@@ -1,0 +1,16 @@
+@main("Hi!"){
+
+    <style type=”text/css”>
+        .jumbotron {
+        padding: 0;
+        margin-bottom: 0;
+        }
+    </style>
+
+    <div class=”jumbotron”>
+        <video width=”100%” poster="@routes.Assets.at("images/NWO_film_poster.png")" autoplay="autoplay">
+            <source src="@routes.Assets.at("images/NWO_film.mp4")" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+}

@@ -1,0 +1,10 @@
+ #greeting_animation{
+    max-width: 800px;
+    max-height: 1200px;
+    padding: 0;
+    margin-bottom: 0;
+    background: white;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}

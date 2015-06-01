@@ -5,9 +5,14 @@
 # Home page
 GET     /                           controllers.Application.index()
 GET     /bootstrap                  controllers.Application.showBootstrap()
+
+#Diary
+GET     /mypal                      controllers.Application.diary()
+GET     /mypal/calendar             controllers.Application.calendar()
+
+# Admin
 GET     /admin                      controllers.Application.admin()
 GET     /admin/users                controllers.Application.users()
-
 POST    /admin/adduser              controllers.Application.addUser()
 
 # Map static resources from the /public folder to the /assets URL path

@@ -7,6 +7,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.admin.*;
 import views.html.demo.*;
+import views.html.diary.*;
 import views.html.greeting;
 
 import java.util.List;
@@ -23,6 +24,14 @@ public class Application extends Controller {
         return ok(bootstrap.render("Hello World!"));
     }
 
+    /*DIARY PAGES */
+    public static Result diary(){
+        return ok(diary_home.render());
+    }
+
+    public static Result calendar(){
+        return ok(diary_calendar.render());
+    }
 
     /* ADMIN PAGES */
     public static Result admin(){

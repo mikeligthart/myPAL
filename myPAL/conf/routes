@@ -13,7 +13,7 @@ GET     /mypal/calendar             controllers.Application.calendar()
 # Admin
 GET     /admin                      controllers.Application.admin()
 GET     /admin/users                controllers.Application.users()
-POST    /admin/adduser              controllers.Application.addUser()
+POST    /admin/users                controllers.Application.addUser()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

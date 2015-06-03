@@ -1,9 +1,14 @@
 package models;
 
+import play.data.format.Formats;
+import play.data.validation.Constraints;
+import play.data.validation.ValidationError;
 import play.db.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ligthartmeu on 29-5-2015.
@@ -12,17 +17,31 @@ import javax.persistence.Id;
 public class User extends Model {
 
     @Id
+    @Constraints.Required(message = "This is field required")
+    @Constraints.Email
     private String email;
+
+    @Constraints.Required(message = "This is field required")
     private String firstName;
+
+    @Constraints.Required
     private String lastName;
+
+    @Constraints.Required(message = "This is field required")
     private String password;
-    private UserType userType;
+
+    @Constraints.Required(message = "This is field required")
+    private int userType;
 
     public enum UserType{
-        CHILD, PARENT, VIEWER, MODERATOR, ADMIN
+        CHILD, PARENT, VIEWER, MODERATOR, ADMIN;
+
+        public static final int getLength(){
+            return 5;
+        }
     }
 
-    public User(String email, String firstName, String lastName, String password, UserType userType){
+    public User(String email, String firstName, String lastName, String password, int userType){
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,8 +49,18 @@ public class User extends Model {
         this.userType = userType;
     }
 
+    /**
     public User(String email, String firstName, String lastName, String password, int userType){
         this(email, firstName, lastName, password, UserType.values()[userType]);
+    }
+     */
+
+    public List<ValidationError> validate() {
+        List<ValidationError> errors = new ArrayList<>();
+        if (User.byEmail(email) != null) {
+            errors.add(new ValidationError("email", "This e-mail is already registered."));
+        }
+        return errors.isEmpty() ? null : errors;
     }
 
     public String getEmail() {
@@ -67,17 +96,17 @@ public class User extends Model {
     }
 
     public int getUserType() {
-        return userType.ordinal();
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+        return userType;
     }
 
     public void setUserType(int userType){
-        this.userType = UserType.values()[userType];
+            this.userType = userType;
     }
 
     public static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
+
+    public static User byEmail(String email){
+        return find.byId(email);
+    }
 
 }

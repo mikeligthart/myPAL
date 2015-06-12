@@ -3,6 +3,7 @@ package controllers;
 import dialogue.Dialogue;
 import models.User;
 import play.Logger;
+import play.Routes;
 import play.data.Form;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -30,6 +31,12 @@ public class Application extends Controller {
         return ok(bootstrap.render("Hello World!"));
     }
 
+    /*JAVASCRIPT ROUTES*/
+    public static Result javascriptRoutes() {
+        response().setContentType("text/javascript");
+        return ok(Routes.javascriptRouter("jsRoutes", routes.javascript.Application.deleteUser()));
+    }
+
     /*DIARY PAGES */
     public static Result diary(){
         return ok(diary_home.render());
@@ -48,7 +55,6 @@ public class Application extends Controller {
         Form<User> userForm = Form.form(User.class).bindFromRequest();
         List<User> users = User.find.all();
         if (userForm.hasErrors()) {
-            Logger.debug("badrequest");
             return badRequest(admin_users.render(userForm, users));
         } else {
             User user = userForm.get();
@@ -57,40 +63,19 @@ public class Application extends Controller {
         }
     }
 
+    public static Result deleteUser(String email) {
+        User deleteThisUser = User.byEmail(email);
+        if(deleteThisUser != null) {
+            deleteThisUser.delete();
+            return ok();
+        } else {
+            return forbidden();
+        }
+    }
+
     public static Result users(){
         Form<User> userForm = Form.form(User.class);
         List<User> users = User.find.all();
         return ok(admin_users.render(userForm, users));
     }
-
-    /**
-    public static class UserAdd {
-
-        @Id
-        @Constraints.Required(message="This is field required")
-        @Constraints.Email
-        public String email;
-
-        @Constraints.Required(message="This is field required")
-        public String firstName;
-
-        @Constraints.Required
-        public String lastName;
-
-        @Constraints.Required
-        @Formats.NonEmpty
-        public String password;
-
-        @Constraints.Required
-        public int userType;
-
-        public String validate() {
-            if (User.byEmail(email) != null) {
-                return "This e-mail is already registered.";
-            }
-            return null;
-        }
-
-    }
-     */
 }

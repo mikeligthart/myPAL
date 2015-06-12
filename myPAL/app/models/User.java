@@ -24,7 +24,7 @@ public class User extends Model {
     @Constraints.Required(message = "This is field required")
     private String firstName;
 
-    @Constraints.Required
+    @Constraints.Required(message = "This is field required")
     private String lastName;
 
     @Constraints.Required(message = "This is field required")

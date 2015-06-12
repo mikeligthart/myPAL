@@ -19,9 +19,11 @@
 
     <h3>Overview</h3>
     <table class="table table-striped">
-        <tr><th>E-mail adres</th><th>Voornaam</th><th>Achternaam</th><th>Gebruikerstype</th></tr>
+        <tr><th>E-mail adres</th><th>Voornaam</th><th>Achternaam</th><th>Gebruikerstype</th><th>Verwijderen</th></tr>
         @users.map { user =>
-            <tr><td>@user.getEmail()</td><td>@user.getFirstName()</td><td>@user.getLastName()</td><td>@user.getUserType()</td></tr>
+            <tr><td>@user.getEmail()</td><td>@user.getFirstName()</td><td>@user.getLastName()</td><td>@user.getUserType()</td><td><button onclick='deleteUser("@user.getEmail()")'>Verwijder</button> </td></tr>
         }
     </table>
 }
+
+

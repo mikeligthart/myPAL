@@ -13,7 +13,6 @@ import play.mvc.Result;
 import views.html.admin.*;
 import views.html.demo.*;
 import views.html.diary.*;
-import views.html.greeting;
 
 import javax.persistence.Id;
 import java.util.ArrayList;
@@ -32,10 +31,12 @@ public class Application extends Controller {
     }
 
     /*JAVASCRIPT ROUTES*/
+    /**
     public static Result javascriptRoutes() {
         response().setContentType("text/javascript");
         return ok(Routes.javascriptRouter("jsRoutes", routes.javascript.Application.deleteUser()));
     }
+    */
 
     /*DIARY PAGES */
     public static Result diary(){

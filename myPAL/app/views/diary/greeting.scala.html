@@ -1,0 +1,15 @@
+@(message: String)
+
+@main_basic("Hi there!") {
+
+    <script>setTimeout(function(){window.location.replace('@routes.Application.diary()')}, 5500);</script>
+
+    <div class="jumbotron" id="greeting_animation">
+        <video width="100%" autoplay="autoplay" poster='@routes.Assets.at("robot_animations/avatarvideo_greeting_test1_poster.png")'>
+            <source src='@routes.Assets.at("robot_animations/avatarvideo_greeting_test2.mp4")' type="video/mp4">
+            Your browser does not support the video tag
+        </video>
+
+        <h1>@message</h1>
+    </div>
+}

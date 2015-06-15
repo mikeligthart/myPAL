@@ -1,6 +1,6 @@
 @(userForm: Form[User], users: List[User])
 
-@admin("User management")("users") {
+@admin(title = "User management", page = "users", tablename = "adminUserOverview") {
 
     <h2>Users</h2>
     <h3>Add user</h3>
@@ -18,11 +18,13 @@
     }
 
     <h3>Overview</h3>
-    <table class="table table-striped">
-        <tr><th>E-mail adres</th><th>Voornaam</th><th>Achternaam</th><th>Gebruikerstype</th><th>Verwijderen</th></tr>
+    <table id="adminUserOverview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead><tr><th>E-mail adres</th><th>Voornaam</th><th>Achternaam</th><th>Gebruikerstype</th><th>Verwijderen</th></tr></thead>
+        <tbody>
         @users.map { user =>
-            <tr><td>@user.getEmail()</td><td>@user.getFirstName()</td><td>@user.getLastName()</td><td>@user.getUserType()</td><td><button onclick='deleteUser("@user.getEmail()")'>Verwijder</button> </td></tr>
+        <tr><td>@user.getEmail()</td><td>@user.getFirstName()</td><td>@user.getLastName()</td><td>@user.getUserType()</td><td><button onclick='deleteUser("@user.getEmail()")'>Verwijder</button> </td></tr>
         }
+        </tbody>
     </table>
 }
 

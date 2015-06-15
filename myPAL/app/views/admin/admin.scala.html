@@ -1,6 +1,6 @@
-@(title: String)(page: String)(content: Html)
+@(title: String, page: String, tablename: String = "")(content: Html)
 
-@main(title) {
+@main_datatables(title, tablename) {
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -20,10 +20,10 @@
             </ul>
         </div><!--/.nav-collapse -->
     </div>
-</nav>
+    </nav>
 
-<div class="container">
-    @content
-</div><!-- /.container -->
+    <div class="container">
+        @content
+    </div><!-- /.container -->
 
 }

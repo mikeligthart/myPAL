@@ -1,7 +1,7 @@
-@(title: String)(content: Html)
+@(title: String)(content: Html)(extracss: Html)(extrajs: Html)
 
 <!DOCTYPE html>
-<html lang="en">
+    <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,23 +18,21 @@
         <!-- myPAL CSS -->
         <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/mypal.css")'>
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
-    <body role="document">
-        @content
+        <!-- custum CSS -->
+        @extracss
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src=@routes.Assets.at("javascripts/jquery.min.js")></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <!-- Bootstrap -->
         <script src='@routes.Assets.at("javascripts/bootstrap.min.js")' type="text/javascript"></script>
+
         <!-- custom javascript -->
-        <script type="text/javascript" src='@routes.Assets.at("javascripts/main.js")'></script>
-        <script type="text/javascript" src="@routes.Application.javascriptRoutes()"></script>
+        @extrajs
+
+</head>
+    <body role="document">
+        @content
 
     </body>
 </html>

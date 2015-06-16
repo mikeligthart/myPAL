@@ -1,5 +1,11 @@
 package controllers;
 
+import com.avaje.ebean.Expr;
+import com.avaje.ebean.Page;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import dialogue.Dialogue;
 import models.User;
 import play.Logger;
@@ -8,15 +14,20 @@ import play.data.Form;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.admin.*;
 import views.html.demo.*;
 import views.html.diary.*;
+import views.html.test.*;
 
 import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import static play.libs.Json.toJson;
 
 
 public class Application extends Controller {
@@ -74,9 +85,20 @@ public class Application extends Controller {
         }
     }
 
+    public static Result getUsers(){
+        List<User> users = User.find.all();
+        ObjectNode data = JsonNodeFactory.instance.objectNode();
+        data.put("data", toJson(users));
+        return ok(data);
+    }
+
     public static Result users(){
         Form<User> userForm = Form.form(User.class);
         List<User> users = User.find.all();
         return ok(admin_users.render(userForm, users));
+    }
+
+    public static Result dataTest(){
+        return ok(dataTest.render());
     }
 }

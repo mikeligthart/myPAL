@@ -10,7 +10,13 @@
 
     <script>
         $(document).ready(function() {
-        $(@tablename).DataTable();
+        $(tablename).DataTable({
+            "bProcessing": true,
+            "aaSorting": [[ 0, "asc" ]],
+            "bServerSide": true,
+            "sPaginationType": "full_numbers",
+            "sAjaxSource":@routes.Application.getUsers()
+        });
         } );
     </script>
 }

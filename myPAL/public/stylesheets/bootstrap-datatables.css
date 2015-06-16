@@ -1,3 +1,13 @@
+td.details-control {
+    background: url('../images/details_open.png') no-repeat center center;
+    cursor: pointer;
+    background-size:35%;
+}
+tr.shown td.details-control {
+    background: url('../images/details_close.png') no-repeat center center;
+    background-size:35%;
+}
+
 div.dataTables_length label {
 	font-weight: normal;
 	text-align: left;

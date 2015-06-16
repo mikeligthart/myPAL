@@ -1,6 +1,6 @@
 @(field: Field, label: String = "E-mail", placeholder: String = "E-mail")
 
-<div class="form-group @if(field.hasErrors) {has-error}">
+        <div class="form-group @if(field.hasErrors) {has-error}">
     <label for="@field.id">@label</label><br />
     <input type="email"
            class="form-control"

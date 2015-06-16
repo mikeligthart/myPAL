@@ -1,13 +1,13 @@
 @(field: Field, label: String, placeholder: String)
 
-<div class="form-group @if(field.hasErrors) {has-error}">
-    <label for="@field.id">@label</label><br />
-    <select class="form-control" id="@field.id" name="@field.name">
-        <option value=0>Kind</option>
-        <option value=1>Ouder</option>
-        <option value=2>Kijker</option>
-        <option value=3>Moderator</option>
-        <option value=4>Admin</option>
-    </select>
-    <span class="help-block">@{field.error.map { error => error.message }}</span>
-</div>
+        <div class="form-group @if(field.hasErrors) {has-error}">
+            <label for="@field.id">@label</label><br />
+            <select class="form-control" id="@field.id" name="@field.name">
+                <option value=0>Kind</option>
+                <option value=1>Ouder</option>
+                <option value=2>Kijker</option>
+                <option value=3>Moderator</option>
+                <option value=4>Admin</option>
+            </select>
+            <span class="help-block">@{field.error.map { error => error.message }}</span>
+        </div>

@@ -6,17 +6,3 @@ function deleteUser(email){
         data: {email:email},
     });
 }
-
-/*
-function deleteItem(id)
-{
- console.log(id)
-  $.ajax({
-   type: "DELETE",
-   url: "item/" + id,
-   data: {
-    id:id
-   }
- });
-}
-*/

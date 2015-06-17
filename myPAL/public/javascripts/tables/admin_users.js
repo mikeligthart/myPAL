@@ -39,7 +39,7 @@ $(document).ready(function() {
         "ajax": "/admin/users/list",
         "columns": [
             {
-                "className":      'details-control',
+                "className":      'details-control glyphicon glyphicon-triangle-bottom',
                 "orderable":      false,
                 "data":           null,
                 "defaultContent": ''
@@ -50,9 +50,10 @@ $(document).ready(function() {
             {
                 "data": null,
                 "orderable":      false,
-                "defaultContent": '<button id="removeButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>'
+                "defaultContent": '<button id="removeButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button> <button id="editButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'
             }
-        ]
+        ],
+        "order": [[ 1, "desc" ]]
     } );
 
     $('#admin_users tbody').on( 'click', '#removeButton', function () {
@@ -60,19 +61,24 @@ $(document).ready(function() {
         table.row($(this).closest('tr')).remove().draw( false );
     } );
 
+    $('#admin_users tbody').on( 'click', '#editButton', function () {
+        window.location.href = "users/update/" + table.row($(this).closest('tr')).data().email;
+    } );
+
     $('#admin_users tbody').on('click', 'td.details-control', function () {
-            var tr = $(this).closest('tr');
-            var row = table.row( tr );
+            var row = table.row($(this).closest('tr'));
 
             if ( row.child.isShown() ) {
                 // This row is already open - close it
                 row.child.hide();
-                tr.removeClass('shown');
+                $(this).removeClass('details-control glyphicon glyphicon-triangle-top');
+                $(this).addClass('details-control glyphicon glyphicon-triangle-bottom');
             }
             else {
                 // Open this row
                 row.child( format(row.data()) ).show();
-                tr.addClass('shown');
+                $(this).removeClass('details-control glyphicon glyphicon-triangle-bottom');
+                $(this).addClass('details-control glyphicon glyphicon-triangle-top');
             }
     } );
 } );

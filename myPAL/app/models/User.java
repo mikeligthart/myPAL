@@ -4,11 +4,14 @@ import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
 import play.db.ebean.Model;
+import scala.Int;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ligthartmeu on 29-5-2015.
@@ -31,17 +34,9 @@ public class User extends Model {
     private String password;
 
     @Constraints.Required(message = "This is field required")
-    private int userType;
+    private String userType;
 
-    public enum UserType{
-        CHILD, PARENT, VIEWER, MODERATOR, ADMIN;
-
-        public static final int getLength(){
-            return 5;
-        }
-    }
-
-    public User(String email, String firstName, String lastName, String password, int userType){
+    public User(String email, String firstName, String lastName, String password, String userType){
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -95,11 +90,11 @@ public class User extends Model {
         this.password = password;
     }
 
-    public int getUserType() {
+    public String getUserType() {
         return userType;
     }
 
-    public void setUserType(int userType){
+    public void setUserType(String userType){
             this.userType = userType;
     }
 
@@ -109,4 +104,13 @@ public class User extends Model {
         return find.byId(email);
     }
 
+    public UserMutable getMutables(){
+        return new UserMutable(firstName, lastName, userType);
+    }
+
+    public void updateFromMutables(UserMutable mutables){
+        firstName = mutables.getFirstName();
+        lastName = mutables.getLastName();
+        userType = mutables.getUserType();
+    }
 }

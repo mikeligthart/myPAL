@@ -8,7 +8,7 @@ create table user (
   first_name                varchar(255),
   last_name                 varchar(255),
   password                  varchar(255),
-  user_type                 integer,
+  user_type                 varchar(255),
   constraint pk_user primary key (email))
 ;
 

@@ -1,0 +1,22 @@
+@(emailValue: String, userForm: Form[UserMutable])
+
+@import fieldsets._
+
+@admin(title = "Admin", page = "users") {
+
+    <h3>Update</h3>
+    @if(userForm.hasGlobalErrors) {
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        @userForm.globalError.message
+    </div>
+    }
+
+
+    @helper.form(action = routes.Application.updateUser(emailValue), 'class -> "form-horizontal") {
+    @admin_user_update_fieldset(emailValue, userForm)
+    }
+
+
+}

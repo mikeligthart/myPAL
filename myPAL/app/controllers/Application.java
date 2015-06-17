@@ -8,8 +8,10 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import dialogue.Dialogue;
 import models.User;
+import models.UserMutable;
 import play.Logger;
 import play.Routes;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -96,6 +98,31 @@ public class Application extends Controller {
         Form<User> userForm = Form.form(User.class);
         List<User> users = User.find.all();
         return ok(admin_users.render(userForm, users));
+    }
+
+    public static Result updatePageUser(String email){
+        User updateThisUser = User.byEmail(email);
+        Form<UserMutable> userForm = Form.form(UserMutable.class);
+        if(updateThisUser != null) {
+            userForm = userForm.fill(updateThisUser.getMutables());
+            return ok(admin_user_update.render(email, userForm));
+        } else {
+            return forbidden();
+        }
+    }
+
+    public static Result updateUser(String email){
+        Form<UserMutable> userForm = Form.form(UserMutable.class).bindFromRequest();
+        if (userForm.hasErrors()) {
+            Logger.debug("error");
+            return badRequest(admin_user_update.render(email, userForm));
+        } else {
+            Logger.debug("succes");
+            User user = User.byEmail(email);
+            user.updateFromMutables(userForm.get());
+            user.update();
+            return redirect(routes.Application.users());
+        }
     }
 
     public static Result dataTest(){

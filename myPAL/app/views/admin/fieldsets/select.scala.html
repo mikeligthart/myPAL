@@ -1,13 +1,13 @@
-@(field: Field, label: String, placeholder: String)
+@(field: Field, label: String, placeholder: String, preselected: String = "")
 
         <div class="form-group @if(field.hasErrors) {has-error}">
             <label for="@field.id">@label</label><br />
             <select class="form-control" id="@field.id" name="@field.name">
-                <option value=0>Kind</option>
-                <option value=1>Ouder</option>
-                <option value=2>Kijker</option>
-                <option value=3>Moderator</option>
-                <option value=4>Admin</option>
+                <option value="0" @if(preselected == "0"){selected}>Kind</option>
+                <option value="1" @if(preselected == "1"){selected}>Ouder</option>
+                <option value="2" @if(preselected == "2"){selected}>Kijker</option>
+                <option value="3" @if(preselected == "3"){selected}>Moderator</option>
+                <option value="4" @if(preselected == "4"){selected}>Admin</option>
             </select>
             <span class="help-block">@{field.error.map { error => error.message }}</span>
         </div>

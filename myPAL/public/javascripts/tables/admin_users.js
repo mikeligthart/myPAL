@@ -16,6 +16,24 @@ function format ( d ) {
     '</table>';
 }
 
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table class="table table-condensed" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Password:</td>'+
+            '<td>'+d.password+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>UserType:</td>'+
+            '<td>'+d.userType+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+    '</table>';
+}
+
 $(document).ready(function() {
     var table = $('#admin_users').DataTable( {
         "ajax": "/admin/users/list",

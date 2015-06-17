@@ -8,5 +8,7 @@
         <!-- Datatables Bootstrap integration -->
         <script src='@routes.Assets.at("javascripts/bootstrap-datatables.js")' type="text/javascript"></script>
         <!-- Load datatable -->
-        <script src='@routes.Assets.at(table)' type="text/javascript"></script>
+        @if(table != ""){
+                <script src='@routes.Assets.at(table)' type="text/javascript"></script>
+        }
 }

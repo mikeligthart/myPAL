@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import dialogue.Dialogue;
+import models.Login;
 import models.User;
 import models.UserMutable;
 import play.Logger;
@@ -23,12 +24,15 @@ import views.html.admin.*;
 import views.html.demo.*;
 import views.html.diary.*;
 import views.html.test.*;
+import views.html.controlFlow.*;
+
 
 import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static play.data.Form.form;
 import static play.libs.Json.toJson;
 
 
@@ -37,7 +41,11 @@ public class Application extends Controller {
     private static Dialogue dialogue = Dialogue.getInstance();
 
     public static Result index() {
-        return ok(greeting.render(dialogue.getGreeting("Jelte")));
+        if(session().isEmpty()){
+            return redirect(routes.Application.login());
+        }
+        User user = User.byEmail(session().get("email"));
+        return ok(greeting.render(dialogue.getGreeting(user.getFirstName())));
     }
     public static Result showBootstrap() {
         return ok(bootstrap.render("Hello World!"));
@@ -66,7 +74,7 @@ public class Application extends Controller {
     }
 
     public static Result addUser(){
-        Form<User> userForm = Form.form(User.class).bindFromRequest();
+        Form<User> userForm = form(User.class).bindFromRequest();
         List<User> users = User.find.all();
         if (userForm.hasErrors()) {
             return badRequest(admin_users.render(userForm, users));
@@ -95,14 +103,14 @@ public class Application extends Controller {
     }
 
     public static Result users(){
-        Form<User> userForm = Form.form(User.class);
+        Form<User> userForm = form(User.class);
         List<User> users = User.find.all();
         return ok(admin_users.render(userForm, users));
     }
 
     public static Result updatePageUser(String email){
         User updateThisUser = User.byEmail(email);
-        Form<UserMutable> userForm = Form.form(UserMutable.class);
+        Form<UserMutable> userForm = form(UserMutable.class);
         if(updateThisUser != null) {
             userForm = userForm.fill(updateThisUser.getMutables());
             return ok(admin_user_update.render(email, userForm));
@@ -112,7 +120,7 @@ public class Application extends Controller {
     }
 
     public static Result updateUser(String email){
-        Form<UserMutable> userForm = Form.form(UserMutable.class).bindFromRequest();
+        Form<UserMutable> userForm = form(UserMutable.class).bindFromRequest();
         if (userForm.hasErrors()) {
             Logger.debug("error");
             return badRequest(admin_user_update.render(email, userForm));
@@ -127,5 +135,27 @@ public class Application extends Controller {
 
     public static Result dataTest(){
         return ok(dataTest.render());
+    }
+
+    public static Result login() {
+        return ok(
+                login.render(form(Login.class))
+        );
+    }
+
+    public static Result authenticate() {
+        Form<Login> loginForm = form(Login.class).bindFromRequest();
+        if (loginForm.hasErrors()) {
+            return badRequest(login.render(loginForm));
+        } else {
+            session().clear();
+            session("email", loginForm.get().email);
+            return redirect(routes.Application.index());
+        }
+    }
+
+    public static Result logout(){
+        session().clear();
+        return redirect(routes.Application.login());
     }
 }

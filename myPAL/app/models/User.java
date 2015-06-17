@@ -113,4 +113,14 @@ public class User extends Model {
         lastName = mutables.getLastName();
         userType = mutables.getUserType();
     }
+
+    public static boolean authenticate(String email, String password) {
+        User user = byEmail(email);
+        if(user != null){
+            if(user.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

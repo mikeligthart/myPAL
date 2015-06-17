@@ -3,8 +3,10 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
-GET     /bootstrap                  controllers.Application.showBootstrap()
+GET     /greeting                   controllers.Application.index()
+GET     /                           controllers.Application.login()
+POST    /                           controllers.Application.authenticate()
+GET     /logout                     controllers.Application.logout()
 
 #Diary
 GET     /mypal                      controllers.Application.diary()
@@ -21,6 +23,7 @@ DELETE  /admin/users/delete/:email  controllers.Application.deleteUser(email: St
 
 # Test
 GET     /test/datatest              controllers.Application.dataTest()
+GET     /test/bootstrap             controllers.Application.showBootstrap()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

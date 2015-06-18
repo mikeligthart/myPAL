@@ -2,7 +2,7 @@
 
 @import play.i18n._
 
-@main_basic(Messages.get("page.login.title")){
+@main_basic(Messages.get("page.control.login.title")){
 
 <style>
     body {
@@ -49,12 +49,12 @@
 
 <div class="container">
     @helper.form(routes.Application.authenticate, 'class -> "form-signin") {
-    <h2 class="form-signin-heading">@Messages.get("page.login.signinheading")</h2>
+    <h2 class="form-signin-heading">@Messages.get("page.control.login.signinheading")</h2>
 
     @if(form.hasGlobalErrors) {
     <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">@Messages.get("page.login.error")</span>
+        <span class="sr-only">@Messages.get("page.general.error")</span>
         @form.globalError.message
     </div>
     }
@@ -64,10 +64,10 @@
     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="@Messages.get("model.user.password")" required>
     <div class="checkbox">
         <label>
-            <input type="checkbox" value="remember-me"> @Messages.get("page.login.rememberme")
+            <input type="checkbox" value="remember-me"> @Messages.get("page.control.login.rememberme")
         </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">@Messages.get("page.login.login")</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">@Messages.get("page.control.login.login")</button>
     }
 </div>
 

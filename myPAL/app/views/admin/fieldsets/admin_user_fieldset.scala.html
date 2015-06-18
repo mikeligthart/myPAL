@@ -1,13 +1,15 @@
 @(userForm: Form[User])
 
+@import play.i18n._
+
         <fieldset>
-            @email(userForm("email"), label = "E-mail", placeholder = "E-mail")
-            @text(userForm("firstName"), label = "Voornaam", placeholder = "Voornaam")
-            @text(userForm("lastName"), label = "Achternaam", placeholder = "Achternaam")
-            @select(userForm("userType"), label = "Gebruikerstype", placeholder = "Gebruikerstype")
-            @password(userForm("password"), label = "Wachtwoord", placeholder = "Wachtwoord")
+            @email(userForm("email"), label = Messages.get("model.user.email"), placeholder = Messages.get("model.user.email"))
+            @text(userForm("firstName"), label = Messages.get("model.user.firstName"), placeholder = Messages.get("model.user.firstName"))
+            @text(userForm("lastName"), label = Messages.get("model.user.lastName"), placeholder = Messages.get("model.user.lastName"))
+            @select(userForm("userType"), label = Messages.get("model.user.userType"), placeholder = Messages.get("model.user.userType"))
+            @password(userForm("password"), label = Messages.get("model.user.password"), placeholder = Messages.get("model.user.password"))
             <div class="form-group">
                 <br />
-                <button type="submit" class="btn btn-default">Voeg toe</button>
+                <button type="submit" class="btn btn-default">@Messages.get("page.admin.users.addUser")</button>
             </div>
         </fieldset>

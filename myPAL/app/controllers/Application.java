@@ -7,11 +7,9 @@ import models.User;
 import models.User.*;
 import play.Logger;
 import play.data.Form;
-import play.i18n.Lang;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.admin.*;
-import views.html.demo.*;
 import views.html.diary.*;
 import views.html.test.*;
 import views.html.controlFlow.*;
@@ -70,6 +68,13 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         return ok(diary_calendar.render());
+    }
+
+    public static Result goals(){
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        return ok(diary_goals.render());
     }
 
     /* ADMIN */

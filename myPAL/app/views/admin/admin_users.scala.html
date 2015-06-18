@@ -1,16 +1,17 @@
 @(userForm: Form[User], users: List[User])
 
 @import fieldsets._
+@import play.i18n._
 
-@admin(title = "User management", page = "users", table = "javascripts/tables/admin_users.js") {
+@admin(title = Messages.get("page.admin.users.title"), page = "users", table = "javascripts/tables/admin_users.js") {
 
-        <h2>Users</h2>
-        <h3>Add user</h3>
+        <h2>@Messages.get("page.admin.base.users")</h2>
+        <h3>@Messages.get("page.admin.users.addUser")</h3>
 
         @if(userForm.hasGlobalErrors) {
             <div class="alert alert-danger" role="alert">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span>
+                <span class="sr-only">@Messages.get("page.general.error")</span>
                 @userForm.globalError.message
             </div>
         }
@@ -19,24 +20,24 @@
             @admin_user_fieldset(userForm)
         }
 
-        <h3>Overview</h3>
+        <h3>@Messages.get("page.admin.users.overview")</h3>
         <table id="admin_users" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th> </th>
-                    <th>E-mail</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Options</th>
+                    <th>@Messages.get("model.user.email")</th>
+                    <th>@Messages.get("model.user.firstName")</th>
+                    <th>@Messages.get("model.user.lastName")</th>
+                    <th>@Messages.get("page.admin.users.options")</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td> </td>
-                    <td>E-mail</td>
-                    <td>First Name</td>
-                    <td>Last Name</td>
-                    <td>Options</td>
+                    <td>@Messages.get("model.user.email")</td>
+                    <td>@Messages.get("model.user.firstName")</td>
+                    <td>@Messages.get("model.user.lastName")</td>
+                    <td>@Messages.get("page.admin.users.options")</td>
                 </tr>
             </tbody>
         </table>

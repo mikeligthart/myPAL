@@ -1,22 +1,25 @@
 @(title: String)(page: String)(content: Html)
 
+@import play.i18n._
+
 @main_basic(title) {
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only">@Messages.get("page.general.navigation")</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">MyPAL</a>
+            <a class="navbar-brand" href="#">@Messages.get("page.general.brand")</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li @if(page == "home"){class="active"}><a href="@routes.Application.diary()">Home</a></li>
-                <li @if(page == "calendar"){class="active"}><a href="@routes.Application.calendar()">Calendar</a></li>
+                <li @if(page == "home"){class="active"}><a href="@routes.Application.diary()">@Messages.get("page.diary.base.home")</a></li>
+                <li @if(page == "calendar"){class="active"}><a href="@routes.Application.calendar()">@Messages.get("page.diary.base.calendar")</a></li>
+                <li @if(page == "goals"){class="active"}><a href="@routes.Application.goals()">@Messages.get("page.diary.base.goals")</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

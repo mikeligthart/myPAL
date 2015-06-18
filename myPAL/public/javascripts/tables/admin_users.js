@@ -35,6 +35,12 @@ function format ( d ) {
 }
 
 $(document).ready(function() {
+    var userLang = navigator.language || navigator.userLanguage;
+    var lang = "/assets/javascripts/tables/en.json"
+    if(userLang = "nl"){
+        lang = "/assets/javascripts/tables/nl.json"
+    }
+
     var table = $('#admin_users').DataTable( {
         "ajax": "/admin/users/list",
         "columns": [
@@ -53,7 +59,10 @@ $(document).ready(function() {
                 "defaultContent": '<button id="removeButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button> <button id="editButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'
             }
         ],
-        "order": [[ 1, "desc" ]]
+        "order": [[ 1, "desc" ]],
+        "language": {
+            "url": lang
+        }
     } );
 
     $('#admin_users tbody').on( 'click', '#removeButton', function () {

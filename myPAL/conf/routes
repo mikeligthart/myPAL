@@ -11,6 +11,7 @@ GET     /logout                     controllers.Application.logout()
 #Diary
 GET     /mypal                      controllers.Application.diary()
 GET     /mypal/calendar             controllers.Application.calendar()
+GET     /mypal/goals                controllers.Application.goals()
 
 # Admin
 GET     /admin                      controllers.Application.admin()

@@ -7,13 +7,51 @@ model.user.userType=User type
 model.user.password="Password"
 
 ### PAGES ###
-## Login page ##
-page.login.title=Sign in
-page.login.signinheading=Please sign in
-page.login.error=Error:
-page.login.rememberme=Remember me
-page.login.login=Sign in
+## General ##
+page.general.error=Error:
+page.general.navgation=Toggle navigation
+page.general.brand=MyPAL
+
+## Control Flow ##
+# Login #
+page.control.login.title=Sign in
+page.control.login.signinheading=Please sign in
+page.control.login.rememberme=Remember me
+page.control.login.login=Sign in
+
+## Diary ##
+# Base #
+page.diary.base.home=Home
+page.diary.base.calendar=Calendar
+page.diary.base.goals=Goals
+
+## Admin ##
+# Base #
+page.admin.base.home=Home
+page.admin.base.users=Users
+
+# Home #
+page.admin.home.title=Admin | home
+
+# Users #
+page.admin.users.title=Admin | users
+page.admin.users.overview=Overview
+page.admin.users.addUser=Add user
+page.admin.users.updateUser=Update
+page.admin.users.update.title=Admin | update user
+page.admin.users.options=Options
 
 ### ERROR MESSAGES ###
 
 ### DIALOGUE ###
+## Greeting ##
+# Part 1 #
+dialogue.greeting.part1.count=3
+dialogue.greeting.part1.0=Hi {0},
+dialogue.greeting.part1.1=Hello {0},
+dialogue.greeting.part1.2=Hey {0},
+# Part 2 #
+dialogue.greeting.part2.count=3
+dialogue.greeting.part3.0=good to see you again.
+dialogue.greeting.part3.1=welcome back.
+dialogue.greeting.part3.2=it is good that you are here.

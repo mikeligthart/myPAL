@@ -36,6 +36,42 @@ public class User extends Model {
     @Constraints.Required(message = "This is field required")
     private String userType;
 
+    //The attributes needed to login with a user
+    public static class Login {
+        public String email;
+        public String password;
+
+        public Login(){};
+
+        public String validate() {
+            if (!User.authenticate(email, password)) {
+                return "Invalid user or password";
+            }
+            return null;
+        }
+    }
+
+    //The attributes that are mutable
+    public static class UserMutable{
+
+        @Constraints.Required(message = "This is field required")
+        public String firstName;
+
+        @Constraints.Required(message = "This is field required")
+        public String lastName;
+
+        @Constraints.Required(message = "This is field required")
+        public String userType;
+
+        public UserMutable(String firstName, String lastName, String userType){
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.userType = userType;
+        }
+
+        public UserMutable(){}
+    }
+
     public User(String email, String firstName, String lastName, String password, String userType){
         this.email = email;
         this.firstName = firstName;
@@ -43,12 +79,6 @@ public class User extends Model {
         this.password = password;
         this.userType = userType;
     }
-
-    /**
-    public User(String email, String firstName, String lastName, String password, int userType){
-        this(email, firstName, lastName, password, UserType.values()[userType]);
-    }
-     */
 
     public List<ValidationError> validate() {
         List<ValidationError> errors = new ArrayList<>();
@@ -109,9 +139,9 @@ public class User extends Model {
     }
 
     public void updateFromMutables(UserMutable mutables){
-        firstName = mutables.getFirstName();
-        lastName = mutables.getLastName();
-        userType = mutables.getUserType();
+        firstName = mutables.firstName;
+        lastName = mutables.lastName;
+        userType = mutables.userType;
     }
 
     public static boolean authenticate(String email, String password) {

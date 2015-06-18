@@ -1,6 +1,8 @@
-@(form: Form[Login])
+@(form: Form[User.Login])
 
-@main_basic("Login"){
+@import play.i18n._
+
+@main_basic(Messages.get("page.login.title")){
 
 <style>
     body {
@@ -47,25 +49,25 @@
 
 <div class="container">
     @helper.form(routes.Application.authenticate, 'class -> "form-signin") {
-    <h2 class="form-signin-heading">Please sign in</h2>
+    <h2 class="form-signin-heading">@Messages.get("page.login.signinheading")</h2>
 
     @if(form.hasGlobalErrors) {
     <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
+        <span class="sr-only">@Messages.get("page.login.error")</span>
         @form.globalError.message
     </div>
     }
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <label for="inputEmail" class="sr-only">@Messages.get("model.user.email")</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="@Messages.get("model.user.email")" required autofocus>
+    <label for="inputPassword" class="sr-only">@Messages.get("model.user.password")</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="@Messages.get("model.user.password")" required>
     <div class="checkbox">
         <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="remember-me"> @Messages.get("page.login.rememberme")
         </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">@Messages.get("page.login.login")</button>
     }
 </div>
 

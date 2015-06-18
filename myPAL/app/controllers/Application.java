@@ -3,11 +3,11 @@ package controllers;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import dialogue.Dialogue;
-import models.Login;
 import models.User;
-import models.UserMutable;
+import models.User.*;
 import play.Logger;
 import play.data.Form;
+import play.i18n.Lang;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.admin.*;
@@ -110,7 +110,7 @@ public class Application extends Controller {
         }
 
         User updateThisUser = User.byEmail(email);
-        Form<UserMutable> userForm = form(UserMutable.class);
+        Form<UserMutable> userForm = form(User.UserMutable.class);
         if (updateThisUser != null) {
             userForm = userForm.fill(updateThisUser.getMutables());
             return ok(admin_user_update.render(email, userForm));

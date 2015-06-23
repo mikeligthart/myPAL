@@ -4,6 +4,13 @@
 
 @main_basic(title) {
 
+<style>
+    div.avatarfield{
+        border-left: thick solid #ff0000;
+        height: 95vh;
+    }
+</style>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -17,16 +24,22 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li @if(page == "home"){class="active"}><a href="@routes.Application.diary()">@Messages.get("page.diary.base.home")</a></li>
-                <li @if(page == "calendar"){class="active"}><a href="@routes.Application.calendar()">@Messages.get("page.diary.base.calendar")</a></li>
-                <li @if(page == "goals"){class="active"}><a href="@routes.Application.goals()">@Messages.get("page.diary.base.goals")</a></li>
+                <li @if(page == "home"){class="active"}><a href="@routes.Application.diary()"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> @Messages.get("page.diary.base.home")</a></li>
+                <li @if(page == "calendar"){class="active"}><a href="@routes.Application.calendar()"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> @Messages.get("page.diary.base.calendar")</a></li>
+                <li @if(page == "goals"){class="active"}><a href="@routes.Application.goals()"><span class="glyphicon glyphicon-ok" aria-hidden="true"> @Messages.get("page.diary.base.goals")</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="@routes.Application.logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"> @Messages.get("page.control.login.logout")</span></a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
 
 <div class="container" id="withNavBar">
-    @content
+    <div class="row">
+        <div class="col-md-9">@content</div>
+        <div class="col-md-3 avatarfield">Avatar</div>
+    </div>
 </div><!-- /.container -->
 
 }

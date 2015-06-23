@@ -18,6 +18,7 @@ page.control.login.title=Sign in
 page.control.login.signinheading=Please sign in
 page.control.login.rememberme=Remember me
 page.control.login.login=Sign in
+page.control.login.logout=Sign out
 
 ## Diary ##
 # Base #

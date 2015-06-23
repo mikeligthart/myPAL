@@ -17,7 +17,8 @@ page.general.brand=MyPAL
 page.control.login.title=Login
 page.control.login.signinheading=Inloggen
 page.control.login.rememberme=Onthoud mijn gegevens
-page.control.login.login=Login
+page.control.login.login=Inloggen
+page.control.login.logout=Uitloggen
 
 ## Diary ##
 # Base #

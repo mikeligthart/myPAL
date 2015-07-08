@@ -26,6 +26,13 @@ page.diary.base.home=Home
 page.diary.base.calendar=Kalender
 page.diary.base.goals=Doelen
 
+# Calendar #
+page.diary.calendar.today=Vandaag
+page.diary.calendar.tomorrow=Morgen
+page.diary.calendar.dayaftertomorrow=Overmorgen
+page.diary.calendar.yesterday=Gisteren
+page.diary.calendar.daybeforeyesterday=Eergisteren
+
 ## Admin ##
 # Base #
 page.admin.base.home=Home

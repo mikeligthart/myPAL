@@ -7,18 +7,27 @@ import models.User;
 import models.User.*;
 import play.Logger;
 import play.data.Form;
+import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.admin.*;
 import views.html.diary.*;
 import views.html.test.*;
 import views.html.controlFlow.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
 import static play.data.Form.form;
 import static play.libs.Json.toJson;
 
 
 public class Application extends Controller {
+
+    private static LocalDate calendarDate;
+    private static LocalDate todayDate = LocalDate.now();
+    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private static Dialogue dialogue = Dialogue.getInstance();
 
@@ -67,7 +76,46 @@ public class Application extends Controller {
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
-        return ok(diary_calendar.render());
+        calendarDate = LocalDate.now();
+        return ok(diary_calendar.render(Messages.get("page.diary.calendar.today"), calendarDate.format(dateFormatter)));
+    }
+
+    public static Result calendarUpdate(String update){
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        if(update.contentEquals("-")){
+            calendarDate = calendarDate.minusDays(1);
+        } else if (update.contentEquals("+")){
+            calendarDate = calendarDate.plusDays(1);
+        } else {
+            return forbidden();
+        }
+        return ok(diary_calendar.render(dateConverter(calendarDate, todayDate), calendarDate.format(dateFormatter)));
+    }
+
+    public static Result calendarSet(String day, String month, String year){
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        calendarDate = LocalDate.parse(day + "/" + month + "/" + year, dateFormatter);
+        return ok(diary_calendar.render(dateConverter(calendarDate, todayDate), calendarDate.format(dateFormatter)));
+    }
+
+    private static String dateConverter(LocalDate calendarDate, LocalDate todayDate){
+        String dateDisplayButton = calendarDate.format(dateFormatter);
+        if (calendarDate.isEqual(todayDate)){
+            dateDisplayButton = Messages.get("page.diary.calendar.today");
+        } else if (calendarDate.compareTo(todayDate) == 1){
+            dateDisplayButton = Messages.get("page.diary.calendar.tomorrow");
+        } else if (calendarDate.compareTo(todayDate) == 2){
+            dateDisplayButton = Messages.get("page.diary.calendar.dayaftertomorrow");
+        } else if (calendarDate.compareTo(todayDate) == -1){
+            dateDisplayButton = Messages.get("page.diary.calendar.yesterday");
+        } else if (calendarDate.compareTo(todayDate) == -2){
+            dateDisplayButton = Messages.get("page.diary.calendar.daybeforeyesterday");
+        }
+        return dateDisplayButton;
     }
 
     public static Result goals(){
@@ -207,4 +255,6 @@ public class Application extends Controller {
     public static Result showBootstrap() {
         return ok(bootstrap.render("Hello World!"));
     }
+
+    /* AVATAR */
 }

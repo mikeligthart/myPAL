@@ -9,9 +9,11 @@ POST    /                           controllers.Application.authenticate()
 GET     /logout                     controllers.Application.logout()
 
 #Diary
-GET     /mypal                      controllers.Application.diary()
-GET     /mypal/calendar             controllers.Application.calendar()
-GET     /mypal/goals                controllers.Application.goals()
+GET     /mypal                              controllers.Application.diary()
+GET     /mypal/calendar                     controllers.Application.calendar()
+GET     /mypal/calendar/:update             controllers.Application.calendarUpdate(update:String)
+GET     /mypal/calendar/:day/:month/:year   controllers.Application.calendarSet(day:String, month:String, year:String)
+GET     /mypal/goals                        controllers.Application.goals()
 
 # Admin
 GET     /admin                      controllers.Application.admin()

@@ -9,16 +9,21 @@
     text-align: center;
 }
 
-#withNavBar {
+.withNavBar {
   padding-top: 50px;
 }
 
+div.avatarfield{
+    border-left: thick solid #46575f;
+    height: 95vh;
+}
+
 .starter-template {
-  padding: 40px 15px;
   text-align: center;
 }
 
 .navbar-inverse {
+  color: red;
   background-color: #46575f;
   border-color: #404e55;
 }

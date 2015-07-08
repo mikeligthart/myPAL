@@ -26,6 +26,13 @@ page.diary.base.home=Home
 page.diary.base.calendar=Calendar
 page.diary.base.goals=Goals
 
+# Calendar #
+page.diary.calendar.today=Today
+page.diary.calendar.tomorrow=Tomorrow
+page.diary.calendar.dayaftertomorrow=Day after tomorrow
+page.diary.calendar.yesterday=Yesterday
+page.diary.calendar.daybeforeyesterday=Day before yesterday
+
 ## Admin ##
 # Base #
 page.admin.base.home=Home

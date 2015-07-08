@@ -4,12 +4,7 @@
 
 @main_basic(title) {
 
-<style>
-    div.avatarfield{
-        border-left: thick solid #ff0000;
-        height: 95vh;
-    }
-</style>
+<script src='@routes.Assets.at("javascripts/avatar.js")' type="text/javascript"></script>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -35,10 +30,10 @@
     </div>
 </nav>
 
-<div class="container" id="withNavBar">
+<div class="container withNavBar">
     <div class="row">
-        <div class="col-md-9">@content</div>
-        <div class="col-md-3 avatarfield">Avatar</div>
+        <div class="col-sm-8 text-center">@content</div>
+        <div class="col-sm-4 avatarfield text-center">@diary_avatar()</div>
     </div>
 </div><!-- /.container -->
 

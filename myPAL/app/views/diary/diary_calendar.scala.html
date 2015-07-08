@@ -1,10 +1,14 @@
+@(date: String, realDate: String)
+
 @import play.i18n._
 
 @diary(Messages.get("page.diary.base.calendar"))("calendar") {
 
+        <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/datepicker.css")'>
+        <script src=@routes.Assets.at("javascripts/bootstrap-datepicker.js")></script>
 
-        <div class="starter-template">
-            <h1>Calendar</h1>
-            <p class="lead">Hier komt de tijdlijn.</p>
+        <div>
+            <h1>@Messages.get("page.diary.base.calendar")</h1>
+            <a href='@routes.Application.calendarUpdate("-")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a> <button class="btn btn-default" id="datePicker" data-date="@realDate" data-date-format="dd/mm/yyyy">@date <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></button> <a href='@routes.Application.calendarUpdate("+")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
         </div>
 }

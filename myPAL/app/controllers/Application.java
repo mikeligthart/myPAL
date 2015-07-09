@@ -256,5 +256,9 @@ public class Application extends Controller {
         return ok(bootstrap.render("Hello World!"));
     }
 
+    public static Result googleTest() {
+        return ok(google_visualization.render());
+    }
+
     /* AVATAR */
 }

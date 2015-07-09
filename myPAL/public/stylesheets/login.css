@@ -1,0 +1,131 @@
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #fff;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+    color: #46575f;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+margin-bottom: -1px;
+border-bottom-right-radius: 0;
+border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+margin-bottom: 10px;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
+}
+
+.btn-mypal-login {
+    background-color: #46575f;
+    border-color: #46575f;
+}
+
+.btn-mypal-login:hover {
+    background-color: #627077;
+    border-color: #627077;
+}
+
+.btn-mypal-login:active {
+    background-color: #3C4A51;
+    border-color: #3C4A51;
+}
+
+.btn-mypal-login {
+    background-color: #46575f;
+    border-color: #46575f;
+}
+.btn-mypal-login:focus,
+.btn-mypal-login.focus {
+    background-color: #3C4A51;
+    border-color: #3C4A51;
+}
+.btn-mypal-login:hover {
+    background-color: #627077;
+    border-color: #627077;
+}
+.btn-mypal-login:active,
+.btn-mypal-login.active,
+.open > .dropdown-toggle.btn-mypal-login {
+    background-color: #3C4A51;
+    border-color: #3C4A51;
+}
+.btn-mypal-login:active:hover,
+.btn-mypal-login.active:hover,
+.open > .dropdown-toggle.btn-mypal-login:hover,
+.btn-mypal-login:active:focus,
+.btn-mypal-login.active:focus,
+.open > .dropdown-toggle.btn-mypal-login:focus,
+.btn-mypal-login:active.focus,
+.btn-mypal-login.active.focus,
+.open > .dropdown-toggle.btn-mypal-login.focus {
+    background-color: #3C4A51;
+    border-color: #3C4A51;
+}
+.btn-mypal-login:active,
+.btn-mypal-login.active,
+.open > .dropdown-toggle.btn-mypal-login {
+background-image: none;
+}
+.btn-mypal-login.disabled,
+.btn-mypal-login[disabled],
+fieldset[disabled] .btn-mypal-login,
+.btn-mypal-login.disabled:hover,
+.btn-mypal-login[disabled]:hover,
+fieldset[disabled] .btn-mypal-login:hover,
+.btn-mypal-login.disabled:focus,
+.btn-mypal-login[disabled]:focus,
+fieldset[disabled] .btn-mypal-login:focus,
+.btn-mypal-login.disabled.focus,
+.btn-mypal-login[disabled].focus,
+fieldset[disabled] .btn-mypal-login.focus,
+.btn-mypal-login.disabled:active,
+.btn-mypal-login[disabled]:active,
+fieldset[disabled] .btn-mypal-login:active,
+.btn-mypal-login.disabled.active,
+.btn-mypal-login[disabled].active,
+fieldset[disabled] .btn-mypal-login.active {
+    background-color: #3C4A51;
+    border-color: #3C4A51;
+}
+.btn-mypal-login .badge {
+    color: #ffffff;
+    background-color: #333333;
+}
+
+.myPAL-logo{
+    width: 25%;
+    height: 25%;
+    align: middle;
+    padding-bottom: 2%
+}
+

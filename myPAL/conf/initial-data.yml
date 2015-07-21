@@ -10,7 +10,7 @@
     firstName:      Mike
     lastName:       Ligthart
     password:   mike
-    userType:       4
+    userType:       models.UserType.ADMIN
 
 - !!models.User
     email:      test2@email.com

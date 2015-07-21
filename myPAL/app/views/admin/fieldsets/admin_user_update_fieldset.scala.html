@@ -1,21 +1,21 @@
 @(email: String, userForm: Form[User.UserMutable])
 
-@import play.i18n._
+@import play.api.i18n._
 
 <fieldset>
     <div class="form-group">
-        <label for="emailField">@Messages.get("model.user.email")</label><br />
+        <label for="emailField">@Messages("model.user.email")</label><br />
         <input type="email"
                class="form-control"
                id="emailField"
                value='@email'
                disabled/>
     </div>
-    @text(userForm("firstName"), label = Messages.get("model.user.firstName"), placeholder = Messages.get("model.user.firstName"))
-    @text(userForm("lastName"), label = Messages.get("model.user.lastName"), placeholder = Messages.get("model.user.lastName"))
-    @select(userForm("userType"), label = Messages.get("model.user.userType"), placeholder = Messages.get("model.user.userType"), preselected=userForm("userType").value)
+    @text(userForm("firstName"), label = Messages("model.user.firstName"), placeholder = Messages("model.user.firstName"))
+    @text(userForm("lastName"), label = Messages("model.user.lastName"), placeholder = Messages("model.user.lastName"))
+    @select(userForm("userType"), label = Messages("model.user.userType"), placeholder = Messages("model.user.userType"), preselected=userForm("userType").value.toString)
     <div class="form-group">
         <br />
-        <button type="submit" class="btn btn-default">@Messages.get("page.admin.users.updateUser")</button>
+        <button type="submit" class="btn btn-default">@Messages("page.admin.users.updateUser")</button>
     </div>
 </fieldset>

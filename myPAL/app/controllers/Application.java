@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import dialogue.Dialogue;
 import models.User;
 import models.User.*;
+import models.UserType;
 import play.Logger;
 import play.data.Form;
 import play.i18n.Messages;
@@ -128,25 +129,29 @@ public class Application extends Controller {
     /* ADMIN */
     /* Pages */
     public static Result admin(){
+        /*
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
+        if(user.getUserType() != UserType.ADMIN){
             return forbidden(no_access.render());
         }
+        */
 
         return ok(admin_home.render());
     }
 
     public static Result users(){
+        /*
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
+        if(user.getUserType() != UserType.ADMIN){
             return forbidden(no_access.render());
         }
+        */
         Form<User> userForm = form(User.class);
         List<User> users = User.find.all();
         return ok(admin_users.render(userForm, users));
@@ -158,9 +163,10 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
+        if(user.getUserType() != UserType.ADMIN){
             return forbidden(no_access.render());
         }
+
 
         User updateThisUser = User.byEmail(email);
         Form<UserMutable> userForm = form(User.UserMutable.class);
@@ -174,13 +180,15 @@ public class Application extends Controller {
 
     /* Functionalities */
     public static Result getUsers(){
+        /*
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
-            return forbidden();
+        if(user.getUserType() != UserType.ADMIN){
+            return forbidden(no_access.render());
         }
+        */
         List<User> users = User.find.all();
         ObjectNode data = JsonNodeFactory.instance.objectNode();
         data.put("data", toJson(users));
@@ -188,13 +196,15 @@ public class Application extends Controller {
     }
 
     public static Result addUser(){
+        /*
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
-            return forbidden();
+        if(user.getUserType() != UserType.ADMIN){
+            return forbidden(no_access.render());
         }
+        */
 
         Form<User> userForm = form(User.class).bindFromRequest();
         List<User> users = User.find.all();
@@ -212,8 +222,8 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
-            return forbidden();
+        if(user.getUserType() != UserType.ADMIN){
+            return forbidden(no_access.render());
         }
 
         Form<UserMutable> userForm = form(UserMutable.class).bindFromRequest();
@@ -234,8 +244,8 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
-            return forbidden();
+        if(user.getUserType() != UserType.ADMIN){
+            return forbidden(no_access.render());
         }
 
         User deleteThisUser = User.byEmail(email);

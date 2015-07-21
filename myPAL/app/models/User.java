@@ -1,17 +1,13 @@
 package models;
 
-import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
 import play.db.ebean.Model;
-import scala.Int;
+import play.i18n.Messages;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ligthartmeu on 29-5-2015.
@@ -20,21 +16,23 @@ import java.util.Map;
 public class User extends Model {
 
     @Id
-    @Constraints.Required(message = "This is field required")
+    @Constraints.Required
     @Constraints.Email
     private String email;
 
-    @Constraints.Required(message = "This is field required")
+    @Constraints.Required
     private String firstName;
 
-    @Constraints.Required(message = "This is field required")
+    @Constraints.Required
     private String lastName;
 
-    @Constraints.Required(message = "This is field required")
+    @Constraints.Required
     private String password;
 
-    @Constraints.Required(message = "This is field required")
-    private String userType;
+    @Constraints.Required
+    @OneToMany
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
 
     //The attributes needed to login with a user
     public static class Login {
@@ -45,25 +43,28 @@ public class User extends Model {
 
         public String validate() {
             if (!User.authenticate(email, password)) {
-                return "Invalid user or password";
+                return Messages.get("model.user.invalid");
             }
             return null;
         }
     }
 
     //The attributes that are mutable
+
     public static class UserMutable{
 
-        @Constraints.Required(message = "This is field required")
+        @Constraints.Required
         public String firstName;
 
-        @Constraints.Required(message = "This is field required")
+        @Constraints.Required
         public String lastName;
 
-        @Constraints.Required(message = "This is field required")
-        public String userType;
+        @Constraints.Required
+        @OneToMany
+        @Enumerated(EnumType.STRING)
+        public UserType userType;
 
-        public UserMutable(String firstName, String lastName, String userType){
+        public UserMutable(String firstName, String lastName, UserType userType){
             this.firstName = firstName;
             this.lastName = lastName;
             this.userType = userType;
@@ -72,18 +73,20 @@ public class User extends Model {
         public UserMutable(){}
     }
 
-    public User(String email, String firstName, String lastName, String password, String userType){
+    /*
+    public User(String email, String firstName, String lastName, String password, UserType userType){
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.userType = userType;
     }
+    */
 
     public List<ValidationError> validate() {
         List<ValidationError> errors = new ArrayList<>();
         if (User.byEmail(email) != null) {
-            errors.add(new ValidationError("email", "This e-mail is already registered."));
+            errors.add(new ValidationError("email", Messages.get("model.user.emailregisteredalready")));
         }
         return errors.isEmpty() ? null : errors;
     }
@@ -120,11 +123,11 @@ public class User extends Model {
         this.password = password;
     }
 
-    public String getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType){
+    public void setUserType(UserType userType){
             this.userType = userType;
     }
 

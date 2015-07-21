@@ -8,7 +8,8 @@ create table user (
   first_name                varchar(255),
   last_name                 varchar(255),
   password                  varchar(255),
-  user_type                 varchar(255),
+  user_type                 varchar(20),
+  constraint ck_user_user_type check (user_type in ('CHILD','PARENT','PROFESSIONAL','ADMIN')),
   constraint pk_user primary key (email))
 ;
 

@@ -16,60 +16,58 @@ function format ( d ) {
     '</table>';
 }
 
-$(document).ready(function() {
-    var userLang = navigator.language || navigator.userLanguage;
-    var lang = "/assets/javascripts/tables/en.json"
-    if(userLang = "nl"){
-        lang = "/assets/javascripts/tables/nl.json"
-    }
+var userLang = navigator.language || navigator.userLanguage;
+var lang = "/assets/javascripts/tables/en.json"
+if(userLang = "nl"){
+    lang = "/assets/javascripts/tables/nl.json"
+}
 
-    var table = $('#admin_users').DataTable( {
-        "ajax": "/assets/test/testdata3.txt",
-        "columns": [
-            {
-                "className":      'details-control glyphicon glyphicon-triangle-bottom',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ''
-            },
-            { "data": "email" },
-            { "data": "firstName" },
-            { "data": "lastName" },
-            {
-                "data": null,
-                "orderable":      false,
-                "defaultContent": '<button id="removeButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button> <button id="editButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'
-            }
-        ],
-        "order": [[ 1, "desc" ]],
-        "language": {
-            "url": lang
+var table = $('#admin_users').DataTable( {
+    "ajax": "/admin/users/list",
+    "columns": [
+        {
+            "className":      'details-control glyphicon glyphicon-triangle-bottom',
+            "orderable":      false,
+            "data":           null,
+            "defaultContent": ''
+        },
+        { "data": "email" },
+        { "data": "firstName" },
+        { "data": "lastName" },
+        {
+            "data": null,
+            "orderable":      false,
+            "defaultContent": '<button id="removeButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button> <button id="editButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'
         }
-    } );
+    ],
+    "order": [[ 1, "desc" ]],
+    "language": {
+        "url": lang
+    }
+} );
 
-    $('#admin_users tbody').on( 'click', '#removeButton', function () {
-        deleteUser(table.row($(this).closest('tr')).data().email);
-        table.row($(this).closest('tr')).remove().draw( false );
-    } );
+$('#admin_users tbody').on( 'click', '#removeButton', function () {
+    deleteUser(table.row($(this).closest('tr')).data().email);
+    table.row($(this).closest('tr')).remove().draw( false );
+} );
 
-    $('#admin_users tbody').on( 'click', '#editButton', function () {
-        window.location.href = "users/update/" + table.row($(this).closest('tr')).data().email;
-    } );
+$('#admin_users tbody').on( 'click', '#editButton', function () {
+    window.location.href = "users/update/" + table.row($(this).closest('tr')).data().email;
+} );
 
-    $('#admin_users tbody').on('click', 'td.details-control', function () {
-            var row = table.row($(this).closest('tr'));
+$('#admin_users tbody').on('click', 'td.details-control', function () {
+        var row = table.row($(this).closest('tr'));
 
-            if ( row.child.isShown() ) {
-                // This row is already open - close it
-                row.child.hide();
-                $(this).removeClass('details-control glyphicon glyphicon-triangle-top');
-                $(this).addClass('details-control glyphicon glyphicon-triangle-bottom');
-            }
-            else {
-                // Open this row
-                row.child( format(row.data()) ).show();
-                $(this).removeClass('details-control glyphicon glyphicon-triangle-bottom');
-                $(this).addClass('details-control glyphicon glyphicon-triangle-top');
-            }
-    } );
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            $(this).removeClass('details-control glyphicon glyphicon-triangle-top');
+            $(this).addClass('details-control glyphicon glyphicon-triangle-bottom');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            $(this).removeClass('details-control glyphicon glyphicon-triangle-bottom');
+            $(this).addClass('details-control glyphicon glyphicon-triangle-top');
+        }
 } );

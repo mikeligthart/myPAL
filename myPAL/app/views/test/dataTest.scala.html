@@ -39,7 +39,7 @@
 
         $(document).ready(function() {
             var table = $('#example').DataTable( {
-                "ajax": "@routes.Application.getUsers",
+                "ajax": "/admin/users/list",
                 "columns": [
                     { "data": "email" },
                     { "data": "firstName" },

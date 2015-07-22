@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import dialogue.Dialogue;
+import models.logging.LogActionType;
 import models.User;
 import models.User.*;
 import models.UserType;
@@ -46,11 +47,17 @@ public class Application extends Controller {
         } else {
             session().clear();
             session("email", loginForm.get().email);
+            User user = User.byEmail(session().get("email"));
+            user.addLogAction(LogActionType.LOGIN);
+            user.update();
             return redirect(routes.Application.index());
         }
     }
 
     public static Result logout(){
+        User user = User.byEmail(session().get("email"));
+        user.addLogAction(LogActionType.LOGOFF);
+        user.update();
         session().clear();
         return redirect(routes.Application.login());
     }
@@ -77,6 +84,10 @@ public class Application extends Controller {
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
+        User user = User.byEmail(session().get("email"));
+        user.addLogAction(LogActionType.ACCESSCALENDAR);
+        user.update();
+
         calendarDate = LocalDate.now();
         return ok(diary_calendar.render(Messages.get("page.diary.calendar.today"), calendarDate.format(dateFormatter)));
     }
@@ -85,6 +96,10 @@ public class Application extends Controller {
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
+        User user = User.byEmail(session().get("email"));
+        user.addLogAction(LogActionType.BUTTONPRESS);
+        user.update();
+
         if(update.contentEquals("-")){
             calendarDate = calendarDate.minusDays(1);
         } else if (update.contentEquals("+")){
@@ -123,13 +138,16 @@ public class Application extends Controller {
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
+        User user = User.byEmail(session().get("email"));
+        user.addLogAction(LogActionType.ACCESSGOALS);
+        user.update();
+
         return ok(diary_goals.render());
     }
 
     /* ADMIN */
     /* Pages */
     public static Result admin(){
-        /*
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
@@ -137,13 +155,11 @@ public class Application extends Controller {
         if(user.getUserType() != UserType.ADMIN){
             return forbidden(no_access.render());
         }
-        */
 
         return ok(admin_home.render());
     }
 
     public static Result users(){
-        /*
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
@@ -151,7 +167,6 @@ public class Application extends Controller {
         if(user.getUserType() != UserType.ADMIN){
             return forbidden(no_access.render());
         }
-        */
         Form<User> userForm = form(User.class);
         List<User> users = User.find.all();
         return ok(admin_users.render(userForm, users));
@@ -167,7 +182,6 @@ public class Application extends Controller {
             return forbidden(no_access.render());
         }
 
-
         User updateThisUser = User.byEmail(email);
         Form<UserMutable> userForm = form(User.UserMutable.class);
         if (updateThisUser != null) {
@@ -180,7 +194,6 @@ public class Application extends Controller {
 
     /* Functionalities */
     public static Result getUsers(){
-        /*
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
@@ -188,7 +201,6 @@ public class Application extends Controller {
         if(user.getUserType() != UserType.ADMIN){
             return forbidden(no_access.render());
         }
-        */
         List<User> users = User.find.all();
         ObjectNode data = JsonNodeFactory.instance.objectNode();
         data.put("data", toJson(users));
@@ -196,7 +208,6 @@ public class Application extends Controller {
     }
 
     public static Result addUser(){
-        /*
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
@@ -204,7 +215,6 @@ public class Application extends Controller {
         if(user.getUserType() != UserType.ADMIN){
             return forbidden(no_access.render());
         }
-        */
 
         Form<User> userForm = form(User.class).bindFromRequest();
         List<User> users = User.find.all();

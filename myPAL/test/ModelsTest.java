@@ -10,6 +10,7 @@ import static play.test.Helpers.*;
 
 public class ModelsTest extends WithApplication {
 
+    /*
     @Test
     public void createAndRetrieveUser() {
         new User("bob@gmail.com", "Bob", "Test", "secret", UserType.CHILD).save();
@@ -17,4 +18,5 @@ public class ModelsTest extends WithApplication {
         assertNotNull(bob);
         assertEquals("Bob", bob.getFirstName());
     }
+    */
 }

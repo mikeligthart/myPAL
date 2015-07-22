@@ -1,11 +1,17 @@
 package models;
 
+import models.logging.LogAction;
+import models.logging.LogActionType;
 import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
 import play.db.ebean.Model;
 import play.i18n.Messages;
+import util.AppException;
+import util.HashHelper;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +32,10 @@ public class User extends Model {
     @Constraints.Required
     private String lastName;
 
+    @Temporal(TemporalType.DATE)
+    @Constraints.Required
+    private Date birthDate;
+
     @Constraints.Required
     private String password;
 
@@ -33,6 +43,11 @@ public class User extends Model {
     @OneToMany
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<LogAction> logActions;
+
+    private Timestamp lastActivity;
 
     //The attributes needed to login with a user
     public static class Login {
@@ -50,7 +65,6 @@ public class User extends Model {
     }
 
     //The attributes that are mutable
-
     public static class UserMutable{
 
         @Constraints.Required
@@ -73,22 +87,45 @@ public class User extends Model {
         public UserMutable(){}
     }
 
-    /*
-    public User(String email, String firstName, String lastName, String password, UserType userType){
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.userType = userType;
-    }
-    */
-
     public List<ValidationError> validate() {
         List<ValidationError> errors = new ArrayList<>();
         if (User.byEmail(email) != null) {
             errors.add(new ValidationError("email", Messages.get("model.user.emailregisteredalready")));
         }
         return errors.isEmpty() ? null : errors;
+    }
+
+    public static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
+
+    public static User byEmail(String email){
+        return find.byId(email);
+    }
+
+    public UserMutable getMutables(){
+        return new UserMutable(firstName, lastName, userType);
+    }
+
+    public void updateFromMutables(UserMutable mutables){
+        firstName = mutables.firstName;
+        lastName = mutables.lastName;
+        userType = mutables.userType;
+    }
+
+    public static boolean authenticate(String email, String password) {
+        User user = byEmail(email);
+        if(user != null){
+            if(HashHelper.checkPassword(password, user.getPassword())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addLogAction(LogActionType logActionType){
+        LogAction logAction = new LogAction(logActionType);
+        lastActivity = logAction.getTimestamp();
+        logActions.add(logAction);
+        logAction.save();
     }
 
     public String getEmail() {
@@ -115,12 +152,20 @@ public class User extends Model {
         this.lastName = lastName;
     }
 
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) throws AppException {
+        this.password = HashHelper.createPassword(password); ;
     }
 
     public UserType getUserType() {
@@ -131,29 +176,20 @@ public class User extends Model {
             this.userType = userType;
     }
 
-    public static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
-
-    public static User byEmail(String email){
-        return find.byId(email);
+    public List<LogAction> getLogActions() {
+        return logActions;
     }
 
-    public UserMutable getMutables(){
-        return new UserMutable(firstName, lastName, userType);
+    public void setLogActions(List<LogAction> logActions) {
+        this.logActions = logActions;
     }
 
-    public void updateFromMutables(UserMutable mutables){
-        firstName = mutables.firstName;
-        lastName = mutables.lastName;
-        userType = mutables.userType;
+
+    public Timestamp getLastActivity() {
+        return lastActivity;
     }
 
-    public static boolean authenticate(String email, String password) {
-        User user = byEmail(email);
-        if(user != null){
-            if(user.getPassword().equals(password)){
-                return true;
-            }
-        }
-        return false;
+    public void setLastActivity(Timestamp lastActivity) {
+        this.lastActivity = lastActivity;
     }
 }

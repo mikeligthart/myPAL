@@ -11,4 +11,6 @@
             <h1>@Messages.get("page.diary.base.calendar")</h1>
             <a href='@routes.Application.calendarUpdate("-")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a> <button class="btn btn-default" id="datePicker" data-date="@realDate" data-date-format="dd/mm/yyyy">@date <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></button> <a href='@routes.Application.calendarUpdate("+")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
         </div>
+
+        <script src=@routes.Assets.at("javascripts/main.js")></script>
 }

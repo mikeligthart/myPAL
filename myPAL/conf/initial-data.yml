@@ -1,34 +1,41 @@
-- !!models.User
-    email:      test1@email.com
-    firstName:      Bob
-    lastName:       Test1
-    password:   secret
-    userType:       0
+users:
 
-- !!models.User
-    email:      mike.ligthart@gmail.com
-    firstName:      Mike
-    lastName:       Ligthart
-    password:   mike
-    userType:       models.UserType.ADMIN
+    - !!models.User
+        email:      test1@email.com
+        firstName:      Bob
+        lastName:       Test1
+        birthDate:    2005-01-01
+        password:   secret
+        userType:       CHILD
 
-- !!models.User
-    email:      test2@email.com
-    firstName:      Henk
-    lastName:       Test2
-    password:   secret
-    userType:       1
+    - !!models.User
+        email:      mike.ligthart@gmail.com
+        firstName:      Mike
+        lastName:       Ligthart
+        birthDate:    2005-01-01
+        password:   mike
+        userType:       ADMIN
 
-- !!models.User
-    email:      test3@email.com
-    firstName:      Jan
-    lastName:       Test3
-    password:   secret
-    userType:       2
+    - !!models.User
+        email:      test2@email.com
+        firstName:      Henk
+        lastName:       Test2
+        birthDate:    2005-01-01
+        password:   secret
+        userType:       CHILD
 
-- !!models.User
-    email:      test4@email.com
-    firstName:      Piet
-    lastName:       Test4
-    password:   secret
-    userType:       3
+    - !!models.User
+        email:      test3@email.com
+        firstName:      Jan
+        lastName:       Test3
+        birthDate:    2005-01-01
+        password:   secret
+        userType:       CHILD
+
+    - !!models.User
+        email:      test4@email.com
+        firstName:      Piet
+        lastName:       Test4
+        birthDate:    2005-01-01
+        password:   secret
+        userType:       CHILD

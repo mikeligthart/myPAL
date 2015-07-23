@@ -1,5 +1,4 @@
-- !!models.DiaryActivity
-    id: 1
+- !!models.diary.DiaryActivity
     type: 1
     description: test
     picture: test

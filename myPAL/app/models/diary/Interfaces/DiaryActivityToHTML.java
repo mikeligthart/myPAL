@@ -15,7 +15,7 @@ public class DiaryActivityToHTML {
     private String type;
     private String description;
     private String picture;
-    private float pleased, aroused, dominant;
+    private double pleased, aroused, dominant;
 
     public DiaryActivityToHTML(DiaryActivity diaryActivity){
         this.startHour = diaryActivity.getStarttime().toLocalTime().getHour();
@@ -66,15 +66,15 @@ public class DiaryActivityToHTML {
         return picture;
     }
 
-    public float getPleased() {
+    public double getPleased() {
         return pleased;
     }
 
-    public float getAroused() {
+    public double getAroused() {
         return aroused;
     }
 
-    public float getDominant() {
+    public double getDominant() {
         return dominant;
     }
 }

@@ -17,35 +17,37 @@ public class Emotion extends Model {
     @GeneratedValue
     private int id;
 
-    private float pleased, aroused, dominant;
+    private double pleased;
+    private double aroused;
+    private double dominant;
 
-    public Emotion(float pleased, float aroused, float dominant) {
+    public Emotion(double pleased, double aroused, double dominant) {
         this.pleased = pleased;
         this.aroused = aroused;
         this.dominant = dominant;
     }
 
-    public float getPleased() {
+    public double getPleased() {
         return pleased;
     }
 
-    public void setPleased(float pleased) {
+    public void setPleased(double pleased) {
         this.pleased = pleased;
     }
 
-    public float getAroused() {
+    public double getAroused() {
         return aroused;
     }
 
-    public void setAroused(float aroused) {
+    public void setAroused(double aroused) {
         this.aroused = aroused;
     }
 
-    public float getDominant() {
+    public double getDominant() {
         return dominant;
     }
 
-    public void setDominant(float dominant) {
+    public void setDominant(double dominant) {
         this.dominant = dominant;
     }
 }

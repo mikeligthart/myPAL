@@ -97,17 +97,20 @@ public class Application extends Controller {
 
         Diary diary = listOfDiaries.get(session().get("email"));
 
+        /*
         DiaryActivity testDiaryActivity = new DiaryActivity(0);
         testDiaryActivity.setDate(Date.valueOf(LocalDate.now()));
         testDiaryActivity.setStarttime(new Time(13, 45, 0));
         testDiaryActivity.setEndtime(new Time(15, 30, 0));
         testDiaryActivity.setType(DiaryActivityType.SPORT);
         testDiaryActivity.setDescription("This is a test activity");
-        Emotion emotion = new Emotion(0.1f, 0.1f, 0.1f);
+        Emotion emotion = new Emotion(0.1, 0.1, 0.1);
         emotion.save();
         testDiaryActivity.setEmotion(emotion);
         testDiaryActivity.setPicture("/location/pic.png");
         testDiaryActivity.save();
+        */
+
         List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date", Date.valueOf(diary.getCalendarDate())).findList();
         //List<DiaryMeasurement> diaryMeasurements = DiaryMeasurement.find.where().eq("date", diary.getDateString(false)).findList();
         return ok(diary_calendar.render(diary.getDateString(true), diary.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));

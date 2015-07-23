@@ -26,10 +26,11 @@ create table diary_item (
 
 create table emotion (
   id                        integer not null,
-  pleased                   float,
-  aroused                   float,
-  dominant                  float,
+  pleased                   double,
+  aroused                   double,
+  dominant                  double,
   constraint pk_emotion primary key (id))
+;
 
 create table log_action (
   id                        bigint not null,
@@ -58,16 +59,14 @@ create sequence diary_item_seq;
 
 create sequence emotion_seq;
 
+create sequence log_action_seq;
+
 create sequence user_seq;
 
 alter table diary_activity add constraint fk_diary_activity_emotion_1 foreign key (emotion_id) references emotion (id) on delete restrict on update restrict;
 create index ix_diary_activity_emotion_1 on diary_activity (emotion_id);
-
-create sequence log_action_seq;
-
-
-alter table log_action add constraint fk_log_action_user_1 foreign key (user_email) references user (email) on delete restrict on update restrict;
-create index ix_log_action_user_1 on log_action (user_email);
+alter table log_action add constraint fk_log_action_user_2 foreign key (user_email) references user (email) on delete restrict on update restrict;
+create index ix_log_action_user_2 on log_action (user_email);
 
 
 

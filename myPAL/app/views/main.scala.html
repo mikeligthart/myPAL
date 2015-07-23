@@ -1,4 +1,4 @@
-@(title: String)(content: Html)(extracss: Html)(extrajs: Html)
+@(title: String)(content: Html)(extracss: Html)(topjs: Html)(bottomjs: Html)
 
 <!DOCTYPE html>
     <html>
@@ -28,11 +28,10 @@
         <script src='@routes.Assets.at("javascripts/bootstrap.min.js")' type="text/javascript"></script>
 
         <!-- custom javascript -->
-        <script src='@routes.Assets.at("javascripts/main.js")' type="text/javascript"></script>
-        @extrajs
+        @topjs
     </head>
     <body role="document">
         @content
-
+        @bottomjs
     </body>
 </html>

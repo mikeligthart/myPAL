@@ -7,16 +7,16 @@ Starting event engine
 Starting sbt command engine
 Waiting for sbt command engine
 Command engine arguments=List()
-Command engine baseDirectory=C:\Users\ligthartmeu\apps\myPAL\myPAL
+Command engine baseDirectory=C:\Users\Mike\Documents\GitHub\myPAL\myPAL
 Command engine initial remaining commands List(--initialize, onFailure load-failed, boot, server-send-ready-for-request, server-handle-next-server-request)
 > --initialize
 > initialize
 > onFailure load-failed
 > boot
 > reload
-[Loading] Scanning directory C:\Users\ligthartmeu\apps\myPAL\myPAL\project
+[Loading] Scanning directory C:\Users\Mike\Documents\GitHub\myPAL\myPAL\project
 [Loading] Found non-root projects 
-[Loading] Done in C:\Users\ligthartmeu\apps\myPAL\myPAL\project, returning: ()
+[Loading] Done in C:\Users\Mike\Documents\GitHub\myPAL\myPAL\project, returning: ()
 deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(List(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))))
   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.JUnitXmlReportPlugin)
 sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
@@ -29,7 +29,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
 Loading project definition from C:\Users\ligthartmeu\apps\myPAL\myPAL\project
 Running task... Cancel: sbt.TaskCancellationStrategy$Null$@5bbc4d3a, check cycles: false
 
-Initial source changes: 
+Initial source changes:
 	removed:Set()
 	added: Set()
 	modified: Set()
@@ -46,7 +46,7 @@ All initially invalidated sources: Set()
 
 Copy resource mappings: 
 	
-[Loading] Scanning directory C:\Users\ligthartmeu\apps\myPAL\myPAL
+[Loading] Scanning directory C:\Users\Mike\Documents\GitHub\myPAL\myPAL
 [Loading] Found root project root w/ remaining 
 deducing auto plugins based on known facts Set(Atom(play.PlayJava), Atom(sbt.plugins.CorePlugin)) and clauses Clauses(List(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(play.sbt.forkrun.PlayForkRun),Set(Atom(sbt.plugins.BackgroundRunPlugin))), Clause(Atom(play.sbt.forkrun.PlayForkRun),Set(Atom(play.Play))), Clause(Atom(play.sbt.forkrun.PlayForkRun),Set(Atom(sbt.plugins.SerializersPlugin))), Clause(Atom(play.Play),Set(Atom(com.typesafe.sbt.webdriver.SbtWebDriver))), Clause(Atom(play.Play),Set(Atom(play.twirl.sbt.SbtTwirl))), Clause(Atom(play.Play),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(play.PlayJava),Set(Atom(play.Play))), Clause(Atom(play.PlayScala),Set(Atom(play.Play))), Clause(Atom(play.twirl.sbt.SbtTwirl),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(com.typesafe.sbt.jse.SbtJsEngine),Set(Atom(com.typesafe.sbt.web.SbtWeb))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.jse.SbtJsEngine))), Clause(Atom(com.typesafe.sbt.webdriver.SbtWebDriver),Set(Atom(com.typesafe.sbt.web.SbtWeb))), Clause(Atom(sbt.plugins.BackgroundRunPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(com.typesafe.sbt.coffeescript.SbtCoffeeScript),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(com.typesafe.sbt.less.SbtLess),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(com.typesafe.sbt.jshint.SbtJSHint),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(com.typesafe.sbt.rjs.SbtRjs),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(com.typesafe.sbt.digest.SbtDigest),Set(Atom(com.typesafe.sbt.web.SbtWeb))), Clause(Atom(com.typesafe.sbt.mocha.SbtMocha),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin))), Clause(And(Set(Atom(sbt.plugins.BackgroundRunPlugin), Atom(play.Play), Atom(sbt.plugins.SerializersPlugin))),Set(Atom(play.sbt.forkrun.PlayForkRun))), Clause(Atom(com.typesafe.sbt.web.SbtWeb),Set(Atom(com.typesafe.sbt.jse.SbtJsEngine))), Clause(Atom(com.typesafe.sbt.jse.SbtJsEngine),Set(Atom(com.typesafe.sbt.jse.SbtJsTask))), Clause(Atom(com.typesafe.sbt.web.SbtWeb),Set(Atom(com.typesafe.sbt.webdriver.SbtWebDriver))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.BackgroundRunPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.InteractionServicePlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.SendEventServicePlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.SerializersPlugin))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.coffeescript.SbtCoffeeScript))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.less.SbtLess))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.jshint.SbtJSHint))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.rjs.SbtRjs))), Clause(Atom(com.typesafe.sbt.web.SbtWeb),Set(Atom(com.typesafe.sbt.digest.SbtDigest))), Clause(Atom(com.typesafe.sbt.jse.SbtJsTask),Set(Atom(com.typesafe.sbt.mocha.SbtMocha)))))
   :: deduced result: Matched(sbt.plugins.CorePlugin,play.PlayJava,sbt.plugins.InteractionServicePlugin,sbt.plugins.SendEventServicePlugin,play.Play,sbt.plugins.SerializersPlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,com.typesafe.sbt.jse.SbtJsTask,play.twirl.sbt.SbtTwirl,com.typesafe.sbt.webdriver.SbtWebDriver,com.typesafe.sbt.jshint.SbtJSHint,sbt.plugins.JUnitXmlReportPlugin,com.typesafe.sbt.mocha.SbtMocha,com.typesafe.sbt.less.SbtLess,com.typesafe.sbt.web.SbtWeb,com.typesafe.sbt.rjs.SbtRjs,com.typesafe.sbt.jse.SbtJsEngine,com.typesafe.sbt.coffeescript.SbtCoffeeScript,sbt.plugins.BackgroundRunPlugin,com.typesafe.sbt.digest.SbtDigest,play.sbt.forkrun.PlayForkRun)
@@ -58,10 +58,10 @@ sorting: ns: List(sbt.plugins.CorePlugin, play.PlayJava, sbt.plugins.Interaction
   :: sorting:: found: List(sbt.plugins.CorePlugin, com.typesafe.sbt.web.SbtWeb, sbt.plugins.InteractionServicePlugin, sbt.plugins.SendEventServicePlugin, sbt.plugins.SerializersPlugin, sbt.plugins.IvyPlugin, com.typesafe.sbt.webdriver.SbtWebDriver, com.typesafe.sbt.jse.SbtJsEngine, com.typesafe.sbt.digest.SbtDigest, sbt.plugins.JvmPlugin, com.typesafe.sbt.jse.SbtJsTask, play.twirl.sbt.SbtTwirl, com.typesafe.sbt.jshint.SbtJSHint, sbt.plugins.JUnitXmlReportPlugin, com.typesafe.sbt.mocha.SbtMocha, com.typesafe.sbt.less.SbtLess, com.typesafe.sbt.rjs.SbtRjs, com.typesafe.sbt.coffeescript.SbtCoffeeScript, sbt.plugins.BackgroundRunPlugin, play.Play) not found List(play.PlayJava, play.sbt.forkrun.PlayForkRun)
   :: sorting:: found: List(sbt.plugins.CorePlugin, com.typesafe.sbt.web.SbtWeb, sbt.plugins.InteractionServicePlugin, sbt.plugins.SendEventServicePlugin, sbt.plugins.SerializersPlugin, sbt.plugins.IvyPlugin, com.typesafe.sbt.webdriver.SbtWebDriver, com.typesafe.sbt.jse.SbtJsEngine, com.typesafe.sbt.digest.SbtDigest, sbt.plugins.JvmPlugin, com.typesafe.sbt.jse.SbtJsTask, play.twirl.sbt.SbtTwirl, com.typesafe.sbt.jshint.SbtJSHint, sbt.plugins.JUnitXmlReportPlugin, com.typesafe.sbt.mocha.SbtMocha, com.typesafe.sbt.less.SbtLess, com.typesafe.sbt.rjs.SbtRjs, com.typesafe.sbt.coffeescript.SbtCoffeeScript, sbt.plugins.BackgroundRunPlugin, play.Play, play.PlayJava, play.sbt.forkrun.PlayForkRun) not found List()
   :: sorted deduced result: List(sbt.plugins.CorePlugin, com.typesafe.sbt.web.SbtWeb, sbt.plugins.InteractionServicePlugin, sbt.plugins.SendEventServicePlugin, sbt.plugins.SerializersPlugin, sbt.plugins.IvyPlugin, com.typesafe.sbt.webdriver.SbtWebDriver, com.typesafe.sbt.jse.SbtJsEngine, com.typesafe.sbt.digest.SbtDigest, sbt.plugins.JvmPlugin, com.typesafe.sbt.jse.SbtJsTask, play.twirl.sbt.SbtTwirl, com.typesafe.sbt.jshint.SbtJSHint, sbt.plugins.JUnitXmlReportPlugin, com.typesafe.sbt.mocha.SbtMocha, com.typesafe.sbt.less.SbtLess, com.typesafe.sbt.rjs.SbtRjs, com.typesafe.sbt.coffeescript.SbtCoffeeScript, sbt.plugins.BackgroundRunPlugin, play.Play, play.PlayJava, play.sbt.forkrun.PlayForkRun)
-[Loading] Done in C:\Users\ligthartmeu\apps\myPAL\myPAL, returning: (root)
-Set current project to myPAL (in build file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/)
+[Loading] Done in C:\Users\Mike\Documents\GitHub\myPAL\myPAL, returning: (root)
+Set current project to myPAL (in build file:/C:/Users/Mike/Documents/GitHub/myPAL/myPAL/)
 Reapplying settings...
-Set current project to myPAL (in build file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/)
+Set current project to myPAL (in build file:/C:/Users/Mike/Documents/GitHub/myPAL/myPAL/)
 > iflast shell
 > server-send-ready-for-request
 > server-handle-next-server-request
@@ -72,17 +72,17 @@ Running task... Cancel: sbt.server.ServerTaskCancellation@6a1aed89, check cycles
 Initial source changes: 
 	removed:Set()
 	added: Set()
-	modified: Set()
+	modified: Set(C:\Users\Mike\Documents\GitHub\myPAL\myPAL\app\models\User.java)
 Removed products: Set()
 External API changes: API Changes: Set()
 Modified binary dependencies: Set()
-Initial directly invalidated sources: Set()
+Initial directly invalidated sources: Set(C:\Users\Mike\Documents\GitHub\myPAL\myPAL\app\models\User.java)
 
 Sources indirectly invalidated by:
 	product: Set()
 	binary dep: Set()
 	external source: Set()
-All initially invalidated sources: Set()
+All initially invalidated sources: Set(C:\Users\Mike\Documents\GitHub\myPAL\myPAL\app\models\User.java)
 
 Total time: 1 s, completed 23-jul-2015 10:31:54
 > server-post-command-cleanup
@@ -96,6 +96,7 @@ Total time: 0 s, completed 23-jul-2015 10:31:54
 > {file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
 Running task... Cancel: sbt.server.ServerTaskCancellation@7d189546, check cycles: false
+
 
 Initial source changes: 
 	removed:Set()
@@ -141,5 +142,3 @@ Sources indirectly invalidated by:
 All initially invalidated sources: Set()
 
 Total time: 0 s, completed 23-jul-2015 10:31:55
-> server-post-command-cleanup
-> server-handle-next-server-request

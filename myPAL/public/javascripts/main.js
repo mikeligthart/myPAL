@@ -17,11 +17,8 @@ function getFormattedDate(date) {
 }
 
 
-$(document).ready(function() {
-    $('#datePicker').datepicker();
+$('#datePicker').datepicker();
 
-    $('#datePicker').datepicker().on('changeDate', function(ev){
-        window.location = "/mypal/calendar/" + getFormattedDate(ev.date);
-    });
-
+$('#datePicker').datepicker().on('changeDate', function(ev){
+    window.location = "/mypal/calendar/" + getFormattedDate(ev.date);
 });

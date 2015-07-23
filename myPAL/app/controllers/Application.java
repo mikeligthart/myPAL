@@ -10,6 +10,8 @@ import models.diary.Diary;
 import models.diary.DiaryActivity;
 import models.diary.DiaryActivityType;
 import models.diary.interfaces.DiaryActivityToHTML;
+import models.logging.LogActionType;
+import models.UserType;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
@@ -51,11 +53,17 @@ public class Application extends Controller {
             session().clear();
             session("email", loginForm.get().email);
             listOfDiaries.put(session().get("email"), new Diary());
+            User user = User.byEmail(session().get("email"));
+            user.addLogAction(LogActionType.LOGIN);
+            user.update();
             return redirect(routes.Application.index());
         }
     }
 
     public static Result logout(){
+        User user = User.byEmail(session().get("email"));
+        user.addLogAction(LogActionType.LOGOFF);
+        user.update();
         session().clear();
         listOfDiaries.remove(session().get("email"));
         return redirect(routes.Application.login());
@@ -83,6 +91,10 @@ public class Application extends Controller {
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
+        User user = User.byEmail(session().get("email"));
+        user.addLogAction(LogActionType.ACCESSCALENDAR);
+        user.update();
+
         Diary diary = listOfDiaries.get(session().get("email"));
 
         DiaryActivity testDiaryActivity = new DiaryActivity(0);
@@ -106,6 +118,9 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         Diary diary = listOfDiaries.get(session().get("email"));
+        User user = User.byEmail(session().get("email"));
+        user.addLogAction(LogActionType.BUTTONPRESS);
+        user.update();
 
         if(update.contentEquals("-")){
             diary.dateMinusOne();
@@ -133,6 +148,10 @@ public class Application extends Controller {
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
+        User user = User.byEmail(session().get("email"));
+        user.addLogAction(LogActionType.ACCESSGOALS);
+        user.update();
+
         return ok(diary_goals.render());
     }
 
@@ -143,7 +162,7 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
+        if(user.getUserType() != UserType.ADMIN){
             return forbidden(no_access.render());
         }
 
@@ -155,7 +174,7 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
+        if(user.getUserType() != UserType.ADMIN){
             return forbidden(no_access.render());
         }
         Form<User> userForm = form(User.class);
@@ -169,7 +188,7 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
+        if(user.getUserType() != UserType.ADMIN){
             return forbidden(no_access.render());
         }
 
@@ -189,8 +208,8 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
-            return forbidden();
+        if(user.getUserType() != UserType.ADMIN){
+            return forbidden(no_access.render());
         }
         List<User> users = User.find.all();
         ObjectNode data = JsonNodeFactory.instance.objectNode();
@@ -203,8 +222,8 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
-            return forbidden();
+        if(user.getUserType() != UserType.ADMIN){
+            return forbidden(no_access.render());
         }
 
         Form<User> userForm = form(User.class).bindFromRequest();
@@ -223,8 +242,8 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
-            return forbidden();
+        if(user.getUserType() != UserType.ADMIN){
+            return forbidden(no_access.render());
         }
 
         Form<UserMutable> userForm = form(UserMutable.class).bindFromRequest();
@@ -245,8 +264,8 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        if(!user.getUserType().equalsIgnoreCase("4")){
-            return forbidden();
+        if(user.getUserType() != UserType.ADMIN){
+            return forbidden(no_access.render());
         }
 
         User deleteThisUser = User.byEmail(email);

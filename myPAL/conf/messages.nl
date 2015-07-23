@@ -5,6 +5,12 @@ model.user.firstName=Voornaam
 model.user.lastName=Achternaam
 model.user.userType=Gebruikerstype
 model.user.password=Wachtwoord
+model.user.invalid=Ongeldig wachtwoord of gebruikersnaam
+model.user.emailregisteredalready=Dit e-mailadres is al geregistreerd
+model.user.userType.child=Kind
+model.user.userType.parent=Ouder
+model.user.userType.professional=Medisch Professional
+model.user.userType.admin=Admin
 
 ### PAGES ###
 ## General ##

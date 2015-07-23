@@ -943,3 +943,32 @@ Sending msg to client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee: DetachedLo
 Sending msg to client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee: DetachedLogEvent(LogMessage(debug,> server-post-command-cleanup))
 Sending msg to client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee: ExecutionSuccess(5)
 Sending msg to client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee: DetachedLogEvent(LogMessage(debug,> server-handle-next-server-request))
+Got request: UnlistenToEvents()
+Reading next message from client.
+Sending msg to client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee: (22,ReceivedResponse())
+Got request: UnlistenToValue(AttributeKey[scala.collection.Seq[java.lang.String]]("discoveredMainClasses") in Scope(Build: file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/, , Project: ProjectReference(file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/,root), Config: compile))
+Reading next message from client.
+Got request: UnlistenToValue(AttributeKey[scala.Option[java.lang.String]]("mainClass") in Scope(Build: file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/, , Project: ProjectReference(file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/,root), Config: compile))
+Reading next message from client.
+Got request: UnlistenToBuildChange()
+Reading next message from client.
+Client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee EOF, shutting down.
+Stopping client.
+Client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee thread exiting.
+Dropping message (22,ReceivedResponse()) because client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee of an exception serializing and sending: java.net.SocketException: socket is closed
+stack trace sending message was 
+java.net.SocketException: socket is closed
+	at sbt.impl.ipc.Peer.send(IPC.scala:74)
+	at sbt.impl.ipc.Peer.reply(IPC.scala:88)
+	at sbt.impl.ipc.Peer.replyString(IPC.scala:111)
+	at sbt.impl.ipc.Peer.replyJson(IPC.scala:124)
+	at sbt.server.SbtClientHandler$$anonfun$reply$1.apply$mcV$sp(SbtClientHandler.scala:132)
+	at sbt.server.SbtClientHandler.wrappedSend(SbtClientHandler.scala:113)
+	at sbt.server.SbtClientHandler.reply(SbtClientHandler.scala:132)
+	at sbt.server.RequestProcessor.unlistenToEvents(RequestProcessor.scala:344)
+	at sbt.server.RequestProcessor.sbt$server$RequestProcessor$$handleRequestsWithBuildState(RequestProcessor.scala:392)
+	at sbt.server.RequestProcessor.run(RequestProcessor.scala:324)
+Dropping message (23,ReceivedResponse()) to dead client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee
+Dropping message (24,ReceivedResponse()) to dead client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee
+Dropping message (25,ReceivedResponse()) to dead client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee
+Dropping message (0,ReceivedResponse()) to dead client activator-7c3459d4-4030-4fee-a94e-dea3c1b09bee

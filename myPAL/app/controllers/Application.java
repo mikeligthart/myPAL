@@ -3,11 +3,15 @@ package controllers;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import dialogue.Dialogue;
+import models.Emotion;
 import models.User;
 import models.User.*;
+import models.diary.Diary;
+import models.diary.DiaryActivity;
+import models.diary.DiaryActivityType;
+import models.diary.interfaces.DiaryActivityToHTML;
 import play.Logger;
 import play.data.Form;
-import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.admin.*;
@@ -15,9 +19,12 @@ import views.html.diary.*;
 import views.html.test.*;
 import views.html.controlFlow.*;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static play.data.Form.form;
 import static play.libs.Json.toJson;
@@ -25,11 +32,9 @@ import static play.libs.Json.toJson;
 
 public class Application extends Controller {
 
-    private static LocalDate calendarDate;
-    private static LocalDate todayDate = LocalDate.now();
-    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    private static Dialogue dialogue = Dialogue.getInstance();
+    private static final Map<String, Diary> listOfDiaries = new HashMap<>();
+    private static final Dialogue dialogue = Dialogue.getInstance();
 
     /* CONTROL FLOW */
     public static Result login() {
@@ -45,12 +50,14 @@ public class Application extends Controller {
         } else {
             session().clear();
             session("email", loginForm.get().email);
+            listOfDiaries.put(session().get("email"), new Diary());
             return redirect(routes.Application.index());
         }
     }
 
     public static Result logout(){
         session().clear();
+        listOfDiaries.remove(session().get("email"));
         return redirect(routes.Application.login());
     }
 
@@ -69,53 +76,57 @@ public class Application extends Controller {
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
-        return ok(diary_home.render());
+        return calendar();
     }
 
     public static Result calendar(){
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
-        calendarDate = LocalDate.now();
-        return ok(diary_calendar.render(Messages.get("page.diary.calendar.today"), calendarDate.format(dateFormatter)));
+        Diary diary = listOfDiaries.get(session().get("email"));
+
+        DiaryActivity testDiaryActivity = new DiaryActivity(0);
+        testDiaryActivity.setDate(Date.valueOf(LocalDate.now()));
+        testDiaryActivity.setStarttime(new Time(13, 45, 0));
+        testDiaryActivity.setEndtime(new Time(15, 30, 0));
+        testDiaryActivity.setType(DiaryActivityType.SPORT);
+        testDiaryActivity.setDescription("This is a test activity");
+        Emotion emotion = new Emotion(0.1f, 0.1f, 0.1f);
+        emotion.save();
+        testDiaryActivity.setEmotion(emotion);
+        testDiaryActivity.setPicture("/location/pic.png");
+        testDiaryActivity.save();
+        List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date", Date.valueOf(diary.getCalendarDate())).findList();
+        //List<DiaryMeasurement> diaryMeasurements = DiaryMeasurement.find.where().eq("date", diary.getDateString(false)).findList();
+        return ok(diary_calendar.render(diary.getDateString(true), diary.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
 
     public static Result calendarUpdate(String update){
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
+        Diary diary = listOfDiaries.get(session().get("email"));
+
         if(update.contentEquals("-")){
-            calendarDate = calendarDate.minusDays(1);
+            diary.dateMinusOne();
         } else if (update.contentEquals("+")){
-            calendarDate = calendarDate.plusDays(1);
+            diary.datePlusOne();
         } else {
             return forbidden();
         }
-        return ok(diary_calendar.render(dateConverter(calendarDate, todayDate), calendarDate.format(dateFormatter)));
+        List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date",Date.valueOf(diary.getCalendarDate())).findList();
+        return ok(diary_calendar.render(diary.getDateString(true), diary.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
 
     public static Result calendarSet(String day, String month, String year){
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
-        calendarDate = LocalDate.parse(day + "/" + month + "/" + year, dateFormatter);
-        return ok(diary_calendar.render(dateConverter(calendarDate, todayDate), calendarDate.format(dateFormatter)));
-    }
+        Diary diary = listOfDiaries.get(session().get("email"));
 
-    private static String dateConverter(LocalDate calendarDate, LocalDate todayDate){
-        String dateDisplayButton = calendarDate.format(dateFormatter);
-        if (calendarDate.isEqual(todayDate)){
-            dateDisplayButton = Messages.get("page.diary.calendar.today");
-        } else if (calendarDate.compareTo(todayDate) == 1){
-            dateDisplayButton = Messages.get("page.diary.calendar.tomorrow");
-        } else if (calendarDate.compareTo(todayDate) == 2){
-            dateDisplayButton = Messages.get("page.diary.calendar.dayaftertomorrow");
-        } else if (calendarDate.compareTo(todayDate) == -1){
-            dateDisplayButton = Messages.get("page.diary.calendar.yesterday");
-        } else if (calendarDate.compareTo(todayDate) == -2){
-            dateDisplayButton = Messages.get("page.diary.calendar.daybeforeyesterday");
-        }
-        return dateDisplayButton;
+        diary.dateUpdate(day, month, year);
+        List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date",Date.valueOf(diary.getCalendarDate())).findList();
+        return ok(diary_calendar.render(diary.getDateString(true), diary.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
 
     public static Result goals(){

@@ -32,6 +32,12 @@ page.diary.calendar.tomorrow=Morgen
 page.diary.calendar.dayaftertomorrow=Overmorgen
 page.diary.calendar.yesterday=Gisteren
 page.diary.calendar.daybeforeyesterday=Eergisteren
+page.diary.calendar.activitytype.school=School
+page.diary.calendar.activitytype.meal=Maaltijd
+page.diary.calendar.activitytype.sport=Sport
+page.diary.calendar.activitytype.other=Overig
+page.diary.calendar.activity=Activiteit
+page.diary.calendar.measurement=Meeting
 
 ## Admin ##
 # Base #

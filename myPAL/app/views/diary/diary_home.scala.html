@@ -2,8 +2,19 @@
 
 @diary(Messages.get("page.diary.base.home"))("home") {
 
-        <div class="starter-template">
-            <h1>Home</h1>
-            <p class="lead">Hier komt het beginmenu.</p>
-        </div>
+            <style>
+                .vertical-center {
+                    padding-top:25%;
+                }
+
+                .btn-menu {
+                    magin-bottom:15px;
+                }
+
+            </style>
+            <div class="col-sm-4 vertical-center text-center">
+                <button class="btn btn-lg btn-block btn-menu">@Messages.get("page.diary.base.calendar")</button>
+                <br/>
+                <button class="btn btn-lg btn-block">@Messages.get("page.diary.base.goals")</button>
+            </div>
 }

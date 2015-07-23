@@ -1,32 +1,65 @@
 package models.diary;
 
+import play.data.validation.Constraints;
+import play.db.ebean.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
 
 /**
  * Created by ligthartmeu on 8-7-2015.
  */
-public abstract class DiaryItem {
+@Entity
+public abstract class DiaryItem extends Model {
 
-    private Instant starttime, endtime;
+    @Id
+    private int id;
 
-    public DiaryItem(Instant starttime, Instant endtime) {
-        this.starttime = starttime;
-        this.endtime = endtime;
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
+    @Temporal(TemporalType.TIME)
+    private Time starttime, endtime;
+
+    public DiaryItem(int id){
+        this.id = id;
+    }
+    public int getId() {
+        return id;
     }
 
-    public Instant getStarttime() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Time getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(Instant starttime) {
+    public void setStarttime(Time starttime) {
         this.starttime = starttime;
     }
 
-    public Instant getEndtime() {
+    public Time getEndtime() {
         return endtime;
     }
 
-    public void setEndtime(Instant endtime) {
+    public void setEndtime(Time endtime) {
         this.endtime = endtime;
     }
 }

@@ -1,3 +1,4 @@
+import models.diary.DiaryActivity;
 import play.*;
 import play.libs.*;
 import com.avaje.ebean.Ebean;
@@ -9,7 +10,7 @@ public class Global extends GlobalSettings {
     public void onStart(Application app) {
         // Check if the database is empty
         if (User.find.findRowCount() == 0) {
-            Ebean.save((List) Yaml.load("initial-data.yml"));
+            Ebean.save((List) Yaml.load("test_users.yml"));
         }
     }
 }

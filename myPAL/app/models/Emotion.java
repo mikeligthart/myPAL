@@ -1,9 +1,21 @@
 package models;
 
+import play.db.ebean.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Created by ligthartmeu on 8-7-2015.
  */
-public class Emotion {
+@Entity
+public class Emotion extends Model {
+
+
+    @Id
+    @GeneratedValue
+    private int id;
 
     private float pleased, aroused, dominant;
 

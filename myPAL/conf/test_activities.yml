@@ -1,0 +1,5 @@
+- !!models.DiaryActivity
+    id: 1
+    type: 1
+    description: test
+    picture: test

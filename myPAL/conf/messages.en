@@ -32,6 +32,12 @@ page.diary.calendar.tomorrow=Tomorrow
 page.diary.calendar.dayaftertomorrow=Day after tomorrow
 page.diary.calendar.yesterday=Yesterday
 page.diary.calendar.daybeforeyesterday=Day before yesterday
+page.diary.calendar.activitytype.school=School
+page.diary.calendar.activitytype.meal=Meal
+page.diary.calendar.activitytype.sport=Sport
+page.diary.calendar.activitytype.other=Other
+page.diary.calendar.activity=Activity
+page.diary.calendar.measurement=Measurement
 
 ## Admin ##
 # Base #

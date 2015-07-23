@@ -2,29 +2,28 @@ package models.diary;
 
 import models.Emotion;
 
-import java.time.Instant;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 
 /**
  * Created by ligthartmeu on 8-7-2015.
  */
+@Entity
 public class DiaryActivity extends DiaryItem {
 
+    @Enumerated(EnumType.STRING)
     private DiaryActivityType type;
+
     private String description;
-    private Emotion emotion;
     private String picture;
 
-    public DiaryActivity(Instant starttime, Instant endtime, DiaryActivityType type) {
-        super(starttime, endtime);
-        this.type = type;
-    }
+    @OneToOne
+    private Emotion emotion;
 
-    public DiaryActivity(Instant starttime, Instant endtime, DiaryActivityType type, String description, Emotion emotion, String picture) {
-        super(starttime, endtime);
-        this.type = type;
-        this.description = description;
-        this.emotion = emotion;
-        this.picture = picture;
+    public DiaryActivity(int id){
+        super(id);
     }
 
     public DiaryActivityType getType() {
@@ -43,6 +42,14 @@ public class DiaryActivity extends DiaryItem {
         this.description = description;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
     public Emotion getEmotion() {
         return emotion;
     }
@@ -51,11 +58,5 @@ public class DiaryActivity extends DiaryItem {
         this.emotion = emotion;
     }
 
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
+    public static Finder<Integer, DiaryActivity> find = new Finder<Integer, DiaryActivity>(Integer.class, DiaryActivity.class);
 }

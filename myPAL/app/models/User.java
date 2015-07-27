@@ -12,6 +12,8 @@ import util.HashHelper;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class User extends Model {
 
     @Temporal(TemporalType.DATE)
     @Constraints.Required
-    private Date birthDate;
+    private Date birthdate;
 
     @Constraints.Required
     private String password;
@@ -152,13 +154,17 @@ public class User extends Model {
         this.lastName = lastName;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
+
+    public void setBirthdate(String birthdate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        this.birthdate = (Date) sdf.parse(birthdate);  }
 
     public String getPassword() {
         return password;

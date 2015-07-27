@@ -16,7 +16,7 @@
             </div>
         }
 
-        @helper.form(action = routes.Application.addUser(), 'class -> "form-inline") {
+        @helper.form(action = routes.Application.addUser(), 'class -> "") {
             @admin_user_fieldset(userForm)
         }
 
@@ -41,6 +41,8 @@
                 </tr>
             </tbody>
         </table>
+
+        <script src=@routes.Assets.at("javascripts/main.js")></script>
 }
 
 

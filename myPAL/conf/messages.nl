@@ -3,6 +3,7 @@
 model.user.email=E-mail adres
 model.user.firstName=Voornaam
 model.user.lastName=Achternaam
+model.user.birthdate=Geboortedatum
 model.user.userType=Gebruikerstype
 model.user.password=Wachtwoord
 model.user.invalid=Ongeldig wachtwoord of gebruikersnaam

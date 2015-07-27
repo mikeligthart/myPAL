@@ -18,6 +18,7 @@ function getFormattedDate(date) {
 
 
 $('#datePicker').datepicker();
+$('#birthdate').datepicker();
 
 $('#datePicker').datepicker().on('changeDate', function(ev){
     window.location = "/mypal/calendar/" + getFormattedDate(ev.date);

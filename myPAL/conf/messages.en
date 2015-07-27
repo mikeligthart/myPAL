@@ -3,6 +3,7 @@
 model.user.email=Email address
 model.user.firstName=First name
 model.user.lastName=Last name
+model.user.birthdate=Birthday
 model.user.userType=User type
 model.user.password=Password
 model.user.invalid=Invalid user or password

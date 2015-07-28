@@ -65,6 +65,7 @@ page.admin.users.update.title=Admin | update user
 page.admin.users.options=Options
 page.admin.users.view.title=Admin | view user
 page.admin.users.viewUser=View
+page.admin.users.log=Activity log
 
 
 ### ERROR MESSAGES ###

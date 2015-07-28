@@ -2,8 +2,34 @@
 
 @import play.api.i18n._
 
-@admin(title = Messages("page.admin.users.view.title"), page = "users") {
+@admin(title = Messages("page.admin.users.view.title"), page = "users", table = "javascripts/tables/admin_user_log.js") {
 
-<h3>@Messages("page.admin.users.viewUser")</h3>
+<div>
+    <h2>@user.getFirstName @user.getLastName</h2>
+    <i>@user.getEmail</i>
+    <br />
+    <br />
+    @Messages("model.user.birthdate"): @user.getBirthdate
+    <br />
+    @Messages("model.user.lastActivity"): @user.getLastActivity
+</div>
 
+<div>
+    <h3>@Messages("page.admin.users.log")</h3>
+</div>
+
+<table id="admin_user_log" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Timestamp</th>
+        <th>Activity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Timestamp</td>
+        <td>Activity</td>
+    </tr>
+    </tbody>
+</table>
 }

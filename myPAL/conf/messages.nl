@@ -64,8 +64,7 @@ page.admin.users.updateUser=Update
 page.admin.users.update.title=Admin | update gebruiker
 page.admin.users.options=Opties
 page.admin.users.view.title=Admin | bekijk user
-page.admin.users.viewUser=Bekijken
-
+page.admin.users.log=Activiteiten log
 ### ERROR MESSAGES ###
 
 ### DIALOGUE ###

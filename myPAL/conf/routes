@@ -16,14 +16,15 @@ GET     /mypal/calendar/:day/:month/:year   controllers.Application.calendarSet(
 GET     /mypal/goals                        controllers.Application.goals()
 
 # Admin
-GET     /admin                      controllers.Application.admin()
-GET     /admin/users                controllers.Application.users()
-GET     /admin/users/list           controllers.Application.getUsers()
-POST    /admin/users                controllers.Application.addUser()
-GET     /admin/users/view/:email    controllers.Application.viewUser(email: String)
-GET     /admin/users/update/:email  controllers.Application.updatePageUser(email: String)
-POST    /admin/users/update/:email  controllers.Application.updateUser(email: String)
-DELETE  /admin/users/delete/:email  controllers.Application.deleteUser(email: String)
+GET     /admin                          controllers.Application.admin()
+GET     /admin/users                    controllers.Application.users()
+GET     /admin/users/list               controllers.Application.getUsers()
+POST    /admin/users                    controllers.Application.addUser()
+GET     /admin/users/view/:email        controllers.Application.viewUser(email: String)
+GET     /admin/users/view/log/:email    controllers.Application.getUserLog(email: String)
+GET     /admin/users/update/:email      controllers.Application.updatePageUser(email: String)
+POST    /admin/users/update/:email      controllers.Application.updateUser(email: String)
+DELETE  /admin/users/delete/:email      controllers.Application.deleteUser(email: String)
 
 # Test
 GET     /test/datatest              controllers.Application.dataTest()

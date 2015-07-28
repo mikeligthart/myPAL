@@ -2,6 +2,7 @@ package models;
 
 import models.logging.LogAction;
 import models.logging.LogActionType;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import play.Logger;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -202,5 +203,19 @@ public class User extends Model {
 
     public void setLastActivity(Timestamp lastActivity) {
         this.lastActivity = lastActivity;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof User))
+            return false;
+        if (obj == this)
+            return true;
+
+        User rhs = (User) obj;
+        return new EqualsBuilder().
+                append(email, rhs.email).
+                append(lastActivity, rhs.lastActivity).
+                isEquals();
     }
 }

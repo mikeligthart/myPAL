@@ -9,6 +9,7 @@ import models.diary.Diary;
 import models.diary.DiaryActivity;
 import models.interfaces.DiaryActivityToHTML;
 import models.interfaces.UserToHTML;
+import models.logging.LogAction;
 import models.logging.LogActionType;
 import models.UserType;
 import play.Logger;
@@ -275,6 +276,26 @@ public class Application extends Controller {
             return ok();
         } else {
             return forbidden();
+        }
+    }
+
+    public static Result getUserLog(String email){
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        User user = User.byEmail(session().get("email"));
+        if(user.getUserType() != UserType.ADMIN){
+            return forbidden(no_access.render());
+        }
+
+        User userForLogs = User.byEmail(email);
+        if (userForLogs != null){
+            List<LogAction> logs = LogAction.find.where().eq("user", userForLogs).findList();
+            ObjectNode data = JsonNodeFactory.instance.objectNode();
+            data.put("data", toJson(logs));
+            return ok(data);
+        } else {
+            return forbidden(no_access.render());
         }
     }
 

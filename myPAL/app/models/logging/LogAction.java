@@ -32,6 +32,8 @@ public class LogAction extends Model {
         this.timestamp = Timestamp.valueOf(LocalDateTime.now());
     }
 
+    public static Finder<Integer, LogAction> find = new Finder<Integer, LogAction>(Integer.class, LogAction.class);
+
     public User getUser() {
         return user;
     }

@@ -2,6 +2,7 @@ package models;
 
 import models.logging.LogAction;
 import models.logging.LogActionType;
+import play.Logger;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
@@ -159,15 +160,16 @@ public class User extends Model {
         return birthdate;
     }
 
+    /*
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
+    */
 
-    /*
     public void setBirthdate(String birthdate) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        this.birthdate = (Date) sdf.parse(birthdate);  }
-    */
+        this.birthdate = new Date(sdf.parse(birthdate).getTime());
+    }
     
     public String getPassword() {
         return password;

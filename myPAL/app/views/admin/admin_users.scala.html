@@ -1,4 +1,4 @@
-@(userForm: Form[User], users: List[User])
+@(userForm: Form[User])
 
 @import fieldsets._
 @import play.i18n._
@@ -24,19 +24,21 @@
         <table id="admin_users" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th> </th>
                     <th>@Messages.get("model.user.email")</th>
                     <th>@Messages.get("model.user.firstName")</th>
                     <th>@Messages.get("model.user.lastName")</th>
+                    <th>@Messages.get("model.user.birthdate")</th>
+                    <th>@Messages.get("model.user.lastActivity")</th>
                     <th>@Messages.get("page.admin.users.options")</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td> </td>
                     <td>@Messages.get("model.user.email")</td>
                     <td>@Messages.get("model.user.firstName")</td>
                     <td>@Messages.get("model.user.lastName")</td>
+                    <td>@Messages.get("model.user.birthdate")</td>
+                    <td>@Messages.get("model.user.lastActivity")</td>
                     <td>@Messages.get("page.admin.users.options")</td>
                 </tr>
             </tbody>

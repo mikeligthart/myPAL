@@ -1,15 +1,15 @@
 @(emailValue: String, userForm: Form[User.UserMutable])
 
 @import fieldsets._
-@import play.i18n._
+@import play.api.i18n._
 
-@admin(title = Messages.get("page.admin.users.update.title"), page = "users") {
+@admin(title = Messages("page.admin.users.update.title"), page = "users") {
 
-    <h3>Update</h3>
+    <h3>@Messages("page.admin.users.updateUser")</h3>
     @if(userForm.hasGlobalErrors) {
     <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">@Messages.get("page.general.error")</span>
+        <span class="sr-only">@Messages("page.general.error")</span>
         @userForm.globalError.message
     </div>
     }
@@ -18,6 +18,4 @@
     @helper.form(action = routes.Application.updateUser(emailValue), 'class -> "form-horizontal") {
     @admin_user_update_fieldset(emailValue, userForm)
     }
-
-
 }

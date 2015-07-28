@@ -4,6 +4,8 @@ model.user.email=Email address
 model.user.firstName=First name
 model.user.lastName=Last name
 model.user.birthdate=Birthday
+model.user.lastActivity=Last active
+model.user.lastActivityNever=Never
 model.user.userType=User type
 model.user.password=Password
 model.user.invalid=Invalid user or password
@@ -61,6 +63,9 @@ page.admin.users.addUser=Add user
 page.admin.users.updateUser=Update
 page.admin.users.update.title=Admin | update user
 page.admin.users.options=Options
+page.admin.users.view.title=Admin | view user
+page.admin.users.viewUser=View
+
 
 ### ERROR MESSAGES ###
 

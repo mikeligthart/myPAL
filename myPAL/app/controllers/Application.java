@@ -3,13 +3,12 @@ package controllers;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import dialogue.Dialogue;
-import models.Emotion;
 import models.User;
 import models.User.*;
 import models.diary.Diary;
 import models.diary.DiaryActivity;
-import models.diary.DiaryActivityType;
-import models.diary.interfaces.DiaryActivityToHTML;
+import models.interfaces.DiaryActivityToHTML;
+import models.interfaces.UserToHTML;
 import models.logging.LogActionType;
 import models.UserType;
 import play.Logger;
@@ -22,8 +21,6 @@ import views.html.test.*;
 import views.html.controlFlow.*;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,8 +163,7 @@ public class Application extends Controller {
             return forbidden(no_access.render());
         }
         Form<User> userForm = form(User.class);
-        List<User> users = User.find.all();
-        return ok(admin_users.render(userForm, users));
+        return ok(admin_users.render(userForm));
 
     }
 
@@ -190,6 +186,23 @@ public class Application extends Controller {
         }
     }
 
+    public static Result viewUser(String email){
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        User user = User.byEmail(session().get("email"));
+        if(user.getUserType() != UserType.ADMIN){
+            return forbidden(no_access.render());
+        }
+
+        User viewUser = User.byEmail(email);
+        if (viewUser != null) {
+            return ok(admin_user_view.render(new UserToHTML(viewUser)));
+        } else {
+            return forbidden();
+        }
+    }
+
     /* Functionalities */
     public static Result getUsers(){
         if(session().isEmpty() || session().get("email") == null){
@@ -199,7 +212,8 @@ public class Application extends Controller {
         if(user.getUserType() != UserType.ADMIN){
             return forbidden(no_access.render());
         }
-        List<User> users = User.find.all();
+
+        List<UserToHTML> users = UserToHTML.fromListToList(User.find.all());
         ObjectNode data = JsonNodeFactory.instance.objectNode();
         data.put("data", toJson(users));
         return ok(data);
@@ -215,9 +229,8 @@ public class Application extends Controller {
         }
 
         Form<User> userForm = form(User.class).bindFromRequest();
-        List<User> users = User.find.all();
         if (userForm.hasErrors()) {
-            return badRequest(admin_users.render(userForm, users));
+            return badRequest(admin_users.render(userForm));
         } else {
             User newUser = userForm.get();
             newUser.save();

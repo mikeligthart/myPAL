@@ -4,6 +4,8 @@ model.user.email=E-mail adres
 model.user.firstName=Voornaam
 model.user.lastName=Achternaam
 model.user.birthdate=Geboortedatum
+model.user.lastActivity=Laatst actief
+model.user.lastActivityNever=Nooit
 model.user.userType=Gebruikerstype
 model.user.password=Wachtwoord
 model.user.invalid=Ongeldig wachtwoord of gebruikersnaam
@@ -61,6 +63,8 @@ page.admin.users.addUser=Voeg gebruiker toe
 page.admin.users.updateUser=Update
 page.admin.users.update.title=Admin | update gebruiker
 page.admin.users.options=Opties
+page.admin.users.view.title=Admin | bekijk user
+page.admin.users.viewUser=Bekijken
 
 ### ERROR MESSAGES ###
 

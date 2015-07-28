@@ -2,6 +2,7 @@ package models;
 
 import models.logging.LogAction;
 import models.logging.LogActionType;
+import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
 import play.db.ebean.Model;
@@ -34,8 +35,8 @@ public class User extends Model {
     @Constraints.Required
     private String lastName;
 
-    @Temporal(TemporalType.DATE)
     @Constraints.Required
+    @Formats.DateTime(pattern="dd/MM/yyyy")
     private Date birthdate;
 
     @Constraints.Required
@@ -162,10 +163,12 @@ public class User extends Model {
         this.birthdate = birthdate;
     }
 
+    /*
     public void setBirthdate(String birthdate) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         this.birthdate = (Date) sdf.parse(birthdate);  }
-
+    */
+    
     public String getPassword() {
         return password;
     }

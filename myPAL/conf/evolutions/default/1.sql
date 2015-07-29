@@ -8,7 +8,7 @@ create table diary_activity (
   date                      date,
   starttime                 time,
   endtime                   time,
-  type                      varchar(6),
+  type                      varchar(8),
   description               varchar(255),
   picture                   varchar(255),
   emotion_id                integer,

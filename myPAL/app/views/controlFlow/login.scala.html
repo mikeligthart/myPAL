@@ -1,8 +1,8 @@
 @(form: Form[User.Login])
 
-@import play.i18n._
+@import play.api.i18n._
 
-@main_basic(Messages.get("page.control.login.title")){
+@main_basic(Messages("page.control.login.title")){
 
 <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/login.css")'>
 
@@ -11,24 +11,19 @@
         <img class="myPAL-logo" src='@routes.Assets.at("images/myPAL_logo_big.png")'/>
     </div>
     @helper.form(routes.Application.authenticate, 'class -> "form-signin") {
-    <h2 class="form-signin-heading">@Messages.get("page.control.login.signinheading")</h2>
+    <h2 class="form-signin-heading">@Messages("page.control.login.signinheading")</h2>
     @if(form.hasGlobalErrors) {
     <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">@Messages.get("page.general.error")</span>
+        <span class="sr-only">@Messages("page.general.error")</span>
         @form.globalError.message
     </div>
     }
-    <label for="inputEmail" class="sr-only">@Messages.get("model.user.email")</label>
-    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="@Messages.get("model.user.email")" required autofocus>
-    <label for="inputPassword" class="sr-only">@Messages.get("model.user.password")</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="@Messages.get("model.user.password")" required>
-    <!--<div class="checkbox">
-        <label>
-            <input type="checkbox" value="remember-me"> @Messages.get("page.control.login.rememberme")
-        </label>
-    </div>-->
-    <button class="btn btn-lg btn-primary btn-block btn-mypal-login" type="submit">@Messages.get("page.control.login.login")</button>
+    <label for="inputEmail" class="sr-only">@Messages("model.user.email")</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder='@Messages("model.user.email")' required autofocus>
+    <label for="inputPassword" class="sr-only">@Messages("model.user.password")</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder='@Messages("model.user.password")' required>
+    <button class="btn btn-lg btn-primary btn-block btn-mypal-login" type="submit">@Messages("page.control.login.login")</button>
     }
 </div>
 

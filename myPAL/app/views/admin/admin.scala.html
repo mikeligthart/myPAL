@@ -1,6 +1,6 @@
 @(title: String, page: String, table: String = "")(content: Html)
 
-@import play.i18n._
+@import play.api.i18n._
 
 @main_datatables(title, table) {
 
@@ -8,17 +8,17 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">@Messages.get("page.general.navigation")</span>
+                <span class="sr-only">@Messages("page.general.navigation")</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">@Messages.get("page.general.brand")</a>
+            <a class="navbar-brand" href="#">@Messages("page.general.brand")</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li @if(page == "home"){class="active"}><a href="@routes.Application.admin()">@Messages.get("page.admin.base.home")</a></li>
-                <li @if(page == "users"){class="active"}><a href="@routes.Application.users()">@Messages.get("page.admin.base.users")</a></li>
+                <li @if(page == "home"){class="active"}><a href="@routes.Admin.admin()">@Messages("page.admin.base.home")</a></li>
+                <li @if(page == "users"){class="active"}><a href="@routes.Admin.users()">@Messages("page.admin.base.users")</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

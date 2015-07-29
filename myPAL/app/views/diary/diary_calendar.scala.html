@@ -1,8 +1,8 @@
 @(date: String, realDate: String, activities: List[models.interfaces.DiaryActivityToHTML])
 
-@import play.i18n._
+@import play.api.i18n._
 
-@diary(Messages.get("page.diary.base.calendar"))("calendar") {
+@diary(Messages("page.diary.base.calendar"))("calendar") {
 
         <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/datepicker.css")'>
         <script src=@routes.Assets.at("javascripts/bootstrap-datepicker.js")></script>
@@ -27,7 +27,7 @@
                           dataTable.addRows([
                           @for(activity <- activities) {
 
-                            [ '@Messages.get("page.diary.calendar.activity")', '@activity.getType', new Date(0,0,0,@activity.getStartHour,@activity.getStartMin,0), new Date(0,0,0,@activity.getEndHour,@activity.getEndMin,0) ],
+                            [ '@Messages("page.diary.calendar.activity")', '@activity.getType', new Date(0,0,0,@activity.getStartHour,@activity.getStartMin,0), new Date(0,0,0,@activity.getEndHour,@activity.getEndMin,0) ],
                             }
                             ]);
 
@@ -52,8 +52,8 @@
     }
 
         <div class="text-center">
-            <h1>@Messages.get("page.diary.base.calendar")</h1>
-            <a href='@routes.Application.calendarUpdate("-")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a> <button class="btn btn-default" id="datePicker" data-date="@realDate" data-date-format="dd/mm/yyyy">@date <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></button> <a href='@routes.Application.calendarUpdate("+")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            <h1>@Messages("page.diary.base.calendar")</h1>
+            <a href='@routes.Diary.calendarUpdate("-")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a> <button class="btn btn-default" id="datePicker" data-date="@realDate" data-date-format="dd/mm/yyyy">@date <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></button> <a href='@routes.Diary.calendarUpdate("+")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
         </div>
 
         <div id="timeline" style="width:70%; height:90%;" class="text-center"></div>

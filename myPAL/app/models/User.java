@@ -15,7 +15,6 @@ import util.HashHelper;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -167,9 +166,19 @@ public class User extends Model {
     }
     */
 
-    public void setBirthdate(String birthdate) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        this.birthdate = new Date(sdf.parse(birthdate).getTime());
+    public void setBirthdate(Object birthdate) throws Exception {
+        Logger.debug("Hello setBirthdate class is " + birthdate.getClass());
+        if (birthdate instanceof String){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Logger.debug("In setBirthDate with birthDate: " + birthdate);
+            this.birthdate = new Date(sdf.parse((String) birthdate).getTime());
+        } else if (birthdate instanceof Date){
+            this.birthdate = (Date) birthdate;
+        } else if (birthdate instanceof java.util.Date){
+            this.birthdate = new Date(((java.util.Date) birthdate).getTime());
+        } else{
+            throw new Exception("Birthdate object must be either String or sql.Date");
+        }
     }
     
     public String getPassword() {

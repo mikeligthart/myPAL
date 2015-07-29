@@ -15,7 +15,7 @@
     }
 
 
-    @helper.form(action = routes.Application.updateUser(emailValue), 'class -> "form-horizontal") {
+    @helper.form(action = routes.Admin.updateUser(emailValue), 'class -> "form-horizontal") {
     @admin_user_update_fieldset(emailValue, userForm)
     }
 }

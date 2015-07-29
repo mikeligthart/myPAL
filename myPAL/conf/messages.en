@@ -61,6 +61,7 @@ page.admin.users.title=Admin | users
 page.admin.users.overview=Overview
 page.admin.users.addUser=Add user
 page.admin.users.updateUser=Update
+page.admin.users.updateUser.cancel=Cancel
 page.admin.users.update.title=Admin | update user
 page.admin.users.options=Options
 page.admin.users.view.title=Admin | view user

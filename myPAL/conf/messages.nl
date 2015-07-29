@@ -61,6 +61,7 @@ page.admin.users.title=Admin | gebruikers
 page.admin.users.overview=Overzicht
 page.admin.users.addUser=Voeg gebruiker toe
 page.admin.users.updateUser=Update
+page.admin.users.updateUser.cancel=Niet aanpassen
 page.admin.users.update.title=Admin | update gebruiker
 page.admin.users.options=Opties
 page.admin.users.view.title=Admin | bekijk user

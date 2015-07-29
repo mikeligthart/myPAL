@@ -12,7 +12,7 @@
                name="@field.name"
                value='@field.value.getOrElse("01/01/2005")'
                placeholder="@placeholder"
-               data-date="01/01/2005"
+               data-date='@field.value.getOrElse("01/01/2005")'
                data-date-format="dd/mm/yyyy" />
         <span class="help-block">@{field.error.map { error => error.message }}</span>
     </div>

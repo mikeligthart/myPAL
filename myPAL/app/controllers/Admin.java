@@ -134,10 +134,10 @@ public class Admin extends Controller {
 
         Form<User.UserMutable> userForm = form(User.UserMutable.class).bindFromRequest();
         if (userForm.hasErrors()) {
-            Logger.debug("error");
+            Logger.debug("update user error");
             return badRequest(admin_user_update.render(email, userForm));
         } else {
-            Logger.debug("succes");
+            Logger.debug("update user succes");
             User updateUser = User.byEmail(email);
             updateUser.updateFromMutables(userForm.get());
             updateUser.update();

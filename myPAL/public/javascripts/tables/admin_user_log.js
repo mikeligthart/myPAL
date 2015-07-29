@@ -7,7 +7,7 @@ if(userLang = "nl"){
 var email = "mike.ligthart@gmail.com"
 
 var table = $('#admin_user_log').DataTable( {
-    "ajax": "/admin/users/view/list/" + email,
+    "ajax": "/admin/users/view/log/" + email,
     "columns": [
         { "data": "timestamp" },
         { "data": "type" }

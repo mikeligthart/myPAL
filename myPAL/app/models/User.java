@@ -72,23 +72,71 @@ public class User extends Model {
     public static class UserMutable{
 
         @Constraints.Required
-        public String firstName;
+        private String firstName;
 
         @Constraints.Required
-        public String lastName;
+        private String lastName;
+
+        @Constraints.Required
+        @Formats.DateTime(pattern="dd/MM/yyyy")
+        private Date birthdate;
 
         @Constraints.Required
         @OneToMany
         @Enumerated(EnumType.STRING)
-        public UserType userType;
+        private UserType userType;
 
-        public UserMutable(String firstName, String lastName, UserType userType){
+        public UserMutable(String firstName, String lastName, Date birthdate, UserType userType){
             this.firstName = firstName;
             this.lastName = lastName;
+            this.birthdate = birthdate;
             this.userType = userType;
         }
 
         public UserMutable(){}
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+        }
+
+        public Date getBirthdate() {
+            return birthdate;
+        }
+
+        public void setBirthdate(Object birthdate) throws Exception {
+            Logger.debug("Hello setBirthdate class is " + birthdate.getClass());
+            if (birthdate instanceof String){
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Logger.debug("In setBirthDate with birthDate: " + birthdate);
+                this.birthdate = new Date(sdf.parse((String) birthdate).getTime());
+            } else if (birthdate instanceof Date){
+                this.birthdate = (Date) birthdate;
+            } else if (birthdate instanceof java.util.Date){
+                this.birthdate = new Date(((java.util.Date) birthdate).getTime());
+            } else{
+                throw new Exception("Birthdate object must be either String sql.Date or java.util.Date");
+            }
+        }
+
+        public UserType getUserType() {
+            return userType;
+        }
+
+        public void setUserType(UserType userType) {
+            this.userType = userType;
+        }
     }
 
     public List<ValidationError> validate() {
@@ -106,13 +154,14 @@ public class User extends Model {
     }
 
     public UserMutable getMutables(){
-        return new UserMutable(firstName, lastName, userType);
+        return new UserMutable(firstName, lastName, birthdate, userType);
     }
 
     public void updateFromMutables(UserMutable mutables){
-        firstName = mutables.firstName;
-        lastName = mutables.lastName;
-        userType = mutables.userType;
+        firstName = mutables.getFirstName();
+        lastName = mutables.getLastName();
+        birthdate = mutables.getBirthdate();
+        userType = mutables.getUserType();
     }
 
     public static boolean authenticate(String email, String password) {
@@ -160,12 +209,6 @@ public class User extends Model {
         return birthdate;
     }
 
-    /*
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
-    */
-
     public void setBirthdate(Object birthdate) throws Exception {
         Logger.debug("Hello setBirthdate class is " + birthdate.getClass());
         if (birthdate instanceof String){
@@ -177,7 +220,7 @@ public class User extends Model {
         } else if (birthdate instanceof java.util.Date){
             this.birthdate = new Date(((java.util.Date) birthdate).getTime());
         } else{
-            throw new Exception("Birthdate object must be either String or sql.Date");
+            throw new Exception("Birthdate object must be either String sql.Date or java.util.Date");
         }
     }
     
@@ -204,7 +247,6 @@ public class User extends Model {
     public void setLogActions(List<LogAction> logActions) {
         this.logActions = logActions;
     }
-
 
     public Timestamp getLastActivity() {
         return lastActivity;

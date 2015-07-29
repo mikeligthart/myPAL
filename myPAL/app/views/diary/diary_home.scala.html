@@ -1,6 +1,8 @@
+@(userType: UserType)
+
 @import play.api.i18n._
 
-@diary(Messages("page.diary.base.home"))("home") {
+@diary(Messages("page.diary.base.home"), "home", userType) {
 
             <style>
                 .vertical-center {

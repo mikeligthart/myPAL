@@ -52,6 +52,8 @@ page.diary.calendar.measurement=Meeting
 # Base #
 page.admin.base.home=Home
 page.admin.base.users=Gebruikers
+page.admin.base.admin=Admin
+page.admin.base.practiseDiary=Oefen dagboek
 
 # Home #
 page.admin.home.title=Admin | home

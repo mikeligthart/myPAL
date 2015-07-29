@@ -52,6 +52,8 @@ page.diary.calendar.measurement=Measurement
 # Base #
 page.admin.base.home=Home
 page.admin.base.users=Users
+page.admin.base.admin=Admin
+page.admin.base.practiseDiary=Practise Diary
 
 # Home #
 page.admin.home.title=Admin | home

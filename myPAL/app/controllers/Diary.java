@@ -37,7 +37,7 @@ public class Diary extends Controller {
         DiarySettings diarySettings = Application.listOfDiaries.get(session().get("email"));
         List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date", Date.valueOf(diarySettings.getCalendarDate())).findList();
         //List<DiaryMeasurement> diaryMeasurements = DiaryMeasurement.find.where().eq("date", diarySettings.getDateString(false)).findList();
-        return ok(diary_calendar.render(diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
+        return ok(diary_calendar.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
 
     public static Result goals() {
@@ -48,7 +48,7 @@ public class Diary extends Controller {
         user.addLogAction(LogActionType.ACCESSGOALS);
         user.update();
 
-        return ok(diary_goals.render());
+        return ok(diary_goals.render(user.getUserType()));
     }
 
     /* FUNCTIONALITIES */
@@ -70,7 +70,7 @@ public class Diary extends Controller {
             return forbidden();
         }
         List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date",Date.valueOf(diarySettings.getCalendarDate())).findList();
-        return ok(diary_calendar.render(diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
+        return ok(diary_calendar.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
 
     public static Result calendarSet(String day, String month, String year){
@@ -79,7 +79,11 @@ public class Diary extends Controller {
         }
         DiarySettings diarySettings = Application.listOfDiaries.get(session().get("email"));
         diarySettings.dateUpdate(day, month, year);
+        User user = User.byEmail(session().get("email"));
+        user.addLogAction(LogActionType.BUTTONPRESS);
+        user.update();
+
         List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date",Date.valueOf(diarySettings.getCalendarDate())).findList();
-        return ok(diary_calendar.render(diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
+        return ok(diary_calendar.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
 }

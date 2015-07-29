@@ -3,12 +3,13 @@ package controllers;
 import dialogue.Dialogue;
 import models.User;
 import models.User.Login;
+import models.UserType;
 import models.diary.DiarySettings;
 import models.logging.LogActionType;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.controlFlow.login;
+import views.html.controlFlow.*;
 import views.html.diary.greeting;
 
 import java.util.HashMap;
@@ -41,7 +42,15 @@ public class Application extends Controller {
             User user = User.byEmail(session().get("email"));
             user.addLogAction(LogActionType.LOGIN);
             user.update();
-            return redirect(routes.Application.hello());
+
+            if(user.getUserType() == UserType.CHILD){
+                return redirect(routes.Application.hello());
+            }
+            else if (user.getUserType() == UserType.ADMIN){
+                return redirect(routes.Admin.addUser());
+            } else {
+                return forbidden(no_content.render());
+            }
         }
     }
 

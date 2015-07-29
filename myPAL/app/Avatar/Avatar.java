@@ -1,4 +1,4 @@
-package avatar;
+package Avatar;
 
 /**
  * Created by ligthartmeu on 29-6-2015.

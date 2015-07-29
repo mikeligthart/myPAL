@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -49,6 +50,7 @@ public class User extends Model {
     private UserType userType;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
     private List<LogAction> logActions;
 
     private Timestamp lastActivity;
@@ -116,10 +118,8 @@ public class User extends Model {
         }
 
         public void setBirthdate(Object birthdate) throws Exception {
-            Logger.debug("Hello setBirthdate class is " + birthdate.getClass());
             if (birthdate instanceof String){
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                Logger.debug("In setBirthDate with birthDate: " + birthdate);
                 this.birthdate = new Date(sdf.parse((String) birthdate).getTime());
             } else if (birthdate instanceof Date){
                 this.birthdate = (Date) birthdate;
@@ -175,7 +175,7 @@ public class User extends Model {
     }
 
     public void addLogAction(LogActionType logActionType){
-        LogAction logAction = new LogAction(logActionType);
+        LogAction logAction = new LogAction(this, logActionType);
         lastActivity = logAction.getTimestamp();
         logActions.add(logAction);
         logAction.save();
@@ -209,11 +209,14 @@ public class User extends Model {
         return birthdate;
     }
 
+    public void setBirthdate(Date birthdate){
+        this.birthdate = birthdate;
+    }
+
     public void setBirthdate(Object birthdate) throws Exception {
-        Logger.debug("Hello setBirthdate class is " + birthdate.getClass());
+        Logger.debug("setBirthdate class of object is " + birthdate.getClass());
         if (birthdate instanceof String){
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Logger.debug("In setBirthDate with birthDate: " + birthdate);
             this.birthdate = new Date(sdf.parse((String) birthdate).getTime());
         } else if (birthdate instanceof Date){
             this.birthdate = (Date) birthdate;

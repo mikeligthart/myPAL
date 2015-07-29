@@ -4,7 +4,7 @@ users:
       email:      test1@email.com
       firstName:      Bob
       lastName:       Test1
-      birthdate:    2005-01-01
+      birthdate:  2005-01-01
       password:   secret
       userType: CHILD
 
@@ -12,7 +12,7 @@ users:
       email:      mike.ligthart@gmail.com
       firstName:      Mike
       lastName:       Ligthart
-      birthdate:    2005-01-01
+      birthdate:    2006-01-01
       password:   mike
       userType:       ADMIN
 
@@ -20,7 +20,7 @@ users:
       email:      test2@email.com
       firstName:      Henk
       lastName:       Test2
-      birthdate:    2005-01-01
+      birthdate:    2007-01-01
       password:   secret
       userType:       CHILD
 
@@ -28,7 +28,7 @@ users:
       email:      test3@email.com
       firstName:      Jan
       lastName:       Test3
-      birthdate:    2005-01-01
+      birthdate:    2008-01-01
       password:   secret
       userType:       CHILD
 
@@ -36,7 +36,7 @@ users:
       email:      test4@email.com
       firstName:      Piet
       lastName:       Test4
-      birthdate:    2005-01-01
+      birthdate:    2009-01-01
       password:   secret
       userType:       CHILD
 

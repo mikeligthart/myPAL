@@ -4,9 +4,8 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
 import models.UserType;
-import models.interfaces.UserToHTML;
+import views.interfaces.UserToHTML;
 import models.logging.LogAction;
-import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -134,10 +133,8 @@ public class Admin extends Controller {
 
         Form<User.UserMutable> userForm = form(User.UserMutable.class).bindFromRequest();
         if (userForm.hasErrors()) {
-            Logger.debug("update user error");
             return badRequest(admin_user_update.render(email, userForm));
         } else {
-            Logger.debug("update user succes");
             User updateUser = User.byEmail(email);
             updateUser.updateFromMutables(userForm.get());
             updateUser.update();

@@ -4,7 +4,7 @@ if(userLang = "nl"){
     lang = "/assets/javascripts/tables/nl.json"
 }
 
-var email = "mike.ligthart@gmail.com"
+var email = $( "i" ).text();
 
 var table = $('#admin_user_log').DataTable( {
     "ajax": "/admin/users/view/log/" + email,

@@ -3,7 +3,7 @@ package controllers;
 import models.User;
 import models.diary.DiaryActivity;
 import models.diary.DiarySettings;
-import models.interfaces.DiaryActivityToHTML;
+import views.interfaces.DiaryActivityToHTML;
 import models.logging.LogActionType;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class Diary extends Controller {
 
-    /* Pages */
+    /* PAGES */
     public static Result diary(){
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
@@ -39,6 +39,19 @@ public class Diary extends Controller {
         //List<DiaryMeasurement> diaryMeasurements = DiaryMeasurement.find.where().eq("date", diarySettings.getDateString(false)).findList();
         return ok(diary_calendar.render(diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
+
+    public static Result goals() {
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        User user = User.byEmail(session().get("email"));
+        user.addLogAction(LogActionType.ACCESSGOALS);
+        user.update();
+
+        return ok(diary_goals.render());
+    }
+
+    /* FUNCTIONALITIES */
 
     public static Result calendarUpdate(String update){
         if(session().isEmpty() || session().get("email") == null){
@@ -69,16 +82,4 @@ public class Diary extends Controller {
         List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date",Date.valueOf(diarySettings.getCalendarDate())).findList();
         return ok(diary_calendar.render(diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
-
-    public static Result goals() {
-        if (session().isEmpty() || session().get("email") == null) {
-            return redirect(routes.Application.login());
-        }
-        User user = User.byEmail(session().get("email"));
-        user.addLogAction(LogActionType.ACCESSGOALS);
-        user.update();
-
-        return ok(diary_goals.render());
-    }
-
 }

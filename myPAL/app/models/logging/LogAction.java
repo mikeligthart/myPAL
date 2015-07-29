@@ -1,12 +1,10 @@
 package models.logging;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import models.User;
 import play.db.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -24,23 +22,18 @@ public class LogAction extends Model {
     private Timestamp timestamp;
     private LogActionType type;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     private User user;
 
-    public LogAction(LogActionType type) {
+    public LogAction(User user, LogActionType type) {
+        this.user = user;
         this.type = type;
         this.timestamp = Timestamp.valueOf(LocalDateTime.now());
     }
 
     public static Finder<Integer, LogAction> find = new Finder<Integer, LogAction>(Integer.class, LogAction.class);
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public Timestamp getTimestamp() {
         return timestamp;

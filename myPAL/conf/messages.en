@@ -10,10 +10,10 @@ model.user.userType=User type
 model.user.password=Password
 model.user.invalid=Invalid user or password
 model.user.emailregisteredalready=This email address is already registered
-model.user.userType.child=Child
-model.user.userType.parent=Parent
-model.user.userType.professional=Medical Professional
-model.user.userType.admin=Admin
+model.user.userType.CHILD=Child
+model.user.userType.PARENT=Parent
+model.user.userType.PROFESSIONAL=Medical Professional
+model.user.userType.ADMIN=Admin
 
 ### PAGES ###
 ## General ##

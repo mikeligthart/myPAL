@@ -47,9 +47,9 @@ create table user (
   last_name                 varchar(255),
   birthdate                 date,
   password                  varchar(255),
-  user_type                 varchar(20),
+  user_type                 integer,
   last_activity             timestamp,
-  constraint ck_user_user_type check (user_type in ('CHILD','PARENT','PROFESSIONAL','ADMIN')),
+  constraint ck_user_user_type check (user_type in (0,1,2,3)),
   constraint pk_user primary key (email))
 ;
 

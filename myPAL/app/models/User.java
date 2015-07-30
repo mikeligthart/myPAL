@@ -1,6 +1,7 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.typesafe.config.ConfigFactory;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -38,7 +39,7 @@ public class User extends Model {
     private String lastName;
 
     @Constraints.Required
-    @Formats.DateTime(pattern="dd/MM/yyyy")
+    @Formats.DateTime(pattern="dd/MM/yyyy") //Is this still up to date with application.conf -> date.format
     private Date birthdate;
 
     @Constraints.Required
@@ -46,7 +47,7 @@ public class User extends Model {
 
     @Constraints.Required
     @OneToMany
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private UserType userType;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -80,12 +81,12 @@ public class User extends Model {
         private String lastName;
 
         @Constraints.Required
-        @Formats.DateTime(pattern="dd/MM/yyyy")
+        @Formats.DateTime(pattern="dd/MM/yyyy") //Is this still up to date with application.conf -> date.format
         private Date birthdate;
 
         @Constraints.Required
         @OneToMany
-        @Enumerated(EnumType.STRING)
+        @Enumerated(EnumType.ORDINAL)
         private UserType userType;
 
         public UserMutable(String firstName, String lastName, Date birthdate, UserType userType){
@@ -119,7 +120,7 @@ public class User extends Model {
 
         public void setBirthdate(Object birthdate) throws Exception {
             if (birthdate instanceof String){
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
                 this.birthdate = new Date(sdf.parse((String) birthdate).getTime());
             } else if (birthdate instanceof Date){
                 this.birthdate = (Date) birthdate;
@@ -209,14 +210,17 @@ public class User extends Model {
         return birthdate;
     }
 
+    
     public void setBirthdate(Date birthdate){
         this.birthdate = birthdate;
     }
 
+
+
     public void setBirthdate(Object birthdate) throws Exception {
         Logger.debug("setBirthdate class of object is " + birthdate.getClass());
         if (birthdate instanceof String){
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
             this.birthdate = new Date(sdf.parse((String) birthdate).getTime());
         } else if (birthdate instanceof Date){
             this.birthdate = (Date) birthdate;

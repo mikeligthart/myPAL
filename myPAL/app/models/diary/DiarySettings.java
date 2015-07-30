@@ -1,5 +1,6 @@
 package models.diary;
 
+import com.typesafe.config.ConfigFactory;
 import play.i18n.Messages;
 
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ import java.time.temporal.ChronoUnit;
 public class DiarySettings {
 
     private LocalDate calendarDate;
-    public static DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern(ConfigFactory.load().getString("date.format"));
 
     public DiarySettings(){
         calendarDate = LocalDate.now();
@@ -27,7 +28,8 @@ public class DiarySettings {
     }
 
     public void dateUpdate(String day, String month, String year){
-        calendarDate = LocalDate.parse(day + "/" + month + "/" + year, DATEFORMATTER);
+        String delimiter = ConfigFactory.load().getString("date.delimiter");
+        calendarDate = LocalDate.parse(day + delimiter + month + delimiter + year, DATEFORMATTER);
     }
 
     public String getDateString(Boolean beautified){

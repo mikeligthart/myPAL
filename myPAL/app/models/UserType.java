@@ -10,16 +10,22 @@ import javax.persistence.Entity;
  */
 public enum UserType {
 
-    CHILD, PARENT, PROFESSIONAL, ADMIN;
+    CHILD(0), PARENT(1), PROFESSIONAL(2), ADMIN(3);
+
+    public final int id;
+
+    UserType(int id){
+        this.id = id;
+    }
 
     public String toString(){
 
         switch(this){
-            case PARENT: return Messages.get("model.user.userType.parent");
-            case PROFESSIONAL: return Messages.get("model.user.userType.professional");
-            case ADMIN: return Messages.get("model.user.userType.admin");
+            case PARENT: return Messages.get("model.user.userType.PARENT");
+            case PROFESSIONAL: return Messages.get("model.user.userType.PROFESSIONAL");
+            case ADMIN: return Messages.get("model.user.userType.ADMIN");
             case CHILD:
-            default: return Messages.get("model.user.userType.child");
+            default: return Messages.get("model.user.userType.CHILD");
         }
     }
 

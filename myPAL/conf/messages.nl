@@ -10,10 +10,10 @@ model.user.userType=Gebruikerstype
 model.user.password=Wachtwoord
 model.user.invalid=Ongeldig wachtwoord of gebruikersnaam
 model.user.emailregisteredalready=Dit e-mailadres is al geregistreerd
-model.user.userType.child=Kind
-model.user.userType.parent=Ouder
-model.user.userType.professional=Medisch Professional
-model.user.userType.admin=Admin
+model.user.userType.CHILD=Kind
+model.user.userType.PARENT=Ouder
+model.user.userType.PROFESSIONAL=Medisch Professional
+model.user.userType.ADMIN=Admin
 
 ### PAGES ###
 ## General ##

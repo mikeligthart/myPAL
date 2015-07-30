@@ -11,6 +11,7 @@ var table = $('#admin_users').DataTable( {
         { "data": "firstName" },
         { "data": "lastName" },
         { "data": "birthdate"},
+        { "data": "userType"},
         { "data": "lastActivity"},
         {
             "data": null,

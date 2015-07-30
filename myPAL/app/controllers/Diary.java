@@ -3,6 +3,9 @@ package controllers;
 import models.User;
 import models.diary.DiaryActivity;
 import models.diary.DiarySettings;
+import models.diary.DiarySettingsManager;
+import models.logging.LogAction;
+import play.Logger;
 import views.interfaces.DiaryActivityToHTML;
 import models.logging.LogActionType;
 import play.mvc.Controller;
@@ -20,6 +23,7 @@ public class Diary extends Controller {
 
     /* PAGES */
     public static Result diary(){
+        //Check whether a user is logged in
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
@@ -27,41 +31,47 @@ public class Diary extends Controller {
     }
 
     public static Result calendar(){
+        //Check whether a user is logged in
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
-        User user = User.byEmail(session().get("email"));
-        user.addLogAction(LogActionType.ACCESSCALENDAR);
-        user.update();
+        String email = session().get("email");
 
-        DiarySettings diarySettings = Application.listOfDiaries.get(session().get("email"));
+        //Log user activity
+        LogAction.log(email, LogActionType.ACCESSCALENDAR);
+
+        //Retrieve and show activities and measurements for a specific date
+        DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
         List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date", Date.valueOf(diarySettings.getCalendarDate())).findList();
         //List<DiaryMeasurement> diaryMeasurements = DiaryMeasurement.find.where().eq("date", diarySettings.getDateString(false)).findList();
-        return ok(diary_calendar.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
+
+        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
 
     public static Result goals() {
         if (session().isEmpty() || session().get("email") == null) {
             return redirect(routes.Application.login());
         }
-        User user = User.byEmail(session().get("email"));
-        user.addLogAction(LogActionType.ACCESSGOALS);
-        user.update();
+        String email = session().get("email");
+        LogAction.log(email, LogActionType.ACCESSGOALS);
 
-        return ok(diary_goals.render(user.getUserType()));
+        return ok(diary_goals.render(User.byEmail(email).getUserType()));
     }
 
     /* FUNCTIONALITIES */
 
     public static Result calendarUpdate(String update){
+        //Check whether a user is logged in
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
-        DiarySettings diarySettings = Application.listOfDiaries.get(session().get("email"));
-        User user = User.byEmail(session().get("email"));
-        user.addLogAction(LogActionType.BUTTONPRESS);
-        user.update();
+        String email = session().get("email");
 
+        //Log user activity
+        LogAction.log(email, LogActionType.BUTTONPRESS);
+
+        //Update calendar based on date change
+        DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
         if(update.contentEquals("-")){
             diarySettings.dateMinusOne();
         } else if (update.contentEquals("+")){
@@ -70,20 +80,25 @@ public class Diary extends Controller {
             return forbidden();
         }
         List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date",Date.valueOf(diarySettings.getCalendarDate())).findList();
-        return ok(diary_calendar.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
+
+        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
 
     public static Result calendarSet(String day, String month, String year){
+        //Check whether a user is logged in
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
         }
-        DiarySettings diarySettings = Application.listOfDiaries.get(session().get("email"));
-        diarySettings.dateUpdate(day, month, year);
-        User user = User.byEmail(session().get("email"));
-        user.addLogAction(LogActionType.BUTTONPRESS);
-        user.update();
+        String email = session().get("email");
 
+        //Log user activity
+        LogAction.log(email, LogActionType.BUTTONPRESS);
+
+        //Update calendar based on date change
+        DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
+        diarySettings.dateUpdate(day, month, year);
         List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date",Date.valueOf(diarySettings.getCalendarDate())).findList();
-        return ok(diary_calendar.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
+
+        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
 }

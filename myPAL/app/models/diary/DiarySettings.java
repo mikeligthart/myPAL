@@ -4,6 +4,7 @@ import play.i18n.Messages;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Created by ligthartmeu on 15-7-2015.
@@ -34,13 +35,13 @@ public class DiarySettings {
         if(beautified) {
             if (calendarDate.isEqual(LocalDate.now())) {
                 dateDisplayButton = Messages.get("page.diary.calendar.today");
-            } else if (calendarDate.compareTo(LocalDate.now()) == 1) {
+            } else if (ChronoUnit.DAYS.between(LocalDate.now(), calendarDate) == 1) {
                 dateDisplayButton = Messages.get("page.diary.calendar.tomorrow");
-            } else if (calendarDate.compareTo(LocalDate.now()) == 2) {
+            } else if (ChronoUnit.DAYS.between(LocalDate.now(), calendarDate) == 2) {
                 dateDisplayButton = Messages.get("page.diary.calendar.dayaftertomorrow");
-            } else if (calendarDate.compareTo(LocalDate.now()) == -1) {
+            } else if (ChronoUnit.DAYS.between(LocalDate.now(), calendarDate) == -1) {
                 dateDisplayButton = Messages.get("page.diary.calendar.yesterday");
-            } else if (calendarDate.compareTo(LocalDate.now()) == -2) {
+            } else if (ChronoUnit.DAYS.between(LocalDate.now(), calendarDate) == -2) {
                 dateDisplayButton = Messages.get("page.diary.calendar.daybeforeyesterday");
             }
         }

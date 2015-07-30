@@ -5,7 +5,6 @@ import models.User;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -49,5 +48,11 @@ public class LogAction extends Model {
 
     public void setType(LogActionType type) {
         this.type = type;
+    }
+
+    public static void log(String email, LogActionType type){
+        User user = User.byEmail(email);
+        user.addLogAction(type);
+        user.update();
     }
 }

@@ -5,6 +5,8 @@ import models.User;
 import models.User.Login;
 import models.UserType;
 import models.diary.DiarySettings;
+import models.diary.DiarySettingsManager;
+import models.logging.LogAction;
 import models.logging.LogActionType;
 import play.data.Form;
 import play.mvc.Controller;
@@ -21,7 +23,6 @@ import static play.data.Form.form;
 public class Application extends Controller {
 
 
-    public static final Map<String, DiarySettings> listOfDiaries = new HashMap<>();
     private static final Dialogue dialogue = Dialogue.getInstance();
 
     /* CONTROL FLOW */
@@ -36,17 +37,23 @@ public class Application extends Controller {
         if (loginForm.hasErrors()) {
             return badRequest(login.render(loginForm));
         } else {
+            //Set session
             session().clear();
-            session("email", loginForm.get().email);
-            listOfDiaries.put(session().get("email"), new DiarySettings());
-            User user = User.byEmail(session().get("email"));
-            user.addLogAction(LogActionType.LOGIN);
-            user.update();
+            String email = loginForm.get().email;
+            session("email", email);
 
-            if(user.getUserType() == UserType.CHILD){
+            //Set DiarySettings
+            DiarySettingsManager.getInstance().login(email);
+
+            //Log user activity
+            LogAction.log(email, LogActionType.LOGIN);
+
+            //Redirect to right page
+            UserType userType = User.byEmail(email).getUserType();
+            if(userType == UserType.CHILD){
                 return redirect(routes.Application.hello());
             }
-            else if (user.getUserType() == UserType.ADMIN){
+            else if (userType == UserType.ADMIN){
                 return redirect(routes.Admin.addUser());
             } else {
                 return forbidden(no_content.render());
@@ -55,11 +62,17 @@ public class Application extends Controller {
     }
 
     public static Result logout() {
-        User user = User.byEmail(session().get("email"));
-        user.addLogAction(LogActionType.LOGOFF);
-        user.update();
+        //Log user activity
+        String email = session().get("email");
+        LogAction.log(email, LogActionType.LOGOFF);
+
+        //Clear session
         session().clear();
-        listOfDiaries.remove(session().get("email"));
+
+        //Clear DiarySettings
+        DiarySettingsManager.getInstance().logoff(email);
+
+        //Redirect to login page
         return redirect(routes.Application.login());
     }
 

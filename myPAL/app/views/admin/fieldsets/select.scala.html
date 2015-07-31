@@ -15,7 +15,7 @@
                 -->
                 <select class="form-control" id="@field.id" name="@field.name">
                     @for(uType <- UserType.values()){
-                    <option value="@uType.id" @if(preselected == Messages("model.user.userType." + uType.name)){selected}>@Messages("model.user.userType." + uType.name)</option>
+                    <option value="@uType.name" @if(preselected == Messages("model.user.userType." + uType.name)){selected}>@Messages("model.user.userType." + uType.name)</option>
                     }
                 </select>
                 <span class="help-block">@{field.error.map { error => error.message }}</span>

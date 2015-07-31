@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
 import models.UserType;
+import play.Logger;
 import views.interfaces.UserToHTML;
 import models.logging.LogAction;
 import play.data.Form;
@@ -136,8 +137,11 @@ public class Admin extends Controller {
             return badRequest(admin_user_update.render(email, userForm));
         } else {
             User updateUser = User.byEmail(email);
-            updateUser.updateFromMutables(userForm.get());
-            updateUser.update();
+            User updatedUser = new User(updateUser);
+            updateUser.delete();
+            updatedUser.updateFromMutables(userForm.get());
+            updatedUser.save();
+
             return redirect(routes.Admin.users());
         }
     }

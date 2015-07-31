@@ -60,17 +60,37 @@ emotion:
 diary_activity:
 
   - !!models.diary.DiaryActivity
-    type: SCHOOL
+    date: 2015-07-31
+    starttime: 2015-07-31T01:00:00.0
+    endtime: 2015-07-31T02:30:00.0
+    user: !!models.User
+      email:      blaat@blaat.com
     description: School test
     picture: /school/test
+    emotion: !!models.Emotion
+              id: 0
 
   - !!models.diary.DiaryActivity
+    date: 2015-07-31
+    starttime: 2015-07-31T02:45:00.0
+    endtime: 2015-07-31T03:00:00.0
+    user: !!models.User
+      email:      mike.ligthart@gmail.com
     type: SPORT
     description: Sport test
     picture: /sport/test
+    emotion: !!models.Emotion
+               id: 1
 
   - !!models.diary.DiaryActivity
+    date: 2015-07-31
+    starttime: 2015-07-31T03:00:00.0
+    endtime: 2015-07-31T03:10:00.0
+    user: !!models.User
+      email:      mike.ligthart@gmail.com
     type: MEAL
     description: Meal test
     picture: /Meal/test
+    emotion: !!models.Emotion
+                id: 2
 

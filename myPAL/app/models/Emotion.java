@@ -50,4 +50,12 @@ public class Emotion extends Model {
     public void setDominant(double dominant) {
         this.dominant = dominant;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

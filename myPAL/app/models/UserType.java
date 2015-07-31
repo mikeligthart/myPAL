@@ -10,13 +10,7 @@ import javax.persistence.Entity;
  */
 public enum UserType {
 
-    CHILD(0), PARENT(1), PROFESSIONAL(2), ADMIN(3);
-
-    public final int id;
-
-    UserType(int id){
-        this.id = id;
-    }
+    CHILD, PARENT, PROFESSIONAL, ADMIN;
 
     public String toString(){
 

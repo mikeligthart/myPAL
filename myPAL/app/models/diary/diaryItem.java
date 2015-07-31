@@ -1,17 +1,13 @@
 package models.diary;
 
-import play.data.validation.Constraints;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import models.User;
+import play.Logger;
 import play.db.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDate;
 
 /**
  * Created by ligthartmeu on 8-7-2015.
@@ -20,7 +16,8 @@ import java.time.LocalDate;
 public abstract class DiaryItem extends Model {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
 
     @Temporal(TemporalType.DATE)
     private Date date;
@@ -28,14 +25,15 @@ public abstract class DiaryItem extends Model {
     @Temporal(TemporalType.TIME)
     private Time starttime, endtime;
 
-    public DiaryItem(int id){
-        this.id = id;
-    }
-    public int getId() {
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User user;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -52,6 +50,7 @@ public abstract class DiaryItem extends Model {
     }
 
     public void setStarttime(Time starttime) {
+        Logger.debug("Starttime = " + starttime);
         this.starttime = starttime;
     }
 
@@ -61,5 +60,14 @@ public abstract class DiaryItem extends Model {
 
     public void setEndtime(Time endtime) {
         this.endtime = endtime;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        Logger.debug("[DiaryItem < setUser] The user's name is is " + user.getFirstName());
     }
 }

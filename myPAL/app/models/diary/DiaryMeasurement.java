@@ -1,19 +1,23 @@
 package models.diary;
 
-import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import models.User;
+
+import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDate;
 
 /**
  * Created by ligthartmeu on 15-7-2015.
  */
+@Entity
 public class DiaryMeasurement extends DiaryItem {
 
     private DiaryMeasurementType type;
     private float value;
 
-    public DiaryMeasurement(int id){
-        super(id);
+    public DiaryMeasurement(){
+        super();
     }
 
     public DiaryMeasurementType getType() {

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class LogAction extends Model {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     private Timestamp timestamp;

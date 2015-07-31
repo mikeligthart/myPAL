@@ -1,11 +1,11 @@
 package models.diary;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import models.Emotion;
+import models.User;
+import play.Logger;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * Created by ligthartmeu on 8-7-2015.
@@ -22,8 +22,8 @@ public class DiaryActivity extends DiaryItem {
     @OneToOne
     private Emotion emotion;
 
-    public DiaryActivity(int id){
-        super(id);
+    public DiaryActivity(){
+        super();
     }
 
     public DiaryActivityType getType() {

@@ -42,7 +42,9 @@ public class Diary extends Controller {
 
         //Retrieve and show activities and measurements for a specific date
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
-        List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date", Date.valueOf(diarySettings.getCalendarDate())).findList();
+        //List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date", Date.valueOf(diarySettings.getCalendarDate())).findList();
+        List<DiaryActivity> diaryActivities = DiaryActivity.find.all();
+        Logger.debug("size of list is " + diaryActivities.size());
         //List<DiaryMeasurement> diaryMeasurements = DiaryMeasurement.find.where().eq("date", diarySettings.getDateString(false)).findList();
 
         return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));

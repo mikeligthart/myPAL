@@ -3,6 +3,12 @@ import play.*;
 import play.libs.*;
 import com.avaje.ebean.Ebean;
 import models.*;
+
+import java.sql.*;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalField;
 import java.util.*;
 import views.html.*;
 
@@ -24,6 +30,7 @@ public class Global extends GlobalSettings {
             if(Ebean.find(User.class).findRowCount() == 0) {
 
                 Map<String,List<Object>> all = (Map<String,List<Object>>)Yaml.load("initial-data.yml");
+                Logger.debug("Size of all diary activities from intial data " + all.get("diary_activity").size());
 
                 // Insert users first
                 Ebean.save(all.get("users"));

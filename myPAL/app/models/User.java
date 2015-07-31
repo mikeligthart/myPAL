@@ -2,6 +2,8 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.typesafe.config.ConfigFactory;
+import models.diary.DiaryActivity;
+import models.diary.DiaryMeasurement;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -47,7 +49,7 @@ public class User extends Model {
 
     @Constraints.Required
     @OneToMany
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -55,6 +57,14 @@ public class User extends Model {
     private List<LogAction> logActions;
 
     private Timestamp lastActivity;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
+    private List<DiaryActivity> diaryActivities;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
+    private List<DiaryMeasurement> diaryMeasurements;
 
     //The attributes needed to login with a user
     public static class Login {
@@ -86,7 +96,7 @@ public class User extends Model {
 
         @Constraints.Required
         @OneToMany
-        @Enumerated(EnumType.ORDINAL)
+        @Enumerated(EnumType.STRING)
         private UserType userType;
 
         public UserMutable(String firstName, String lastName, Date birthdate, UserType userType){
@@ -136,8 +146,24 @@ public class User extends Model {
         }
 
         public void setUserType(UserType userType) {
+            Logger.debug("setUserType in UserMutable: " + userType.toString());
             this.userType = userType;
         }
+    }
+
+    public User(){
+
+    }
+
+    public User(User newUser){
+        this.email = newUser.getEmail();
+        this.firstName = newUser.getFirstName();
+        this.lastName = newUser.getLastName();
+        this.birthdate = newUser.getBirthdate();
+        this.password = newUser.getPassword();
+        this.userType = newUser.getUserType();
+        this.lastActivity = newUser.getLastActivity();
+        this.logActions = newUser.getLogActions();
     }
 
     public List<ValidationError> validate() {
@@ -159,10 +185,10 @@ public class User extends Model {
     }
 
     public void updateFromMutables(UserMutable mutables){
-        firstName = mutables.getFirstName();
-        lastName = mutables.getLastName();
-        birthdate = mutables.getBirthdate();
-        userType = mutables.getUserType();
+        this.firstName = mutables.getFirstName();
+        this.lastName = mutables.getLastName();
+        this.birthdate = mutables.getBirthdate();
+        this.userType = mutables.getUserType();
     }
 
     public static boolean authenticate(String email, String password) {
@@ -210,15 +236,11 @@ public class User extends Model {
         return birthdate;
     }
 
-    
     public void setBirthdate(Date birthdate){
         this.birthdate = birthdate;
     }
 
-
-
     public void setBirthdate(Object birthdate) throws Exception {
-        Logger.debug("setBirthdate class of object is " + birthdate.getClass());
         if (birthdate instanceof String){
             SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
             this.birthdate = new Date(sdf.parse((String) birthdate).getTime());
@@ -244,7 +266,7 @@ public class User extends Model {
     }
 
     public void setUserType(UserType userType){
-            this.userType = userType;
+        this.userType = userType;
     }
 
     public List<LogAction> getLogActions() {
@@ -263,6 +285,22 @@ public class User extends Model {
         this.lastActivity = lastActivity;
     }
 
+    public List<DiaryActivity> getDiaryActivities() {
+        return diaryActivities;
+    }
+
+    public void setDiaryActivities(List<DiaryActivity> diaryActivities) {
+        this.diaryActivities = diaryActivities;
+    }
+
+    public List<DiaryMeasurement> getDiaryMeasurements() {
+        return diaryMeasurements;
+    }
+
+    public void setDiaryMeasurements(List<DiaryMeasurement> diaryMeasurements) {
+        this.diaryMeasurements = diaryMeasurements;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof User))
@@ -276,4 +314,6 @@ public class User extends Model {
                 append(lastActivity, rhs.lastActivity).
                 isEquals();
     }
+
+
 }

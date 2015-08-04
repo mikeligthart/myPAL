@@ -9,7 +9,7 @@ create table diary_activity (
   starttime                 time,
   endtime                   time,
   user_email                varchar(255),
-  type                      varchar(8),
+  type                      varchar(39),
   description               varchar(255),
   picture                   varchar(255),
   emotion_id                integer,
@@ -51,7 +51,7 @@ create table log_action (
   timestamp                 timestamp,
   type                      integer,
   user_email                varchar(255),
-  constraint ck_log_action_type check (type in (0,1,2,3,4)),
+  constraint ck_log_action_type check (type in (0,1,2,3,4,5,6)),
   constraint pk_log_action primary key (id))
 ;
 

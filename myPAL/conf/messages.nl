@@ -41,12 +41,16 @@ page.diary.calendar.tomorrow=Morgen
 page.diary.calendar.dayaftertomorrow=Overmorgen
 page.diary.calendar.yesterday=Gisteren
 page.diary.calendar.daybeforeyesterday=Eergisteren
-page.diary.calendar.activitytype.school=School
-page.diary.calendar.activitytype.meal=Maaltijd
-page.diary.calendar.activitytype.sport=Sport
-page.diary.calendar.activitytype.other=Overig
+page.diary.calendar.activitytype.SCHOOL=School
+page.diary.calendar.activitytype.MEAL=Maaltijd
+page.diary.calendar.activitytype.SPORT=Sport
+page.diary.calendar.activitytype.OTHER=Overig
+page.diary.calendar.activitytype=Type activiteit
 page.diary.calendar.activity=Activiteit
 page.diary.calendar.measurement=Meeting
+page.diary.calendar.addactivity=Activiteit toevoegen
+page.diary.calendar.settime.starttime=Van
+page.diary.calendar.settime.endtime=Tot
 
 ## Admin ##
 # Base #

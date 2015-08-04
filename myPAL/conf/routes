@@ -17,6 +17,8 @@ GET     /mypal/calendar                     controllers.Diary.calendar()
 GET     /mypal/calendar/:update             controllers.Diary.calendarUpdate(update:String)
 GET     /mypal/calendar/:day/:month/:year   controllers.Diary.calendarSet(day:String, month:String, year:String)
 GET     /mypal/goals                        controllers.Diary.goals()
+GET     /mypal/addactivity                  controllers.Diary.addActivityPage()
+POST    /mypal/addactivity                  controllers.Diary.addActivity()
 
 ## ADMIN ##
 GET     /admin                          controllers.Admin.admin()

@@ -1,0 +1,14 @@
+@(activityForm: Form[models.diary.DiaryActivity])
+
+@import play.api.i18n._
+
+<fieldset>
+    @diary_select_activityType(activityForm("type"), label = Messages("page.diary.calendar.activitytype"), placeholder = Messages("page.diary.calendar.activitytype"))
+    @diary_time(activityForm("starttime"), activityForm("endtime"))
+    <div class="form-group">
+        <br />
+        <div class="col-sm-offset-2 col-sm-10 text-right">
+            <button type="submit" class="btn btn-default">@Messages("page.diary.calendar.addactivity")</button>
+        </div>
+    </div>
+</fieldset>

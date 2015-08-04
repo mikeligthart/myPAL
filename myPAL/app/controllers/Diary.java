@@ -6,15 +6,17 @@ import models.diary.DiarySettings;
 import models.diary.DiarySettingsManager;
 import models.logging.LogAction;
 import play.Logger;
+import play.data.Form;
 import views.interfaces.DiaryActivityToHTML;
 import models.logging.LogActionType;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.diary.diary_calendar;
-import views.html.diary.diary_goals;
+import views.html.diary.*;
 
 import java.sql.Date;
 import java.util.List;
+
+import static play.data.Form.form;
 
 /**
  * Created by Mike on 29-7-2015.
@@ -102,5 +104,24 @@ public class Diary extends Controller {
         List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date",Date.valueOf(diarySettings.getCalendarDate())).findList();
 
         return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
+    }
+
+    public static Result addActivity(){
+        return ok();
+    }
+
+    public static Result addActivityPage(){
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user activity
+        LogAction.log(email, LogActionType.ACCESSADDACTIVITYPAGE);
+
+        //Generate addActivity page
+        Form<DiaryActivity> activityForm = form(DiaryActivity.class);
+        return ok(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), activityForm));
     }
 }

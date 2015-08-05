@@ -87,4 +87,8 @@ dialogue.greeting.part2.0=leuk om je weer te zien.
 dialogue.greeting.part2.1=goed dat je er bent.
 dialogue.greeting.part2.2=fijn dat je er bent.
 
+### JAVASCRIPT ###
+## Timepicker ##
+javascript.timepicker.lang={mins: 'min', hr: 'uur', hrs: 'uren'}
+
 

@@ -236,11 +236,10 @@ public class User extends Model {
         return birthdate;
     }
 
-    /*
     public void setBirthdate(Date birthdate){
         this.birthdate = birthdate;
     }
-    */
+
 
     public void setBirthdate(Object birthdate) throws Exception {
         if (birthdate instanceof String){

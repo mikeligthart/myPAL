@@ -89,3 +89,7 @@ dialogue.greeting.part2.count=3
 dialogue.greeting.part3.0=good to see you again.
 dialogue.greeting.part3.1=welcome back.
 dialogue.greeting.part3.2=it is good that you are here.
+
+### JAVASCRIPT ###
+## Timepicker ##
+javascript.timepicker.lang={am: 'am', pm: 'pm', AM: 'AM', PM: 'PM', decimal: '.', mins: 'mins', hr: 'hr', hrs: 'hrs'}

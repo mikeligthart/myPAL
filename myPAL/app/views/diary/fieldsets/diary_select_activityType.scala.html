@@ -6,7 +6,7 @@
     <label class="col-sm-2 control-label" for="@field.id">@label</label>
     <div class="col-sm-10">
         <select class="form-control" id="@field.id" name="@field.name">
-            @for(uType <- DiaryActivityType.values()){
+            @for(uType <- models.diary.DiaryActivityType.values()){
             <option value="@uType.name" @if(preselected == Messages("page.diary.calendar.activitytype." + uType.name)){selected}>@Messages("page.diary.calendar.activitytype." + uType.name)</option>
             }
         </select>

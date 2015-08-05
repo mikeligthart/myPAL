@@ -1,6 +1,8 @@
 package controllers;
 
 import dialogue.Dialogue;
+//import jsmessages.JsMessages;
+//import jsmessages.JsMessagesFactory;
 import models.User;
 import models.User.Login;
 import models.UserType;
@@ -13,7 +15,9 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.controlFlow.*;
 import views.html.diary.greeting;
+//import play.api.i18n.DefaultMessagesApi;
 
+//import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +28,7 @@ public class Application extends Controller {
 
 
     private static final Dialogue dialogue = Dialogue.getInstance();
+    //private final JsMessages jsMessages;
 
     /* CONTROL FLOW */
     public static Result login() {
@@ -85,4 +90,13 @@ public class Application extends Controller {
         User user = User.byEmail(session().get("email"));
         return ok(greeting.render(dialogue.getGreeting(user.getFirstName())));
     }
+
+
+    /* Push Messages to javascript */
+/*
+    @Inject
+    public Application(JsMessagesFactory jsMessagesFactory) {
+        jsMessages = jsMessagesFactory.all();
+    }
+    */
 }

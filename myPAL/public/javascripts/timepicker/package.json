@@ -1,39 +1,33 @@
 {
-	"name"			: "df-timepicker",
-	"version"		: "1.0.0",
-	"title"			: "jQuery Timepicker",
-	"author"		: {
-		"name"	: "Team DF",
-		"email"	: "plugins@teamdf.com",
-		"url"	: "http://teamdf.com/"
+	"name": "timepicker",
+	"version": "1.8.1",
+	"title": "jquery-timepicker",
+	"author": {
+		"name": "Jon Thornton",
+		"url": "https://github.com/jonthornton"
 	},
-	"maintainers"	: [
-		{
-			"name"	: "Sam Sehnert",
-			"email"	: "sam@teamdf.com"
-		}
-	],
-	"description"	: "This plugin aims to create a standard, easy-to-use control which allows end users to enter times in a consistant and intuitive way. It converts a standard HTML input element into a user friendly time entry widget, and allows you to format times as you require.",
-	"keywords"		: [
-		"time",
-		"entry",
-		"form",
-		"input",
-		"format"
-	],
-	"homepage"		: "http://teamdf.com/jquery-plugins/timepicker/",
-	"docs"			: "https://github.com/teamdf/jquery-timepicker/tree/master/docs",
-	"demo"			: "http://teamdf.com/jquery-plugins/timepicker/",
-	"files"			: [
-		"jquery.timepicker.js"
-	],
-	"dependancies"	: {
-		"jquery" : ">1.4.0"
+	"license": "MIT",
+	"dependencies": {
+		"jquery": ">=1.7"
 	},
-	"licenses"		: [
-		{
-		    "type": "MIT",
-		    "url": "http://teamdf.com/jquery-plugins/license/"
-		}
-	]
+	"devDependencies": {
+		"grunt": "~0.4.1",
+		"grunt-cli": "~0.1.9",
+		"grunt-contrib-uglify": "~0.2.2",
+		"grunt-contrib-cssmin": "~0.4.1"
+	},
+	"main": "jquery.timepicker.min.js",
+	"description": "A jQuery timepicker plugin inspired by Google Calendar. It supports both mouse and keyboard navigation.",
+	"keywords": [ "timepicker", "time", "picker", "ui", "google calendar" ],
+	"homepage": "http://jonthornton.github.com/jquery-timepicker/",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jonthornton/jquery-timepicker.git"
+	},
+	"bugs": {
+		"url": "https://github.com/jonthornton/jquery-timepicker/issues"
+	}
 }

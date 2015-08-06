@@ -240,7 +240,6 @@ public class User extends Model {
         this.birthdate = birthdate;
     }
 
-
     public void setBirthdate(Object birthdate) throws Exception {
         if (birthdate instanceof String){
             SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));

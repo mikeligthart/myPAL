@@ -107,7 +107,24 @@ public class Diary extends Controller {
     }
 
     public static Result addActivity(){
-        return ok();
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user activity
+        LogAction.log(email, LogActionType.ADDEDACTIVITY);
+
+        Form<DiaryActivity> diaryActivityForm = form(DiaryActivity.class).bindFromRequest();
+        Logger.debug("[Diary > addActivity] The date is " + diaryActivityForm.data().get("date"));
+        if (diaryActivityForm.hasErrors()) {
+            return badRequest(diary_add_diaryActivity.render(User.byEmail(email), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+        } else {
+            DiaryActivity newDiaryActivity = diaryActivityForm.get();
+            newDiaryActivity.save();
+            return redirect(routes.Diary.calendar());
+        }
     }
 
     public static Result addActivityPage(){
@@ -122,6 +139,6 @@ public class Diary extends Controller {
 
         //Generate addActivity page
         Form<DiaryActivity> activityForm = form(DiaryActivity.class);
-        return ok(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), activityForm));
+        return ok(diary_add_diaryActivity.render(User.byEmail(email), activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
     }
 }

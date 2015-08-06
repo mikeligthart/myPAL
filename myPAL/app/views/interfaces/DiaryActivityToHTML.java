@@ -14,8 +14,8 @@ public class DiaryActivityToHTML {
     private int startHour, startMin, endHour, endMin;
     private String type;
     private String description;
-    private String picture;
-    private double pleased, aroused, dominant;
+    //private String picture;
+    private String emotion;
 
     public DiaryActivityToHTML(DiaryActivity diaryActivity){
         this.startHour = diaryActivity.getStarttime().toLocalTime().getHour();
@@ -24,10 +24,8 @@ public class DiaryActivityToHTML {
         this.endMin = diaryActivity.getEndtime().toLocalTime().getMinute();
         this.type = diaryActivity.getType().toString();
         this.description = diaryActivity.getDescription();
-        this.picture = diaryActivity.getPicture();
-        this.pleased = diaryActivity.getEmotion().getPleased();
-        this.aroused = diaryActivity.getEmotion().getAroused();
-        this.dominant = diaryActivity.getEmotion().getDominant();
+        //this.picture = diaryActivity.getPicture();
+        this.emotion = diaryActivity.getEmotion().name();
     }
 
     public static List<DiaryActivityToHTML> fromListToList(List<DiaryActivity> activities){
@@ -62,19 +60,14 @@ public class DiaryActivityToHTML {
         return description;
     }
 
+    /*
     public String getPicture() {
         return picture;
     }
+    */
 
-    public double getPleased() {
-        return pleased;
+    public String getEmotion() {
+        return emotion;
     }
 
-    public double getAroused() {
-        return aroused;
-    }
-
-    public double getDominant() {
-        return dominant;
-    }
 }

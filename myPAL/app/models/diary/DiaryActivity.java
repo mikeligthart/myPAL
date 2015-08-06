@@ -1,11 +1,5 @@
 package models.diary;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import models.Emotion;
-import models.User;
-import play.Logger;
-import play.data.validation.Constraints;
-
 import javax.persistence.*;
 
 /**
@@ -21,10 +15,11 @@ public class DiaryActivity extends DiaryItem {
     //@Constraints.Required
     private String description;
 
-    private String picture;
+    //private String picture;
 
     //@Constraints.Required
     @OneToOne
+    @Enumerated(EnumType.STRING)
     private Emotion emotion;
 
     public DiaryActivity(){
@@ -47,6 +42,7 @@ public class DiaryActivity extends DiaryItem {
         this.description = description;
     }
 
+    /*
     public String getPicture() {
         return picture;
     }
@@ -54,6 +50,7 @@ public class DiaryActivity extends DiaryItem {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+    */
 
     public Emotion getEmotion() {
         return emotion;

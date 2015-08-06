@@ -1,5 +1,3 @@
-var lang = Messages('javascript.timepicker.lang');
-
 $('#starttime').timepicker({'timeFormat': 'H:i',
                             'minTime': '00:00',
                             'maxTime': '23:59',
@@ -11,13 +9,18 @@ $('#endtime').timepicker({  'timeFormat': 'H:i',
                             'minTime': '00:00',
                             'maxTime': '23:59',
                             'step': 15,
-                            'lang': lang,
+                            'lang': {mins: 'min', hr: 'uur', hrs: 'uren'},
                             'scrollDefault': 'now'
 });
 
 $('#starttime').on('changeTime', function(){
     var mintime = $('#starttime').timepicker('getTime');
     $('#endtime').timepicker('option', { 'minTime': mintime, 'showDuration': true });
-
-
 });
+
+$('#endtime').on('changeTime', function(){
+    var maxtime = $('#endtime').timepicker('getTime');
+    $('#starttime').timepicker('option', {'maxTime': maxtime});
+});
+
+$('#date').datepicker();

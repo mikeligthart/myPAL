@@ -51,14 +51,27 @@
         </script>
     }
 
-        <div class="text-center">
-            <h1>@Messages("page.diary.base.calendar")</h1>
-            <a href='@routes.Diary.calendarUpdate("-")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a> <button class="btn btn-default" id="datePicker" data-date="@realDate" data-date-format="dd/mm/yyyy">@date <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></button> <a href='@routes.Diary.calendarUpdate("+")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+
+        <div class="row">
+            <div class="text-left col-md-4 addactivity">
+                <a href='@routes.Diary.addActivityPage()' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.calendar.addactivity")</a>
+                <br />
+                <a href='' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.calendar.addmeasurement")</a>
+            </div>
+            <div id="calendar_head" class="text-center col-md-4">
+                <h1>@Messages("page.diary.base.calendar")</h1>
+                <a href='@routes.Diary.calendarUpdate("-")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a> <button class="btn btn-default" id="datePicker" data-date="@realDate" data-date-format="dd/mm/yyyy">@date <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></button> <a href='@routes.Diary.calendarUpdate("+")' class="btn btn-default"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+            </div>
         </div>
 
-        <div id="timeline" style="width:70%; height:90%;" class="text-center"></div>
-        <div class="calendar_selected_title"></div>
-        <div class="calendar_selected_info"></div>
+        <div class="row">
+            <div id="timeline" style="width:85%; height:100%;" class="text-center"></div>
+        </div>
+
+        <div class="row">
+            <div class="calendar_selected_title text-center"></div>
+            <div class="calendar_selected_info text-center"></div>
+        </div>
 
     @if(activities.size == 0){
         <div class="text-center">

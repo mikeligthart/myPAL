@@ -49,8 +49,12 @@ page.diary.calendar.activitytype=Type activiteit
 page.diary.calendar.activity=Activiteit
 page.diary.calendar.measurement=Meeting
 page.diary.calendar.addactivity=Activiteit toevoegen
+page.diary.calendar.addmeasurement=Meeting toevoegen
 page.diary.calendar.settime.starttime=Van
 page.diary.calendar.settime.endtime=Tot
+page.diary.calendar.date=Datum
+page.diary.calendar.description=Beschrijving
+page.diary.calendar.emotion=Emotie
 
 ## Admin ##
 # Base #

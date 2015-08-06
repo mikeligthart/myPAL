@@ -1,0 +1,21 @@
+@(field: Field, label: String = "CHANGEME", placeholder: String)
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">@label</label>
+    <div>
+        <label  class="col-sm-2">
+            <input type="radio" name="emotion" value="SAD" />
+            <img class="emotionimage" src='@routes.Assets.at("images/smiley1_sad.png")'>
+        </label>
+
+        <label class="col-sm-2">
+            <input type="radio" name="emotion" value="NEUTRAL"/>
+            <img class="emotionimage" src='@routes.Assets.at("images/smiley1_neutral.png")'>
+        </label>
+
+        <label class="col-sm-2">
+            <input type="radio" name="emotion" value="HAPPY" />
+            <img class="emotionimage" src='@routes.Assets.at("images/smiley1_happy.png")'>
+        </label>
+    </div>
+</div>

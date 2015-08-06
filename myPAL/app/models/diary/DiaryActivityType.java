@@ -11,14 +11,14 @@ public enum DiaryActivityType {
     public String toString(){
         switch(this) {
             case SCHOOL:
-                return Messages.get("page.diary.calendar.activitytype.school");
+                return Messages.get("page.diary.calendar.activitytype.SCHOOL");
             case MEAL:
-                return Messages.get("page.diary.calendar.activitytype.meal");
+                return Messages.get("page.diary.calendar.activitytype.MEAL");
             case SPORT:
-                return Messages.get("page.diary.calendar.activitytype.sport");
+                return Messages.get("page.diary.calendar.activitytype.SPORT");
             case OTHER:
             default:
-                return Messages.get("page.diary.calendar.activitytype.other");
+                return Messages.get("page.diary.calendar.activitytype.OTHER");
         }
     }
 

@@ -9,6 +9,18 @@
     text-align: center;
 }
 
+#timeline{
+  margin-top: 5%;
+}
+
+.addactivity{
+  padding-top:15px;
+}
+
+.addactivitybutton{
+  margin-top: 10px;
+}
+
 .withNavBar {
   padding-top: 50px;
 }
@@ -175,3 +187,21 @@ li.ui-timepicker-selected .ui-timepicker-duration,
 .ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
 	background: #f2f2f2;
 }
+
+label > input{ /* HIDE RADIO */
+  display:none;
+}
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+  width:50%;
+  height:50%;
+  padding:0;
+  margin:0;
+}
+label > input:checked + img{ /* (CHECKED) IMAGE STYLES */
+  border:2px solid #90d23d;
+}
+
+}
+

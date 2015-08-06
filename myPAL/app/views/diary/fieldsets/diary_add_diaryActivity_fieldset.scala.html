@@ -1,10 +1,14 @@
-@(activityForm: Form[models.diary.DiaryActivity])
+@(activityForm: Form[models.diary.DiaryActivity], currentDate: String, user: String)
 
 @import play.api.i18n._
 
 <fieldset>
     @diary_select_activityType(activityForm("type"), label = Messages("page.diary.calendar.activitytype"), placeholder = Messages("page.diary.calendar.activitytype"))
+    @diary_date(activityForm("date"), Messages("page.diary.calendar.date"), Messages("page.diary.calendar.date"), currentDate)
     @diary_time(activityForm("starttime"), activityForm("endtime"))
+    @diary_description(activityForm("description"), label = Messages("page.diary.calendar.description"), placeholder = Messages("page.diary.calendar.description"))
+    @diary_select_emotion(activityForm("emotion"), label = Messages("page.diary.calendar.emotion"), placeholder = Messages("page.diary.calendar.emotion"))
+    <input name="user_email" id="user_email" type="hidden" value="@user">
     <div class="form-group">
         <br />
         <div class="col-sm-offset-2 col-sm-10 text-right">

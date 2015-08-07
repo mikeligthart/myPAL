@@ -50,7 +50,9 @@ page.diary.calendar.activity=Activity
 page.diary.calendar.measurement=Measurement
 page.diary.calendar.addactivity=Add activity
 page.diary.calendar.addmeasurement=Add measurement
+page.diary.calendar.starttime=Start time
 page.diary.calendar.settime.starttime=From
+page.diary.calendar.endtime=End time
 page.diary.calendar.settime.endtime=Till
 page.diary.calendar.date=Date
 page.diary.calendar.description=Description
@@ -97,3 +99,7 @@ dialogue.greeting.part3.2=it is good that you are here.
 ### JAVASCRIPT ###
 ## Timepicker ##
 javascript.timepicker.lang={am: 'am', pm: 'pm', AM: 'AM', PM: 'PM', decimal: '.', mins: 'mins', hr: 'hr', hrs: 'hrs'}
+
+### ERROR MESSAGES ###
+## Forms ##
+error.required=This is a required field

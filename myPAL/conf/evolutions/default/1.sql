@@ -9,7 +9,7 @@ create table diary_activity (
   starttime                 time,
   endtime                   time,
   user_email                varchar(255),
-  type                      varchar(6),
+  type                      varchar(8),
   description               varchar(255),
   emotion                   varchar(7),
   constraint ck_diary_activity_type check (type in ('SCHOOL','MEAL','SPORT','OTHER')),

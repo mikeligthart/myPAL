@@ -23,15 +23,18 @@ public abstract class DiaryItem extends Model {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-    //@Constraints.Required
+    @Constraints.Required
     @Formats.DateTime(pattern="dd/MM/yyyy")
     private Date date;
 
-    //@Constraints.Required
+    @Constraints.Required
     @Formats.DateTime(pattern = "HH:mm")
-    private Time starttime, endtime;
+    private Time starttime;
 
-    //@Constraints.Required
+    @Constraints.Required
+    @Formats.DateTime(pattern = "HH:mm")
+    private Time endtime;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonBackReference
     private User user;
@@ -47,12 +50,6 @@ public abstract class DiaryItem extends Model {
     public Date getDate() {
         return date;
     }
-
-    /*
-    public void setDate(Date date) {
-        this.date = date;
-    }
-    */
 
     public void setDate(Object date) throws Exception {
         if (date instanceof String){
@@ -107,6 +104,5 @@ public abstract class DiaryItem extends Model {
 
     public void setUser(User user) {
         this.user = user;
-        Logger.debug("[DiaryItem < setUser] The user's name is is " + user.getFirstName());
     }
 }

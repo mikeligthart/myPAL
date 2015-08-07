@@ -50,7 +50,9 @@ page.diary.calendar.activity=Activiteit
 page.diary.calendar.measurement=Meeting
 page.diary.calendar.addactivity=Activiteit toevoegen
 page.diary.calendar.addmeasurement=Meeting toevoegen
+page.diary.calendar.starttime=Starttijd
 page.diary.calendar.settime.starttime=Van
+page.diary.calendar.endtime=Eindtijd
 page.diary.calendar.settime.endtime=Tot
 page.diary.calendar.date=Datum
 page.diary.calendar.description=Beschrijving
@@ -94,5 +96,10 @@ dialogue.greeting.part2.2=fijn dat je er bent.
 ### JAVASCRIPT ###
 ## Timepicker ##
 javascript.timepicker.lang={mins: 'min', hr: 'uur', hrs: 'uren'}
+
+### ERROR MESSAGES ###
+## Forms ##
+error.required=Dit veld is verplicht
+hallo.test.haha=Hallo test haha
 
 

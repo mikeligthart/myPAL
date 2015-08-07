@@ -9,7 +9,8 @@
                class="time form-control"
                id="@field_start.id"
                name="@field_start.name"
-               value='@field_start.value.getOrElse("")'/>
+               value='@field_start.value.getOrElse("09:00")'
+               placeholder='@Messages("page.diary.calendar.starttime")'/>
         <span class="help-block">@{field_start.error.map { error => error.message }}</span>
     </div>
 
@@ -19,7 +20,8 @@
                class="form-control"
                id="@field_end.id"
                name="@field_end.name"
-               value='@field_end.value.getOrElse("")'/>
+               value='@field_end.value.getOrElse("10:00")'
+               placeholder='@Messages("page.diary.calendar.endtime")'/>
         <span class="help-block">@{field_end.error.map { error => error.message }}</span>
     </div>
 </div>

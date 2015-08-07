@@ -1,5 +1,7 @@
 package models.diary;
 
+import play.data.validation.Constraints;
+
 import javax.persistence.*;
 
 /**
@@ -9,17 +11,17 @@ import javax.persistence.*;
 public class DiaryActivity extends DiaryItem {
 
     @Enumerated(EnumType.STRING)
-    //@Constraints.Required
+    @Constraints.Required
     private DiaryActivityType type;
 
-    //@Constraints.Required
+    @Constraints.Required(message = "Dit moet ook nog ingevuld worden")
     private String description;
 
     //private String picture;
 
-    //@Constraints.Required
     @OneToOne
     @Enumerated(EnumType.STRING)
+    @Constraints.Required
     private Emotion emotion;
 
     public DiaryActivity(){

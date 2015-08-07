@@ -44,9 +44,7 @@ public class Diary extends Controller {
 
         //Retrieve and show activities and measurements for a specific date
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
-        //List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date", Date.valueOf(diarySettings.getCalendarDate())).findList();
-        List<DiaryActivity> diaryActivities = DiaryActivity.find.all();
-        Logger.debug("size of list is " + diaryActivities.size());
+        List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date",Date.valueOf(diarySettings.getCalendarDate())).eq("user", User.byEmail(email)).findList();
         //List<DiaryMeasurement> diaryMeasurements = DiaryMeasurement.find.where().eq("date", diarySettings.getDateString(false)).findList();
 
         return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
@@ -83,7 +81,7 @@ public class Diary extends Controller {
         } else {
             return forbidden();
         }
-        List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date",Date.valueOf(diarySettings.getCalendarDate())).findList();
+        List<DiaryActivity> diaryActivities = DiaryActivity.find.where().eq("date",Date.valueOf(diarySettings.getCalendarDate())).eq("user", User.byEmail(email)).findList();
 
         return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
     }
@@ -117,11 +115,12 @@ public class Diary extends Controller {
         LogAction.log(email, LogActionType.ADDEDACTIVITY);
 
         Form<DiaryActivity> diaryActivityForm = form(DiaryActivity.class).bindFromRequest();
-        Logger.debug("[Diary > addActivity] The date is " + diaryActivityForm.data().get("date"));
+
         if (diaryActivityForm.hasErrors()) {
-            return badRequest(diary_add_diaryActivity.render(User.byEmail(email), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+            return badRequest(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
         } else {
             DiaryActivity newDiaryActivity = diaryActivityForm.get();
+            newDiaryActivity.setUser(User.byEmail(email));
             newDiaryActivity.save();
             return redirect(routes.Diary.calendar());
         }
@@ -139,6 +138,6 @@ public class Diary extends Controller {
 
         //Generate addActivity page
         Form<DiaryActivity> activityForm = form(DiaryActivity.class);
-        return ok(diary_add_diaryActivity.render(User.byEmail(email), activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+        return ok(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
     }
 }

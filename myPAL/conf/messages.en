@@ -57,6 +57,7 @@ page.diary.calendar.settime.endtime=Till
 page.diary.calendar.date=Date
 page.diary.calendar.description=Description
 page.diary.calendar.emotion=Emotion
+page.diary.calendar.picture=Picture
 
 ## Admin ##
 # Base #
@@ -103,3 +104,5 @@ javascript.timepicker.lang={am: 'am', pm: 'pm', AM: 'AM', PM: 'PM', decimal: '.'
 ### ERROR MESSAGES ###
 ## Forms ##
 error.required=This is a required field
+error.fileIsNotAnImage=The added file is not an image.
+error.pictureCannotBeStored=Whoops! Unfortunately your image could not be stored. Please try to add the activity without an image.

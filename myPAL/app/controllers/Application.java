@@ -8,6 +8,7 @@ import models.User.Login;
 import models.UserType;
 import models.diary.DiarySettings;
 import models.diary.DiarySettingsManager;
+import models.diary.Picture;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import play.data.Form;
@@ -18,6 +19,7 @@ import views.html.diary.greeting;
 //import play.api.i18n.DefaultMessagesApi;
 
 //import javax.inject.Inject;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +30,6 @@ public class Application extends Controller {
 
 
     private static final Dialogue dialogue = Dialogue.getInstance();
-    //private final JsMessages jsMessages;
 
     /* CONTROL FLOW */
     public static Result login() {
@@ -82,7 +83,6 @@ public class Application extends Controller {
     }
 
     /* HELLO AND GOODBYE */
-
     public static Result hello() {
         if (session().isEmpty() || session().get("email") == null) {
             return redirect(routes.Application.login());
@@ -91,12 +91,21 @@ public class Application extends Controller {
         return ok(greeting.render(dialogue.getGreeting(user.getFirstName())));
     }
 
+    /* PRIVATE FILE MANAGEMENT */
+    public static Result getPicture(String fileName){
+        //Check if someone is logged in and whether the request is not empty
+        if(session().isEmpty() || session().get("email") == null || fileName == ""){
+            return forbidden();
+        }
 
-    /* Push Messages to javascript */
-/*
-    @Inject
-    public Application(JsMessagesFactory jsMessagesFactory) {
-        jsMessages = jsMessagesFactory.all();
+        //Check if someone has access to the picture
+        Picture picture = Picture.byName(fileName);
+        User user = User.byEmail(session().get("email"));
+        if(picture != null || picture.getUser().equals(user) || user.getUserType() == UserType.ADMIN){
+            //Retrieve the picture and serve it
+            File file = new File("/privateData/" + fileName);
+            return ok(file);
+        }
+        return forbidden();
     }
-    */
 }

@@ -1,8 +1,13 @@
 package models.diary;
 
+import controllers.Diary;
+import models.User;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ligthartmeu on 8-7-2015.
@@ -17,7 +22,8 @@ public class DiaryActivity extends DiaryItem {
     @Constraints.Required(message = "Dit moet ook nog ingevuld worden")
     private String description;
 
-    //private String picture;
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    private Picture picture;
 
     @OneToOne
     @Enumerated(EnumType.STRING)
@@ -44,15 +50,13 @@ public class DiaryActivity extends DiaryItem {
         this.description = description;
     }
 
-    /*
-    public String getPicture() {
+    public Picture getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public void setPicture(Picture picture) {
         this.picture = picture;
     }
-    */
 
     public Emotion getEmotion() {
         return emotion;
@@ -63,4 +67,17 @@ public class DiaryActivity extends DiaryItem {
     }
 
     public static Finder<Integer, DiaryActivity> find = new Finder<Integer, DiaryActivity>(Integer.class, DiaryActivity.class);
+
+    public static List<DiaryActivity> byUser(User user){
+        return find.where().eq("user", user).findList();
+    }
+
+    public static List<DiaryActivity> byDate(Date date){
+        return find.where().eq("date", date).findList();
+    }
+
+    public static List<DiaryActivity> byUserAndDate(User user, Date date){
+        return find.where().eq("user", user).eq("date", date).findList();
+    }
+
 }

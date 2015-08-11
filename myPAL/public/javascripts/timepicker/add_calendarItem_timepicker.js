@@ -16,11 +16,17 @@ $('#endtime').timepicker({  'timeFormat': 'H:i',
 $('#starttime').on('changeTime', function(){
     var mintime = $('#starttime').timepicker('getTime');
     $('#endtime').timepicker('option', { 'minTime': mintime, 'showDuration': true });
+    if(mintime > $('#endtime').timepicker('getTime')){
+        $('#endtime').timepicker('setTime', mintime);
+    }
 });
 
 $('#endtime').on('changeTime', function(){
     var maxtime = $('#endtime').timepicker('getTime');
-    $('#starttime').timepicker('option', {'maxTime': maxtime});
+    $('#starttime').timepicker('option', 'maxTime', maxtime);
+    if(maxTime < $('#starttime').timepicker('getTime')){
+         $('#starttime').timepicker('setTime', maxtime);
+    }
 });
 
 $('#date').datepicker();

@@ -11,6 +11,7 @@ create table diary_activity (
   user_email                varchar(255),
   type                      varchar(8),
   description               varchar(255),
+  picture_id                bigint,
   emotion                   varchar(7),
   constraint ck_diary_activity_type check (type in ('SCHOOL','MEAL','SPORT','OTHER')),
   constraint ck_diary_activity_emotion check (emotion in ('HAPPY','NEUTRAL','SAD')),
@@ -47,6 +48,13 @@ create table log_action (
   constraint pk_log_action primary key (id))
 ;
 
+create table picture (
+  id                        bigint not null,
+  name                      varchar(255),
+  diary_activity_id         bigint not null,
+  constraint pk_picture primary key (id))
+;
+
 create table user (
   email                     varchar(255) not null,
   first_name                varchar(255),
@@ -67,16 +75,22 @@ create sequence diary_measurement_seq;
 
 create sequence log_action_seq;
 
+create sequence picture_seq;
+
 create sequence user_seq;
 
 alter table diary_activity add constraint fk_diary_activity_user_1 foreign key (user_email) references user (email) on delete restrict on update restrict;
 create index ix_diary_activity_user_1 on diary_activity (user_email);
-alter table diary_item add constraint fk_diary_item_user_2 foreign key (user_email) references user (email) on delete restrict on update restrict;
-create index ix_diary_item_user_2 on diary_item (user_email);
-alter table diary_measurement add constraint fk_diary_measurement_user_3 foreign key (user_email) references user (email) on delete restrict on update restrict;
-create index ix_diary_measurement_user_3 on diary_measurement (user_email);
-alter table log_action add constraint fk_log_action_user_4 foreign key (user_email) references user (email) on delete restrict on update restrict;
-create index ix_log_action_user_4 on log_action (user_email);
+alter table diary_activity add constraint fk_diary_activity_picture_2 foreign key (picture_id) references picture (id) on delete restrict on update restrict;
+create index ix_diary_activity_picture_2 on diary_activity (picture_id);
+alter table diary_item add constraint fk_diary_item_user_3 foreign key (user_email) references user (email) on delete restrict on update restrict;
+create index ix_diary_item_user_3 on diary_item (user_email);
+alter table diary_measurement add constraint fk_diary_measurement_user_4 foreign key (user_email) references user (email) on delete restrict on update restrict;
+create index ix_diary_measurement_user_4 on diary_measurement (user_email);
+alter table log_action add constraint fk_log_action_user_5 foreign key (user_email) references user (email) on delete restrict on update restrict;
+create index ix_log_action_user_5 on log_action (user_email);
+alter table picture add constraint fk_picture_diaryActivity_6 foreign key (diary_activity_id) references diary_activity (id) on delete restrict on update restrict;
+create index ix_picture_diaryActivity_6 on picture (diary_activity_id);
 
 
 
@@ -92,6 +106,8 @@ drop table if exists diary_measurement;
 
 drop table if exists log_action;
 
+drop table if exists picture;
+
 drop table if exists user;
 
 SET REFERENTIAL_INTEGRITY TRUE;
@@ -103,6 +119,8 @@ drop sequence if exists diary_item_seq;
 drop sequence if exists diary_measurement_seq;
 
 drop sequence if exists log_action_seq;
+
+drop sequence if exists picture_seq;
 
 drop sequence if exists user_seq;
 

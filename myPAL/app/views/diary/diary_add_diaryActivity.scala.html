@@ -16,7 +16,7 @@
         </div>
         }
 
-        @helper.form(action = routes.Diary.addActivity(), 'class -> "") {
+        @helper.form(action = routes.Diary.addActivity(), 'class -> "", 'enctype -> "multipart/form-data") {
             @diary_add_diaryActivity_fieldset(activityForm, currentDate)
         }
     </div>

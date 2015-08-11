@@ -57,6 +57,7 @@ page.diary.calendar.settime.endtime=Tot
 page.diary.calendar.date=Datum
 page.diary.calendar.description=Beschrijving
 page.diary.calendar.emotion=Emotie
+page.diary.calendar.picture=Foto
 
 ## Admin ##
 # Base #
@@ -100,6 +101,6 @@ javascript.timepicker.lang={mins: 'min', hr: 'uur', hrs: 'uren'}
 ### ERROR MESSAGES ###
 ## Forms ##
 error.required=Dit veld is verplicht
-hallo.test.haha=Hallo test haha
-
+error.fileIsNotAnImage=Het toegevoegde bestand is geen foto of plaatje.
+error.pictureCannotBeStored=Oeps er is wat misgegaan. Helaas kan je plaatje niet worden opgeslagen. Voeg de activiteit toe zonder een plaatje.
 

@@ -30,6 +30,24 @@ div.avatarfield{
     height: 95vh;
 }
 
+.has-error > div > #emotion_selector_left {
+  border-left:1px solid DarkRed;
+  border-top:1px solid DarkRed;
+  border-bottom:1px solid DarkRed;
+}
+
+.has-error > div > #emotion_selector_center {
+  border-top:1px solid DarkRed;
+  border-bottom:1px solid DarkRed;
+}
+
+.has-error > div > #emotion_selector_right {
+  border-right:1px solid DarkRed;
+  border-top:1px solid DarkRed;
+  border-bottom:1px solid DarkRed;
+}
+
+
 .starter-template {
   text-align: center;
 }

@@ -34,6 +34,7 @@ page.control.login.logout=Uitloggen
 page.diary.base.home=Home
 page.diary.base.calendar=Kalender
 page.diary.base.goals=Doelen
+page.diary.base.gallery=Galerij
 
 # Calendar #
 page.diary.calendar.today=Vandaag

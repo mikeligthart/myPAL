@@ -19,6 +19,7 @@
             <ul class="nav navbar-nav">
                 <li @if(page == "calendar"){class="active"}><a href="@routes.Diary.calendar()"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> @Messages("page.diary.base.calendar")</a></li>
                 <li @if(page == "goals"){class="active"}><a href="@routes.Diary.goals()"><span class="glyphicon glyphicon-ok" aria-hidden="true"> @Messages("page.diary.base.goals")</a></li>
+                <li @if(page == "gallery"){class="active"}><a href="@routes.Diary.gallery()"><span class="glyphicon glyphicon-picture" aria-hidden="true"> @Messages("page.diary.base.gallery")</a></li>
                 @if(userType == UserType.ADMIN){<li><a href="@routes.Admin.admin()"><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"> @Messages("page.admin.base.admin")</a></li>}
             </ul>
             <ul class="nav navbar-nav navbar-right">

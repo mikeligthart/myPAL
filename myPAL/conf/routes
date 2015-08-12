@@ -20,6 +20,7 @@ GET     /mypal/calendar/:day/:month/:year   controllers.Diary.calendarSet(day:St
 GET     /mypal/goals                        controllers.Diary.goals()
 GET     /mypal/addactivity                  controllers.Diary.addActivityPage()
 POST    /mypal/addactivity                  controllers.Diary.addActivity()
+GET     /mypal/gallery                      controllers.Diary.gallery()
 
 ## ADMIN ##
 GET     /admin                          controllers.Admin.admin()

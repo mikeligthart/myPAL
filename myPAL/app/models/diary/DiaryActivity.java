@@ -58,6 +58,10 @@ public class DiaryActivity extends DiaryItem {
         this.picture = picture;
     }
 
+    public boolean hasPicture(){
+        return (picture != null);
+    }
+
     public Emotion getEmotion() {
         return emotion;
     }

@@ -1,5 +1,6 @@
 package views.interfaces;
 
+import com.typesafe.config.ConfigFactory;
 import models.User;
 import models.logging.LogAction;
 import org.joda.time.Instant;
@@ -25,8 +26,8 @@ public class UserToHTML {
         this.email = user.getEmail();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
-        String birthdateString = new SimpleDateFormat("dd/MM/yyyy").format(user.getBirthdate());
-        int age = Years.yearsBetween(Instant.parse(birthdateString, DateTimeFormat.forPattern("dd/MM/yyyy")), Instant.now()).getYears();
+        String birthdateString = new SimpleDateFormat(ConfigFactory.load().getString("date.format")).format(user.getBirthdate());
+        int age = Years.yearsBetween(Instant.parse(birthdateString, DateTimeFormat.forPattern(ConfigFactory.load().getString("date.format"))), Instant.now()).getYears();
         this.birthdate = age + " - " + birthdateString;
         this.userType = user.getUserType().toString();
         if(user.getLastActivity() == null){

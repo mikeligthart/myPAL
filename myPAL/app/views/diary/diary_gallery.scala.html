@@ -1,0 +1,33 @@
+@(userType: UserType, pictures: List[models.diary.Picture])
+
+@diary_no_avatar(Messages("page.diary.base.gallery"), "gallery", userType) {
+
+<div>
+    <h1>@Messages("page.diary.base.gallery")</h1>
+    @if(pictures == null || pictures.size == 0){
+        <h2>No images</h2>
+    }else{
+        @for((picture, index) <- pictures.zipWithIndex){
+            @if(index % 4 == 0){
+                <div class="row">
+            }
+                    <div class="col-md-3 portfolio-item">
+                        <a href="#">
+                            <img class="img-responsive" src="@routes.Application.getPicture(picture.getThumbnail)" alt="">
+                        </a>
+                        <h3>
+                            <a href="@routes.Diary.calendarSet(views.interfaces.DiaryActivityToHTML.DateToDay(picture.getDiaryActivity.getDate), views.interfaces.DiaryActivityToHTML.DateToMonth(picture.getDiaryActivity.getDate), views.interfaces.DiaryActivityToHTML.DateToYear(picture.getDiaryActivity.getDate))">@picture.getDiaryActivity.getType.toString</a>
+                        </h3>
+                        <p><i>@views.interfaces.DiaryActivityToHTML.DateToFormattedString(picture.getDiaryActivity.getDate)</i> - @picture.getDiaryActivity.getDescription</p>
+                    </div>
+            @if(index+1 % 4 == 0){
+                </div>
+            }
+        }
+        @if(pictures.size == 1 || pictures.size-1 % 4 != 0){
+                </div>
+        }
+    }
+</div>
+
+}

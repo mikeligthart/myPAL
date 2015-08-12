@@ -34,6 +34,7 @@ page.control.login.logout=Sign out
 page.diary.base.home=Home
 page.diary.base.calendar=Calendar
 page.diary.base.goals=Goals
+page.diary.base.gallery=Gallery
 
 # Calendar #
 page.diary.calendar.today=Today

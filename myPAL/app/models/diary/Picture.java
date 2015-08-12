@@ -5,7 +5,6 @@ import models.User;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +19,7 @@ public class Picture extends Model {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
-    private String name;
+    private String name, thumbnail;
 
     @OneToOne(cascade = CascadeType.ALL, optional = false)
     private DiaryActivity diaryActivity;
@@ -29,8 +28,9 @@ public class Picture extends Model {
 
     }
 
-    public Picture(String name, DiaryActivity diaryActivity){
+    public Picture(String name, String thumbnail, DiaryActivity diaryActivity){
         this.name = name;
+        this.thumbnail = thumbnail;
         this.diaryActivity = diaryActivity;
     }
 
@@ -48,6 +48,14 @@ public class Picture extends Model {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public DiaryActivity getDiaryActivity() {
@@ -68,6 +76,10 @@ public class Picture extends Model {
         return find.where().eq("name", name).findUnique();
     }
 
+    public static Picture byThumbnail(String name){
+        return find.where().eq("thumbnail", name).findUnique();
+    }
+
     public static Picture byDiaryActivity(DiaryActivity diaryActivity){
         return find.where().eq("diaryActivity", diaryActivity).findUnique();
     }
@@ -75,8 +87,21 @@ public class Picture extends Model {
     public static List<Picture> byUser(User user){
         ArrayList<Picture> pictures = new ArrayList<>();
         for(Iterator<DiaryActivity> it = DiaryActivity.byUser(user).iterator(); it.hasNext();){
+            DiaryActivity diaryActivity = it.next();
+            if(diaryActivity.hasPicture()) {
+                pictures.add(byDiaryActivity(diaryActivity));
+            }
+        }
+        return pictures;
+    }
+
+    /*
+    public static List<Picture> byUser(User user, PictureSort sort){
+        ArrayList<Picture> pictures = new ArrayList<>();
+        for(Iterator<DiaryActivity> it = DiaryActivity.byUser(user).iterator(); it.hasNext();){
             pictures.add(byDiaryActivity(it.next()));
         }
         return pictures;
     }
+    */
 }

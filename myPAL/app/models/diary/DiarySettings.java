@@ -29,6 +29,12 @@ public class DiarySettings {
 
     public void dateUpdate(String day, String month, String year){
         String delimiter = ConfigFactory.load().getString("date.delimiter");
+        if(day.length() == 1){
+            day = "0" + day;
+        }
+        if(month.length() == 1){
+            month = "0" + month;
+        }
         calendarDate = LocalDate.parse(day + delimiter + month + delimiter + year, DATEFORMATTER);
     }
 

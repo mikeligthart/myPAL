@@ -9,6 +9,10 @@
     text-align: center;
 }
 
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
 #timeline{
   margin-top: 5%;
 }

@@ -1,5 +1,6 @@
 package controllers;
 
+import com.typesafe.config.ConfigFactory;
 import dialogue.Dialogue;
 //import jsmessages.JsMessages;
 //import jsmessages.JsMessagesFactory;
@@ -11,6 +12,7 @@ import models.diary.DiarySettingsManager;
 import models.diary.Picture;
 import models.logging.LogAction;
 import models.logging.LogActionType;
+import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -93,18 +95,26 @@ public class Application extends Controller {
 
     /* PRIVATE FILE MANAGEMENT */
     public static Result getPicture(String fileName){
+        //Retrieve a picture if it exists
+        Picture picture;
+        if(fileName.contains("picture_")) {
+            picture = Picture.byName(fileName);
+        } else if(fileName.contains("thumbnail_")){
+            picture = Picture.byThumbnail(fileName);
+        } else {
+            return forbidden();
+        }
+
         //Check if someone is logged in and whether the request is not empty
-        if(session().isEmpty() || session().get("email") == null || fileName == ""){
+        if(session().isEmpty() || session().get("email") == null || fileName.isEmpty()|| picture == null || picture.getUser() == null){
             return forbidden();
         }
 
         //Check if someone has access to the picture
-        Picture picture = Picture.byName(fileName);
         User user = User.byEmail(session().get("email"));
-        if(picture != null || picture.getUser().equals(user) || user.getUserType() == UserType.ADMIN){
-            //Retrieve the picture and serve it
-            File file = new File("/privateData/" + fileName);
-            return ok(file);
+        if(picture.getUser().equals(user) || user.getUserType() == UserType.ADMIN){
+            //Serve the picture
+            return ok(new File(ConfigFactory.load().getString("private.data.location") + fileName));
         }
         return forbidden();
     }

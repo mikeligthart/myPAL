@@ -10,16 +10,13 @@ import play.Logger;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Http;
+import util.PictureFactory;
 import views.interfaces.DiaryActivityToHTML;
 import models.logging.LogActionType;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.diary.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.List;
 
@@ -65,6 +62,19 @@ public class Diary extends Controller {
         LogAction.log(email, LogActionType.ACCESSGOALS);
 
         return ok(diary_goals.render(User.byEmail(email).getUserType()));
+    }
+
+    public static Result gallery(){
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        LogAction.log(email, LogActionType.ACCESSGALLERY);
+        User user = User.byEmail(email);
+
+        List<Picture> pictures = Picture.byUser(user);
+        Logger.debug("[Diary > gallery] pictures size: " + pictures.size());
+        return ok(diary_gallery.render(user.getUserType(), pictures));
     }
 
     /* FUNCTIONALITIES */
@@ -142,22 +152,19 @@ public class Diary extends Controller {
                     diaryActivityForm.reject(Messages.get("error.fileIsNotAnImage"));
                     return badRequest(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
                 } else{
-                    File file = filePart.getFile();
-                    try {
-                        Logger.debug("Tries to store the file at " + Paths.get(".").toAbsolutePath().normalize().toString() + "\\privateData\\");
-                        file.renameTo(File.createTempFile("picture_", ".png", new File(Paths.get(".").toAbsolutePath().normalize().toString() + "\\privateData\\")));
-                        Picture picture = new Picture(file.getName(), newDiaryActivity);
+                    //Retrieve, move and store image file to disk and save picture object
+                    Picture picture = PictureFactory.processUploadedFile(filePart, newDiaryActivity);
+                    if(picture != null) {
                         picture.save();
                         newDiaryActivity.setPicture(picture);
-                    } catch (IOException e) {
-                        Logger.debug("[Diary > addActivity] FAILURE! Picture is not stored - " + e.getMessage());
+                    } else {
                         diaryActivityForm.reject(Messages.get("error.pictureCannotBeStored"));
                         return badRequest(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
                     }
-
                 }
-
             }
+
+            //Save newly created DiaryActivity
             newDiaryActivity.save();
             return redirect(routes.Diary.calendar());
         }

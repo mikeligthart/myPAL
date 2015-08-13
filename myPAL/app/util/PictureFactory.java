@@ -6,6 +6,7 @@ import models.diary.Picture;
 import org.apache.commons.io.FilenameUtils;
 import org.imgscalr.Scalr;
 import play.Logger;
+import play.i18n.Messages;
 import play.mvc.Http;
 
 import javax.imageio.ImageIO;
@@ -19,64 +20,112 @@ import java.util.regex.Pattern;
  */
 public class PictureFactory {
 
-    private static int width, height, thumpnailSize;
+    private int width, height, thumbnailWidth, thumbnailHeight;
 
-    private static PictureFactory ourInstance = new PictureFactory();
+    private String latestError;
 
-    public static PictureFactory getInstance() {
-        return ourInstance;
-    }
-
-
-    private PictureFactory() {
+    public PictureFactory() {
         width = 1024;
         height = 1024;
-        thumpnailSize = 400;
+        thumbnailWidth = 400;
+        thumbnailHeight = 400;
     }
 
-    public static int getWidth() {
+    public Picture processUploadedFile(Http.MultipartFormData.FilePart filePart, DiaryActivity newDiaryActivity) {
+        //Check if it has the right extension
+        String extension = FilenameUtils.getExtension(filePart.getFilename());
+        if(!hasSupportedExtension(extension)){
+            latestError = Messages.get("error.fileIsNotSupported");
+            return null;
+        }
+
+        //Load the image
+        File file = filePart.getFile();
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(file);
+        } catch (IOException e) {
+            latestError = Messages.get("error.pictureCannotBeStored");
+            return null;
+        }
+
+        //Resize image if necessary and create a thumbnail
+        image = Scalr.resize(image, width, height);
+        BufferedImage thumbnail = Scalr.resize(image, thumbnailWidth, thumbnailHeight);
+
+        //Create the random unique new filenames for the image and thumbnail
+        String pictureName = "";
+        try {
+            pictureName = File.createTempFile("picture_", "." + extension).getName();
+        } catch (IOException e) {
+            latestError = Messages.get("error.pictureCannotBeStored");
+            return null;
+        }
+        Pattern extensionPattern = Pattern.compile("\\.[a-zA-Z]+");
+        String thumbnailName = pictureName.replace("picture_", "thumbnail_").replaceAll(extensionPattern.pattern(), ".png");
+
+        //Save the image and thumbnail to disk
+        File pictureFile = new File(ConfigFactory.load().getString("private.data.location") + pictureName);
+        File thumbnailFile = new File(ConfigFactory.load().getString("private.data.location") + thumbnailName);
+        try {
+            ImageIO.write(image, extension, pictureFile);
+            ImageIO.write(thumbnail, "png", thumbnailFile);
+        } catch (IOException e) {
+            latestError = Messages.get("error.pictureCannotBeStored");
+            return null;
+        }
+
+        //Return the new picture
+        return new Picture(pictureName, thumbnailName, newDiaryActivity);
+    }
+
+    private boolean hasSupportedExtension(String extension){
+        if(extension.equalsIgnoreCase("jpg"))
+            return true;
+        if(extension.equalsIgnoreCase("jpeg"))
+            return true;
+        if(extension.equalsIgnoreCase("png"))
+            return true;
+        if(extension.equalsIgnoreCase("bmp"))
+            return true;
+        if(extension.equalsIgnoreCase("gif"))
+            return true;
+        return false;
+    }
+
+    public int getWidth() {
         return width;
     }
 
-    public static void setWidth(int width) {
-        PictureFactory.width = width;
+    public void setWidth(int width) {
+        this.width = width;
     }
 
-    public static int getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public static void setHeight(int height) {
-        PictureFactory.height = height;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
-    public static Picture processUploadedFile(Http.MultipartFormData.FilePart filePart, DiaryActivity newDiaryActivity) {
-        try {
-            //Resize image if necessary and create a thumbnail
-            File file = filePart.getFile();
-            BufferedImage image = ImageIO.read(file);
-            if(image.getWidth() > width || image.getHeight() > height){
-                image = Scalr.resize(image, width, height);
-            }
-            BufferedImage thumbnail = Scalr.resize(image, thumpnailSize);
+    public int getThumbnailWidth() {
+        return thumbnailWidth;
+    }
 
-            //Create the random unique new filenames for the image and thumbnail
-            String extension = FilenameUtils.getExtension(filePart.getFilename());
-            String pictureName = File.createTempFile("picture_", "." + extension).getName();
-            Pattern extensionPattern = Pattern.compile("\\.[a-zA-Z]+");
-            String thumbnailName = pictureName.replace("picture_", "thumbnail_").replaceAll(extensionPattern.pattern(), ".png");
-            Logger.debug("[PictureFactory > processUploadedFile] thumbnailName: " + thumbnailName);
+    public void setThumbnailWidth(int thumbnailWidth) {
+        this.thumbnailWidth = thumbnailWidth;
+    }
 
-            //Save the image and thumbnail to disk
-            File pictureFile = new File(ConfigFactory.load().getString("private.data.location") + pictureName);
-            File thumbnailFile = new File(ConfigFactory.load().getString("private.data.location") + thumbnailName);
-            ImageIO.write(image, extension, pictureFile);
-            ImageIO.write(thumbnail, "png", thumbnailFile);
+    public int getThumbnailHeight() {
+        return thumbnailHeight;
+    }
 
-            //Return the new picture
-            return new Picture(pictureName, thumbnailName, newDiaryActivity);
-        } catch (IOException e) {
-            return null;
-        }
+    public void setThumbnailHeight(int thumbnailHeight) {
+        this.thumbnailHeight = thumbnailHeight;
+    }
+
+    public String getLatestError(){
+        return latestError;
     }
 }

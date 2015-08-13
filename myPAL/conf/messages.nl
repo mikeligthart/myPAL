@@ -102,6 +102,6 @@ javascript.timepicker.lang={mins: 'min', hr: 'uur', hrs: 'uren'}
 ### ERROR MESSAGES ###
 ## Forms ##
 error.required=Dit veld is verplicht
-error.fileIsNotAnImage=Het toegevoegde bestand is geen foto of plaatje.
-error.pictureCannotBeStored=Oeps er is wat misgegaan. Helaas kan je plaatje niet worden opgeslagen. Voeg de activiteit toe zonder een plaatje.
+error.fileIsNotSupported=Oeps! Het toegevoegde bestand wordt niet ondersteund. Probeer een plaatje dat eindigd op: jpg, png, bmp and gif
+error.pictureCannotBeStored=Oeps! Helaas kan je plaatje niet worden opgeslagen. Voeg de activiteit toe zonder een plaatje.
 

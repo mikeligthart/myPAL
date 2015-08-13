@@ -1,7 +1,7 @@
 @(userType: UserType, pictures: List[models.diary.Picture])
 
 @diary_no_avatar(Messages("page.diary.base.gallery"), "gallery", userType) {
-
+<link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/ekko-lightbox.min.css")'>
 <div>
     <h1>@Messages("page.diary.base.gallery")</h1>
     @if(pictures == null || pictures.size == 0){
@@ -12,7 +12,7 @@
                 <div class="row">
             }
                     <div class="col-md-3 portfolio-item">
-                        <a href="#">
+                        <a href="@routes.Application.getPicture(picture.getName)" data-toggle="lightbox" data-gallery="multiimages" data-title="@index - @picture.getDiaryActivity.getType.toString">
                             <img class="img-responsive" src="@routes.Application.getPicture(picture.getThumbnail)" alt="">
                         </a>
                         <h3>
@@ -20,7 +20,7 @@
                         </h3>
                         <p><i>@views.interfaces.DiaryActivityToHTML.DateToFormattedString(picture.getDiaryActivity.getDate)</i> - @picture.getDiaryActivity.getDescription</p>
                     </div>
-            @if(index+1 % 4 == 0){
+            @if((index+1) % 4 == 0){
                 </div>
             }
         }
@@ -29,5 +29,13 @@
         }
     }
 </div>
+
+<script src='@routes.Assets.at("javascripts/ekko-lightbox.min.js")' type="text/javascript"></script>
+<script>
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>
 
 }

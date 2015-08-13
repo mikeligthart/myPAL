@@ -105,5 +105,5 @@ javascript.timepicker.lang={am: 'am', pm: 'pm', AM: 'AM', PM: 'PM', decimal: '.'
 ### ERROR MESSAGES ###
 ## Forms ##
 error.required=This is a required field
-error.fileIsNotAnImage=The added file is not an image.
+error.fileIsNotSupported=Whoops! This file is not a supported image. The following files are allowed: jpg, png, bmp and gif
 error.pictureCannotBeStored=Whoops! Unfortunately your image could not be stored. Please try to add the activity without an image.

@@ -144,23 +144,17 @@ public class Diary extends Controller {
             //Link the activity to a user
             newDiaryActivity.setUser(User.byEmail(email));
 
-            //If a picture is added
+            //If a file is added
             if (filePart != null) {
-                //Check if file is an image
-                String contentType = filePart.getContentType();
-                if (!contentType.contains("image")){
-                    diaryActivityForm.reject(Messages.get("error.fileIsNotAnImage"));
+                //Retrieve, move and store image file to disk and save picture object
+                PictureFactory pictureFactory = new PictureFactory();
+                Picture picture = pictureFactory.processUploadedFile(filePart, newDiaryActivity);
+                if (picture != null) {
+                    picture.save();
+                    newDiaryActivity.setPicture(picture);
+                } else {
+                    diaryActivityForm.reject(pictureFactory.getLatestError());
                     return badRequest(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
-                } else{
-                    //Retrieve, move and store image file to disk and save picture object
-                    Picture picture = PictureFactory.processUploadedFile(filePart, newDiaryActivity);
-                    if(picture != null) {
-                        picture.save();
-                        newDiaryActivity.setPicture(picture);
-                    } else {
-                        diaryActivityForm.reject(Messages.get("error.pictureCannotBeStored"));
-                        return badRequest(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
-                    }
                 }
             }
 

@@ -95,13 +95,14 @@ public class Picture extends Model {
         return pictures;
     }
 
-    /*
     public static List<Picture> byUser(User user, PictureSort sort){
         ArrayList<Picture> pictures = new ArrayList<>();
-        for(Iterator<DiaryActivity> it = DiaryActivity.byUser(user).iterator(); it.hasNext();){
-            pictures.add(byDiaryActivity(it.next()));
+        for(Iterator<DiaryActivity> it = DiaryActivity.byUser(user, sort).iterator(); it.hasNext();){
+            DiaryActivity diaryActivity = it.next();
+            if(diaryActivity.hasPicture()) {
+                pictures.add(byDiaryActivity(diaryActivity));
+            }
         }
         return pictures;
     }
-    */
 }

@@ -1,10 +1,7 @@
 package controllers;
 
 import models.User;
-import models.diary.DiaryActivity;
-import models.diary.DiarySettings;
-import models.diary.DiarySettingsManager;
-import models.diary.Picture;
+import models.diary.*;
 import models.logging.LogAction;
 import play.Logger;
 import play.data.Form;
@@ -72,7 +69,7 @@ public class Diary extends Controller {
         LogAction.log(email, LogActionType.ACCESSGALLERY);
         User user = User.byEmail(email);
 
-        List<Picture> pictures = Picture.byUser(user);
+        List<Picture> pictures = Picture.byUser(user, PictureSort.DATEASC);
         Logger.debug("[Diary > gallery] pictures size: " + pictures.size());
         return ok(diary_gallery.render(user.getUserType(), pictures));
     }

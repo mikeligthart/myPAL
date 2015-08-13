@@ -76,22 +76,11 @@ public class DiaryActivity extends DiaryItem {
         return find.where().eq("user", user).findList();
     }
 
-    public static List<DiaryActivity> byUser(User user, PictureSort sort){
-        if(sort == PictureSort.DATEASC){
-            return find.where().eq("user", user).setOrderBy("date asc").findList();
-        } else if (sort == PictureSort.DATEDESC) {
-            return find.where().eq("user", user).orderBy("date desc").findList();
-        } else {
-            return find.where().eq("user", user).findList();
-        }
-    }
-
-    public static List<DiaryActivity> byDate(Date date){
+      public static List<DiaryActivity> byDate(Date date){
         return find.where().eq("date", date).findList();
     }
 
     public static List<DiaryActivity> byUserAndDate(User user, Date date){
         return find.where().eq("user", user).eq("date", date).findList();
     }
-
 }

@@ -60,6 +60,11 @@ page.diary.calendar.description=Beschrijving
 page.diary.calendar.emotion=Emotie
 page.diary.calendar.picture=Foto
 
+# Gallery #
+page.diary.gallery.addpicture=Foto toevoegen
+page.diary.gallery.nocontent=Op dit moment zijn er geen foto's opgeslagen
+
+
 ## Admin ##
 # Base #
 page.admin.base.home=Home
@@ -104,4 +109,5 @@ javascript.timepicker.lang={mins: 'min', hr: 'uur', hrs: 'uren'}
 error.required=Dit veld is verplicht
 error.fileIsNotSupported=Oeps! Het toegevoegde bestand wordt niet ondersteund. Probeer een plaatje dat eindigd op: jpg, png, bmp and gif
 error.pictureCannotBeStored=Oeps! Helaas kan je plaatje niet worden opgeslagen. Voeg de activiteit toe zonder een plaatje.
+error.pleaseAddFile=Voeg een foto toe.
 

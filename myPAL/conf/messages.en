@@ -60,6 +60,10 @@ page.diary.calendar.description=Description
 page.diary.calendar.emotion=Emotion
 page.diary.calendar.picture=Picture
 
+# Gallery #
+page.diary.gallery.addpicture=Add picture
+page.diary.gallery.nocontent=There are not pictures present at the moment
+
 ## Admin ##
 # Base #
 page.admin.base.home=Home
@@ -107,3 +111,4 @@ javascript.timepicker.lang={am: 'am', pm: 'pm', AM: 'AM', PM: 'PM', decimal: '.'
 error.required=This is a required field
 error.fileIsNotSupported=Whoops! This file is not a supported image. The following files are allowed: jpg, png, bmp and gif
 error.pictureCannotBeStored=Whoops! Unfortunately your image could not be stored. Please try to add the activity without an image.
+error.pleaseAddFile=Please add a file

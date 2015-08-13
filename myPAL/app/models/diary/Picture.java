@@ -1,10 +1,12 @@
 package models.diary;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import controllers.Diary;
 import models.User;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,8 +23,14 @@ public class Picture extends Model {
 
     private String name, thumbnail;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
     private DiaryActivity diaryActivity;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private User user;
+
+    private Date date;
 
     public Picture(){
 
@@ -32,6 +40,16 @@ public class Picture extends Model {
         this.name = name;
         this.thumbnail = thumbnail;
         this.diaryActivity = diaryActivity;
+        this.user = diaryActivity.getUser();
+        this.date = diaryActivity.getDate();
+    }
+
+    public Picture(String name, String thumbnail, User user, Date date){
+        this.name = name;
+        this.thumbnail = thumbnail;
+        this.user = user;
+        this.date = date;
+        this.diaryActivity = null;
     }
 
     public long getId() {
@@ -67,7 +85,19 @@ public class Picture extends Model {
     }
 
     public User getUser(){
-        return diaryActivity.getUser();
+        return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public static Finder<Integer, Picture> find = new Finder<Integer, Picture>(Integer.class, Picture.class);
@@ -85,24 +115,22 @@ public class Picture extends Model {
     }
 
     public static List<Picture> byUser(User user){
-        ArrayList<Picture> pictures = new ArrayList<>();
-        for(Iterator<DiaryActivity> it = DiaryActivity.byUser(user).iterator(); it.hasNext();){
-            DiaryActivity diaryActivity = it.next();
-            if(diaryActivity.hasPicture()) {
-                pictures.add(byDiaryActivity(diaryActivity));
-            }
-        }
-        return pictures;
+        return find.where().eq("user", user).findList();
     }
 
     public static List<Picture> byUser(User user, PictureSort sort){
-        ArrayList<Picture> pictures = new ArrayList<>();
-        for(Iterator<DiaryActivity> it = DiaryActivity.byUser(user, sort).iterator(); it.hasNext();){
-            DiaryActivity diaryActivity = it.next();
-            if(diaryActivity.hasPicture()) {
-                pictures.add(byDiaryActivity(diaryActivity));
-            }
+        switch(sort){
+            case DATEASC:
+                return find.where().eq("user", user).setOrderBy("date asc").findList();
+            case DATEDESC:
+                return find.where().eq("user", user).setOrderBy("date desc").findList();
+            case USERASC:
+                return find.where().eq("user", user).setOrderBy("user asc").findList();
+            case USERDESC:
+                return find.where().eq("user", user).setOrderBy("date desc").findList();
+            default:
+                return byUser(user);
         }
-        return pictures;
+
     }
 }

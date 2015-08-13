@@ -15,6 +15,7 @@ import play.mvc.Result;
 import views.html.diary.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static play.data.Form.form;
@@ -72,6 +73,34 @@ public class Diary extends Controller {
         List<Picture> pictures = Picture.byUser(user, PictureSort.DATEASC);
         Logger.debug("[Diary > gallery] pictures size: " + pictures.size());
         return ok(diary_gallery.render(user.getUserType(), pictures));
+    }
+
+    public static Result addActivityPage(){
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user activity
+        LogAction.log(email, LogActionType.ACCESSADDACTIVITYPAGE);
+
+        //Generate addActivity page
+        Form<DiaryActivity> activityForm = form(DiaryActivity.class);
+        return ok(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+    }
+
+    public static Result addPicturePage(){
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user activity
+        LogAction.log(email, LogActionType.ACCESSADDPICTUREPAGE);
+
+        return ok(diary_add_picture_page.render(""));
     }
 
     /* FUNCTIONALITIES */
@@ -161,18 +190,34 @@ public class Diary extends Controller {
         }
     }
 
-    public static Result addActivityPage(){
+    public static Result addPicture(){
         //Check whether a user is logged in
-        if(session().isEmpty() || session().get("email") == null){
+        if (session().isEmpty() || session().get("email") == null) {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
 
         //Log user activity
-        LogAction.log(email, LogActionType.ACCESSADDACTIVITYPAGE);
+        LogAction.log(email, LogActionType.ADDEDPICTURE);
 
-        //Generate addActivity page
-        Form<DiaryActivity> activityForm = form(DiaryActivity.class);
-        return ok(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart filePart = body.getFile("picture_file");
+
+        //If a file is added
+        if (filePart != null) {
+            //Retrieve, move and store image file to disk and save picture object
+            PictureFactory pictureFactory = new PictureFactory();
+            Picture picture = pictureFactory.processUploadedFile(filePart, User.byEmail(email), Date.valueOf(LocalDate.now()));
+            if (picture != null) {
+                picture.save();
+                return gallery();
+            } else {
+                return badRequest(diary_add_picture_page.render(pictureFactory.getLatestError()));
+            }
+        } else {
+            return badRequest(diary_add_picture_page.render(Messages.get("error.pleaseAddFile")));
+        }
     }
+
+
 }

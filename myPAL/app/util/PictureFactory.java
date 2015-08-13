@@ -1,6 +1,7 @@
 package util;
 
 import com.typesafe.config.ConfigFactory;
+import models.User;
 import models.diary.DiaryActivity;
 import models.diary.Picture;
 import org.apache.commons.io.FilenameUtils;
@@ -13,6 +14,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.regex.Pattern;
 
 /**
@@ -31,7 +33,15 @@ public class PictureFactory {
         thumbnailHeight = 400;
     }
 
+
     public Picture processUploadedFile(Http.MultipartFormData.FilePart filePart, DiaryActivity newDiaryActivity) {
+        Picture picture = processUploadedFile(filePart, newDiaryActivity.getUser(), newDiaryActivity.getDate());
+        if (picture != null)
+            picture.setDiaryActivity(newDiaryActivity);
+        return picture;
+    }
+
+    public Picture processUploadedFile(Http.MultipartFormData.FilePart filePart, User user, Date date) {
         //Check if it has the right extension
         String extension = FilenameUtils.getExtension(filePart.getFilename());
         if(!hasSupportedExtension(extension)){
@@ -65,8 +75,10 @@ public class PictureFactory {
         String thumbnailName = pictureName.replace("picture_", "thumbnail_").replaceAll(extensionPattern.pattern(), ".png");
 
         //Save the image and thumbnail to disk
+
         File pictureFile = new File(ConfigFactory.load().getString("private.data.location") + pictureName);
         File thumbnailFile = new File(ConfigFactory.load().getString("private.data.location") + thumbnailName);
+
         try {
             ImageIO.write(image, extension, pictureFile);
             ImageIO.write(thumbnail, "png", thumbnailFile);
@@ -76,8 +88,11 @@ public class PictureFactory {
         }
 
         //Return the new picture
-        return new Picture(pictureName, thumbnailName, newDiaryActivity);
+        return new Picture(pictureName, thumbnailName, user, date);
     }
+
+
+
 
     private boolean hasSupportedExtension(String extension){
         if(extension.equalsIgnoreCase("jpg"))

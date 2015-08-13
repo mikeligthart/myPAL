@@ -44,7 +44,7 @@ create table log_action (
   timestamp                 timestamp,
   type                      integer,
   user_email                varchar(255),
-  constraint ck_log_action_type check (type in (0,1,2,3,4,5,6,7)),
+  constraint ck_log_action_type check (type in (0,1,2,3,4,5,6,7,8,9)),
   constraint pk_log_action primary key (id))
 ;
 
@@ -52,7 +52,9 @@ create table picture (
   id                        bigint not null,
   name                      varchar(255),
   thumbnail                 varchar(255),
-  diary_activity_id         bigint not null,
+  diary_activity_id         bigint,
+  user_email                varchar(255),
+  date                      date,
   constraint pk_picture primary key (id))
 ;
 
@@ -92,6 +94,8 @@ alter table log_action add constraint fk_log_action_user_5 foreign key (user_ema
 create index ix_log_action_user_5 on log_action (user_email);
 alter table picture add constraint fk_picture_diaryActivity_6 foreign key (diary_activity_id) references diary_activity (id) on delete restrict on update restrict;
 create index ix_picture_diaryActivity_6 on picture (diary_activity_id);
+alter table picture add constraint fk_picture_user_7 foreign key (user_email) references user (email) on delete restrict on update restrict;
+create index ix_picture_user_7 on picture (user_email);
 
 
 

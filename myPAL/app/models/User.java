@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.typesafe.config.ConfigFactory;
 import models.diary.DiaryActivity;
 import models.diary.DiaryMeasurement;
+import models.diary.Picture;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -65,6 +66,10 @@ public class User extends Model {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonManagedReference
     private List<DiaryMeasurement> diaryMeasurements;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
+    private List<Picture> pictures;
 
     //The attributes needed to login with a user
     public static class Login {
@@ -299,6 +304,14 @@ public class User extends Model {
 
     public void setDiaryMeasurements(List<DiaryMeasurement> diaryMeasurements) {
         this.diaryMeasurements = diaryMeasurements;
+    }
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
     }
 
     @Override

@@ -18,8 +18,13 @@
 }
 
 .addactivity{
-  padding-top:15px;
-}
+   padding-top:15px;
+ }
+
+ .addpicture{
+   padding-top:15px;
+   margin-bottom:50px;
+ }
 
 .addactivitybutton{
   margin-top: 10px;

@@ -59,6 +59,9 @@ page.diary.calendar.date=Date
 page.diary.calendar.description=Description
 page.diary.calendar.emotion=Emotion
 page.diary.calendar.picture=Picture
+page.diary.calendar.emotion.HAPPY=Happy
+page.diary.calendar.emotion.NEUTRAL=All right
+page.diary.calendar.emotion.SAD=Sad
 
 # Gallery #
 page.diary.gallery.addpicture=Add picture

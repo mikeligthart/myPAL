@@ -59,6 +59,9 @@ page.diary.calendar.date=Datum
 page.diary.calendar.description=Beschrijving
 page.diary.calendar.emotion=Emotie
 page.diary.calendar.picture=Foto
+page.diary.calendar.emotion.HAPPY=Blij
+page.diary.calendar.emotion.NEUTRAL=Oke
+page.diary.calendar.emotion.SAD=Verdrietig
 
 # Gallery #
 page.diary.gallery.addpicture=Foto toevoegen

@@ -22,5 +22,4 @@ public enum UserType {
             default: return Messages.get("model.user.userType.CHILD");
         }
     }
-
 }

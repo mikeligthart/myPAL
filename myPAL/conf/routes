@@ -23,6 +23,7 @@ POST    /mypal/addactivity                  controllers.Diary.addActivity()
 GET     /mypal/gallery                      controllers.Diary.gallery()
 GET     /mypal/addpicture                   controllers.Diary.addPicturePage()
 POST    /mypal/addpicture                   controllers.Diary.addPicture()
+GET     /mypal/showactivities               controllers.Diary.getActivities()
 
 ## ADMIN ##
 GET     /admin                          controllers.Admin.admin()

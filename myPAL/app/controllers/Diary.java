@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
 import models.diary.*;
 import models.logging.LogAction;
@@ -19,6 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static play.data.Form.form;
+import static play.libs.Json.toJson;
 
 /**
  * Created by Mike on 29-7-2015.
@@ -228,5 +230,23 @@ public class Diary extends Controller {
         }
     }
 
+    public static Result getActivities(){
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
 
+        DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
+        List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
+        Logger.debug("[Diary > getActivities] diaryAcitivites size: " + diaryActivities.size());
+
+        List<DiaryActivityToHTML> activities = DiaryActivityToHTML.fromListToList(diaryActivities);
+        Logger.debug("[Diary > getActivities] diaryAcitivitestoHTML size: " + activities.size());
+
+        JsonNode jsonActivities = toJson(activities);
+        Logger.debug("[Diary > getActivities] JsonNode: " + jsonActivities.asText());
+
+        return ok(jsonActivities);
+    }
 }

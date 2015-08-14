@@ -23,11 +23,11 @@ public enum DiaryActivityType {
     }
 
     public static DiaryActivityType fromString(String type){
-        if(type.equalsIgnoreCase("school")){
+        if(type.equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.SCHOOL"))){
             return DiaryActivityType.SCHOOL;
-        } else if(type.equalsIgnoreCase("meal")){
+        } else if(type.equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.MEAL"))){
             return DiaryActivityType.MEAL;
-        } else if(type.equalsIgnoreCase("sport")){
+        } else if(type.equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.SPORT"))){
             return DiaryActivityType.SPORT;
         } else{
             return DiaryActivityType.OTHER;

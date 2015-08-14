@@ -63,6 +63,10 @@ public class Diary extends Controller {
     }
 
     public static Result gallery(){
+        return gallery("");
+    }
+
+    private static Result gallery(String error){
         if (session().isEmpty() || session().get("email") == null) {
             return redirect(routes.Application.login());
         }
@@ -71,8 +75,13 @@ public class Diary extends Controller {
         User user = User.byEmail(email);
 
         List<Picture> pictures = Picture.byUser(user, PictureSort.DATEASC);
-        Logger.debug("[Diary > gallery] pictures size: " + pictures.size());
-        return ok(diary_gallery.render(user.getUserType(), pictures));
+
+        if(error.isEmpty()) {
+            return ok(diary_gallery.render(user.getUserType(), pictures, ""));
+        }
+        else {
+            return badRequest(diary_gallery.render(user.getUserType(), pictures, error));
+        }
     }
 
     public static Result addActivityPage(){
@@ -100,7 +109,7 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSADDPICTUREPAGE);
 
-        return ok(diary_add_picture_page.render(""));
+        return ok(diary_add_picture_page.render());
     }
 
     /* FUNCTIONALITIES */
@@ -212,10 +221,10 @@ public class Diary extends Controller {
                 picture.save();
                 return gallery();
             } else {
-                return badRequest(diary_add_picture_page.render(pictureFactory.getLatestError()));
+                return gallery(pictureFactory.getLatestError());
             }
         } else {
-            return badRequest(diary_add_picture_page.render(Messages.get("error.pleaseAddFile")));
+            return gallery(Messages.get("error.pleaseAddFile"));
         }
     }
 

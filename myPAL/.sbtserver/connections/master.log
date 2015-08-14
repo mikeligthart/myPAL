@@ -1,103 +1,88 @@
-New log file opened at Thu Aug 13 20:34:51 CEST 2015 by 4668@Obsidian
-Taking next connection to: 59461
-New client attempting to connect on port: 59462-59461
-  Address = /192.168.1.144:59461
-This client on port 59462 has uuid c11dd318-0549-4db2-942b-f1a8ca05217d configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-c11dd318-0549-4db2-942b-f1a8ca05217d
-Taking next connection to: 59461
-New client attempting to connect on port: 59463-59461
-  Address = /192.168.1.144:59461
-Handshake exception on socket: 59463
+New log file opened at Fri Aug 14 10:09:39 CEST 2015 by 1628@PC-14874
+Taking next connection to: 49757
+New client attempting to connect on port: 49758-49757
+  Address = /139.63.20.104:49757
+This client on port 49758 has uuid d21e762a-36bb-45ac-91ab-7e34fd1f9db9 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-d21e762a-36bb-45ac-91ab-7e34fd1f9db9
+Taking next connection to: 49757
+New client attempting to connect on port: 49759-49757
+  Address = /139.63.20.104:49757
+Handshake exception on socket: 49759
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
 	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
 Caused by: java.net.SocketException: Software caused connection abort: recv failed
 	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.socketRead(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.io.BufferedInputStream.fill(Unknown Source)
-	at java.io.BufferedInputStream.read(Unknown Source)
-	at java.io.DataInputStream.readInt(Unknown Source)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readInt(DataInputStream.java:387)
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 59461
-New client attempting to connect on port: 59464-59461
-  Address = /192.168.1.144:59461
-This client on port 59464 has uuid ed41d992-d97f-48d6-a118-c9912332d85a configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-c11dd318-0549-4db2-942b-f1a8ca05217d, activator-ed41d992-d97f-48d6-a118-c9912332d85a
-Taking next connection to: 59461
-New client attempting to connect on port: 59465-59461
-  Address = /192.168.1.144:59461
-Handshake exception on socket: 59465
+Taking next connection to: 49757
+New client attempting to connect on port: 49760-49757
+  Address = /139.63.20.104:49757
+This client on port 49760 has uuid e511022a-b367-4365-a678-5c88ab2046c6 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-d21e762a-36bb-45ac-91ab-7e34fd1f9db9, activator-e511022a-b367-4365-a678-5c88ab2046c6
+Taking next connection to: 49757
+New client attempting to connect on port: 49765-49757
+  Address = /139.63.20.104:49757
+Handshake exception on socket: 49765
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
 	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
 Caused by: java.net.SocketException: Software caused connection abort: recv failed
 	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.socketRead(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.io.BufferedInputStream.fill(Unknown Source)
-	at java.io.BufferedInputStream.read(Unknown Source)
-	at java.io.DataInputStream.readInt(Unknown Source)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readInt(DataInputStream.java:387)
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 59461
-New client attempting to connect on port: 59466-59461
-  Address = /192.168.1.144:59461
-This client on port 59466 has uuid 168eeb01-52a2-43d7-9505-b2bd5e62afb1 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-c11dd318-0549-4db2-942b-f1a8ca05217d, activator-ed41d992-d97f-48d6-a118-c9912332d85a, play-fork-run-168eeb01-52a2-43d7-9505-b2bd5e62afb1
-Taking next connection to: 59461
+Taking next connection to: 49757
+New client attempting to connect on port: 49766-49757
+  Address = /139.63.20.104:49757
+This client on port 49766 has uuid 63e71143-befa-4ae1-b0ba-fbf54db836a4 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-d21e762a-36bb-45ac-91ab-7e34fd1f9db9, activator-e511022a-b367-4365-a678-5c88ab2046c6, play-fork-run-63e71143-befa-4ae1-b0ba-fbf54db836a4
+Taking next connection to: 49757
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
+Taking next connection to: 49757
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
+Taking next connection to: 49757
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
+Taking next connection to: 49757
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
+Taking next connection to: 49757
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
+Taking next connection to: 49757
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
+Taking next connection to: 49757
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
+Taking next connection to: 49757
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
+Taking next connection to: 49757
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
+Taking next connection to: 49757
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
+Taking next connection to: 49757
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 59461
-Checking to see if clients are empty...
-No non-daemon clients connected after 3 min. Shutting down.
-Server socket thread exiting.
-0 clients open, will close them...
-All client sockets have been closed.
-Closing the 4668@Obsidian logs at Thu Aug 13 21:20:04 CEST 2015, goodbye.
+Taking next connection to: 49757

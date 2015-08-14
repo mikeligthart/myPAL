@@ -1,4 +1,4 @@
-@(userType: UserType, pictures: List[models.diary.Picture])
+@(userType: UserType, pictures: List[models.diary.Picture], error: String = "")
 
 @diary_no_avatar(Messages("page.diary.base.gallery"), "gallery", userType) {
 <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/ekko-lightbox.min.css")'>
@@ -11,9 +11,19 @@
             <h1>@Messages("page.diary.base.gallery")</h1>
         </div>
     </div>
+    <div>
+        @if(error != "") {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">@Messages("page.general.error")</span>
+            @error
+        </div>
+        }
     @if(pictures == null || pictures.size == 0){
         <h2>@Messages("page.diary.gallery.nocontent")</h2>
+    </div>
     }else{
+    </div>
         @for((picture, index) <- pictures.zipWithIndex){
             @if(index % 4 == 0){
                 <div class="row">

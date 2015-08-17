@@ -33,9 +33,9 @@
                             <img class="img-responsive" src="@routes.Application.getPicture(picture.getThumbnail)" alt="">
                         </a>
                         <h3>
-                            <a href="@if(picture.getDiaryActivity != null){@routes.Diary.calendarSet(views.interfaces.DiaryActivityToHTML.DateToDay(picture.getDiaryActivity.getDate), views.interfaces.DiaryActivityToHTML.DateToMonth(picture.getDiaryActivity.getDate), views.interfaces.DiaryActivityToHTML.DateToYear(picture.getDiaryActivity.getDate))}else{@routes.Diary.addActivityPage()}">@if(picture.getDiaryActivity != null){@picture.getDiaryActivity.getType.toString}else{Free picture}</a>
+                            <a href="@if(picture.getDiaryActivity != null){@routes.Diary.calendarSet(views.interfaces.DiaryActivityToHTML.dateToDay(picture.getDiaryActivity.getDate), views.interfaces.DiaryActivityToHTML.dateToMonth(picture.getDiaryActivity.getDate), views.interfaces.DiaryActivityToHTML.dateToYear(picture.getDiaryActivity.getDate))}else{@routes.Diary.addActivityPage()}">@if(picture.getDiaryActivity != null){@picture.getDiaryActivity.getType.toString}else{Free picture}</a>
                         </h3>
-                        <p><i>@views.interfaces.DiaryActivityToHTML.DateToFormattedString(picture.getDate)</i> - @if(picture.getDiaryActivity != null){@picture.getDiaryActivity.getDescription}else{Free picture}</p>
+                        <p><i>@views.interfaces.DiaryActivityToHTML.dateToFormattedString(picture.getDate)</i> - @if(picture.getDiaryActivity != null){@picture.getDiaryActivity.getDescription}else{Free picture}</p>
                     </div>
             @if((index+1) % 4 == 0){
                 </div>

@@ -5,6 +5,7 @@ import controllers.routes;
 import models.diary.DiaryActivity;
 import models.diary.DiaryActivityType;
 import models.diary.Emotion;
+import models.diary.Picture;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -18,12 +19,14 @@ import java.util.List;
  */
 public class DiaryActivityToHTML {
 
+    private long id;
     private int startHour, startMin, endHour, endMin;
-    private String type, description, emotion, date, emotionPicture;
+    private String type, description, emotion, date, emotionPicture, picture;
 
     private static SimpleDateFormat formatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
 
     public DiaryActivityToHTML(DiaryActivity diaryActivity){
+        this.id = diaryActivity.getId();
         this.startHour = diaryActivity.getStarttime().toLocalTime().getHour();
         this.startMin = diaryActivity.getStarttime().toLocalTime().getMinute();
         this.endHour = diaryActivity.getEndtime().toLocalTime().getHour();
@@ -33,6 +36,7 @@ public class DiaryActivityToHTML {
         this.emotion = diaryActivity.getEmotion().name();
         this.emotionPicture = emotionToPicture(diaryActivity.getEmotion());
         this.date = formatter.format(diaryActivity.getDate());
+        this.picture = retrievePictureURL(diaryActivity.getPicture());
     }
 
     public static List<DiaryActivityToHTML> fromListToList(List<DiaryActivity> activities){
@@ -59,7 +63,7 @@ public class DiaryActivityToHTML {
         return Integer.toString(cal.get(Calendar.MONTH) + 1);
     }
 
-    public static String d(Date date){
+    public static String dateToYear(Date date){
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         return Integer.toString(cal.get(Calendar.YEAR));
@@ -97,6 +101,10 @@ public class DiaryActivityToHTML {
             default:
                 return routes.Assets.at("images/smiley1_neutral.png").url();
         }
+    }
+
+    public long getId() {
+        return id;
     }
 
     public int getStartHour() {
@@ -141,5 +149,20 @@ public class DiaryActivityToHTML {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    private String retrievePictureURL(Picture picture){
+        String url = routes.Assets.at("images/no_picture.png").url();;
+        if (picture != null)
+            url = routes.Application.getPicture(picture.getThumbnail()).url();
+        return url;
     }
 }

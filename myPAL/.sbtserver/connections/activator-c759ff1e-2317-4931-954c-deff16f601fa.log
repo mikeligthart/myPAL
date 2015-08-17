@@ -1,0 +1,9 @@
+New log file opened at Mon Aug 17 13:13:43 CEST 2015 by 4268@Obsidian
+Sending msg to client activator-c759ff1e-2317-4931-954c-deff16f601fa: DetachedLogEvent(LogMessage(debug,sbt server socket logs are in: C:\Users\Mike\Documents\GitHub\myPAL\myPAL\.sbtserver\connections\master.log))
+Sending msg to client activator-c759ff1e-2317-4931-954c-deff16f601fa: DetachedLogEvent(LogMessage(debug,sbt general server logs are in: C:\Users\Mike\Documents\GitHub\myPAL\myPAL\.sbtserver\master.log))
+Sending msg to client activator-c759ff1e-2317-4931-954c-deff16f601fa: DetachedLogEvent(LogMessage(debug,sbt client logs are in: C:\Users\Mike\Documents\GitHub\myPAL\myPAL\.sbtserver\connections\activator-c759ff1e-2317-4931-954c-deff16f601fa.log))
+Reading next message from client.
+Client activator-c759ff1e-2317-4931-954c-deff16f601fa EOF, shutting down.
+Stopping client.
+Dropping message (0,ReceivedResponse()) to dead client activator-c759ff1e-2317-4931-954c-deff16f601fa
+Client activator-c759ff1e-2317-4931-954c-deff16f601fa thread exiting.

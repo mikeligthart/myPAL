@@ -19,6 +19,8 @@ public class DiaryActivity extends DiaryItem {
     @Constraints.Required
     private DiaryActivityType type;
 
+    @Constraints.MaxLength(1200)
+    @Column(length = 1200)
     @Constraints.Required(message = "Dit moet ook nog ingevuld worden")
     private String description;
 

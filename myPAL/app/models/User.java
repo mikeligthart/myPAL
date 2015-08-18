@@ -328,5 +328,13 @@ public class User extends Model {
                 isEquals();
     }
 
+    public void removeDiaryActivity(DiaryActivity diaryActivity){
+        Picture picture = diaryActivity.getPicture();
+        if (picture != null) {
+            pictures.remove(picture);
+        }
+        diaryActivities.remove(diaryActivity);
+    }
+
 
 }

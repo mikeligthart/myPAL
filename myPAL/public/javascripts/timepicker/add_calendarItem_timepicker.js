@@ -13,7 +13,7 @@ $('#endtime').timepicker({  'timeFormat': 'H:i',
                             'scrollDefault': 'now'
 });
 
-$('#starttime').on('changeTime', function(){
+$('#starttime').on('selectTime', function(){
     var mintime = $('#starttime').timepicker('getTime');
     $('#endtime').timepicker('option', { 'minTime': mintime, 'showDuration': true });
     if(mintime > $('#endtime').timepicker('getTime')){
@@ -21,10 +21,10 @@ $('#starttime').on('changeTime', function(){
     }
 });
 
-$('#endtime').on('changeTime', function(){
+$('#endtime').on('selectTime', function(){
     var maxtime = $('#endtime').timepicker('getTime');
     $('#starttime').timepicker('option', 'maxTime', maxtime);
-    if(maxTime < $('#starttime').timepicker('getTime')){
+    if(maxtime < $('#starttime').timepicker('getTime')){
          $('#starttime').timepicker('setTime', maxtime);
     }
 });

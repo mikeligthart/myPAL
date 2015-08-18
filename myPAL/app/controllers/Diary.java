@@ -46,12 +46,13 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSCALENDAR);
 
-        //Retrieve and show activities and measurements for a specific date
+        //Manage the right settings such as date for the calendar
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
-        List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
-        //List<DiaryMeasurement> diaryMeasurements = DiaryMeasurement.find.where().eq("date", diarySettings.getDateString(false)).findList();
 
-        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
+        //Retrieve the number of activities
+        List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
+
+        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), diaryActivities.size()));
     }
 
     public static Result goals() {
@@ -69,6 +70,7 @@ public class Diary extends Controller {
     }
 
     private static Result gallery(String error){
+        //Check whether a user is logged in
         if (session().isEmpty() || session().get("email") == null) {
             return redirect(routes.Application.login());
         }
@@ -114,6 +116,32 @@ public class Diary extends Controller {
         return ok(diary_add_picture_page.render());
     }
 
+    public static Result viewActivity(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.VIEWACTIVITY);
+
+        //Check if user has access to view this activity
+        User user = User.byEmail(email);
+        DiaryActivity activity = DiaryActivity.byID(id);
+        if(activity == null){
+            return forbidden();
+        }
+        if(!activity.getUser().equals(user)){
+            return forbidden();
+        }
+
+        //Manage the right settings such as date for the calendar
+        DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
+
+        return ok(diary_calendar_view_activity.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity)));
+    }
+
     /* FUNCTIONALITIES */
 
     public static Result calendarUpdate(String update){
@@ -135,9 +163,11 @@ public class Diary extends Controller {
         } else {
             return forbidden();
         }
+
+        //Retrieve the number of activities
         List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
 
-        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
+        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), diaryActivities.size()));
     }
 
     public static Result calendarSet(String day, String month, String year){
@@ -153,9 +183,11 @@ public class Diary extends Controller {
         //Update calendar based on date change
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
         diarySettings.dateUpdate(day, month, year);
+
+        //Retrieve the number of activities
         List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
 
-        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryActivityToHTML.fromListToList(diaryActivities)));
+        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), diaryActivities.size()));
     }
 
     public static Result addActivity() {
@@ -248,5 +280,42 @@ public class Diary extends Controller {
         Logger.debug("[Diary > getActivities] JsonNode: " + jsonActivities.asText());
 
         return ok(jsonActivities);
+    }
+
+    public static Result deleteActivity(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.DELETEACTIVITY);
+
+        //Check if user has access to view this activity
+        User user = User.byEmail(email);
+        DiaryActivity activity = DiaryActivity.byID(id);
+        if(activity == null){
+            return forbidden();
+        }
+        if(!activity.getUser().equals(user)){
+            return forbidden();
+        }
+
+        user.removeDiaryActivity(activity);
+        user.update();
+
+        if(activity.hasPicture()) {
+            Picture picture = activity.getPicture();
+            picture.setDiaryActivity(null);
+            picture.update();
+            activity.setPicture(null);
+            activity.update();
+            //picture.delete();
+        }
+
+        activity.delete();
+
+        return calendar();
     }
 }

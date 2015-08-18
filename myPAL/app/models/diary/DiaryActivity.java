@@ -78,11 +78,15 @@ public class DiaryActivity extends DiaryItem {
         return find.where().eq("user", user).findList();
     }
 
-      public static List<DiaryActivity> byDate(Date date){
+    public static List<DiaryActivity> byDate(Date date){
         return find.where().eq("date", date).findList();
     }
 
     public static List<DiaryActivity> byUserAndDate(User user, Date date){
         return find.where().eq("user", user).eq("date", date).findList();
+    }
+
+    public static DiaryActivity byID(int id){
+        return find.byId(id);
     }
 }

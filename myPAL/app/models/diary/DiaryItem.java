@@ -3,7 +3,6 @@ package models.diary;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.typesafe.config.ConfigFactory;
 import models.User;
-import play.Logger;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
@@ -21,7 +20,7 @@ public abstract class DiaryItem extends Model {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    private int id;
 
     @Constraints.Required
     @Formats.DateTime(pattern="dd/MM/yyyy")
@@ -35,15 +34,15 @@ public abstract class DiaryItem extends Model {
     @Formats.DateTime(pattern = "HH:mm")
     private Time endtime;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JsonBackReference
     private User user;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

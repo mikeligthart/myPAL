@@ -19,9 +19,9 @@ import java.util.List;
  */
 public class DiaryActivityToHTML {
 
-    private long id;
+    private int id;
     private int startHour, startMin, endHour, endMin;
-    private String type, description, emotion, date, emotionPicture, picture;
+    private String type, description, emotion, date, emotionPicture, picture, color, viewURL, startTime, endTime;
 
     private static SimpleDateFormat formatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
 
@@ -37,6 +37,10 @@ public class DiaryActivityToHTML {
         this.emotionPicture = emotionToPicture(diaryActivity.getEmotion());
         this.date = formatter.format(diaryActivity.getDate());
         this.picture = retrievePictureURL(diaryActivity.getPicture());
+        this.color = diaryActivityTypeToColor(diaryActivity.getType());
+        this.viewURL = routes.Diary.viewActivity(diaryActivity.getId()).url();
+        this.startTime = diaryActivity.getStarttime().toString();
+        this.endTime = diaryActivity.getEndtime().toString();
     }
 
     public static List<DiaryActivityToHTML> fromListToList(List<DiaryActivity> activities){
@@ -103,7 +107,7 @@ public class DiaryActivityToHTML {
         }
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -157,6 +161,38 @@ public class DiaryActivityToHTML {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getViewURL() {
+        return viewURL;
+    }
+
+    public void setViewURL(String viewURL) {
+        this.viewURL = viewURL;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     private String retrievePictureURL(Picture picture){

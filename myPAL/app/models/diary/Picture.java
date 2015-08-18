@@ -23,10 +23,10 @@ public class Picture extends Model {
 
     private String name, thumbnail;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @OneToOne(optional = true)
     private DiaryActivity diaryActivity;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonBackReference
     private User user;
 

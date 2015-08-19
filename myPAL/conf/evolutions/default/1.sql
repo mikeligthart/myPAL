@@ -9,7 +9,7 @@ create table diary_activity (
   starttime                 time,
   endtime                   time,
   user_email                varchar(255),
-  type                      varchar(6),
+  type                      varchar(8),
   description               varchar(1200),
   picture_id                bigint,
   emotion                   varchar(7),

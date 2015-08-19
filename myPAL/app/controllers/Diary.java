@@ -219,17 +219,19 @@ public class Diary extends Controller {
                 PictureFactory pictureFactory = new PictureFactory();
                 Picture picture = pictureFactory.processUploadedFile(filePart, newDiaryActivity);
                 if (picture != null) {
+                    newDiaryActivity.save();
                     picture.save();
                     newDiaryActivity.setPicture(picture);
+                    newDiaryActivity.update();
+                    return redirect(routes.Diary.calendar());
                 } else {
                     diaryActivityForm.reject(pictureFactory.getLatestError());
                     return badRequest(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
                 }
+            } else {
+                newDiaryActivity.save();
+                return redirect(routes.Diary.calendar());
             }
-
-            //Save newly created DiaryActivity
-            newDiaryActivity.save();
-            return redirect(routes.Diary.calendar());
         }
     }
 
@@ -298,7 +300,7 @@ public class Diary extends Controller {
         if(activity == null){
             return forbidden();
         }
-        if(!activity.getUser().equals(user)){
+        if(!activity.getUser().equals(user)) {
             return forbidden();
         }
 
@@ -308,14 +310,17 @@ public class Diary extends Controller {
         if(activity.hasPicture()) {
             Picture picture = activity.getPicture();
             picture.setDiaryActivity(null);
-            picture.update();
+            picture.setUser(null);
             activity.setPicture(null);
+
+            picture.update();
             activity.update();
-            //picture.delete();
+            picture.delete();
         }
 
+        activity.setUser(null);
         activity.delete();
 
-        return calendar();
+        return redirect(routes.Diary.calendar());
     }
 }

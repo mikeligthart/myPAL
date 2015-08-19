@@ -1,14 +1,11 @@
 package models.diary;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import controllers.Diary;
 import models.User;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -19,7 +16,7 @@ public class Picture extends Model {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private int id;
 
     private String name, thumbnail;
 
@@ -52,11 +49,11 @@ public class Picture extends Model {
         this.diaryActivity = null;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -132,5 +129,9 @@ public class Picture extends Model {
                 return byUser(user);
         }
 
+    }
+
+    public static Picture byID(int id){
+        return find.byId(id);
     }
 }

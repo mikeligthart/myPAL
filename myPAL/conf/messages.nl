@@ -70,6 +70,7 @@ page.diary.calendar.picture.delete=Verwijder foto
 # Gallery #
 page.diary.gallery.addpicture=Foto toevoegen
 page.diary.gallery.nocontent=Op dit moment zijn er geen foto's opgeslagen
+page.diary.gallery.unlinkedpicture=Ongekoppelde foto
 
 
 ## Admin ##

@@ -11,7 +11,7 @@ create table diary_activity (
   user_email                varchar(255),
   type                      varchar(8),
   description               varchar(1200),
-  picture_id                bigint,
+  picture_id                integer,
   emotion                   varchar(7),
   constraint ck_diary_activity_type check (type in ('SCHOOL','MEAL','SPORT','OTHER')),
   constraint ck_diary_activity_emotion check (emotion in ('HAPPY','NEUTRAL','SAD')),
@@ -44,12 +44,12 @@ create table log_action (
   timestamp                 timestamp,
   type                      integer,
   user_email                varchar(255),
-  constraint ck_log_action_type check (type in (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14)),
+  constraint ck_log_action_type check (type in (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)),
   constraint pk_log_action primary key (id))
 ;
 
 create table picture (
-  id                        bigint not null,
+  id                        integer not null,
   name                      varchar(255),
   thumbnail                 varchar(255),
   diary_activity_id         integer,

@@ -29,13 +29,14 @@
                 <div class="row">
             }
                     <div class="col-md-3 portfolio-item">
-                        <a href="@routes.Application.getPicture(picture.getName)" data-toggle="lightbox" data-gallery="multiimages" data-title="@(index+1) - @if(picture.getDiaryActivity != null){picture.getDiaryActivity.getType.toString}else{Free picture}">
+                        <div class="text-right"><a href='@routes.Diary.deletePictureFromGallery(picture.getId)' class='btn btn-default' aria-label='Left Align'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></div>
+                        <a href="@routes.Application.getPicture(picture.getName)" data-toggle="lightbox" data-gallery="multiimages" data-title='@(index+1) - @if(picture.getDiaryActivity != null){@picture.getDiaryActivity.getType.toString}else{@Messages("page.diary.gallery.unlinkedpicture")}'>
                             <img class="img-responsive" src="@routes.Application.getPicture(picture.getThumbnail)" alt="">
                         </a>
                         <h3>
-                            <a href="@if(picture.getDiaryActivity != null){@routes.Diary.calendarSet(views.interfaces.DiaryActivityToHTML.dateToDay(picture.getDiaryActivity.getDate), views.interfaces.DiaryActivityToHTML.dateToMonth(picture.getDiaryActivity.getDate), views.interfaces.DiaryActivityToHTML.dateToYear(picture.getDiaryActivity.getDate))}else{@routes.Diary.addActivityPage()}">@if(picture.getDiaryActivity != null){@picture.getDiaryActivity.getType.toString}else{Free picture}</a>
+                            <a href="@if(picture.getDiaryActivity != null){@routes.Diary.calendarSet(views.interfaces.DiaryActivityToHTML.dateToDay(picture.getDiaryActivity.getDate), views.interfaces.DiaryActivityToHTML.dateToMonth(picture.getDiaryActivity.getDate), views.interfaces.DiaryActivityToHTML.dateToYear(picture.getDiaryActivity.getDate))}else{@routes.Diary.addActivityPage()}">@if(picture.getDiaryActivity != null){@picture.getDiaryActivity.getType.toString}else{@Messages("page.diary.gallery.unlinkedpicture")}</a>
                         </h3>
-                        <p><i>@views.interfaces.DiaryActivityToHTML.dateToFormattedString(picture.getDate)</i> - @if(picture.getDiaryActivity != null){@picture.getDiaryActivity.getDescription}else{Free picture}</p>
+                        <p><i>@views.interfaces.DiaryActivityToHTML.dateToFormattedString(picture.getDate)</i> - @if(picture.getDiaryActivity != null){@picture.getDiaryActivity.getDescription}else{@Messages("page.diary.gallery.unlinkedpicture")}</p>
                     </div>
             @if((index+1) % 4 == 0){
                 </div>

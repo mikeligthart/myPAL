@@ -70,6 +70,7 @@ page.diary.calendar.picture.delete=Delete picture
 # Gallery #
 page.diary.gallery.addpicture=Add picture
 page.diary.gallery.nocontent=There are not pictures present at the moment
+page.diary.gallery.unlinkedpicture=Unlinked picture
 
 ## Admin ##
 # Base #

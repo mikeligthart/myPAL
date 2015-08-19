@@ -30,6 +30,7 @@ GET     /mypal/activity/update/:id          controllers.Diary.updateActivityPage
 POST    /mypal/activity/update/:id          controllers.Diary.updateActivity(id:Integer)
 GET     /mypal/activity/deletepicture/:id   controllers.Diary.deletePictureFromActivity(id:Integer)
 GET     /mypal/activity/unlinkpicture/:id   controllers.Diary.unlinkPictureFromActivity(id:Integer)
+GET     /mypal/picture/delete/:id           controllers.Diary.deletePictureFromGallery(id:Int)
 
 ## ADMIN ##
 GET     /admin                          controllers.Admin.admin()

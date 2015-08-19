@@ -465,4 +465,37 @@ public class Diary extends Controller {
 
         return redirect(routes.Diary.updateActivityPage(id));
     }
+
+    public static Result deletePictureFromGallery(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.DELETEPICTUREFROMGALLERY);
+
+        //Check if user has access to view this picture
+        User user = User.byEmail(email);
+        Picture picture = Picture.byID(id);
+        if(picture == null){
+            return forbidden();
+        }
+        if(!user.equals(picture.getUser())){
+            return forbidden();
+        }
+
+        DiaryActivity diaryActivity = picture.getDiaryActivity();
+        if(diaryActivity != null){
+            diaryActivity.setPicture(null);
+            diaryActivity.update();
+        }
+        picture.setUser(null);
+        picture.setDiaryActivity(null);
+        picture.delete();
+
+        return redirect(routes.Diary.gallery());
+
+    }
 }

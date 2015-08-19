@@ -6,6 +6,7 @@ import models.diary.DiaryActivity;
 import models.diary.DiaryActivityType;
 import models.diary.Emotion;
 import models.diary.Picture;
+import play.Logger;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;

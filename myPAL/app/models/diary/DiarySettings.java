@@ -3,6 +3,7 @@ package models.diary;
 import com.typesafe.config.ConfigFactory;
 import play.i18n.Messages;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -36,6 +37,10 @@ public class DiarySettings {
             month = "0" + month;
         }
         calendarDate = LocalDate.parse(day + delimiter + month + delimiter + year, DATEFORMATTER);
+    }
+
+    public void dateUpdate(Date date){
+        calendarDate = date.toLocalDate();
     }
 
     public String getDateString(Boolean beautified){

@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static play.data.Form.form;
+import static play.libs.Json.stringify;
 import static play.libs.Json.toJson;
 
 /**
@@ -299,13 +300,10 @@ public class Diary extends Controller {
 
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
         List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
-        Logger.debug("[Diary > getActivities] diaryAcitivites size: " + diaryActivities.size());
 
         List<DiaryActivityToHTML> activities = DiaryActivityToHTML.fromListToList(diaryActivities);
-        Logger.debug("[Diary > getActivities] diaryAcitivitestoHTML size: " + activities.size());
 
         JsonNode jsonActivities = toJson(activities);
-        Logger.debug("[Diary > getActivities] JsonNode: " + jsonActivities.asText());
 
         return ok(jsonActivities);
     }
@@ -350,8 +348,57 @@ public class Diary extends Controller {
         return redirect(routes.Diary.calendar());
     }
 
-    public static Result updateActivity(){
-        return ok();
+    public static Result updateActivity(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.UPDATEACTIVITY);
+
+        //Check if user has access to view this activity
+        User user = User.byEmail(email);
+        DiaryActivity activity = DiaryActivity.byID(id);
+        if(activity == null){
+            return forbidden();
+        }
+        if(!activity.getUser().equals(user)){
+            return forbidden();
+        }
+
+                //Retrieve data from input elements on webpage
+        Form<DiaryActivity> diaryActivityForm = form(DiaryActivity.class).bindFromRequest();
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart filePart = body.getFile("picture_file");
+
+        if (diaryActivityForm.hasErrors()) {
+            return badRequest(diary_update_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, new DiaryActivityToHTML(activity)));
+        } else {
+            //Retrieve the activity from the form
+            DiaryActivity updateActivity = diaryActivityForm.get();
+            updateActivity.update(id);
+            DiarySettingsManager.getInstance().retrieve(email).dateUpdate(updateActivity.getDate());
+            //If a file is added
+            if (filePart != null) {
+                //Retrieve, move and store image file to disk and save picture object
+                DiaryActivity updatedApartFromPictureDiaryActivity = DiaryActivity.byID(id);
+                PictureFactory pictureFactory = new PictureFactory();
+                Picture picture = pictureFactory.processUploadedFile(filePart, updatedApartFromPictureDiaryActivity);
+                if (picture != null) {
+                    picture.save();
+                    updatedApartFromPictureDiaryActivity.setPicture(picture);
+                    updatedApartFromPictureDiaryActivity.update();
+                    return redirect(routes.Diary.viewActivity(id));
+                } else {
+                    diaryActivityForm.reject(pictureFactory.getLatestError());
+                    return badRequest(diary_update_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, new DiaryActivityToHTML(activity)));
+                }
+            } else {
+                return redirect(routes.Diary.viewActivity(id));
+            }
+        }
     }
 
     public static Result deletePictureFromActivity(int id){
@@ -362,7 +409,7 @@ public class Diary extends Controller {
         String email = session().get("email");
 
         //Log user behavior
-        LogAction.log(email, LogActionType.DELETEACTIVITY);
+        LogAction.log(email, LogActionType.DELETEPICTUREFROMACTIVITY);
 
         //Check if user has access to view this activity
         User user = User.byEmail(email);
@@ -396,7 +443,7 @@ public class Diary extends Controller {
         String email = session().get("email");
 
         //Log user behavior
-        LogAction.log(email, LogActionType.DELETEACTIVITY);
+        LogAction.log(email, LogActionType.UNLINKPICTUREFROMACTIVITY);
 
         //Check if user has access to view this activity
         User user = User.byEmail(email);

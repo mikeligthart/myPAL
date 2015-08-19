@@ -142,6 +142,32 @@ public class Diary extends Controller {
         return ok(diary_calendar_view_activity.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity)));
     }
 
+    public static Result updateActivityPage(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.VIEWACTIVITY);
+
+        //Check if user has access to view this activity
+        User user = User.byEmail(email);
+        DiaryActivity activity = DiaryActivity.byID(id);
+        if(activity == null){
+            return forbidden();
+        }
+        if(!activity.getUser().equals(user)){
+            return forbidden();
+        }
+
+        Form<DiaryActivity> activityForm = form(DiaryActivity.class);
+        activityForm = activityForm.fill(activity);
+
+        return ok(diary_update_diaryActivity.render(user.getUserType(), activityForm, new DiaryActivityToHTML(activity)));
+    }
+
     /* FUNCTIONALITIES */
 
     public static Result calendarUpdate(String update){
@@ -322,5 +348,74 @@ public class Diary extends Controller {
         activity.delete();
 
         return redirect(routes.Diary.calendar());
+    }
+
+    public static Result updateActivity(){
+        return ok();
+    }
+
+    public static Result deletePictureFromActivity(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.DELETEACTIVITY);
+
+        //Check if user has access to view this activity
+        User user = User.byEmail(email);
+        DiaryActivity activity = DiaryActivity.byID(id);
+        if(activity == null){
+            return forbidden();
+        }
+        if(!activity.getUser().equals(user)) {
+            return forbidden();
+        }
+
+        if(activity.hasPicture()) {
+            Picture picture = activity.getPicture();
+            activity.setPicture(null);
+            picture.setDiaryActivity(null);
+            picture.setUser(null);
+
+            picture.update();
+            activity.update();
+            picture.delete();
+        }
+
+        return redirect(routes.Diary.updateActivityPage(id));
+    }
+
+    public static Result unlinkPictureFromActivity(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.DELETEACTIVITY);
+
+        //Check if user has access to view this activity
+        User user = User.byEmail(email);
+        DiaryActivity activity = DiaryActivity.byID(id);
+        if(activity == null){
+            return forbidden();
+        }
+        if(!activity.getUser().equals(user)) {
+            return forbidden();
+        }
+
+        if(activity.hasPicture()) {
+            Picture picture = activity.getPicture();
+            activity.setPicture(null);
+            picture.setDiaryActivity(null);
+            picture.update();
+            activity.update();
+        }
+
+        return redirect(routes.Diary.updateActivityPage(id));
     }
 }

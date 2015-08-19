@@ -26,6 +26,10 @@ POST    /mypal/addpicture                   controllers.Diary.addPicture()
 GET     /mypal/activity/list                controllers.Diary.getActivities()
 GET     /mypal/activity/view/:id            controllers.Diary.viewActivity(id:Integer)
 GET     /mypal/activity/delete/:id          controllers.Diary.deleteActivity(id:Integer)
+GET     /mypal/activity/update/:id          controllers.Diary.updateActivityPage(id:Integer)
+POST    /mypal/activity/update              controllers.Diary.updateActivity()
+GET     /mypal/activity/deletepicture/:id   controllers.Diary.deletePictureFromActivity(id:Integer)
+GET     /mypal/activity/unlinkpicture/:id   controllers.Diary.unlinkPictureFromActivity(id:Integer)
 
 ## ADMIN ##
 GET     /admin                          controllers.Admin.admin()

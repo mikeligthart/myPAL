@@ -1,0 +1,26 @@
+@(userType: UserType, activityForm: Form[models.diary.DiaryActivity], activity: views.interfaces.DiaryActivityToHTML)
+
+@import fieldsets._
+@import play.api.i18n._
+
+@diary_no_avatar(Messages("page.diary.base.calendar"), "calendar", userType) {
+
+<div class="text-left">
+    <h3>@Messages("page.diary.calendar.updateactivity")</h3>
+
+    @if(activityForm.hasGlobalErrors) {
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">@Messages("page.general.error")</span>
+        @activityForm.globalError.message
+    </div>
+    }
+
+    @helper.form(action = routes.Diary.updateActivity(), 'class -> "", 'enctype -> "multipart/form-data") {
+    @diary_update_diaryActivity_fieldset(activityForm, activity)
+    }
+</div>
+
+<script src='@routes.Assets.at("javascripts/timepicker/jquery.timepicker.min.js")' type="text/javascript"></script>
+<script src='@routes.Assets.at("javascripts/timepicker/add_calendarItem_timepicker.js")' type="text/javascript"></script>
+}

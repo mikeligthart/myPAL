@@ -62,6 +62,10 @@ page.diary.calendar.picture=Picture
 page.diary.calendar.emotion.HAPPY=Happy
 page.diary.calendar.emotion.NEUTRAL=All right
 page.diary.calendar.emotion.SAD=Sad
+page.diary.calendar.updateactivity=Update activity
+page.diary.calendar.notupdateactivity=Cancel
+page.diary.calendar.picture.unlink=Unlink picture
+page.diary.calendar.picture.delete=Delete picture
 
 # Gallery #
 page.diary.gallery.addpicture=Add picture

@@ -22,6 +22,7 @@ public class DiaryActivityToHTML {
     private int id;
     private int startHour, startMin, endHour, endMin;
     private String type, description, emotion, date, emotionPicture, picture, color, viewURL, startTime, endTime;
+    private boolean hasPicture;
 
     private static SimpleDateFormat formatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
 
@@ -41,6 +42,7 @@ public class DiaryActivityToHTML {
         this.viewURL = routes.Diary.viewActivity(diaryActivity.getId()).url();
         this.startTime = diaryActivity.getStarttime().toString();
         this.endTime = diaryActivity.getEndtime().toString();
+        this.hasPicture = diaryActivity.hasPicture();
     }
 
     public static List<DiaryActivityToHTML> fromListToList(List<DiaryActivity> activities){
@@ -193,6 +195,14 @@ public class DiaryActivityToHTML {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public boolean hasPicture() {
+        return hasPicture;
+    }
+
+    public void setHasPicture(boolean hasPicture) {
+        this.hasPicture = hasPicture;
     }
 
     private String retrievePictureURL(Picture picture){

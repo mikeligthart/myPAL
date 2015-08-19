@@ -62,6 +62,10 @@ page.diary.calendar.picture=Foto
 page.diary.calendar.emotion.HAPPY=Blij
 page.diary.calendar.emotion.NEUTRAL=Oke
 page.diary.calendar.emotion.SAD=Verdrietig
+page.diary.calendar.updateactivity=Activiteit bijwerken
+page.diary.calendar.notupdateactivity=Niet bijwerken
+page.diary.calendar.picture.unlink=Ontkoppel foto
+page.diary.calendar.picture.delete=Verwijder foto
 
 # Gallery #
 page.diary.gallery.addpicture=Foto toevoegen

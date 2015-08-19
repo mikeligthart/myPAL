@@ -156,6 +156,10 @@ public class Admin extends Controller {
         }
 
         User deleteThisUser = User.byEmail(email);
+        if (user.equals(deleteThisUser)){
+            return forbidden();
+        }
+
         if (deleteThisUser != null) {
             deleteThisUser.delete();
             return ok();

@@ -16,7 +16,7 @@ var table = $('#admin_users').DataTable( {
         {
             "data": null,
             "orderable":      false,
-            "defaultContent":  '<button id="viewButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button> <button id="removeButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button> <button id="editButton" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'
+            "defaultContent":  '<button type="button" class="btn btn-default viewButton" aria-label="Left Align"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button> <button type="button" class="btn btn-default removeButton" aria-label="Left Align" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button> <button type="button" class="btn btn-default editButton" aria-label="Left Align"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'
         }
     ],
     "order": [[ 0, "desc" ]],
@@ -25,15 +25,16 @@ var table = $('#admin_users').DataTable( {
     }
 } );
 
-$('#admin_users tbody').on( 'click', '#removeButton', function () {
+$('#admin_users tbody').on( 'click', '.removeButton', function () {
     deleteUser(table.row($(this).closest('tr')).data().email);
     table.row($(this).closest('tr')).remove().draw( false );
 } );
 
-$('#admin_users tbody').on( 'click', '#editButton', function () {
+$('#admin_users tbody').on( 'click', '.editButton', function () {
     window.location.href = "users/update/" + table.row($(this).closest('tr')).data().email;
 } );
 
-$('#admin_users tbody').on( 'click', '#viewButton', function () {
+$('#admin_users tbody').on( 'click', '.viewButton', function () {
     window.location.href = "users/view/" + table.row($(this).closest('tr')).data().email;
 } );
+

@@ -20,6 +20,11 @@ model.user.userType.ADMIN=Admin
 page.general.error=Fout:
 page.general.navgation=Schakel tussen navigatie
 page.general.brand=MyPAL
+page.general.areyousure=Weet je het zeker?
+page.general.areyousuredirect=Dit gebeurt direct. Weet je het zeker?
+page.general.yes=Ja
+page.general.no=Nee
+page.general.isrequired=is verplicht
 
 ## Control Flow ##
 # Login #
@@ -66,11 +71,19 @@ page.diary.calendar.updateactivity=Activiteit bijwerken
 page.diary.calendar.notupdateactivity=Niet bijwerken
 page.diary.calendar.picture.unlink=Ontkoppel foto
 page.diary.calendar.picture.delete=Verwijder foto
+page.diary.calendar.noactivities=Voeg een activiteit of meeting toe
+page.diary.calendar.notaddactivity=Terug
+page.diary.calendar.addfromgallery=voeg toe uit gallerij
+page.diary.calendar.or=Of
+
 
 # Gallery #
-page.diary.gallery.addpicture=Foto toevoegen
+page.diary.gallery.addpicture=Foto uploaden
+page.diary.gallery.donotaddpicture=Toch geen foto toevoegen
 page.diary.gallery.nocontent=Op dit moment zijn er geen foto's opgeslagen
 page.diary.gallery.unlinkedpicture=Ongekoppelde foto
+page.diary.gallery.selectapicture=Selecteer een foto voor de activiteit of upload een nieuwe foto
+page.diary.gallery.addthispicture=Koppel deze foto aan de activiteit
 
 
 ## Admin ##
@@ -118,4 +131,6 @@ error.required=Dit veld is verplicht
 error.fileIsNotSupported=Oeps! Het toegevoegde bestand wordt niet ondersteund. Probeer een plaatje dat eindigd op: jpg, png, bmp and gif
 error.pictureCannotBeStored=Oeps! Helaas kan je plaatje niet worden opgeslagen. Voeg de activiteit toe zonder een plaatje.
 error.pleaseAddFile=Voeg een foto toe.
+error.activityNotFound=De activiteit is helaas niet goed opgeslagen. Probeer dat eerst opnieuw toe te voegen.
+error.hasAlreadyPicture=Deze activiteit heeft al een foto. Je kunt dat veranderen door de activiteit zelf aan te passen.
 

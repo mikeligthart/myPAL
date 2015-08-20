@@ -65,7 +65,7 @@ public class Admin extends Controller {
         Form<User.UserMutable> userForm = form(User.UserMutable.class);
         if (updateThisUser != null) {
             userForm = userForm.fill(updateThisUser.getMutables());
-            return ok(admin_user_update.render(email, userForm));
+            return ok(admin_user_update.render(email, userForm, user.equals(updateThisUser)));
         } else {
             return forbidden();
         }
@@ -133,10 +133,10 @@ public class Admin extends Controller {
         }
 
         Form<User.UserMutable> userForm = form(User.UserMutable.class).bindFromRequest();
+        User updateUser = User.byEmail(email);
         if (userForm.hasErrors()) {
-            return badRequest(admin_user_update.render(email, userForm));
+            return badRequest(admin_user_update.render(email, userForm, user.equals(updateUser)));
         } else {
-            User updateUser = User.byEmail(email);
             User updatedUser = new User(updateUser);
             updateUser.delete();
             updatedUser.updateFromMutables(userForm.get());

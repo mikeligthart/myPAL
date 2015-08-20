@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
 import models.diary.*;
 import models.logging.LogAction;
-import play.Logger;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Http;
@@ -20,7 +20,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static play.data.Form.form;
-import static play.libs.Json.stringify;
 import static play.libs.Json.toJson;
 
 /**
@@ -169,6 +168,46 @@ public class Diary extends Controller {
         return ok(diary_update_diaryActivity.render(user.getUserType(), activityForm, new DiaryActivityToHTML(activity)));
     }
 
+    public static Result selectFromGalleryPage(int id){
+        return selectFromGalleryPage(id, "");
+    }
+
+    private static Result selectFromGalleryPage(int id, String error){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user activity
+        LogAction.log(email, LogActionType.SELECTPICTUREFROMGALLRERYPAGE);
+
+        User user = User.byEmail(email);
+        List<Picture> pictures = Picture.byUserOnlyUnlinked(user, PictureSort.DATEASC);
+
+        if(error.isEmpty()){
+            return ok(diary_gallery_select_picture.render(user.getUserType(), pictures,"", id));
+        } else {
+            return ok(diary_gallery_select_picture.render(user.getUserType(), pictures, error, id));
+        }
+
+    }
+
+    public static Result addPictureDirectlyPage(int id){
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user activity
+        LogAction.log(email, LogActionType.ACCESSADDPICTUREDIRECTLYPAGE);
+
+        return ok(diary_add_picture_page_direct.render(id));
+    }
+
+
+
     /* FUNCTIONALITIES */
 
     public static Result calendarUpdate(String update){
@@ -231,6 +270,8 @@ public class Diary extends Controller {
         Form<DiaryActivity> diaryActivityForm = form(DiaryActivity.class).bindFromRequest();
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart filePart = body.getFile("picture_file");
+        DynamicForm requestData = form().bindFromRequest();
+        boolean addFromGallery = requestData.get("isaddfromgallery").equalsIgnoreCase("true");
 
         if (diaryActivityForm.hasErrors()) {
             return badRequest(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
@@ -240,24 +281,30 @@ public class Diary extends Controller {
             //Link the activity to a user
             newDiaryActivity.setUser(User.byEmail(email));
 
-            //If a file is added
-            if (filePart != null) {
-                //Retrieve, move and store image file to disk and save picture object
-                PictureFactory pictureFactory = new PictureFactory();
-                Picture picture = pictureFactory.processUploadedFile(filePart, newDiaryActivity);
-                if (picture != null) {
-                    newDiaryActivity.save();
-                    picture.save();
-                    newDiaryActivity.setPicture(picture);
-                    newDiaryActivity.update();
-                    return redirect(routes.Diary.calendar());
-                } else {
-                    diaryActivityForm.reject(pictureFactory.getLatestError());
-                    return badRequest(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
-                }
-            } else {
+            // if the user wants to add a picture from gallery
+            if(addFromGallery){
                 newDiaryActivity.save();
-                return redirect(routes.Diary.calendar());
+                return redirect(routes.Diary.selectFromGalleryPage(newDiaryActivity.getId()));
+            } else {
+                //If a file is added
+                if (filePart != null) {
+                    //Retrieve, move and store image file to disk and save picture object
+                    PictureFactory pictureFactory = new PictureFactory();
+                    Picture picture = pictureFactory.processUploadedFile(filePart, newDiaryActivity);
+                    if (picture != null) {
+                        newDiaryActivity.save();
+                        picture.save();
+                        newDiaryActivity.setPicture(picture);
+                        newDiaryActivity.update();
+                        return redirect(routes.Diary.calendar());
+                    } else {
+                        diaryActivityForm.reject(pictureFactory.getLatestError());
+                        return badRequest(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+                    }
+                } else {
+                    newDiaryActivity.save();
+                    return redirect(routes.Diary.calendar());
+                }
             }
         }
     }
@@ -288,6 +335,51 @@ public class Diary extends Controller {
             }
         } else {
             return gallery(Messages.get("error.pleaseAddFile"));
+        }
+    }
+
+    public static Result addPictureDirectly(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Log user activity
+        LogAction.log(email, LogActionType.ADDEDPICTUREDIRECTLY);
+
+        DiaryActivity diaryActivity = DiaryActivity.byID(id);
+        if (diaryActivity == null){
+            return selectFromGalleryPage(id, Messages.get("error.activityNotFound"));
+        }
+
+        //Check if user has access to manipulate this activity
+        User user = User.byEmail(email);
+        if(!diaryActivity.getUser().equals(user)) {
+            return forbidden();
+        }
+        if (diaryActivity.hasPicture()){
+            return selectFromGalleryPage(id, Messages.get("error.hasAlreadyPicture"));
+        }
+
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart filePart = body.getFile("picture_file");
+
+        //If a file is added
+        if (filePart != null) {
+            //Retrieve, move and store image file to disk and save picture object and link it to DiaryActivity
+            PictureFactory pictureFactory = new PictureFactory();
+            Picture picture = pictureFactory.processUploadedFile(filePart, diaryActivity);
+            if (picture != null) {
+                picture.save();
+                diaryActivity.setPicture(picture);
+                diaryActivity.update();
+                return redirect(routes.Diary.viewActivity(id));
+            } else {
+                return selectFromGalleryPage(id, pictureFactory.getLatestError());
+            }
+        } else {
+            return selectFromGalleryPage(id, Messages.get("error.pleaseAddFile"));
         }
     }
 
@@ -464,6 +556,37 @@ public class Diary extends Controller {
         }
 
         return redirect(routes.Diary.updateActivityPage(id));
+    }
+
+    public static Result linkPictureToActivity(int activityID, int pictureID){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        //Check permissions
+        User user = User.byEmail(email);
+        DiaryActivity activity = DiaryActivity.byID(activityID);
+        Picture picture = Picture.byID(pictureID);
+        if (activity == null || picture == null){
+            return selectFromGalleryPage(activityID, Messages.get("error.activityNotFound"));
+        }
+        if (!user.equals(activity.getUser()) || !user.equals(picture.getUser())){
+            return forbidden();
+        }
+        if(activity.hasPicture()){
+            return selectFromGalleryPage(activityID, Messages.get("error.hasAlreadyPicture"));
+        }
+
+        picture.setDiaryActivity(activity);
+        picture.update();
+        activity.setPicture(picture);
+        activity.update();
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.LINKPICTURETOACTIVITY);
+        return redirect(routes.Diary.viewActivity(activityID));
     }
 
     public static Result deletePictureFromGallery(int id){

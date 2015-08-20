@@ -1,5 +1,7 @@
 package models.diary;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import play.Logger;
 import play.i18n.Messages;
 
 /**
@@ -23,6 +25,7 @@ public enum DiaryActivityType {
     }
 
     public static DiaryActivityType fromString(String type){
+        Logger.debug("[DiaryActivityType > fromString] input = " + type);
         if(type.equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.SCHOOL"))){
             return DiaryActivityType.SCHOOL;
         } else if(type.equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.MEAL"))){
@@ -30,7 +33,7 @@ public enum DiaryActivityType {
         } else if(type.equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.SPORT"))){
             return DiaryActivityType.SPORT;
         } else{
-            return DiaryActivityType.OTHER;
+            return null;
         }
     }
 }

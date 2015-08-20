@@ -20,6 +20,11 @@ model.user.userType.ADMIN=Admin
 page.general.error=Error:
 page.general.navgation=Toggle navigation
 page.general.brand=MyPAL
+page.general.areyousure=Are you sure?
+page.general.areyousuredirect=This will go in effect immediately. Are you sure?
+page.general.yes=Yes
+page.general.no=No
+page.general.isrequired=is required
 
 ## Control Flow ##
 # Login #
@@ -66,11 +71,19 @@ page.diary.calendar.updateactivity=Update activity
 page.diary.calendar.notupdateactivity=Cancel
 page.diary.calendar.picture.unlink=Unlink picture
 page.diary.calendar.picture.delete=Delete picture
+page.diary.calendar.noactivities=Add an activity or measurement
+page.diary.calendar.notaddactivity=Cancel
+page.diary.calendar.addfromgallery=add from gallery
+page.diary.calendar.or=Or
 
 # Gallery #
-page.diary.gallery.addpicture=Add picture
+page.diary.gallery.addpicture=Upload picture
+page.diary.gallery.donotaddpicture=Add no picture
 page.diary.gallery.nocontent=There are not pictures present at the moment
 page.diary.gallery.unlinkedpicture=Unlinked picture
+page.diary.gallery.selectapicture=Select a picture for your activity or add a new picture
+page.diary.gallery.addthispicture=Link this picture to the activity
+
 
 ## Admin ##
 # Base #
@@ -120,3 +133,5 @@ error.required=This is a required field
 error.fileIsNotSupported=Whoops! This file is not a supported image. The following files are allowed: jpg, png, bmp and gif
 error.pictureCannotBeStored=Whoops! Unfortunately your image could not be stored. Please try to add the activity without an image.
 error.pleaseAddFile=Please add a file
+error.activityNotFound=The activity was not stored properly. Please try to add that again first.
+error.hasAlreadyPicture=The activity already has a picture. You can change that by updating the original activity.

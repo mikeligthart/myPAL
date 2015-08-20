@@ -3,30 +3,35 @@
 @import play.api.i18n._
 
 <fieldset>
-    @diary_select_activityType(activityForm("type"), label = Messages("page.diary.calendar.activitytype"), placeholder = Messages("page.diary.calendar.activitytype"), preselected = activityForm("type").value.toString)
-    @diary_date(activityForm("date"), Messages("page.diary.calendar.date"), Messages("page.diary.calendar.date"))
+    @diary_select_activityType(activityForm("type"), label = Messages("page.diary.calendar.activitytype") + "*", placeholder = Messages("page.diary.calendar.activitytype"))
+    @diary_date(activityForm("date"), Messages("page.diary.calendar.date") + "*", Messages("page.diary.calendar.date"))
     @diary_time(activityForm("starttime"), activityForm("endtime"))
-    @diary_description(activityForm("description"), label = Messages("page.diary.calendar.description"), placeholder = Messages("page.diary.calendar.description"))
-    @diary_select_emotion(activityForm("emotion"), label = Messages("page.diary.calendar.emotion"), placeholder = Messages("page.diary.calendar.emotion"))
+    @diary_description(activityForm("description"), label = Messages("page.diary.calendar.description") + "*", placeholder = Messages("page.diary.calendar.description"))
+    @diary_select_emotion(activityForm("emotion"), label = Messages("page.diary.calendar.emotion") + "*", placeholder = Messages("page.diary.calendar.emotion"))
     @if(!activity.hasPicture){
-        @diary_add_picture(Messages("page.diary.calendar.picture"), Messages("page.diary.calendar.picture"))
+        @diary_add_picture(Messages("page.diary.calendar.picture"), Messages("page.diary.calendar.picture"), (activityForm("description").hasErrors || activityForm("date").hasErrors || activityForm("emotion").hasErrors || activityForm("starttime").hasErrors || activityForm("endtime").hasErrors))
     }else{
         <div class="form-group">
             <label class="col-sm-2 control-label" >@Messages("page.diary.calendar.picture")</label>
             <div class="col-sm-4 text-left"><img class='img-responsive' src='@activity.getPicture' alt=''></div>
             <div class="text-left col-md-6">
-                <a href='@routes.Diary.deletePictureFromActivity(activity.getId)' class='btn btn-default btn-picture-mypal' aria-label='Left Align'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> @Messages("page.diary.calendar.picture.delete")</a>
+                <a class='btn btn-default btn-picture-mypal' aria-label='Left Align' data-toggle="confirmation" data-title='@Messages("page.general.areyousuredirect")' data-href='@routes.Diary.deletePictureFromActivity(activity.getId)' data-btnOkLabel='@Messages("page.general.yes")' data-btnCancelLabel='@Messages("page.general.no")' data-btnOkClass="btn btn-sm btn-primary" data-placement="top"><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> @Messages("page.diary.calendar.picture.delete")</a>
                 <br />
-                <a href='@routes.Diary.unlinkPictureFromActivity(activity.getId)' class='btn btn-default btn-picture-mypal' aria-label='Left Align'><span class='glyphicon glyphicon-export' aria-hidden='true'></span> @Messages("page.diary.calendar.picture.unlink")</a>
+                <a class='btn btn-default btn-picture-mypal' aria-label='Left Align' data-toggle="confirmation" data-title='@Messages("page.general.areyousuredirect")' data-href='@routes.Diary.unlinkPictureFromActivity(activity.getId)' data-btnOkLabel='@Messages("page.general.yes")' data-btnCancelLabel='@Messages("page.general.no")' data-btnOkClass="btn btn-sm btn-primary" data-placement="bottom"><span class='glyphicon glyphicon-export' aria-hidden='true'></span> @Messages("page.diary.calendar.picture.unlink")</a>
             </div>
         </div>
     }
 
     <div class="form-group">
         <br />
-        <div class="col-sm-offset-2 col-sm-10 text-right">
+        <div class="col-sm-offset-2 col-sm-2 small text-left">* @Messages("page.general.isrequired")</div>
+        <div class=" col-sm-8 text-right">
             <a href="@routes.Diary.viewActivity(activity.getId)" class="btn btn-default">@Messages("page.diary.calendar.notupdateactivity")</a>
             <button type="submit" class="btn btn-default">@Messages("page.diary.calendar.updateactivity")</button>
         </div>
     </div>
 </fieldset>
+
+<script>
+    $('[data-toggle="confirmation"]').confirmation();
+</script>

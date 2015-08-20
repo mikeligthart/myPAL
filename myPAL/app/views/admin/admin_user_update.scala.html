@@ -1,4 +1,4 @@
-@(emailValue: String, userForm: Form[User.UserMutable])
+@(emailValue: String, userForm: Form[User.UserMutable], isAdminSelf: Boolean)
 
 @import fieldsets._
 @import play.api.i18n._
@@ -16,6 +16,6 @@
 
 
     @helper.form(action = routes.Admin.updateUser(emailValue), 'class -> "form-horizontal") {
-    @admin_user_update_fieldset(emailValue, userForm)
+    @admin_user_update_fieldset(emailValue, userForm, isAdminSelf)
     }
 }

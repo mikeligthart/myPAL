@@ -1,4 +1,4 @@
-@(email: String, userForm: Form[User.UserMutable])
+@(email: String, userForm: Form[User.UserMutable], isAdminSelf: Boolean)
 
 @import play.api.i18n._
 
@@ -16,7 +16,7 @@
     @text(userForm("firstName"), label = Messages("model.user.firstName"), placeholder = Messages("model.user.firstName"))
     @text(userForm("lastName"), label = Messages("model.user.lastName"), placeholder = Messages("model.user.lastName"))
     @date(userForm("birthdate"), label = Messages("model.user.birthdate"), placeholder = Messages("model.user.birthdate"))
-    @select(userForm("userType"), label = Messages("model.user.userType"), placeholder = Messages("model.user.userType"), preselected=userForm("userType").value.toString)
+    @select(userForm("userType"), label = Messages("model.user.userType"), placeholder = Messages("model.user.userType"), preselected=userForm("userType").value.toString, disabled = isAdminSelf)
     <div class="form-group">
         <br />
         <div class="col-sm-offset-2 col-sm-10">

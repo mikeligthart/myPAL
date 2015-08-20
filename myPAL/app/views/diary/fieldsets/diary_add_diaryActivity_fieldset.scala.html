@@ -3,17 +3,27 @@
 @import play.api.i18n._
 
 <fieldset>
-    @diary_select_activityType(activityForm("type"), label = Messages("page.diary.calendar.activitytype"), placeholder = Messages("page.diary.calendar.activitytype"))
-    @diary_date(activityForm("date"), Messages("page.diary.calendar.date"), Messages("page.diary.calendar.date"), currentDate)
+    @diary_select_activityType(activityForm("type"), label = Messages("page.diary.calendar.activitytype") + "*", placeholder = Messages("page.diary.calendar.activitytype"))
+    @diary_date(activityForm("date"), Messages("page.diary.calendar.date") + "*", Messages("page.diary.calendar.date"), currentDate)
     @diary_time(activityForm("starttime"), activityForm("endtime"))
-    @diary_description(activityForm("description"), label = Messages("page.diary.calendar.description"), placeholder = Messages("page.diary.calendar.description"))
-    @diary_select_emotion(activityForm("emotion"), label = Messages("page.diary.calendar.emotion"), placeholder = Messages("page.diary.calendar.emotion"))
-    @diary_add_picture(Messages("page.diary.calendar.picture"), Messages("page.diary.calendar.picture"))
+    @diary_description(activityForm("description"), label = Messages("page.diary.calendar.description") + "*", placeholder = Messages("page.diary.calendar.description"))
+    @diary_select_emotion(activityForm("emotion"), label = Messages("page.diary.calendar.emotion") + "*", placeholder = Messages("page.diary.calendar.emotion"))
+    @diary_add_picture(Messages("page.diary.calendar.picture"), Messages("page.diary.calendar.picture"), (activityForm("description").hasErrors || activityForm("date").hasErrors || activityForm("emotion").hasErrors || activityForm("starttime").hasErrors || activityForm("endtime").hasErrors))
 
     <div class="form-group">
         <br />
-        <div class="col-sm-offset-2 col-sm-10 text-right">
-            <button type="submit" class="btn btn-default">@Messages("page.diary.calendar.addactivity")</button>
+        <div class="col-sm-offset-2 col-sm-2 small text-left">* @Messages("page.general.isrequired")</div>
+        <div class=" col-sm-8 text-right">
+            <a href="@routes.Diary.calendar()" class="btn btn-default">@Messages("page.diary.calendar.notaddactivity")</a>
+            <button type="submit" id="donotaddfromgallery" class="btn btn-default">@Messages("page.diary.calendar.addactivity")</button>
         </div>
     </div>
 </fieldset>
+
+<script>
+    $("#donotaddfromgallery").on('click', function(e) {
+        e.preventDefault()
+        document.getElementById("isaddfromgallery").value = "false";
+        this.form.submit();
+    });
+</script>

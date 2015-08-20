@@ -131,6 +131,21 @@ public class Picture extends Model {
 
     }
 
+    public static List<Picture> byUserOnlyUnlinked(User user, PictureSort sort){
+        switch(sort){
+            case DATEASC:
+                return find.where().eq("user", user).eq("diary_activity_id", null).setOrderBy("date asc").findList();
+            case DATEDESC:
+                return find.where().eq("user", user).eq("diary_activity_id", null).setOrderBy("date desc").findList();
+            case USERASC:
+                return find.where().eq("user", user).eq("diary_activity_id", null).setOrderBy("user asc").findList();
+            case USERDESC:
+                return find.where().eq("user", user).eq("diary_activity_id", null).setOrderBy("date desc").findList();
+            default:
+                return find.where().eq("user", user).eq("diary_activity_id", null).findList();
+        }
+    }
+
     public static Picture byID(int id){
         return find.byId(id);
     }

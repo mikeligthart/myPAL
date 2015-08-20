@@ -16,12 +16,12 @@ import java.util.List;
 public class DiaryActivity extends DiaryItem {
 
     @Enumerated(EnumType.STRING)
-    @Constraints.Required
+    @Constraints.Required(message = " ")
     private DiaryActivityType type;
 
     @Constraints.MaxLength(1200)
     @Column(length = 1200)
-    @Constraints.Required(message = "Dit moet ook nog ingevuld worden")
+    @Constraints.Required(message = " ")
     private String description;
 
     @OneToOne(cascade = CascadeType.ALL, optional = true)
@@ -29,7 +29,7 @@ public class DiaryActivity extends DiaryItem {
 
     @OneToOne
     @Enumerated(EnumType.STRING)
-    @Constraints.Required
+    @Constraints.Required(message = " ")
     private Emotion emotion;
 
     public DiaryActivity(){

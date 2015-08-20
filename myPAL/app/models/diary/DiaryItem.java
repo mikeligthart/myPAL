@@ -22,15 +22,15 @@ public abstract class DiaryItem extends Model {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
-    @Constraints.Required
+    @Constraints.Required(message = " ")
     @Formats.DateTime(pattern="dd/MM/yyyy")
     private Date date;
 
-    @Constraints.Required
+    @Constraints.Required(message = " ")
     @Formats.DateTime(pattern = "HH:mm")
     private Time starttime;
 
-    @Constraints.Required
+    @Constraints.Required(message = " ")
     @Formats.DateTime(pattern = "HH:mm")
     private Time endtime;
 

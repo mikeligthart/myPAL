@@ -29,7 +29,7 @@
                 <div class="row">
             }
                     <div class="col-md-3 portfolio-item">
-                        <div class="text-right"><a href='@routes.Diary.deletePictureFromGallery(picture.getId)' class='btn btn-default' aria-label='Left Align'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></div>
+                        <div class="text-right"><a class='btn btn-default' aria-label='Left Align' data-toggle="confirmation" data-title='@Messages("page.general.areyousure")' data-href='@routes.Diary.deletePictureFromGallery(picture.getId)' data-btnOkLabel='@Messages("page.general.yes")' data-btnCancelLabel='@Messages("page.general.no")' data-btnOkClass="btn btn-sm btn-primary" data-placement="top"><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></div>
                         <a href="@routes.Application.getPicture(picture.getName)" data-toggle="lightbox" data-gallery="multiimages" data-title='@(index+1) - @if(picture.getDiaryActivity != null){@picture.getDiaryActivity.getType.toString}else{@Messages("page.diary.gallery.unlinkedpicture")}'>
                             <img class="img-responsive" src="@routes.Application.getPicture(picture.getThumbnail)" alt="">
                         </a>
@@ -54,6 +54,8 @@
         event.preventDefault();
         $(this).ekkoLightbox();
     });
+
+    $('[data-toggle="confirmation"]').confirmation();
 </script>
 
 }

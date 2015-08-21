@@ -101,3 +101,6 @@ New client attempting to connect on port: 49761-49630
 This client on port 49761 has uuid 1a60e60b-8331-43ee-a7c6-536bd03827e9 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
 Connected Clients: activator-fd528230-9847-44f5-8692-7be2f8db03ce, play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9
 Taking next connection to: 49630
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 49630

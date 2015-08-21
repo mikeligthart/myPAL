@@ -725,3 +725,34 @@ Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: Execut
 Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: DetachedLogEvent(LogMessage(debug,> server-handle-next-server-request))
 Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: BackgroundJobLogEvent(3,LogMessage(info,play - database [default] connected at jdbc:h2:databases/myPAL))
 Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: BackgroundJobLogEvent(3,LogMessage(info,play - Application started (Dev)))
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: ExecutionWaiting(23,jobStop 3,ClientInfo(fd528230-9847-44f5-8692-7be2f8db03ce,activator,Activator,3,Vector()))
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: ExecutionStarting(23)
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: DetachedLogEvent(LogMessage(debug,> jobStop 3))
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: DetachedLogEvent(LogMessage(debug,Evaluating tasks: *:jobStop))
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: DetachedLogEvent(LogMessage(debug,Running task... Cancel: sbt.server.ServerTaskCancellation@371c781c, check cycles: false))
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: DetachedLogEvent(LogMessage(debug,cancel strategy start enabled=true lastCommand=Some(LastCommand(CommandExecutionWork(ExecutionId(23),jobStop 3,Set(LiveClient(activator fd528230-9847-44f5-8692-7be2f8db03ce)),sbt.server.WorkCancellationStatus$$anon$1@5dfbd26a)))))
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: TaskStarted(23,2137,Some(AttributeKey[void]("jobStop") in Scope(Global)))
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: TaskFinished(23,2137,Some(AttributeKey[void]("jobStop") in Scope(Global)),true,None)
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: TaskStarted(23,2136,None)
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: TaskFinished(23,2136,None,true,None)
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: TaskStarted(23,2135,None)
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: BackgroundJobLogEvent(3,LogMessage(info,Stopping Play fork run ...))
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: TaskFinished(23,2135,None,true,None)
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: DetachedLogEvent(LogMessage(debug,cancel strategy finish enabled=false lastCommand=Some(LastCommand(CommandExecutionWork(ExecutionId(23),jobStop 3,Set(LiveClient(activator fd528230-9847-44f5-8692-7be2f8db03ce)),sbt.server.WorkCancellationStatus$$anon$1@5dfbd26a)))))
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: DetachedLogEvent(LogSuccess(Total time: 0 s, completed 21-aug-2015 14:26:40))
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: DetachedLogEvent(LogMessage(debug,> server-post-command-cleanup))
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: ExecutionSuccess(23)
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: DetachedLogEvent(LogMessage(debug,> server-handle-next-server-request))
+Got request: UnlistenToEvents()
+Reading next message from client.
+Sending msg to client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9: (12,ReceivedResponse())
+Got request: UnlistenToValue(AttributeKey[play.forkrun.protocol.ForkConfig]("playForkConfig") in Scope(Build: file:/C:/Users/Mike/Documents/GitHub/myPAL/myPAL/, , Project: ProjectReference(file:/C:/Users/Mike/Documents/GitHub/myPAL/myPAL/,root)))
+Reading next message from client.
+Got request: UnlistenToValue(AttributeKey[play.runsupport.Reloader$CompileResult]("playForkReload") in Scope(Build: file:/C:/Users/Mike/Documents/GitHub/myPAL/myPAL/, , Project: ProjectReference(file:/C:/Users/Mike/Documents/GitHub/myPAL/myPAL/,root)))
+Reading next message from client.
+Client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9 EOF, shutting down.
+Stopping client.
+Client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9 thread exiting.
+Dropping message (13,ReceivedResponse()) to dead client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9
+Dropping message (14,ReceivedResponse()) to dead client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9
+Dropping message (0,ReceivedResponse()) to dead client play-fork-run-1a60e60b-8331-43ee-a7c6-536bd03827e9

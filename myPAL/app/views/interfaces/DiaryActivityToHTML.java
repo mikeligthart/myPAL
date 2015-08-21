@@ -6,7 +6,6 @@ import models.diary.DiaryActivity;
 import models.diary.DiaryActivityType;
 import models.diary.Emotion;
 import models.diary.Picture;
-import play.Logger;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -16,7 +15,16 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by ligthartmeu on 17-7-2015.
+ * myPAL
+ * Purpose: Interface class between a DiaryActivity and data suitable for HTML
+ *
+ * Developped for TNO.
+ * Kampweg 5
+ * 3769 DE Soesterberg
+ * General telephone number: +31(0)88 866 15 00
+ *
+ * @author Mike Ligthart - mike.ligthart@gmail.com
+ * @version 1.0 17-7-2015
  */
 public class DiaryActivityToHTML {
 
@@ -25,7 +33,8 @@ public class DiaryActivityToHTML {
     private String type, description, emotion, date, emotionPicture, picture, color, viewURL, startTime, endTime;
     private boolean hasPicture;
 
-    private static SimpleDateFormat formatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
+    private static SimpleDateFormat dateFormatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
+    private static SimpleDateFormat timeFormatter = new SimpleDateFormat(ConfigFactory.load().getString("time.format"));
 
     public DiaryActivityToHTML(DiaryActivity diaryActivity){
         this.id = diaryActivity.getId();
@@ -37,12 +46,12 @@ public class DiaryActivityToHTML {
         this.description = diaryActivity.getDescription();
         this.emotion = diaryActivity.getEmotion().name();
         this.emotionPicture = emotionToPicture(diaryActivity.getEmotion());
-        this.date = formatter.format(diaryActivity.getDate());
+        this.date = dateFormatter.format(diaryActivity.getDate());
         this.picture = retrievePictureURL(diaryActivity.getPicture());
         this.color = diaryActivityTypeToColor(diaryActivity.getType());
         this.viewURL = routes.Diary.viewActivity(diaryActivity.getId()).url();
-        this.startTime = diaryActivity.getStarttime().toString();
-        this.endTime = diaryActivity.getEndtime().toString();
+        this.startTime = timeFormatter.format(diaryActivity.getStarttime());
+        this.endTime = timeFormatter.format(diaryActivity.getEndtime());
         this.hasPicture = diaryActivity.hasPicture();
     }
 
@@ -55,7 +64,7 @@ public class DiaryActivityToHTML {
     }
 
     public static String dateToFormattedString(Date date){
-        return formatter.format(date);
+        return dateFormatter.format(date);
     }
 
     public static String dateToDay(Date date){

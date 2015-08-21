@@ -23,11 +23,25 @@ import static play.data.Form.form;
 import static play.libs.Json.toJson;
 
 /**
- * Created by Mike on 29-7-2015.
+ * myPAL
+ * Purpose: handles all the controller functions for the diary actions and pages
+ *
+ * Developped for TNO.
+ * Kampweg 5
+ * 3769 DE Soesterberg
+ * General telephone number: +31(0)88 866 15 00
+ *
+ * @author Mike Ligthart - mike.ligthart@gmail.com
+ * @version 1.0 21-8-2015
  */
 public class Diary extends Controller {
 
     /* PAGES */
+
+    /**
+     *
+     * @return the main diary page
+     */
     public static Result diary(){
         //Check whether a user is logged in
         if(session().isEmpty() || session().get("email") == null){
@@ -43,14 +57,14 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
-        //Log user activity
-        LogAction.log(email, LogActionType.ACCESSCALENDAR);
-
         //Manage the right settings such as date for the calendar
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
 
         //Retrieve the number of activities
         List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
+
+        //Log user activity
+        LogAction.log(email, LogActionType.ACCESSCALENDAR);
 
         return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), diaryActivities.size()));
     }
@@ -60,6 +74,8 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
+
+        //Log user activity
         LogAction.log(email, LogActionType.ACCESSGOALS);
 
         return ok(diary_goals.render(User.byEmail(email).getUserType()));
@@ -75,12 +91,14 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        LogAction.log(email, LogActionType.ACCESSGALLERY);
-        User user = User.byEmail(email);
 
+        //Retrieve the pictures belonging to the user
+        User user = User.byEmail(email);
         List<Picture> pictures = Picture.byUser(user, PictureSort.DATEASC);
 
+        //If there is no error load the gallery else return badrequest
         if(error.isEmpty()) {
+            LogAction.log(email, LogActionType.ACCESSGALLERY);
             return ok(diary_gallery.render(user.getUserType(), pictures, ""));
         }
         else {
@@ -95,11 +113,12 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
+        //Generate addActivity page
+        Form<DiaryActivity> activityForm = form(DiaryActivity.class);
+
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSADDACTIVITYPAGE);
 
-        //Generate addActivity page
-        Form<DiaryActivity> activityForm = form(DiaryActivity.class);
         return ok(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
     }
 
@@ -123,9 +142,6 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
-        //Log user behavior
-        LogAction.log(email, LogActionType.VIEWACTIVITY);
-
         //Check if user has access to view this activity
         User user = User.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(id);
@@ -139,6 +155,9 @@ public class Diary extends Controller {
         //Manage the right settings such as date for the calendar
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
 
+        //Log user behavior
+        LogAction.log(email, LogActionType.VIEWACTIVITY);
+
         return ok(diary_calendar_view_activity.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity)));
     }
 
@@ -148,9 +167,6 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-
-        //Log user behavior
-        LogAction.log(email, LogActionType.VIEWACTIVITY);
 
         //Check if user has access to view this activity
         User user = User.byEmail(email);
@@ -164,6 +180,9 @@ public class Diary extends Controller {
 
         Form<DiaryActivity> activityForm = form(DiaryActivity.class);
         activityForm = activityForm.fill(activity);
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.VIEWACTIVITY);
 
         return ok(diary_update_diaryActivity.render(user.getUserType(), activityForm, new DiaryActivityToHTML(activity)));
     }
@@ -179,13 +198,13 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
-        //Log user activity
-        LogAction.log(email, LogActionType.SELECTPICTUREFROMGALLRERYPAGE);
-
         User user = User.byEmail(email);
         List<Picture> pictures = Picture.byUserOnlyUnlinked(user, PictureSort.DATEASC);
 
         if(error.isEmpty()){
+            //Log user activity
+            LogAction.log(email, LogActionType.SELECTPICTUREFROMGALLRERYPAGE);
+
             return ok(diary_gallery_select_picture.render(user.getUserType(), pictures,"", id));
         } else {
             return ok(diary_gallery_select_picture.render(user.getUserType(), pictures, error, id));
@@ -206,8 +225,6 @@ public class Diary extends Controller {
         return ok(diary_add_picture_page_direct.render(id));
     }
 
-
-
     /* FUNCTIONALITIES */
 
     public static Result calendarUpdate(String update){
@@ -217,14 +234,13 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
-        //Log user activity
-        LogAction.log(email, LogActionType.BUTTONPRESS);
-
         //Update calendar based on date change
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
         if(update.contentEquals("-")){
+            LogAction.log(email, LogActionType.UPDATECALENDARDOWN);
             diarySettings.dateMinusOne();
         } else if (update.contentEquals("+")){
+            LogAction.log(email, LogActionType.UPDATECALENDARUP);
             diarySettings.datePlusOne();
         } else {
             return forbidden();
@@ -232,6 +248,7 @@ public class Diary extends Controller {
 
         //Retrieve the number of activities
         List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
+
 
         return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), diaryActivities.size()));
     }
@@ -243,15 +260,15 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
-        //Log user activity
-        LogAction.log(email, LogActionType.BUTTONPRESS);
-
         //Update calendar based on date change
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
         diarySettings.dateUpdate(day, month, year);
 
         //Retrieve the number of activities
         List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
+
+        //Log user activity
+        LogAction.log(email, LogActionType.UPDATECALENDARDIRECTLY);
 
         return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), diaryActivities.size()));
     }
@@ -262,9 +279,6 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-
-        //Log user activity
-        LogAction.log(email, LogActionType.ADDEDACTIVITY);
 
         //Retrieve data from input elements on webpage
         Form<DiaryActivity> diaryActivityForm = form(DiaryActivity.class).bindFromRequest();
@@ -296,6 +310,7 @@ public class Diary extends Controller {
                         picture.save();
                         newDiaryActivity.setPicture(picture);
                         newDiaryActivity.update();
+                        LogAction.log(email, LogActionType.ADDEDACTIVITY);
                         return redirect(routes.Diary.calendar());
                     } else {
                         diaryActivityForm.reject(pictureFactory.getLatestError());
@@ -303,6 +318,7 @@ public class Diary extends Controller {
                     }
                 } else {
                     newDiaryActivity.save();
+                    LogAction.log(email, LogActionType.ADDEDACTIVITY);
                     return redirect(routes.Diary.calendar());
                 }
             }
@@ -316,9 +332,6 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
-        //Log user activity
-        LogAction.log(email, LogActionType.ADDEDPICTURE);
-
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart filePart = body.getFile("picture_file");
 
@@ -329,6 +342,7 @@ public class Diary extends Controller {
             Picture picture = pictureFactory.processUploadedFile(filePart, User.byEmail(email), Date.valueOf(LocalDate.now()));
             if (picture != null) {
                 picture.save();
+                LogAction.log(email, LogActionType.ADDEDPICTURE);
                 return gallery();
             } else {
                 return gallery(pictureFactory.getLatestError());
@@ -344,9 +358,6 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-
-        //Log user activity
-        LogAction.log(email, LogActionType.ADDEDPICTUREDIRECTLY);
 
         DiaryActivity diaryActivity = DiaryActivity.byID(id);
         if (diaryActivity == null){
@@ -374,6 +385,8 @@ public class Diary extends Controller {
                 picture.save();
                 diaryActivity.setPicture(picture);
                 diaryActivity.update();
+                LogAction.log(email, LogActionType.ADDEDPICTUREDIRECTLY);
+
                 return redirect(routes.Diary.viewActivity(id));
             } else {
                 return selectFromGalleryPage(id, pictureFactory.getLatestError());
@@ -407,9 +420,6 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
-        //Log user behavior
-        LogAction.log(email, LogActionType.DELETEACTIVITY);
-
         //Check if user has access to view this activity
         User user = User.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(id);
@@ -437,6 +447,8 @@ public class Diary extends Controller {
         activity.setUser(null);
         activity.delete();
 
+        //Log user behavior
+        LogAction.log(email, LogActionType.DELETEACTIVITY);
         return redirect(routes.Diary.calendar());
     }
 
@@ -446,9 +458,6 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-
-        //Log user behavior
-        LogAction.log(email, LogActionType.UPDATEACTIVITY);
 
         //Check if user has access to view this activity
         User user = User.byEmail(email);
@@ -460,7 +469,7 @@ public class Diary extends Controller {
             return forbidden();
         }
 
-                //Retrieve data from input elements on webpage
+        //Retrieve data from input elements on webpage
         Form<DiaryActivity> diaryActivityForm = form(DiaryActivity.class).bindFromRequest();
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart filePart = body.getFile("picture_file");
@@ -482,12 +491,14 @@ public class Diary extends Controller {
                     picture.save();
                     updatedApartFromPictureDiaryActivity.setPicture(picture);
                     updatedApartFromPictureDiaryActivity.update();
+                    LogAction.log(email, LogActionType.UPDATEACTIVITY);
                     return redirect(routes.Diary.viewActivity(id));
                 } else {
                     diaryActivityForm.reject(pictureFactory.getLatestError());
                     return badRequest(diary_update_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, new DiaryActivityToHTML(activity)));
                 }
             } else {
+                LogAction.log(email, LogActionType.UPDATEACTIVITY);
                 return redirect(routes.Diary.viewActivity(id));
             }
         }
@@ -500,8 +511,6 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
-        //Log user behavior
-        LogAction.log(email, LogActionType.DELETEPICTUREFROMACTIVITY);
 
         //Check if user has access to view this activity
         User user = User.byEmail(email);
@@ -514,16 +523,10 @@ public class Diary extends Controller {
         }
 
         if(activity.hasPicture()) {
-            Picture picture = activity.getPicture();
-            activity.setPicture(null);
-            picture.setDiaryActivity(null);
-            picture.setUser(null);
-
-            picture.update();
-            activity.update();
-            picture.delete();
+            PictureFactory.deletePictureFromActivity(activity);
         }
 
+        LogAction.log(email, LogActionType.DELETEPICTUREFROMACTIVITY);
         return redirect(routes.Diary.updateActivityPage(id));
     }
 
@@ -534,9 +537,6 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
-        //Log user behavior
-        LogAction.log(email, LogActionType.UNLINKPICTUREFROMACTIVITY);
-
         //Check if user has access to view this activity
         User user = User.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(id);
@@ -555,6 +555,7 @@ public class Diary extends Controller {
             activity.update();
         }
 
+        LogAction.log(email, LogActionType.UNLINKPICTUREFROMACTIVITY);
         return redirect(routes.Diary.updateActivityPage(id));
     }
 
@@ -596,9 +597,6 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
-        //Log user behavior
-        LogAction.log(email, LogActionType.DELETEPICTUREFROMGALLERY);
-
         //Check if user has access to view this picture
         User user = User.byEmail(email);
         Picture picture = Picture.byID(id);
@@ -609,15 +607,9 @@ public class Diary extends Controller {
             return forbidden();
         }
 
-        DiaryActivity diaryActivity = picture.getDiaryActivity();
-        if(diaryActivity != null){
-            diaryActivity.setPicture(null);
-            diaryActivity.update();
-        }
-        picture.setUser(null);
-        picture.setDiaryActivity(null);
-        picture.delete();
+        PictureFactory.deletePictureFromGallery(picture);
 
+        LogAction.log(email, LogActionType.DELETEPICTUREFROMGALLERY);
         return redirect(routes.Diary.gallery());
 
     }

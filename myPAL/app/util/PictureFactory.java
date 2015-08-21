@@ -14,11 +14,23 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.regex.Pattern;
 
 /**
- * Created by ligthartmeu on 12-8-2015.
+ * myPAL
+ * Purpose: factory class saves pictures to the disk, links them to a Picture object and returns that object
+ *
+ * Developped for TNO.
+ * Kampweg 5
+ * 3769 DE Soesterberg
+ * General telephone number: +31(0)88 866 15 00
+ *
+ * @author Mike Ligthart - mike.ligthart@gmail.com
+ * @version 1.0 21-8-2015
  */
 public class PictureFactory {
 
@@ -91,8 +103,38 @@ public class PictureFactory {
         return new Picture(pictureName, thumbnailName, user, date);
     }
 
+    public static void deletePictureFromActivity(DiaryActivity activity){
+        Picture picture = activity.getPicture();
+        activity.setPicture(null);
+        picture.setDiaryActivity(null);
+        picture.setUser(null);
+        picture.update();
+        activity.update();
+        try {
+            Files.deleteIfExists(Paths.get(ConfigFactory.load().getString("private.data.location") + picture.getName()));
+            Files.deleteIfExists(Paths.get(ConfigFactory.load().getString("private.data.location") + picture.getThumbnail()));
+        } catch (IOException e) {
+            Logger.error(e.getLocalizedMessage());
+        }
+        picture.delete();
+    }
 
-
+    public static void deletePictureFromGallery(Picture picture){
+        DiaryActivity diaryActivity = picture.getDiaryActivity();
+        if(diaryActivity != null){
+            diaryActivity.setPicture(null);
+            diaryActivity.update();
+        }
+        picture.setUser(null);
+        picture.setDiaryActivity(null);
+        try {
+            Files.deleteIfExists(Paths.get(ConfigFactory.load().getString("private.data.location") + picture.getName()));
+            Files.deleteIfExists(Paths.get(ConfigFactory.load().getString("private.data.location") + picture.getThumbnail()));
+        } catch (IOException e) {
+            Logger.error(e.getLocalizedMessage());
+        }
+        picture.delete();
+    }
 
     private boolean hasSupportedExtension(String extension){
         if(extension.equalsIgnoreCase("jpg"))

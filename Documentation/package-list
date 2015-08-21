@@ -1,0 +1,9 @@
+
+avatar.behavior
+controllers
+dialogue
+models
+models.diary
+models.logging
+util
+views.interfaces

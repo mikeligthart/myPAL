@@ -9,7 +9,16 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
- * Created by Mike on 22-7-2015.
+ * myPAL
+ * Purpose: models a user behavior log element
+ *
+ * Developped for TNO.
+ * Kampweg 5
+ * 3769 DE Soesterberg
+ * General telephone number: +31(0)88 866 15 00
+ *
+ * @author Mike Ligthart - mike.ligthart@gmail.com
+ * @version 1.0 21-8-2015
  */
 @Entity
 public class LogAction extends Model {

@@ -27,19 +27,36 @@ import java.util.Map;
 
 import static play.data.Form.form;
 
-
+/**
+ * myPAL
+ * Purpose: handles all the controller functions for the general or misc control flow and pages
+ *
+ * Developped for TNO.
+ * Kampweg 5
+ * 3769 DE Soesterberg
+ * General telephone number: +31(0)88 866 15 00
+ *
+ * @author Mike Ligthart - mike.ligthart@gmail.com
+ * @version 1.0 21-8-2015
+ */
 public class Application extends Controller {
-
 
     private static final Dialogue dialogue = Dialogue.getInstance();
 
     /* CONTROL FLOW */
+
+    /**
+     *
+     * @return rendered login page
+     */
     public static Result login() {
-        return ok(
-                login.render(form(Login.class))
-        );
+        return ok(login.render(form(Login.class)));
     }
 
+    /**
+     *
+     * @return redirect to right page depending on user type
+     */
     public static Result authenticate() {
         Form<Login> loginForm = form(Login.class).bindFromRequest();
         if (loginForm.hasErrors()) {
@@ -69,10 +86,13 @@ public class Application extends Controller {
         }
     }
 
+    /**
+     * Log out user
+     * @return
+     */
     public static Result logout() {
-        //Log user activity
+        //Retrieve session details
         String email = session().get("email");
-        LogAction.log(email, LogActionType.LOGOFF);
 
         //Clear session
         session().clear();
@@ -80,11 +100,19 @@ public class Application extends Controller {
         //Clear DiarySettings
         DiarySettingsManager.getInstance().logoff(email);
 
+        //Log user activity
+        LogAction.log(email, LogActionType.LOGOFF);
+
         //Redirect to login page
         return redirect(routes.Application.login());
     }
 
     /* HELLO AND GOODBYE */
+
+    /**
+     *
+     * @return rendering of the avatar greeting page
+     */
     public static Result hello() {
         if (session().isEmpty() || session().get("email") == null) {
             return redirect(routes.Application.login());
@@ -94,7 +122,18 @@ public class Application extends Controller {
     }
 
     /* PRIVATE FILE MANAGEMENT */
+
+    /**
+     * Validates whether user may retrieve a requested picture and if so returns it
+     * @param fileName - file name of the requested picture
+     * @return requested picture
+     */
     public static Result getPicture(String fileName){
+        //Check if someone is logged in and whether the request is not empty
+        if(session().isEmpty() || session().get("email") == null || fileName.isEmpty()){
+            return forbidden();
+        }
+
         //Retrieve a picture if it exists
         Picture picture;
         if(fileName.contains("picture_")) {
@@ -105,10 +144,10 @@ public class Application extends Controller {
             return forbidden();
         }
 
-        //Check if someone is logged in and whether the request is not empty
-        if(session().isEmpty() || session().get("email") == null || fileName.isEmpty()|| picture == null || picture.getUser() == null){
-            return forbidden();
-        }
+        //Check if the picture exists
+       if (picture == null || picture.getUser() == null){
+           return forbidden();
+       }
 
         //Check if someone has access to the picture
         User user = User.byEmail(session().get("email"));

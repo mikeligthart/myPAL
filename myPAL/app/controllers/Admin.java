@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
 import models.UserType;
-import play.Logger;
 import views.interfaces.UserToHTML;
 import models.logging.LogAction;
 import play.data.Form;
@@ -22,45 +21,61 @@ import static play.data.Form.form;
 import static play.libs.Json.toJson;
 
 /**
- * Created by Mike on 29-7-2015.
+ * myPAL
+ * Purpose: handles all the controller functions for the admin actions and pages
+ *
+ * Developped for TNO.
+ * Kampweg 5
+ * 3769 DE Soesterberg
+ * General telephone number: +31(0)88 866 15 00
+ *
+ * @author Mike Ligthart - mike.ligthart@gmail.com
+ * @version 1.0 21-8-2015
  */
 public class Admin extends Controller {
 
     /* PAGES */
+
+    /**
+     *
+     * @return the admin homepage
+     */
     public static Result admin(){
-        if(session().isEmpty() || session().get("email") == null){
-            return redirect(routes.Application.login());
-        }
-        User user = User.byEmail(session().get("email"));
-        if(user.getUserType() != UserType.ADMIN){
-            return forbidden(no_access.render());
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
         }
 
         return ok(admin_home.render());
     }
 
+    /**
+     * Page that lists all users and provides a form to add new users
+     * @return admin users page
+     */
     public static Result users(){
-        if(session().isEmpty() || session().get("email") == null){
-            return redirect(routes.Application.login());
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
         }
-        User user = User.byEmail(session().get("email"));
-        if(user.getUserType() != UserType.ADMIN){
-            return forbidden(no_access.render());
-        }
+
         Form<User> userForm = form(User.class);
         return ok(admin_users.render(userForm));
 
     }
 
+    /**
+     * Page that provides a pre-filled form to update an existing user
+     * @param email id for an existing user that needs to be updated
+     * @return update page for a existing user
+     */
     public static Result updatePageUser(String email){
-        if(session().isEmpty() || session().get("email") == null){
-            return redirect(routes.Application.login());
-        }
-        User user = User.byEmail(session().get("email"));
-        if(user.getUserType() != UserType.ADMIN){
-            return forbidden(no_access.render());
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
         }
 
+        User user = User.byEmail(session().get("email"));
         User updateThisUser = User.byEmail(email);
         Form<User.UserMutable> userForm = form(User.UserMutable.class);
         if (updateThisUser != null) {
@@ -71,13 +86,15 @@ public class Admin extends Controller {
         }
     }
 
+    /**
+     *
+     * @param email id for existing user that needs to be viewed
+     * @return page with all info on selected existing user
+     */
     public static Result viewUser(String email){
-        if(session().isEmpty() || session().get("email") == null){
-            return redirect(routes.Application.login());
-        }
-        User user = User.byEmail(session().get("email"));
-        if(user.getUserType() != UserType.ADMIN){
-            return forbidden(no_access.render());
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
         }
 
         User viewUser = User.byEmail(email);
@@ -89,13 +106,15 @@ public class Admin extends Controller {
     }
 
     /* FUNCTIONS */
+
+    /**
+     *
+     * @return JSonNode containing all existing users
+     */
     public static Result getUsers(){
-        if(session().isEmpty() || session().get("email") == null){
-            return redirect(routes.Application.login());
-        }
-        User user = User.byEmail(session().get("email"));
-        if(user.getUserType() != UserType.ADMIN){
-            return forbidden(no_access.render());
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
         }
 
         List<UserToHTML> users = UserToHTML.fromListToList(User.find.all());
@@ -104,13 +123,14 @@ public class Admin extends Controller {
         return ok(data);
     }
 
+    /**
+     * Listener for a POST request. Saves a user from a form
+     * @return redirect to admin users page
+     */
     public static Result addUser(){
-        if(session().isEmpty() || session().get("email") == null){
-            return redirect(routes.Application.login());
-        }
-        User user = User.byEmail(session().get("email"));
-        if(user.getUserType() != UserType.ADMIN){
-            return forbidden(no_access.render());
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
         }
 
         Form<User> userForm = form(User.class).bindFromRequest();
@@ -123,15 +143,18 @@ public class Admin extends Controller {
         }
     }
 
+    /**
+     * Listener for a POST request. Updates an existing user from a form.
+     * @param email - id of user that needs to be updated
+     * @return redirect to admin users page
+     */
     public static Result updateUser(String email){
-        if(session().isEmpty() || session().get("email") == null){
-            return redirect(routes.Application.login());
-        }
-        User user = User.byEmail(session().get("email"));
-        if(user.getUserType() != UserType.ADMIN){
-            return forbidden(no_access.render());
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
         }
 
+        User user = User.byEmail(session().get("email"));
         Form<User.UserMutable> userForm = form(User.UserMutable.class).bindFromRequest();
         User updateUser = User.byEmail(email);
         if (userForm.hasErrors()) {
@@ -146,15 +169,18 @@ public class Admin extends Controller {
         }
     }
 
+    /**
+     * Deletes provided existing user
+     * @param email - id for an existing user
+     * @return ok 200
+     */
     public static Result deleteUser(String email) {
-        if(session().isEmpty() || session().get("email") == null){
-            return redirect(routes.Application.login());
-        }
-        User user = User.byEmail(session().get("email"));
-        if(user.getUserType() != UserType.ADMIN){
-            return forbidden(no_access.render());
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
         }
 
+        User user = User.byEmail(session().get("email"));
         User deleteThisUser = User.byEmail(email);
         if (user.equals(deleteThisUser)){
             return forbidden();
@@ -168,13 +194,15 @@ public class Admin extends Controller {
         }
     }
 
+    /**
+     *
+     * @param email id for existing user
+     * @return JsonNode containing LogAction items for provided user
+     */
     public static Result getUserLog(String email){
-        if(session().isEmpty() || session().get("email") == null){
-            return redirect(routes.Application.login());
-        }
-        User user = User.byEmail(session().get("email"));
-        if(user.getUserType() != UserType.ADMIN){
-            return forbidden(no_access.render());
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
         }
 
         User userForLogs = User.byEmail(email);
@@ -188,4 +216,39 @@ public class Admin extends Controller {
         }
     }
 
+    /**
+     * Private classes that check whether a user is logged in properly.
+     */
+    private static class AdminAuthentication {
+
+        public static AdminAuthenticationResult authenticate(){
+            if(session().isEmpty() || session().get("email") == null){
+                return new AdminAuthenticationResult(false, redirect(routes.Application.login()));
+            }
+            User user = User.byEmail(session().get("email"));
+            if(user.getUserType() != UserType.ADMIN){
+                return new AdminAuthenticationResult(false, forbidden(no_access.render()));
+            }
+            return new AdminAuthenticationResult(true, null);
+        }
+    }
+
+    private static class AdminAuthenticationResult{
+
+        private boolean hasAcces;
+        private Result denyAction;
+
+        public AdminAuthenticationResult(boolean hasAcces, Result denyAction){
+            this.hasAcces = hasAcces;
+            this.denyAction = denyAction;
+        }
+
+        public boolean hasAcces() {
+            return hasAcces;
+        }
+
+        public Result getDenyAction() {
+            return denyAction;
+        }
+    }
 }

@@ -13,7 +13,16 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 
 /**
- * Created by ligthartmeu on 8-7-2015.
+ * myPAL
+ * Purpose: base class that models the concept of a diary entry
+ *
+ * Developped for TNO.
+ * Kampweg 5
+ * 3769 DE Soesterberg
+ * General telephone number: +31(0)88 866 15 00
+ *
+ * @author Mike Ligthart - mike.ligthart@gmail.com
+ * @version 1.0 21-8-2015
  */
 @Entity
 public abstract class DiaryItem extends Model {
@@ -69,7 +78,7 @@ public abstract class DiaryItem extends Model {
 
     public void setStarttime(Object starttime) throws Exception  {
         if (starttime instanceof String){
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("time.format"));
             this.starttime = new Time(sdf.parse((String) starttime).getTime());
         } else if (starttime instanceof Time){
             this.starttime = (Time) starttime;
@@ -86,7 +95,7 @@ public abstract class DiaryItem extends Model {
 
     public void setEndtime(Object endtime) throws Exception  {
         if (endtime instanceof String){
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("time.format"));
             this.endtime = new Time(sdf.parse((String) endtime).getTime());
         } else if (endtime instanceof Time){
             this.endtime = (Time) endtime;

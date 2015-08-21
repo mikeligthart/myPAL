@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
 import models.UserType;
+import play.Logger;
+import play.data.validation.ValidationError;
+import play.i18n.Messages;
 import views.interfaces.UserToHTML;
 import models.logging.LogAction;
 import play.data.Form;
@@ -15,7 +18,10 @@ import views.html.admin.admin_user_view;
 import views.html.admin.admin_users;
 import views.html.controlFlow.no_access;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static play.data.Form.form;
 import static play.libs.Json.toJson;
@@ -77,9 +83,9 @@ public class Admin extends Controller {
 
         User user = User.byEmail(session().get("email"));
         User updateThisUser = User.byEmail(email);
-        Form<User.UserMutable> userForm = form(User.UserMutable.class);
+        Form<User> userForm = form(User.class);
         if (updateThisUser != null) {
-            userForm = userForm.fill(updateThisUser.getMutables());
+            userForm = userForm.fill(updateThisUser);
             return ok(admin_user_update.render(email, userForm, user.equals(updateThisUser)));
         } else {
             return forbidden();
@@ -137,6 +143,9 @@ public class Admin extends Controller {
         if (userForm.hasErrors()) {
             return badRequest(admin_users.render(userForm));
         } else {
+            if(User.byEmail(userForm.data().get("email")) != null){
+                userForm.reject("email", Messages.get("error.emailregisteredalready"));
+            }
             User newUser = userForm.get();
             newUser.save();
             return redirect(routes.Admin.users());
@@ -155,16 +164,16 @@ public class Admin extends Controller {
         }
 
         User user = User.byEmail(session().get("email"));
-        Form<User.UserMutable> userForm = form(User.UserMutable.class).bindFromRequest();
-        User updateUser = User.byEmail(email);
+        Form<User> userForm = form(User.class).bindFromRequest();
+        User updateThisUser = User.byEmail(email);
         if (userForm.hasErrors()) {
-            return badRequest(admin_user_update.render(email, userForm, user.equals(updateUser)));
+            return badRequest(admin_user_update.render(email, userForm, user.equals(updateThisUser)));
         } else {
-            User updatedUser = new User(updateUser);
-            updateUser.delete();
-            updatedUser.updateFromMutables(userForm.get());
-            updatedUser.save();
-
+            User updatedUser = userForm.get();
+            if(userForm.data().get("password").equalsIgnoreCase(Messages.get("page.general.dummypassword"))){
+                updatedUser.setHashedPassword(updateThisUser.getPassword());
+            }
+            updatedUser.update();
             return redirect(routes.Admin.users());
         }
     }

@@ -434,14 +434,7 @@ public class Diary extends Controller {
         user.update();
 
         if(activity.hasPicture()) {
-            Picture picture = activity.getPicture();
-            picture.setDiaryActivity(null);
-            picture.setUser(null);
-            activity.setPicture(null);
-
-            picture.update();
-            activity.update();
-            picture.delete();
+            PictureFactory.deletePictureFromActivity(activity);
         }
 
         activity.setUser(null);

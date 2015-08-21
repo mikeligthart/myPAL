@@ -8,8 +8,8 @@ model.user.lastActivity=Laatst actief
 model.user.lastActivityNever=Nooit
 model.user.userType=Gebruikerstype
 model.user.password=Wachtwoord
+model.user.newpassword=Nieuw wachtwoord
 model.user.invalid=Ongeldig wachtwoord of gebruikersnaam
-model.user.emailregisteredalready=Dit e-mailadres is al geregistreerd
 model.user.userType.CHILD=Kind
 model.user.userType.PARENT=Ouder
 model.user.userType.PROFESSIONAL=Medisch Professional
@@ -25,6 +25,8 @@ page.general.areyousuredirect=Dit gebeurt direct. Weet je het zeker?
 page.general.yes=Ja
 page.general.no=Nee
 page.general.isrequired=is verplicht
+page.general.isoptional=is optioneel
+page.general.dummypassword=)))))
 
 ## Control Flow ##
 # Login #
@@ -91,7 +93,7 @@ page.diary.gallery.addthispicture=Koppel deze foto aan de activiteit
 page.admin.base.home=Home
 page.admin.base.users=Gebruikers
 page.admin.base.admin=Admin
-page.admin.base.practiseDiary=Oefen dagboek
+page.admin.base.practiseDiary=Oefendagboek
 
 # Home #
 page.admin.home.title=Admin | home
@@ -106,6 +108,8 @@ page.admin.users.update.title=Admin | update gebruiker
 page.admin.users.options=Opties
 page.admin.users.view.title=Admin | bekijk user
 page.admin.users.log=Activiteiten log
+page.admin.users.viewUser.back=Ga terug naar het overzicht
+
 ### ERROR MESSAGES ###
 
 ### DIALOGUE ###
@@ -133,4 +137,4 @@ error.pictureCannotBeStored=Oeps! Helaas kan je plaatje niet worden opgeslagen. 
 error.pleaseAddFile=Voeg een foto toe.
 error.activityNotFound=De activiteit is helaas niet goed opgeslagen. Probeer dat eerst opnieuw toe te voegen.
 error.hasAlreadyPicture=Deze activiteit heeft al een foto. Je kunt dat veranderen door de activiteit zelf aan te passen.
-
+error.emailregisteredalready=Dit e-mailadres is al geregistreerd

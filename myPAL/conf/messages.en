@@ -8,8 +8,8 @@ model.user.lastActivity=Last active
 model.user.lastActivityNever=Never
 model.user.userType=User type
 model.user.password=Password
+model.user.newpassword=New password
 model.user.invalid=Invalid user or password
-model.user.emailregisteredalready=This email address is already registered
 model.user.userType.CHILD=Child
 model.user.userType.PARENT=Parent
 model.user.userType.PROFESSIONAL=Medical Professional
@@ -25,6 +25,7 @@ page.general.areyousuredirect=This will go in effect immediately. Are you sure?
 page.general.yes=Yes
 page.general.no=No
 page.general.isrequired=is required
+page.general.isoptional=is optional
 
 ## Control Flow ##
 # Login #
@@ -106,6 +107,8 @@ page.admin.users.options=Options
 page.admin.users.view.title=Admin | view user
 page.admin.users.viewUser=View
 page.admin.users.log=Activity log
+page.admin.users.viewUser.back=Go back to the overview
+
 
 
 ### ERROR MESSAGES ###
@@ -135,3 +138,4 @@ error.pictureCannotBeStored=Whoops! Unfortunately your image could not be stored
 error.pleaseAddFile=Please add a file
 error.activityNotFound=The activity was not stored properly. Please try to add that again first.
 error.hasAlreadyPicture=The activity already has a picture. You can change that by updating the original activity.
+error.emailregisteredalready=This email address is already registered

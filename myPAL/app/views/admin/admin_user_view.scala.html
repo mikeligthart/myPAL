@@ -1,17 +1,22 @@
-@(user: interfaces.UserToHTML)
+@(user: views.interfaces.UserToHTML)
 
 @import play.api.i18n._
 
 @admin(title = Messages("page.admin.users.view.title"), page = "users", table = "javascripts/tables/admin_user_log.js") {
 
-<div>
-    <h2>@user.getFirstName @user.getLastName</h2>
-    <i>@user.getEmail</i>
-    <br />
-    <br />
-    @Messages("model.user.birthdate"): @user.getBirthdate
-    <br />
-    @Messages("model.user.lastActivity"): @user.getLastActivity
+<div class="row">
+    <div class="col-sm-6 text-left"><h2>@user.getFirstName @user.getLastName</h2></div>
+    <div class="col-sm-6 text-right buttonWithNavBar"><a href="@routes.Admin.users()" class="btn btn-primary">@Messages("page.admin.users.viewUser.back")</a></div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-left">
+        <i>@user.getEmail</i>
+        <br />
+        <br />
+        @Messages("model.user.birthdate"): @user.getBirthdate
+        <br />
+        @Messages("model.user.lastActivity"): @user.getLastActivity
+    </div>
 </div>
 
 <div>

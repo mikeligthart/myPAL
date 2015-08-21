@@ -68,4 +68,6 @@ crashlytics-build.properties
 
 #during development
 myPAL/privateData/*
+myPAL/databases/myPAL.lock.db
+
 

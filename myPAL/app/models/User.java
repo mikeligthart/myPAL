@@ -20,6 +20,7 @@ import util.HashHelper;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,114 +96,10 @@ public class User extends Model {
         }
     }
 
-    //The attributes that are mutable
-    public static class UserMutable{
-
-        @Constraints.Required
-        private String firstName;
-
-        @Constraints.Required
-        private String lastName;
-
-        @Constraints.Required
-        @Formats.DateTime(pattern="dd/MM/yyyy") //Is this still up to date with application.conf -> date.format
-        private Date birthdate;
-
-        @Constraints.Required
-        @OneToMany
-        @Enumerated(EnumType.STRING)
-        private UserType userType;
-
-        public UserMutable(String firstName, String lastName, Date birthdate, UserType userType){
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.birthdate = birthdate;
-            this.userType = userType;
-        }
-
-        public UserMutable(){}
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
-
-        public String getLastName() {
-            return lastName;
-        }
-
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
-        }
-
-        public Date getBirthdate() {
-            return birthdate;
-        }
-
-        public void setBirthdate(Object birthdate) throws Exception {
-            if (birthdate instanceof String){
-                SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
-                this.birthdate = new Date(sdf.parse((String) birthdate).getTime());
-            } else if (birthdate instanceof Date){
-                this.birthdate = (Date) birthdate;
-            } else if (birthdate instanceof java.util.Date){
-                this.birthdate = new Date(((java.util.Date) birthdate).getTime());
-            } else{
-                throw new Exception("Birthdate object must be either String sql.Date or java.util.Date");
-            }
-        }
-
-        public UserType getUserType() {
-            return userType;
-        }
-
-        public void setUserType(UserType userType) {
-            Logger.debug("setUserType in UserMutable: " + userType.toString());
-            this.userType = userType;
-        }
-    }
-
-    public User(){
-
-    }
-
-    public User(User newUser){
-        this.email = newUser.getEmail();
-        this.firstName = newUser.getFirstName();
-        this.lastName = newUser.getLastName();
-        this.birthdate = newUser.getBirthdate();
-        this.password = newUser.getPassword();
-        this.userType = newUser.getUserType();
-        this.lastActivity = newUser.getLastActivity();
-        this.logActions = newUser.getLogActions();
-    }
-
-    public List<ValidationError> validate() {
-        List<ValidationError> errors = new ArrayList<>();
-        if (User.byEmail(email) != null) {
-            errors.add(new ValidationError("email", Messages.get("model.user.emailregisteredalready")));
-        }
-        return errors.isEmpty() ? null : errors;
-    }
-
     public static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
 
     public static User byEmail(String email){
         return find.byId(email);
-    }
-
-    public UserMutable getMutables(){
-        return new UserMutable(firstName, lastName, birthdate, userType);
-    }
-
-    public void updateFromMutables(UserMutable mutables){
-        this.firstName = mutables.getFirstName();
-        this.lastName = mutables.getLastName();
-        this.birthdate = mutables.getBirthdate();
-        this.userType = mutables.getUserType();
     }
 
     public static boolean authenticate(String email, String password) {
@@ -250,22 +147,18 @@ public class User extends Model {
         return birthdate;
     }
 
-    /*
-    public void setBirthdate(Date birthdate){
-        this.birthdate = birthdate;
-    }
-    */
-
-    public void setBirthdate(Object birthdate) throws Exception {
+    public void setBirthdate(Object birthdate) {
         if (birthdate instanceof String){
             SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
-            this.birthdate = new Date(sdf.parse((String) birthdate).getTime());
+            try {
+                this.birthdate = new Date(sdf.parse((String) birthdate).getTime());
+            } catch (ParseException e) {
+                Logger.error(e.getLocalizedMessage());
+            }
         } else if (birthdate instanceof Date){
             this.birthdate = (Date) birthdate;
         } else if (birthdate instanceof java.util.Date){
             this.birthdate = new Date(((java.util.Date) birthdate).getTime());
-        } else{
-            throw new Exception("Birthdate object must be either String sql.Date or java.util.Date");
         }
     }
     
@@ -275,6 +168,11 @@ public class User extends Model {
 
     public void setPassword(String password) throws AppException {
         this.password = HashHelper.createPassword(password); ;
+    }
+
+    public void setHashedPassword(String hashedPassword)
+    {
+        this.password = hashedPassword;
     }
 
     public UserType getUserType() {
@@ -325,6 +223,14 @@ public class User extends Model {
         this.pictures = pictures;
     }
 
+    public void removeDiaryActivity(DiaryActivity diaryActivity){
+        Picture picture = diaryActivity.getPicture();
+        if (picture != null) {
+            pictures.remove(picture);
+        }
+        diaryActivities.remove(diaryActivity);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof User))
@@ -338,14 +244,4 @@ public class User extends Model {
                 append(lastActivity, rhs.lastActivity).
                 isEquals();
     }
-
-    public void removeDiaryActivity(DiaryActivity diaryActivity){
-        Picture picture = diaryActivity.getPicture();
-        if (picture != null) {
-            pictures.remove(picture);
-        }
-        diaryActivities.remove(diaryActivity);
-    }
-
-
 }

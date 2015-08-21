@@ -6,6 +6,7 @@ import models.diary.DiaryActivity;
 import models.diary.DiaryActivityType;
 import models.diary.Emotion;
 import models.diary.Picture;
+import play.i18n.Messages;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -30,7 +31,7 @@ public class DiaryActivityToHTML {
 
     private int id;
     private int startHour, startMin, endHour, endMin;
-    private String type, description, emotion, date, emotionPicture, picture, color, viewURL, startTime, endTime;
+    private String type, description, emotion, date, emotionPicture, picture, color, viewURL, startTime, endTime, hasPictureString;
     private boolean hasPicture;
 
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
@@ -53,6 +54,11 @@ public class DiaryActivityToHTML {
         this.startTime = timeFormatter.format(diaryActivity.getStarttime());
         this.endTime = timeFormatter.format(diaryActivity.getEndtime());
         this.hasPicture = diaryActivity.hasPicture();
+        if(hasPicture) {
+            hasPictureString = Messages.get("page.general.yes");
+        } else {
+            hasPictureString = Messages.get("page.general.no");
+        }
     }
 
     public static List<DiaryActivityToHTML> fromListToList(List<DiaryActivity> activities){
@@ -211,8 +217,20 @@ public class DiaryActivityToHTML {
         return hasPicture;
     }
 
+    public boolean isHasPicture() {
+        return hasPicture;
+    }
+
     public void setHasPicture(boolean hasPicture) {
         this.hasPicture = hasPicture;
+    }
+
+    public String getHasPictureString() {
+        return hasPictureString;
+    }
+
+    public void setHasPictureString(String hasPictureString) {
+        this.hasPictureString = hasPictureString;
     }
 
     private String retrievePictureURL(Picture picture){

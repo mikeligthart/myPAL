@@ -17,3 +17,20 @@ var table = $('#admin_user_log').DataTable( {
         "url": lang
     }
 } );
+
+var activityTable =  $('#admin_user_activity_overview').DataTable( {
+                        "ajax": "/admin/users/view/activities/" + email,
+                        "columns": [
+                            { "data": "date" },
+                            { "data": "startTime" },
+                            { "data": "endTime" },
+                            { "data": "type" },
+                            { "data": "emotion" },
+                            { "data": "hasPictureString" },
+                        ],
+                        "order": [[ 0, "desc" ]],
+                        "language": {
+                            "url": lang
+                        }
+} );
+

@@ -108,6 +108,7 @@ page.admin.users.view.title=Admin | view user
 page.admin.users.viewUser=View
 page.admin.users.log=Activity log
 page.admin.users.viewUser.back=Go back to the overview
+page.admin.users.viewUser.activityOverview=Activity Overview
 
 
 

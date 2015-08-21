@@ -109,6 +109,7 @@ page.admin.users.options=Opties
 page.admin.users.view.title=Admin | bekijk user
 page.admin.users.log=Activiteiten log
 page.admin.users.viewUser.back=Ga terug naar het overzicht
+page.admin.users.viewUser.activityOverview=Activiteiten overzicht
 
 ### ERROR MESSAGES ###
 

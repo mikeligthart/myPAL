@@ -4,9 +4,11 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
 import models.UserType;
+import models.diary.DiaryActivity;
 import play.Logger;
 import play.data.validation.ValidationError;
 import play.i18n.Messages;
+import views.interfaces.DiaryActivityToHTML;
 import views.interfaces.UserToHTML;
 import models.logging.LogAction;
 import play.data.Form;
@@ -223,6 +225,24 @@ public class Admin extends Controller {
         } else {
             return forbidden(no_access.render());
         }
+    }
+
+    public static Result getUserActivities(String email){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        User user = User.byEmail(email);
+        if (user != null){
+            List<DiaryActivityToHTML> activities = DiaryActivityToHTML.fromListToList(DiaryActivity.byUser(user));
+            ObjectNode data = JsonNodeFactory.instance.objectNode();
+            data.put("data", toJson(activities));
+            return ok(data);
+        } else {
+            return forbidden(no_access.render());
+        }
+
     }
 
     /**

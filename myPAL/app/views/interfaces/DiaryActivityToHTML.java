@@ -31,11 +31,15 @@ public class DiaryActivityToHTML {
 
     private int id;
     private int startHour, startMin, endHour, endMin;
-    private String type, description, emotion, date, emotionPicture, picture, color, viewURL, startTime, endTime, hasPictureString;
+    private String type, description, emotion, date, emotionPicture, picture, color, viewURL,
+            startTime, endTime, hasPictureString, shortDescription, firstName, lastName, fullPicture, email,
+            longDescription;
     private boolean hasPicture;
 
-    private static SimpleDateFormat dateFormatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
-    private static SimpleDateFormat timeFormatter = new SimpleDateFormat(ConfigFactory.load().getString("time.format"));
+    private static final SimpleDateFormat dateFormatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
+    private static final SimpleDateFormat timeFormatter = new SimpleDateFormat(ConfigFactory.load().getString("time.format"));
+    private static final int shortDescriptionMaxLength = 25;
+    private static final int longDescriptionMaxLength = 144;
 
     public DiaryActivityToHTML(DiaryActivity diaryActivity){
         this.id = diaryActivity.getId();
@@ -48,17 +52,32 @@ public class DiaryActivityToHTML {
         this.emotion = diaryActivity.getEmotion().name();
         this.emotionPicture = emotionToPicture(diaryActivity.getEmotion());
         this.date = dateFormatter.format(diaryActivity.getDate());
-        this.picture = retrievePictureURL(diaryActivity.getPicture());
+        this.picture = retrievePictureURL(diaryActivity.getPicture(), false);
+        this.fullPicture =retrievePictureURL(diaryActivity.getPicture(), true);
         this.color = diaryActivityTypeToColor(diaryActivity.getType());
         this.viewURL = routes.Diary.viewActivity(diaryActivity.getId()).url();
         this.startTime = timeFormatter.format(diaryActivity.getStarttime());
         this.endTime = timeFormatter.format(diaryActivity.getEndtime());
         this.hasPicture = diaryActivity.hasPicture();
         if(hasPicture) {
-            hasPictureString = Messages.get("page.general.yes");
+            hasPictureString = "<a href='" + fullPicture + "' data-toggle='lightbox' data-title='" + type +" - " + date + "'>" + Messages.get("page.general.yes") + "</a>";
         } else {
             hasPictureString = Messages.get("page.general.no");
         }
+        if(description.length() <= shortDescriptionMaxLength){
+            this.shortDescription = description;
+        } else {
+            this.shortDescription = "<a href='" + routes.Application.contentBox(description) +"' data-toggle='lightbox' data-title='" + Messages.get("page.diary.calendar.description") + "'>" + description.substring(0, shortDescriptionMaxLength) + "...</a>";
+        }
+        this.firstName = diaryActivity.getUser().getFirstName();
+        this.lastName = diaryActivity.getUser().getLastName();
+        this.email = diaryActivity.getUser().getEmail();
+        if(description.length() <= longDescriptionMaxLength){
+            this.longDescription = description;
+        } else {
+            this.longDescription = description.substring(0, longDescriptionMaxLength) + "...";
+        }
+
     }
 
     public static List<DiaryActivityToHTML> fromListToList(List<DiaryActivity> activities){
@@ -105,7 +124,7 @@ public class DiaryActivityToHTML {
         }
     }
 
-    public static String diaryActivityTypeToColor(String diaryActivityType){
+    public static String diaryActivityTypeToColor(String diaryActivityType) {
         return diaryActivityTypeToColor(DiaryActivityType.fromString(diaryActivityType));
     }
 
@@ -233,10 +252,62 @@ public class DiaryActivityToHTML {
         this.hasPictureString = hasPictureString;
     }
 
-    private String retrievePictureURL(Picture picture){
+    private String retrievePictureURL(Picture picture, boolean full){
         String url = routes.Assets.at("images/no_picture.png").url();;
         if (picture != null)
-            url = routes.Application.getPicture(picture.getThumbnail()).url();
+            if(full){
+                url = routes.Application.getPicture(picture.getName()).url();
+            } else {
+                url = routes.Application.getPicture(picture.getThumbnail()).url();
+            }
         return url;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getFullPicture() {
+        return fullPicture;
+    }
+
+    public void setFullPicture(String fullPicture) {
+        this.fullPicture = fullPicture;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
     }
 }

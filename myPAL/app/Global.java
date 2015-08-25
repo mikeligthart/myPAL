@@ -20,7 +20,6 @@ import static play.mvc.Results.*;
 public class Global extends GlobalSettings {
     //https://github.com/jamesward/zentasks/blob/master/app/Global.java
 
-    /*
     public void onStart(Application app) {
         InitialData.insert(app);
     }
@@ -38,5 +37,4 @@ public class Global extends GlobalSettings {
         }
 
     }
-    */
 }

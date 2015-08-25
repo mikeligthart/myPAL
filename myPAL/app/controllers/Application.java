@@ -2,28 +2,20 @@ package controllers;
 
 import com.typesafe.config.ConfigFactory;
 import dialogue.Dialogue;
-//import jsmessages.JsMessages;
-//import jsmessages.JsMessagesFactory;
 import models.User;
 import models.User.Login;
 import models.UserType;
-import models.diary.DiarySettings;
 import models.diary.DiarySettingsManager;
 import models.diary.Picture;
 import models.logging.LogAction;
 import models.logging.LogActionType;
-import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.controlFlow.*;
 import views.html.diary.greeting;
-//import play.api.i18n.DefaultMessagesApi;
-
-//import javax.inject.Inject;
+import views.html.interfaces.interfaces_description_box;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 import static play.data.Form.form;
 
@@ -157,4 +149,13 @@ public class Application extends Controller {
         }
         return forbidden();
     }
+
+    public static Result contentBox(String content){
+        if(session().isEmpty() || session().get("email") == null || content.isEmpty()){
+            return forbidden();
+        }
+
+        return ok(interfaces_description_box.render(content));
+    }
 }
+

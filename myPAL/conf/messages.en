@@ -95,6 +95,13 @@ page.admin.base.practiseDiary=Practise Diary
 
 # Home #
 page.admin.home.title=Admin | home
+page.admin.home.header=Admin dashboard
+page.admin.home.generaldata=General data
+page.admin.home.usersonline=users online
+page.admin.home.addedactivities=added activities
+page.admin.home.logs=logged actions
+page.admin.home.recentactivities=Recent activities
+page.admin.home.norecentactivities=There are no recent activities
 
 # Users #
 page.admin.users.title=Admin | users
@@ -109,6 +116,9 @@ page.admin.users.viewUser=View
 page.admin.users.log=Activity log
 page.admin.users.viewUser.back=Go back to the overview
 page.admin.users.viewUser.activityOverview=Activity Overview
+page.admin.users.log.timestamp=Time
+page.admin.users.log.activity=Logged activity
+page.admin.users.viewUser.hasPicture=Has picture
 
 
 

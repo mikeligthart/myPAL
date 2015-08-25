@@ -8,6 +8,7 @@ GET     /                           controllers.Application.login()
 POST    /                           controllers.Application.authenticate()
 GET     /logout                     controllers.Application.logout()
 GET     /private/*fileName          controllers.Application.getPicture(fileName)
+GET     /contentbox/:content        controllers.Application.contentBox(content: String)
 
 # Hello goodbye
 GET     /greeting                   controllers.Application.hello()

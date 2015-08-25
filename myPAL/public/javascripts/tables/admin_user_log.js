@@ -27,6 +27,7 @@ var activityTable =  $('#admin_user_activity_overview').DataTable( {
                             { "data": "type" },
                             { "data": "emotion" },
                             { "data": "hasPictureString" },
+                            { "data": "shortDescription" }
                         ],
                         "order": [[ 0, "desc" ]],
                         "language": {

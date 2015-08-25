@@ -9,6 +9,7 @@ import play.Logger;
 import play.data.validation.ValidationError;
 import play.i18n.Messages;
 import views.interfaces.DiaryActivityToHTML;
+import views.interfaces.LogActionToHTML;
 import views.interfaces.UserToHTML;
 import models.logging.LogAction;
 import play.data.Form;
@@ -20,10 +21,9 @@ import views.html.admin.admin_user_view;
 import views.html.admin.admin_users;
 import views.html.controlFlow.no_access;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.*;
 
 import static play.data.Form.form;
 import static play.libs.Json.toJson;
@@ -42,6 +42,7 @@ import static play.libs.Json.toJson;
  */
 public class Admin extends Controller {
 
+    private static final long TIMEWINDOW = 15 * 60 * 1000;
     /* PAGES */
 
     /**
@@ -53,8 +54,36 @@ public class Admin extends Controller {
         if(!result.hasAcces){
             return result.denyAction;
         }
+        List<User> users = User.find.all();
+        List<DiaryActivity> activities = DiaryActivity.find.all();
+        int nLogs = LogAction.find.all().size();
 
-        return ok(admin_home.render());
+        return ok(admin_home.render(users.size(), countOnlineUsers(users), activities.size(), nLogs, recentActivities(activities)));
+    }
+
+    private static int countOnlineUsers(List<User> users) {
+        int nOnlineUsers = 0;
+        long lowerTimeLimit = System.currentTimeMillis() - TIMEWINDOW;
+        for(Iterator<User> it = users.iterator(); it.hasNext();){
+            Timestamp lastActivity = it.next().getLastActivity();
+            if (lastActivity != null && it.next().getLastActivity().getTime() > lowerTimeLimit){
+                nOnlineUsers+=1;
+            }
+        }
+        return nOnlineUsers;
+    }
+
+    private static List<DiaryActivityToHTML> recentActivities(List<DiaryActivity> activities){
+        List<DiaryActivityToHTML> recentActivities = new ArrayList<>();
+        LocalDate lowerDateLimit = LocalDate.now().minusDays(3);
+        for(Iterator<DiaryActivity> it = activities.iterator(); it.hasNext();){
+            DiaryActivity tentativeActivity = it.next();
+            LocalDate dateActivity = tentativeActivity.getDate().toLocalDate();
+            if(dateActivity.isAfter(lowerDateLimit)){
+                recentActivities.add(new DiaryActivityToHTML(tentativeActivity));
+            }
+        }
+        return recentActivities;
     }
 
     /**
@@ -113,7 +142,7 @@ public class Admin extends Controller {
         }
     }
 
-    /* FUNCTIONS */
+     /* FUNCTIONS */
 
     /**
      *
@@ -218,7 +247,7 @@ public class Admin extends Controller {
 
         User userForLogs = User.byEmail(email);
         if (userForLogs != null){
-            List<LogAction> logs = LogAction.find.where().eq("user", userForLogs).findList();
+            List<LogActionToHTML> logs = LogActionToHTML.fromListToList(LogAction.find.where().eq("user", userForLogs).findList());
             ObjectNode data = JsonNodeFactory.instance.objectNode();
             data.put("data", toJson(logs));
             return ok(data);

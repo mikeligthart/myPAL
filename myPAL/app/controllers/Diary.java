@@ -294,6 +294,7 @@ public class Diary extends Controller {
             DiaryActivity newDiaryActivity = diaryActivityForm.get();
             //Link the activity to a user
             newDiaryActivity.setUser(User.byEmail(email));
+            DiarySettingsManager.getInstance().retrieve(email).dateUpdate(newDiaryActivity.getDate());
 
             // if the user wants to add a picture from gallery
             if(addFromGallery){
@@ -387,6 +388,7 @@ public class Diary extends Controller {
                 diaryActivity.update();
                 LogAction.log(email, LogActionType.ADDEDPICTUREDIRECTLY);
 
+                DiarySettingsManager.getInstance().retrieve(email).dateUpdate(diaryActivity.getDate());
                 return redirect(routes.Diary.viewActivity(id));
             } else {
                 return selectFromGalleryPage(id, pictureFactory.getLatestError());
@@ -485,6 +487,7 @@ public class Diary extends Controller {
                     updatedApartFromPictureDiaryActivity.setPicture(picture);
                     updatedApartFromPictureDiaryActivity.update();
                     LogAction.log(email, LogActionType.UPDATEACTIVITY);
+
                     return redirect(routes.Diary.viewActivity(id));
                 } else {
                     diaryActivityForm.reject(pictureFactory.getLatestError());
@@ -562,6 +565,7 @@ public class Diary extends Controller {
         //Check permissions
         User user = User.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(activityID);
+        DiarySettingsManager.getInstance().retrieve(email).dateUpdate(activity.getDate());
         Picture picture = Picture.byID(pictureID);
         if (activity == null || picture == null){
             return selectFromGalleryPage(activityID, Messages.get("error.activityNotFound"));

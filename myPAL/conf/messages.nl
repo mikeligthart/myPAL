@@ -97,6 +97,13 @@ page.admin.base.practiseDiary=Oefendagboek
 
 # Home #
 page.admin.home.title=Admin | home
+page.admin.home.header=Admin dashboard
+page.admin.home.generaldata=Algemene gegevens
+page.admin.home.usersonline=gebruikers online
+page.admin.home.addedactivities=toegevoegde activiteiten
+page.admin.home.logs=gelogde handelingen
+page.admin.home.recentactivities=Recente activiteiten
+page.admin.home.norecentactivities=Er zijn geen recente activiteiten
 
 # Users #
 page.admin.users.title=Admin | gebruikers
@@ -110,6 +117,9 @@ page.admin.users.view.title=Admin | bekijk user
 page.admin.users.log=Activiteiten log
 page.admin.users.viewUser.back=Ga terug naar het overzicht
 page.admin.users.viewUser.activityOverview=Activiteiten overzicht
+page.admin.users.log.timestamp=Tijd
+page.admin.users.log.activity=Gelogde activiteit
+page.admin.users.viewUser.hasPicture=Bevat foto
 
 ### ERROR MESSAGES ###
 

@@ -147,6 +147,10 @@ public class User extends Model {
         return birthdate;
     }
 
+    public void setBirthdate(Date birthdate){
+        this.birthdate = birthdate;
+    }
+
     public void setBirthdate(Object birthdate) {
         if (birthdate instanceof String){
             SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));

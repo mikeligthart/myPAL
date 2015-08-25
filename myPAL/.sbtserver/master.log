@@ -5236,3 +5236,41 @@ Copy resource mappings:
 Total time: 1 s, completed 25-aug-2015 16:07:17
 > server-post-command-cleanup
 > server-handle-next-server-request
+> {file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@367d8e34, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\ligthartmeu\apps\myPAL\myPAL\conf\application.conf,C:\Users\ligthartmeu\apps\myPAL\myPAL\target\scala-2.11\classes\application.conf)
+	(C:\Users\ligthartmeu\apps\myPAL\myPAL\conf\evolutions,C:\Users\ligthartmeu\apps\myPAL\myPAL\target\scala-2.11\classes\evolutions)
+	(C:\Users\ligthartmeu\apps\myPAL\myPAL\conf\initial-data.yml,C:\Users\ligthartmeu\apps\myPAL\myPAL\target\scala-2.11\classes\initial-data.yml)
+	(C:\Users\ligthartmeu\apps\myPAL\myPAL\conf\messages.en,C:\Users\ligthartmeu\apps\myPAL\myPAL\target\scala-2.11\classes\messages.en)
+	(C:\Users\ligthartmeu\apps\myPAL\myPAL\conf\messages.nl,C:\Users\ligthartmeu\apps\myPAL\myPAL\target\scala-2.11\classes\messages.nl)
+	(C:\Users\ligthartmeu\apps\myPAL\myPAL\conf\routes,C:\Users\ligthartmeu\apps\myPAL\myPAL\target\scala-2.11\classes\routes)
+	(C:\Users\ligthartmeu\apps\myPAL\myPAL\conf\evolutions\default,C:\Users\ligthartmeu\apps\myPAL\myPAL\target\scala-2.11\classes\evolutions\default)
+	(C:\Users\ligthartmeu\apps\myPAL\myPAL\conf\evolutions\default\1.sql,C:\Users\ligthartmeu\apps\myPAL\myPAL\target\scala-2.11\classes\evolutions\default\1.sql)
+Total time: 1 s, completed 25-aug-2015 16:30:40
+> server-post-command-cleanup
+> server-handle-next-server-request
+Done executing sbt server engine, result Right(Exit(0))
+Closing listening server socket
+Waiting for socket thread
+Waiting for request processor thread
+Waiting for command engine result
+Returning control to sbt launcher with result Exit(0)
+Closing the 4408@PC-14874 logs at Tue Aug 25 16:41:32 CEST 2015, goodbye.

@@ -1,10 +1,10 @@
-@(activityForm: Form[models.diary.DiaryActivity], activity: views.interfaces.DiaryActivityToHTML)
+@(activityForm: Form[models.diary.DiaryActivity], activity: views.interfaces.DiaryActivityToHTML, user: User)
 
 @import play.api.i18n._
 
 <fieldset>
     <div class="row">
-    @diary_select_activityType(activityForm("type"), label = Messages("page.diary.calendar.activitytype") + "*", placeholder = Messages("page.diary.calendar.activitytype"))
+    @diary_select_activityType(activityForm("type"), label = Messages("page.diary.calendar.activitytype") + "*", placeholder = Messages("page.diary.calendar.activitytype"), user)
     @diary_date(activityForm("date"), Messages("page.diary.calendar.date") + "*", Messages("page.diary.calendar.date"))
     @diary_time(activityForm("starttime"), activityForm("endtime"))
     @diary_description(activityForm("description"), label = Messages("page.diary.calendar.description") + "*", placeholder = Messages("page.diary.calendar.description"))

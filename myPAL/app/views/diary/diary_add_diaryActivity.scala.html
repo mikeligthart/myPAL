@@ -1,9 +1,9 @@
-@(userType: UserType, activityForm: Form[models.diary.DiaryActivity], currentDate: String)
+@(user: User, activityForm: Form[models.diary.DiaryActivity], currentDate: String)
 
 @import fieldsets._
 @import play.api.i18n._
 
-@diary_no_avatar(Messages("page.diary.base.calendar"), "calendar", userType) {
+@diary_no_avatar(Messages("page.diary.base.calendar"), "calendar", user.getUserType) {
 
     <div class="text-left">
         <h3>@Messages("page.diary.calendar.addactivity")</h3>
@@ -17,7 +17,7 @@
         }
 
         @helper.form(action = routes.Diary.addActivity(), 'class -> "", 'enctype -> "multipart/form-data") {
-            @diary_add_diaryActivity_fieldset(activityForm, currentDate)
+            @diary_add_diaryActivity_fieldset(activityForm, currentDate, user)
         }
     </div>
 

@@ -1,4 +1,4 @@
-@(field: Field, label: String, placeholder: String)
+@(field: Field, label: String, placeholder: String, user: User)
 
 @import play.api.i18n._
 
@@ -6,8 +6,8 @@
     <label class="col-sm-2 control-label" for="@field.id">@label</label>
     <div class="col-sm-10">
         <select class="form-control" id="@field.id" name="@field.name">
-            @for(uType <- models.diary.DiaryActivityType.values()){
-            <option value="@uType.name" @if(field.value.getOrElse("") == uType.name){selected}>@uType.toString</option>
+            @for(uType <- models.diary.DiaryActivityTypeManager.getAllUniqueTypes(user)){
+            <option value="@uType.getName" @if(field.value.getOrElse("") == uType.getName){selected}>@uType.getName</option>
             }
         </select>
         <span class="help-block">@{field.error.map { error => error.message }}</span>

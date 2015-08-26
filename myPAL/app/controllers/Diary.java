@@ -119,7 +119,7 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSADDACTIVITYPAGE);
 
-        return ok(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+        return ok(diary_add_diaryActivity.render(User.byEmail(email), activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
     }
 
     public static Result addPicturePage(){
@@ -184,7 +184,7 @@ public class Diary extends Controller {
         //Log user behavior
         LogAction.log(email, LogActionType.VIEWACTIVITY);
 
-        return ok(diary_update_diaryActivity.render(user.getUserType(), activityForm, new DiaryActivityToHTML(activity)));
+        return ok(diary_update_diaryActivity.render(user, activityForm, new DiaryActivityToHTML(activity)));
     }
 
     public static Result selectFromGalleryPage(int id){
@@ -288,7 +288,7 @@ public class Diary extends Controller {
         boolean addFromGallery = requestData.get("isaddfromgallery").equalsIgnoreCase("true");
 
         if (diaryActivityForm.hasErrors()) {
-            return badRequest(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+            return badRequest(diary_add_diaryActivity.render(User.byEmail(email), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
         } else {
             //Retrieve the activity from the form
             DiaryActivity newDiaryActivity = diaryActivityForm.get();
@@ -315,7 +315,7 @@ public class Diary extends Controller {
                         return redirect(routes.Diary.calendar());
                     } else {
                         diaryActivityForm.reject(pictureFactory.getLatestError());
-                        return badRequest(diary_add_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+                        return badRequest(diary_add_diaryActivity.render(User.byEmail(email), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
                     }
                 } else {
                     newDiaryActivity.save();
@@ -470,7 +470,7 @@ public class Diary extends Controller {
         Http.MultipartFormData.FilePart filePart = body.getFile("picture_file");
 
         if (diaryActivityForm.hasErrors()) {
-            return badRequest(diary_update_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, new DiaryActivityToHTML(activity)));
+            return badRequest(diary_update_diaryActivity.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity)));
         } else {
             //Retrieve the activity from the form
             DiaryActivity updateActivity = diaryActivityForm.get();
@@ -491,7 +491,7 @@ public class Diary extends Controller {
                     return redirect(routes.Diary.viewActivity(id));
                 } else {
                     diaryActivityForm.reject(pictureFactory.getLatestError());
-                    return badRequest(diary_update_diaryActivity.render(User.byEmail(email).getUserType(), diaryActivityForm, new DiaryActivityToHTML(activity)));
+                    return badRequest(diary_update_diaryActivity.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity)));
                 }
             } else {
                 LogAction.log(email, LogActionType.UPDATEACTIVITY);

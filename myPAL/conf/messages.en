@@ -63,6 +63,7 @@ page.diary.calendar.endtime=End time
 page.diary.calendar.settime.endtime=Till
 page.diary.calendar.date=Date
 page.diary.calendar.description=Description
+page.diary.calendar.description_howwasit=How was it?
 page.diary.calendar.emotion=Emotion
 page.diary.calendar.picture=Picture
 page.diary.calendar.emotion.HAPPY=Happy

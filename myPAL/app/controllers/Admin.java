@@ -66,7 +66,7 @@ public class Admin extends Controller {
         long lowerTimeLimit = System.currentTimeMillis() - TIMEWINDOW;
         for(Iterator<User> it = users.iterator(); it.hasNext();){
             Timestamp lastActivity = it.next().getLastActivity();
-            if (lastActivity != null && it.next().getLastActivity().getTime() > lowerTimeLimit){
+            if (lastActivity != null && lastActivity.getTime() > lowerTimeLimit){
                 nOnlineUsers+=1;
             }
         }

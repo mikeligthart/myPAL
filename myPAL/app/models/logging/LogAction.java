@@ -30,7 +30,7 @@ public class LogAction extends Model {
     private Timestamp timestamp;
     private LogActionType type;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonBackReference
     private User user;
 

@@ -54,7 +54,7 @@ public class DiaryActivityToHTML {
         this.date = dateFormatter.format(diaryActivity.getDate());
         this.picture = retrievePictureURL(diaryActivity.getPicture(), false);
         this.fullPicture =retrievePictureURL(diaryActivity.getPicture(), true);
-        this.color = diaryActivityTypeToColor(diaryActivity.getType());
+        this.color = diaryActivity.getType().getColor();
         this.viewURL = routes.Diary.viewActivity(diaryActivity.getId()).url();
         this.startTime = timeFormatter.format(diaryActivity.getStarttime());
         this.endTime = timeFormatter.format(diaryActivity.getEndtime());
@@ -108,24 +108,6 @@ public class DiaryActivityToHTML {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         return Integer.toString(cal.get(Calendar.YEAR));
-    }
-
-    public static String diaryActivityTypeToColor(DiaryActivityType diaryActivityType){
-        switch (diaryActivityType){
-            case SCHOOL:
-                return "#308dd4";
-            case MEAL:
-                return "#8dd430";
-            case SPORT:
-                return "#d4308d";
-            case OTHER:
-            default:
-                return "#d47730";
-        }
-    }
-
-    public static String diaryActivityTypeToColor(String diaryActivityType) {
-        return diaryActivityTypeToColor(DiaryActivityType.fromString(diaryActivityType));
     }
 
     public static String emotionToPicture(String emotion){

@@ -3,6 +3,7 @@ package models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.typesafe.config.ConfigFactory;
 import models.diary.DiaryActivity;
+import models.diary.DiaryActivityType;
 import models.diary.DiaryMeasurement;
 import models.diary.Picture;
 import models.logging.LogAction;
@@ -11,7 +12,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import play.Logger;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
-import play.data.validation.ValidationError;
 import play.db.ebean.Model;
 import play.i18n.Messages;
 import util.AppException;
@@ -22,7 +22,6 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,6 +66,10 @@ public class User extends Model {
     @JsonManagedReference
     private List<LogAction> logActions;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
+    private List<DiaryActivityType> createdDiaryActivityTypes;
+
     private Timestamp lastActivity;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -93,6 +96,23 @@ public class User extends Model {
                 return Messages.get("model.user.invalid");
             }
             return null;
+        }
+    }
+
+    public User(){
+
+    }
+
+    public User(String email, String firstName, String lastName, Date birthdate, String password, UserType userType){
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthdate = birthdate;
+        this.userType = userType;
+        try {
+            this.password = HashHelper.createPassword(password);
+        } catch (AppException e) {
+            Logger.error(e.getLocalizedMessage());
         }
     }
 
@@ -233,6 +253,14 @@ public class User extends Model {
             pictures.remove(picture);
         }
         diaryActivities.remove(diaryActivity);
+    }
+
+    public List<DiaryActivityType> getCreatedDiaryActivityTypes() {
+        return createdDiaryActivityTypes;
+    }
+
+    public void setCreatedDiaryActivityTypes(List<DiaryActivityType> createdDiaryActivityTypes) {
+        this.createdDiaryActivityTypes = createdDiaryActivityTypes;
     }
 
     @Override

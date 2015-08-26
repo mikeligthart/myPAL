@@ -64,6 +64,7 @@ page.diary.calendar.endtime=Eindtijd
 page.diary.calendar.settime.endtime=Tot
 page.diary.calendar.date=Wanneer
 page.diary.calendar.description=Vertel eens
+page.diary.calendar.description_howwasit=Hoe was het?
 page.diary.calendar.emotion=Gevoel
 page.diary.calendar.picture=Foto
 page.diary.calendar.emotion.HAPPY=Blij

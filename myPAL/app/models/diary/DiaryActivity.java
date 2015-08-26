@@ -1,12 +1,10 @@
 package models.diary;
 
-import controllers.Diary;
 import models.User;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +22,8 @@ import java.util.List;
 @Entity
 public class DiaryActivity extends DiaryItem {
 
-    @Enumerated(EnumType.STRING)
     @Constraints.Required(message = " ")
+    @OneToOne
     private DiaryActivityType type;
 
     @Constraints.MaxLength(1200)
@@ -44,6 +42,7 @@ public class DiaryActivity extends DiaryItem {
     public DiaryActivity(){
         super();
     }
+
 
     public DiaryActivityType getType() {
         return type;

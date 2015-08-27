@@ -79,6 +79,13 @@ page.diary.calendar.notaddactivity=Terug
 page.diary.calendar.addfromgallery=voeg toe uit gallerij
 page.diary.calendar.or=Of
 page.diary.calendar.addnewtype=Nieuw type toevoegen
+page.diary.diaryActivityType.donotadd=Terug
+page.diary.diaryActivityType.add=Toevoegen
+page.diary.diaryActivityType.name=Naam
+page.diary.diaryActivityType.color=Kleur
+page.diary.diaryActivityType.source.addActivity=add
+page.diary.diaryActivityType.source.updateActivity=update
+page.diary.diaryActivityType.pickacolor=Klik voor een nieuwe kleur
 
 
 # Gallery #
@@ -152,3 +159,4 @@ error.activityNotFound=De activiteit is helaas niet goed opgeslagen. Probeer dat
 error.hasAlreadyPicture=Deze activiteit heeft al een foto. Je kunt dat veranderen door de activiteit zelf aan te passen.
 error.emailregisteredalready=Dit e-mailadres is al geregistreerd
 error.notypeselected=Er is geen type geselecteerd voor deze activiteit
+error.nonameorcolor=Er is iets misgegaan. Heb je het nieuwe type een naam gegeven?

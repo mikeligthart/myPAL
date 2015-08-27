@@ -1,6 +1,7 @@
-@(label: String, user: User, types: List[models.diary.DiaryActivityType], preselected: String = "", errorMessage: String = "")
+@(label: String, user: User, types: List[models.diary.DiaryActivityType], preselected: String = "", errorMessage: String = "", source: String, activityId: Int)
 
 @import play.api.i18n._
+<link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/ekko-lightbox.min.css")'>
 
 <div id="diaryActivityTypeSelecter" class="form-group @if(errorMessage != "") {has-error}">
     <label class="col-sm-2 control-label">@label</label>
@@ -19,7 +20,7 @@
             </label>
                 @if((index+1) == types.size){
                     <label  class="col-sm-2 text-center">
-                        <a href=""><img width="20%" height="20%" src='@routes.Assets.at("images/add_type_icon.png")'>
+                        <a href="@routes.Diary.addDiaryActivityTypePage(source, activityId)" data-toggle="lightbox"><img width="20%" height="20%" src='@routes.Assets.at("images/add_type_icon.png")'>
                         <br/>
                         @Messages("page.diary.calendar.addnewtype")
                         </a>
@@ -34,3 +35,11 @@
     }
     <span class="col-sm-offset-2 help-block text-center">@if(errorMessage != ""){@errorMessage}</span>
 </div>
+
+<script src='@routes.Assets.at("javascripts/ekko-lightbox.min.js")' type="text/javascript"></script>
+<script>
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>

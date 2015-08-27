@@ -4,7 +4,7 @@
 
 <fieldset>
     <div class="row">
-    @diary_select_activityType(label = Messages("page.diary.calendar.activitytype") + "*", user, types, preselectedType, typeInputErrorMessage)
+    @diary_select_activityType(label = Messages("page.diary.calendar.activitytype") + "*", user, types, preselectedType, typeInputErrorMessage, Messages("page.diary.diaryActivityType.source.updateActivity"), Integer.valueOf(activityForm("id").value))
     @diary_date(activityForm("date"), Messages("page.diary.calendar.date") + "*", Messages("page.diary.calendar.date"))
     @diary_time(activityForm("starttime"), activityForm("endtime"))
     @diary_description(activityForm("description"), label = Messages("page.diary.calendar.description") + "*", placeholder = Messages("page.diary.calendar.description"))

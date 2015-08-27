@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
 import models.diary.*;
 import models.logging.LogAction;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
@@ -107,6 +108,10 @@ public class Diary extends Controller {
     }
 
     public static Result addActivityPage(){
+        return addActivityPage("");
+    }
+
+    private static Result addActivityPage(String error){
         //Check whether a user is logged in
         if(session().isEmpty() || session().get("email") == null){
             return redirect(routes.Application.login());
@@ -120,7 +125,8 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSADDACTIVITYPAGE);
 
-        return ok(diary_add_diaryActivity.render(user, activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", ""));
+        return ok(diary_add_diaryActivity.render(user, activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", error));
+
     }
 
     public static Result addPicturePage(){
@@ -162,7 +168,7 @@ public class Diary extends Controller {
         return ok(diary_calendar_view_activity.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity)));
     }
 
-    public static Result updateActivityPage(int id){
+    private static Result updateActivityPage(int id, String error){
         //Check whether a user is logged in
         if (session().isEmpty() || session().get("email") == null) {
             return redirect(routes.Application.login());
@@ -185,7 +191,11 @@ public class Diary extends Controller {
         //Log user behavior
         LogAction.log(email, LogActionType.VIEWACTIVITY);
 
-        return ok(diary_update_diaryActivity.render(user, activityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), activity.getType().getName(), ""));
+        return ok(diary_update_diaryActivity.render(user, activityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), activity.getType().getName(), error));
+    }
+
+    public static Result updateActivityPage(int id){
+        return updateActivityPage(id, "");
     }
 
     public static Result selectFromGalleryPage(int id){
@@ -224,6 +234,15 @@ public class Diary extends Controller {
         LogAction.log(email, LogActionType.ACCESSADDPICTUREDIRECTLYPAGE);
 
         return ok(diary_add_picture_page_direct.render(id));
+    }
+
+    public static Result addDiaryActivityTypePage(String source, int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+
+        return ok(diary_add_diaryActivityType.render(source, id));
     }
 
     /* FUNCTIONALITIES */
@@ -629,5 +648,44 @@ public class Diary extends Controller {
         LogAction.log(email, LogActionType.DELETEPICTUREFROMGALLERY);
         return redirect(routes.Diary.gallery());
 
+    }
+
+    public static Result addDiaryActivityType(String source, int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+
+        if(source == null){
+            return badRequest();
+        }
+        boolean isUpdate = false;
+        if(source.equalsIgnoreCase(Messages.get("page.diary.diaryActivityType.source.updateActivity"))){
+            if (DiaryActivity.byID(id) == null){
+                return badRequest();
+            }
+            isUpdate = true;
+        }
+
+        DynamicForm requestData = form().bindFromRequest();
+        String name = requestData.get("name");
+        String color = requestData.get("colorInput");
+
+        if(name == null || color == null || name.isEmpty()){
+            if(isUpdate){
+                return updateActivityPage(id, Messages.get("error.nonameorcolor"));
+            } else {
+                return addActivityPage(Messages.get("error.nonameorcolor"));
+            }
+        }
+
+        DiaryActivityTypeManager.createDiaryActivityTypeManager(User.byEmail(email), name, color);
+
+        if(isUpdate){
+            return redirect(routes.Diary.updateActivity(id));
+        } else {
+            return redirect(routes.Diary.addActivityPage());
+        }
     }
 }

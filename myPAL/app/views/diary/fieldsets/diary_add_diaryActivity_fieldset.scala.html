@@ -3,7 +3,7 @@
 @import play.api.i18n._
 
 <fieldset>
-    @diary_select_activityType(label = Messages("page.diary.calendar.activitytype") + "*", user, types, preselectedType, typeInputErrorMessage)
+    @diary_select_activityType(label = Messages("page.diary.calendar.activitytype") + "*", user, types, preselectedType, typeInputErrorMessage, Messages("page.diary.diaryActivityType.source.addActivity"), -1)
     @diary_date(activityForm("date"), Messages("page.diary.calendar.date") + "*", Messages("page.diary.calendar.date"), currentDate)
     @diary_time(activityForm("starttime"), activityForm("endtime"))
     @diary_description(activityForm("description"), label = Messages("page.diary.calendar.description") + "*", placeholder = Messages("page.diary.calendar.description_howwasit"))

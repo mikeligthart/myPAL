@@ -36,6 +36,8 @@ GET     /mypal/activity/deletepicture/:id           controllers.Diary.deletePict
 GET     /mypal/activity/unlinkpicture/:id           controllers.Diary.unlinkPictureFromActivity(id:Int)
 GET     /mypal/activity/linkpicture/:aid/:pid       controllers.Diary.linkPictureToActivity(aid:Int, pid:Int)
 GET     /mypal/picture/delete/:id                   controllers.Diary.deletePictureFromGallery(id:Int)
+GET     /mypal/adddiaryactivitytype/:source/:id     controllers.Diary.addDiaryActivityTypePage(source:String, id:Int)
+POST    /mypal/adddiaryactivitytype/:source/:id     controllers.Diary.addDiaryActivityType(source:String, id:Int)
 
 ## ADMIN ##
 GET     /admin                                  controllers.Admin.admin()

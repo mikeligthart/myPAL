@@ -65,7 +65,7 @@ public class DiaryActivityType extends Model {
     public static DiaryActivityType byId(int id){
         return find.byId(id);
     }
-    public static DiaryActivityType byName(String name, User user){
+    public static DiaryActivityType byNameAndUser(String name, User user){
             return find.where().eq("user", user).eq("name", name).findUnique();
     }
     public static List<DiaryActivityType> byUser(User user){

@@ -78,6 +78,14 @@ page.diary.calendar.notaddactivity=Cancel
 page.diary.calendar.addfromgallery=add from gallery
 page.diary.calendar.or=Or
 page.diary.calendar.addnewtype=Add new type
+page.diary.diaryActivityType.donotadd=Terug
+page.diary.diaryActivityType.add=Toevoegen
+page.diary.diaryActivityType.name=Naam
+page.diary.diaryActivityType.color=Kleur
+page.diary.diaryActivityType.source.addActivity=add
+page.diary.diaryActivityType.source.updateActivity=update
+page.diary.diaryActivityType.pickacolor=Click for a new color
+
 
 # Gallery #
 page.diary.gallery.addpicture=Upload picture
@@ -153,3 +161,4 @@ error.activityNotFound=The activity was not stored properly. Please try to add t
 error.hasAlreadyPicture=The activity already has a picture. You can change that by updating the original activity.
 error.emailregisteredalready=This email address is already registered
 error.notypeselected=No type was selected for this activity
+error.nonameorcolor=Something went wrong. Did you gave the new type a name?

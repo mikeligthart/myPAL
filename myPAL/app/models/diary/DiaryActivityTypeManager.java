@@ -43,4 +43,16 @@ public class DiaryActivityTypeManager {
         DiaryActivityType other = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.OTHER"), routes.Assets.at("images/other_icon.png").url(), "#d47730", user);
         other.save();
     }
+
+    public static void createDiaryActivityTypeManager(User user, String name, String color){
+        name = capitalise(name);
+        if(DiaryActivityType.byNameAndUser(name, user) == null){
+            DiaryActivityType newDiaryActivityType = new DiaryActivityType(name, routes.Assets.at("images/other_icon.png").url(), color, user);
+            newDiaryActivityType.save();
+        }
+    }
+
+    private static String capitalise(String name) {
+        return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+    }
 }

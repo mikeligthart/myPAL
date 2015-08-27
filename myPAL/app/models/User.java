@@ -2,10 +2,7 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.typesafe.config.ConfigFactory;
-import models.diary.DiaryActivity;
-import models.diary.DiaryActivityType;
-import models.diary.DiaryMeasurement;
-import models.diary.Picture;
+import models.diary.*;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -22,6 +19,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -100,7 +98,6 @@ public class User extends Model {
     }
 
     public User(){
-
     }
 
     public User(String email, String firstName, String lastName, Date birthdate, String password, UserType userType){
@@ -167,9 +164,11 @@ public class User extends Model {
         return birthdate;
     }
 
+    /*
     public void setBirthdate(Date birthdate){
         this.birthdate = birthdate;
     }
+    */
 
     public void setBirthdate(Object birthdate) {
         if (birthdate instanceof String){

@@ -1,4 +1,4 @@
-@(user: User, activityForm: Form[models.diary.DiaryActivity], activity: views.interfaces.DiaryActivityToHTML)
+@(user: User, activityForm: Form[models.diary.DiaryActivity], activity: views.interfaces.DiaryActivityToHTML, types: List[models.diary.DiaryActivityType], preselectedType: String = "",  typeInputErrorMessage: String = "")
 
 @import fieldsets._
 @import play.api.i18n._
@@ -17,7 +17,7 @@
     }
 
     @helper.form(action = routes.Diary.updateActivity(activity.getId), 'class -> "", 'enctype -> "multipart/form-data") {
-    @diary_update_diaryActivity_fieldset(activityForm, activity, user)
+    @diary_update_diaryActivity_fieldset(activityForm, activity, user, types, preselectedType, typeInputErrorMessage)
     }
 </div>
 

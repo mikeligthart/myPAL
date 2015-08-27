@@ -1,15 +1,36 @@
-@(field: Field, label: String, placeholder: String, user: User)
+@(label: String, user: User, types: List[models.diary.DiaryActivityType], preselected: String = "", errorMessage: String = "")
 
 @import play.api.i18n._
 
-<div class="form-group @if(field.hasErrors) {has-error}">
-    <label class="col-sm-2 control-label" for="@field.id">@label</label>
-    <div class="col-sm-10">
-        <select class="form-control" id="@field.id" name="@field.name">
-            @for(uType <- models.diary.DiaryActivityTypeManager.getAllUniqueTypes(user)){
-            <option value="@uType.getName" @if(field.value.getOrElse("") == uType.getName){selected}>@uType.getName</option>
-            }
-        </select>
-        <span class="help-block">@{field.error.map { error => error.message }}</span>
-    </div>
+<div id="diaryActivityTypeSelecter" class="form-group @if(errorMessage != "") {has-error}">
+    <label class="col-sm-2 control-label">@label</label>
+
+    @for((uType, index) <- types.zipWithIndex){
+        @if(index % 5 == 0){
+            <div class="row text-left">
+            <label  class="col-sm-offset-2 col-sm-1 text-center">
+        }else{
+            <label  class="col-sm-1 text-center">
+        }
+            <input type="radio" name='diaryActivityType' value="@uType.getId" @if(preselected == uType.getName){checked="checked"} @if(preselected == "" && index == 0){checked="checked"} />
+            <img class="typeIcon" src='@uType.getIconLocation'>
+            <br />
+            @uType.getName
+            </label>
+                @if((index+1) == types.size){
+                    <label  class="col-sm-2 text-center">
+                        <a href=""><img width="20%" height="20%" src='@routes.Assets.at("images/add_type_icon.png")'>
+                        <br/>
+                        @Messages("page.diary.calendar.addnewtype")
+                        </a>
+                    </label>
+                }
+        @if((index+1) % 5 == 0){
+            </div>
+        }
+    }
+    @if(types.size == 1 || types.size-1 % 5 != 0){
+        </div>
+    }
+    <span class="col-sm-offset-2 help-block text-center">@if(errorMessage != ""){@errorMessage}</span>
 </div>

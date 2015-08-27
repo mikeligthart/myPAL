@@ -112,6 +112,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
+        User user = User.byEmail(email);
 
         //Generate addActivity page
         Form<DiaryActivity> activityForm = form(DiaryActivity.class);
@@ -119,7 +120,7 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSADDACTIVITYPAGE);
 
-        return ok(diary_add_diaryActivity.render(User.byEmail(email), activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+        return ok(diary_add_diaryActivity.render(user, activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", ""));
     }
 
     public static Result addPicturePage(){
@@ -184,7 +185,7 @@ public class Diary extends Controller {
         //Log user behavior
         LogAction.log(email, LogActionType.VIEWACTIVITY);
 
-        return ok(diary_update_diaryActivity.render(user, activityForm, new DiaryActivityToHTML(activity)));
+        return ok(diary_update_diaryActivity.render(user, activityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), activity.getType().getName(), ""));
     }
 
     public static Result selectFromGalleryPage(int id){
@@ -279,6 +280,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
+        User user = User.byEmail(email);
 
         //Retrieve data from input elements on webpage
         Form<DiaryActivity> diaryActivityForm = form(DiaryActivity.class).bindFromRequest();
@@ -287,13 +289,20 @@ public class Diary extends Controller {
         DynamicForm requestData = form().bindFromRequest();
         boolean addFromGallery = requestData.get("isaddfromgallery").equalsIgnoreCase("true");
 
+        if(requestData.get("diaryActivityType") == null){
+            return badRequest(diary_add_diaryActivity.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", Messages.get("error.notypeselected")));
+        }
+        DiaryActivityType diaryActivityType = DiaryActivityType.byId(Integer.valueOf(requestData.get("diaryActivityType")));
+
         if (diaryActivityForm.hasErrors()) {
-            return badRequest(diary_add_diaryActivity.render(User.byEmail(email), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+            return badRequest(diary_add_diaryActivity.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
         } else {
             //Retrieve the activity from the form
             DiaryActivity newDiaryActivity = diaryActivityForm.get();
             //Link the activity to a user
             newDiaryActivity.setUser(User.byEmail(email));
+            //Link the activity to a type
+            newDiaryActivity.setType(diaryActivityType);
             DiarySettingsManager.getInstance().retrieve(email).dateUpdate(newDiaryActivity.getDate());
 
             // if the user wants to add a picture from gallery
@@ -315,7 +324,7 @@ public class Diary extends Controller {
                         return redirect(routes.Diary.calendar());
                     } else {
                         diaryActivityForm.reject(pictureFactory.getLatestError());
-                        return badRequest(diary_add_diaryActivity.render(User.byEmail(email), diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+                        return badRequest(diary_add_diaryActivity.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
                     }
                 } else {
                     newDiaryActivity.save();
@@ -434,12 +443,16 @@ public class Diary extends Controller {
 
         user.removeDiaryActivity(activity);
         user.update();
+        DiaryActivityType diaryActivityType = DiaryActivityType.byId(activity.getType().getId());
+        diaryActivityType.removeDiaryActivity(activity);
+        diaryActivityType.update();
 
         if(activity.hasPicture()) {
             PictureFactory.deletePictureFromActivity(activity);
         }
 
         activity.setUser(null);
+        activity.setType(null);
         activity.delete();
 
         //Log user behavior
@@ -468,12 +481,19 @@ public class Diary extends Controller {
         Form<DiaryActivity> diaryActivityForm = form(DiaryActivity.class).bindFromRequest();
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart filePart = body.getFile("picture_file");
+        DynamicForm requestData = form().bindFromRequest();
+
+        if(requestData.get("diaryActivityType") == null){
+            return badRequest(diary_add_diaryActivity.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", Messages.get("error.notypeselected")));
+        }
+        DiaryActivityType diaryActivityType = DiaryActivityType.byId(Integer.valueOf(requestData.get("diaryActivityType")));
 
         if (diaryActivityForm.hasErrors()) {
-            return badRequest(diary_update_diaryActivity.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity)));
+            return badRequest(diary_update_diaryActivity.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
         } else {
             //Retrieve the activity from the form
             DiaryActivity updateActivity = diaryActivityForm.get();
+            updateActivity.setType(diaryActivityType);
             updateActivity.update(id);
             DiarySettingsManager.getInstance().retrieve(email).dateUpdate(updateActivity.getDate());
             //If a file is added
@@ -491,7 +511,7 @@ public class Diary extends Controller {
                     return redirect(routes.Diary.viewActivity(id));
                 } else {
                     diaryActivityForm.reject(pictureFactory.getLatestError());
-                    return badRequest(diary_update_diaryActivity.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity)));
+                    return badRequest(diary_update_diaryActivity.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
                 }
             } else {
                 LogAction.log(email, LogActionType.UPDATEACTIVITY);

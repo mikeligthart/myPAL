@@ -3,9 +3,12 @@ package models.diary;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import controllers.routes;
 import models.User;
+import play.Logger;
+import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * myPAL
@@ -26,40 +29,47 @@ public class DiaryActivityType extends Model {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
-    //@Constraints.Required(message = " ")
+    @Constraints.Required(message = " ")
     private String name;
 
-    //@Constraints.Required(message = " ")
+    @Constraints.Required(message = " ")
     private String iconLocation;
 
+    @Constraints.Required(message = " ")
     private String color;
 
-    @OneToOne(optional = true)
-    private DiaryActivity activity;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "type")
+    private List<DiaryActivity> activities;
 
-    @ManyToOne(optional = true)
+    @ManyToOne
     @JsonBackReference
+    @Constraints.Required(message = " ")
     private User user;
 
     public static String OTHERICONLOCATION = routes.Assets.at("images/other_icon.png").url();
     public static String OTHERCOLOR = "#d47730";
 
+    public static Finder<Integer, DiaryActivityType> find = new Finder<Integer, DiaryActivityType>(Integer.class, DiaryActivityType.class);
+
     public DiaryActivityType(){
 
     }
 
-    public DiaryActivityType(DiaryActivityType copy){
-        this.name = copy.getName();
-        this.iconLocation = copy.getIconLocation();
-        this.activity = copy.getActivity();
-        this.user = copy.getUser();
-        this.color = copy.getColor();
+    public DiaryActivityType(String name, String iconLocation, String color, User user){
+        this.name = name;
+        this.iconLocation = iconLocation;
+        this.color = color;
+        this.user = user;
     }
 
-    public static Finder<Integer, DiaryActivityType> find = new Finder<Integer, DiaryActivityType>(Integer.class, DiaryActivityType.class);
-
+    public static DiaryActivityType byId(int id){
+        return find.byId(id);
+    }
     public static DiaryActivityType byName(String name, User user){
             return find.where().eq("user", user).eq("name", name).findUnique();
+    }
+    public static List<DiaryActivityType> byUser(User user){
+        return find.where().eq("user", user).findList();
     }
 
     public int getId() {
@@ -86,12 +96,12 @@ public class DiaryActivityType extends Model {
         this.iconLocation = iconLocation;
     }
 
-    public DiaryActivity getActivity() {
-        return activity;
+    public List<DiaryActivity> getActivities() {
+        return activities;
     }
 
-    public void setActivity(DiaryActivity activity) {
-        this.activity = activity;
+    public void setActivities(List<DiaryActivity> activities) {
+        this.activities = activities;
     }
 
     public User getUser() {
@@ -108,5 +118,14 @@ public class DiaryActivityType extends Model {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @Override
+    public String toString(){
+        return name;
+    }
+
+    public void removeDiaryActivity(DiaryActivity activity) {
+        activities.remove(activity);
     }
 }

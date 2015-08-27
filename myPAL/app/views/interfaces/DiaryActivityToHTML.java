@@ -47,7 +47,7 @@ public class DiaryActivityToHTML {
         this.startMin = diaryActivity.getStarttime().toLocalTime().getMinute();
         this.endHour = diaryActivity.getEndtime().toLocalTime().getHour();
         this.endMin = diaryActivity.getEndtime().toLocalTime().getMinute();
-        this.type = diaryActivity.getType().toString();
+        this.type = diaryActivity.getType().getName();
         this.description = diaryActivity.getDescription();
         this.emotion = diaryActivity.getEmotion().name();
         this.emotionPicture = emotionToPicture(diaryActivity.getEmotion());

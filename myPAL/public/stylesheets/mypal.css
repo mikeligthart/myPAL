@@ -64,6 +64,10 @@ div.avatarfield{
   border-bottom:1px solid DarkRed;
 }
 
+.has-error > #diaryActivityTypeSelecter {
+    border:1px solid DarkRed;
+}
+
 
 .starter-template {
   text-align: center;

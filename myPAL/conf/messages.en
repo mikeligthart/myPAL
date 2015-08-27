@@ -77,6 +77,7 @@ page.diary.calendar.noactivities=Add an activity or measurement
 page.diary.calendar.notaddactivity=Cancel
 page.diary.calendar.addfromgallery=add from gallery
 page.diary.calendar.or=Or
+page.diary.calendar.addnewtype=Add new type
 
 # Gallery #
 page.diary.gallery.addpicture=Upload picture
@@ -151,3 +152,4 @@ error.pleaseAddFile=Please add a file
 error.activityNotFound=The activity was not stored properly. Please try to add that again first.
 error.hasAlreadyPicture=The activity already has a picture. You can change that by updating the original activity.
 error.emailregisteredalready=This email address is already registered
+error.notypeselected=No type was selected for this activity

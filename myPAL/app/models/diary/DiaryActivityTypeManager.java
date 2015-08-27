@@ -1,8 +1,13 @@
 package models.diary;
 
+import com.avaje.ebean.Ebean;
+import controllers.Diary;
+import controllers.routes;
 import models.User;
 import play.Logger;
+import play.i18n.Messages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,53 +24,23 @@ import java.util.List;
  */
 public class DiaryActivityTypeManager {
 
-    public static List<DiaryActivityType> getAllUniqueTypes(User user){
-        Logger.debug("[DiaryActivityTypeManager > getAllUniqueTypes] " + user.getEmail());
-        List<DiaryActivityType> uniques = DiaryActivityType.find.where().eq("user", null).findList();
-        Logger.debug("[DiaryActivityTypeManager > getAllUniqueTypes] " + uniques.size());
-        if(user != null) {
-            uniques.addAll(DiaryActivityType.find.where().eq("user", user).eq("activity", null).findList());
+    public static List<DiaryActivityType> retrieveDiaryActivityTypes(User user){
+        List<DiaryActivityType> diaryActivityTypes = DiaryActivityType.byUser(user);
+        if (diaryActivityTypes == null || diaryActivityTypes.isEmpty()){
+            loadStandardTypes(user);
+            diaryActivityTypes = DiaryActivityType.byUser(user);
         }
-        return uniques;
+        return diaryActivityTypes;
     }
 
-    public static DiaryActivityType getDiaryActivityType(String name, User creator){
-        DiaryActivityType diaryActivityType;
-        if(DiaryActivityTypeExists(name, creator)) {
-            diaryActivityType = new DiaryActivityType(DiaryActivityType.byName(name, creator));
-        } else if (DiaryActivityTypeExists(name, null)){
-            diaryActivityType = new DiaryActivityType(DiaryActivityType.byName(name, null));
-        } else {
-            diaryActivityType = new DiaryActivityType(createNewActivityType(name, creator));
-        }
-        return diaryActivityType;
-    }
-
-    private static DiaryActivityType createNewActivityType(String name, User creator){
-        DiaryActivityType diaryActivityArchType = new DiaryActivityType();
-        diaryActivityArchType.setName(name);
-        diaryActivityArchType.setIconLocation(DiaryActivityType.OTHERICONLOCATION);
-        diaryActivityArchType.setActivity(null);
-        diaryActivityArchType.setUser(creator);
-        diaryActivityArchType.setColor(DiaryActivityType.OTHERCOLOR);
-        diaryActivityArchType.save();
-        return diaryActivityArchType;
-    }
-
-    public static boolean DiaryActivityTypeExists(DiaryActivityType activity){
-        if(DiaryActivityType.find.byId(activity.getId()) != null){
-            return true;
-        }
-        if(DiaryActivityType.byName(activity.getName(), activity.getUser()) != null){
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean DiaryActivityTypeExists(String name, User creator){
-        if(DiaryActivityType.byName(name, creator) != null){
-            return true;
-        }
-        return false;
+    public static void loadStandardTypes(User user){
+        DiaryActivityType school = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.SCHOOL"), routes.Assets.at("images/school_icon.png").url(), "#308dd4", user);
+        school.save();
+        DiaryActivityType sport = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.SPORT"), routes.Assets.at("images/sport_icon.png").url(), "#8dd430", user);
+        sport.save();
+        DiaryActivityType meal = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.MEAL"), routes.Assets.at("images/meal_icon.png").url(), "#d4308d", user);
+        meal.save();
+        DiaryActivityType other = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.OTHER"), routes.Assets.at("images/other_icon.png").url(), "#d47730", user);
+        other.save();
     }
 }

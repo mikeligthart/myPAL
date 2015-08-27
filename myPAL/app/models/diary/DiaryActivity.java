@@ -1,6 +1,7 @@
 package models.diary;
 
 import models.User;
+import play.Logger;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
@@ -22,8 +23,8 @@ import java.util.List;
 @Entity
 public class DiaryActivity extends DiaryItem {
 
-    @Constraints.Required(message = " ")
-    @OneToOne
+    //@Constraints.Required(message = " ")
+    @ManyToOne
     private DiaryActivityType type;
 
     @Constraints.MaxLength(1200)

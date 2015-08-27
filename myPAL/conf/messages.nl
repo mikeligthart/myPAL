@@ -78,6 +78,7 @@ page.diary.calendar.noactivities=Voeg een activiteit of meeting toe
 page.diary.calendar.notaddactivity=Terug
 page.diary.calendar.addfromgallery=voeg toe uit gallerij
 page.diary.calendar.or=Of
+page.diary.calendar.addnewtype=Nieuw type toevoegen
 
 
 # Gallery #
@@ -150,3 +151,4 @@ error.pleaseAddFile=Voeg een foto toe.
 error.activityNotFound=De activiteit is helaas niet goed opgeslagen. Probeer dat eerst opnieuw toe te voegen.
 error.hasAlreadyPicture=Deze activiteit heeft al een foto. Je kunt dat veranderen door de activiteit zelf aan te passen.
 error.emailregisteredalready=Dit e-mailadres is al geregistreerd
+error.notypeselected=Er is geen type geselecteerd voor deze activiteit

@@ -71,7 +71,7 @@ public class Application extends Controller {
                 return redirect(routes.Application.hello());
             }
             else if (userType == UserType.ADMIN){
-                return redirect(routes.Admin.addUser());
+                return redirect(routes.Admin.admin());
             } else {
                 return forbidden(no_content.render());
             }

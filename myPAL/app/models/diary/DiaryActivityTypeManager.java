@@ -8,6 +8,7 @@ import play.Logger;
 import play.i18n.Messages;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -44,12 +45,48 @@ public class DiaryActivityTypeManager {
         other.save();
     }
 
-    public static void createDiaryActivityTypeManager(User user, String name, String color){
+    public static void createDiaryActivityType(User user, String name, String color){
         name = capitalise(name);
         if(DiaryActivityType.byNameAndUser(name, user) == null){
             DiaryActivityType newDiaryActivityType = new DiaryActivityType(name, routes.Assets.at("images/other_icon.png").url(), color, user);
             newDiaryActivityType.save();
         }
+    }
+
+    public static boolean removeDiaryActivity(User user, int id){
+        if(canBeRemoved(user, id)){
+            DiaryActivityType type = DiaryActivityType.byId(id);
+            List<DiaryActivity> diaryActivities = type.getActivities();
+            for(Iterator<DiaryActivity> it = diaryActivities.iterator(); it.hasNext();){
+                DiaryActivity activity = it.next();
+                activity.setType(DiaryActivityType.byNameAndUser(Messages.get("page.diary.calendar.activitytype.OTHER"), user));
+                activity.update();
+            }
+            type.setUser(null);
+            type.update();
+            type.delete();
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean canBeRemoved(User user, int id){
+        DiaryActivityType type = DiaryActivityType.byId(id);
+        if(type == null){
+            return false;
+        }
+        if(!user.equals(type.getUser()))
+            return false;
+        if(type.getName().equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.SCHOOL")))
+            return false;
+        if(type.getName().equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.SPORT")))
+            return false;
+        if(type.getName().equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.MEAL")))
+            return false;
+        if(type.getName().equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.OTHER")))
+            return false;
+
+        return true;
     }
 
     private static String capitalise(String name) {

@@ -1,6 +1,6 @@
 @(source: String, id: Int)
 
-@main_basic("new type"){
+@main_basic("add type"){
     <script src=@routes.Assets.at("javascripts/jquery.tinycolorpicker.js")></script>
 
     @helper.form(action = routes.Diary.addDiaryActivityType(source, id), 'class -> ""){

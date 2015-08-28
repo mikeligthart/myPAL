@@ -38,6 +38,8 @@ GET     /mypal/activity/linkpicture/:aid/:pid       controllers.Diary.linkPictur
 GET     /mypal/picture/delete/:id                   controllers.Diary.deletePictureFromGallery(id:Int)
 GET     /mypal/adddiaryactivitytype/:source/:id     controllers.Diary.addDiaryActivityTypePage(source:String, id:Int)
 POST    /mypal/adddiaryactivitytype/:source/:id     controllers.Diary.addDiaryActivityType(source:String, id:Int)
+GET     /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiaryActivityTypePage(source:String, id:Int)
+POST     /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiaryActivityType(source:String, id:Int)
 
 ## ADMIN ##
 GET     /admin                                  controllers.Admin.admin()

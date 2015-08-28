@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
 import models.diary.*;
 import models.logging.LogAction;
-import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
@@ -243,6 +242,17 @@ public class Diary extends Controller {
         }
 
         return ok(diary_add_diaryActivityType.render(source, id));
+    }
+
+    public static Result removeDiaryActivityTypePage(String source, int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        User user = User.byEmail(session().get("email"));
+        List<DiaryActivityType> diaryActivityTypes = DiaryActivityType.byUser(user);
+
+        return ok(diary_remove_diaryActivityType.render(source, id, diaryActivityTypes));
     }
 
     /* FUNCTIONALITIES */
@@ -680,7 +690,50 @@ public class Diary extends Controller {
             }
         }
 
-        DiaryActivityTypeManager.createDiaryActivityTypeManager(User.byEmail(email), name, color);
+        DiaryActivityTypeManager.createDiaryActivityType(User.byEmail(email), name, color);
+
+        if(isUpdate){
+            return redirect(routes.Diary.updateActivity(id));
+        } else {
+            return redirect(routes.Diary.addActivityPage());
+        }
+    }
+
+    public static Result removeDiaryActivityType(String source, int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        User user = User.byEmail(session().get("email"));
+
+        if(source == null){
+            return badRequest();
+        }
+        boolean isUpdate = false;
+        if(source.equalsIgnoreCase(Messages.get("page.diary.diaryActivityType.source.updateActivity"))){
+            if (DiaryActivity.byID(id) == null){
+                return badRequest();
+            }
+            isUpdate = true;
+        }
+
+        DynamicForm requestData = form().bindFromRequest();
+        String typeIdString = requestData.get("diaryActivityType");
+        if(typeIdString == null || typeIdString.isEmpty()){
+            if(isUpdate){
+                return updateActivityPage(id, Messages.get("error.notypeselected"));
+            } else {
+                return addActivityPage(Messages.get("error.notypeselected"));
+            }
+        }
+
+        if(!DiaryActivityTypeManager.removeDiaryActivity(user, Integer.valueOf(typeIdString))){
+            if(isUpdate){
+                return updateActivityPage(id, Messages.get("error.cannotBeRemoved"));
+            } else {
+                return addActivityPage(Messages.get("error.cannotBeRemoved"));
+            }
+        }
 
         if(isUpdate){
             return redirect(routes.Diary.updateActivity(id));

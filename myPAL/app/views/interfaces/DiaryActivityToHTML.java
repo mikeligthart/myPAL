@@ -2,10 +2,9 @@ package views.interfaces;
 
 import com.typesafe.config.ConfigFactory;
 import controllers.routes;
-import models.diary.DiaryActivity;
-import models.diary.DiaryActivityType;
-import models.diary.Emotion;
-import models.diary.Picture;
+import models.diary.activity.DiaryActivity;
+import models.diary.activity.Emotion;
+import models.diary.activity.Picture;
 import play.i18n.Messages;
 
 import java.sql.Date;

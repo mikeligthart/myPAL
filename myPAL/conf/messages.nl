@@ -90,6 +90,13 @@ page.diary.diaryActivityType.source.addActivity=add
 page.diary.diaryActivityType.source.updateActivity=update
 page.diary.diaryActivityType.pickacolor=Klik voor een nieuwe kleur
 
+# Measurements #
+page.diary.calendar.measurement.glucose=Glucose
+page.diary.calendar.measurement.insulin=Insuline
+page.diary.calendar.measurement.carbohydrate=Koolhydraten
+page.diary.calendar.measurement.select=Selecteer een meting:
+page.diary.calendar.measurement.addmeasurement=Voeg een meting toe
+page.diary.calendar.measurement.time=Tijd
 
 # Gallery #
 page.diary.gallery.addpicture=Foto uploaden

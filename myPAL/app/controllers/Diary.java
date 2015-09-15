@@ -3,12 +3,23 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
 import models.diary.*;
+import models.diary.activity.*;
+import models.diary.measurement.Glucose;
 import models.logging.LogAction;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Http;
 import util.PictureFactory;
+import views.html.diary.calendar.*;
+import views.html.diary.calendar.activity.*;
+import views.html.diary.calendar.measurement.diary_calendar_glucose_add;
+import views.html.diary.calendar.measurement.diary_calendar_measurement_select;
+import views.html.diary.gallery.diary_add_picture_page;
+import views.html.diary.gallery.diary_add_picture_page_direct;
+import views.html.diary.gallery.diary_gallery;
+import views.html.diary.gallery.diary_gallery_select_picture;
+import views.html.diary.goals.diary_goals;
 import views.interfaces.DiaryActivityToHTML;
 import models.logging.LogActionType;
 import play.mvc.Controller;
@@ -124,8 +135,7 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSADDACTIVITYPAGE);
 
-        return ok(diary_add_diaryActivity.render(user, activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", error));
-
+        return ok(diary_calendar_diaryActivity_add.render(user, activityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", error));
     }
 
     public static Result addPicturePage(){
@@ -164,7 +174,7 @@ public class Diary extends Controller {
         //Log user behavior
         LogAction.log(email, LogActionType.VIEWACTIVITY);
 
-        return ok(diary_calendar_view_activity.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity)));
+        return ok(diary_calendar_diaryActivity_view.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity)));
     }
 
     private static Result updateActivityPage(int id, String error){
@@ -190,7 +200,7 @@ public class Diary extends Controller {
         //Log user behavior
         LogAction.log(email, LogActionType.VIEWACTIVITY);
 
-        return ok(diary_update_diaryActivity.render(user, activityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), activity.getType().getName(), error));
+        return ok(diary_calendar_diaryActivity_update.render(user, activityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), activity.getType().getName(), error));
     }
 
     public static Result updateActivityPage(int id){
@@ -241,7 +251,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
 
-        return ok(diary_add_diaryActivityType.render(source, id));
+        return ok(diary_calendar_diaryActivityType_add.render(source, id));
     }
 
     public static Result removeDiaryActivityTypePage(String source, int id){
@@ -252,7 +262,35 @@ public class Diary extends Controller {
         User user = User.byEmail(session().get("email"));
         List<DiaryActivityType> diaryActivityTypes = DiaryActivityType.byUser(user);
 
-        return ok(diary_remove_diaryActivityType.render(source, id, diaryActivityTypes));
+        return ok(diary_calendar_diaryActivityType_remove.render(source, id, diaryActivityTypes));
+    }
+
+    public static Result selectMeasurement(){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        LogAction.log(email, LogActionType.ACCESSSELECTMEASUREMENTPAGE);
+
+        return ok(diary_calendar_measurement_select.render());
+    }
+
+    public static Result addGlucosePage(){
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        User user = User.byEmail(email);
+
+        //Generate addActivity page
+        Form<Glucose> glucoseForm = form(Glucose.class);
+
+        //Log user activity
+        LogAction.log(email, LogActionType.ACCESSADDGLUCOSEPAGE);
+
+        return ok(diary_calendar_glucose_add.render(user, glucoseForm));
     }
 
     /* FUNCTIONALITIES */
@@ -319,12 +357,12 @@ public class Diary extends Controller {
         boolean addFromGallery = requestData.get("isaddfromgallery").equalsIgnoreCase("true");
 
         if(requestData.get("diaryActivityType") == null){
-            return badRequest(diary_add_diaryActivity.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", Messages.get("error.notypeselected")));
+            return badRequest(diary_calendar_diaryActivity_add.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", Messages.get("error.notypeselected")));
         }
         DiaryActivityType diaryActivityType = DiaryActivityType.byId(Integer.valueOf(requestData.get("diaryActivityType")));
 
         if (diaryActivityForm.hasErrors()) {
-            return badRequest(diary_add_diaryActivity.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
+            return badRequest(diary_calendar_diaryActivity_add.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
         } else {
             //Retrieve the activity from the form
             DiaryActivity newDiaryActivity = diaryActivityForm.get();
@@ -353,7 +391,7 @@ public class Diary extends Controller {
                         return redirect(routes.Diary.calendar());
                     } else {
                         diaryActivityForm.reject(pictureFactory.getLatestError());
-                        return badRequest(diary_add_diaryActivity.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
+                        return badRequest(diary_calendar_diaryActivity_add.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
                     }
                 } else {
                     newDiaryActivity.save();
@@ -513,12 +551,12 @@ public class Diary extends Controller {
         DynamicForm requestData = form().bindFromRequest();
 
         if(requestData.get("diaryActivityType") == null){
-            return badRequest(diary_add_diaryActivity.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", Messages.get("error.notypeselected")));
+            return badRequest(diary_calendar_diaryActivity_add.render(user, diaryActivityForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", Messages.get("error.notypeselected")));
         }
         DiaryActivityType diaryActivityType = DiaryActivityType.byId(Integer.valueOf(requestData.get("diaryActivityType")));
 
         if (diaryActivityForm.hasErrors()) {
-            return badRequest(diary_update_diaryActivity.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
+            return badRequest(diary_calendar_diaryActivity_update.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
         } else {
             //Retrieve the activity from the form
             DiaryActivity updateActivity = diaryActivityForm.get();
@@ -540,7 +578,7 @@ public class Diary extends Controller {
                     return redirect(routes.Diary.viewActivity(id));
                 } else {
                     diaryActivityForm.reject(pictureFactory.getLatestError());
-                    return badRequest(diary_update_diaryActivity.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
+                    return badRequest(diary_calendar_diaryActivity_update.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
                 }
             } else {
                 LogAction.log(email, LogActionType.UPDATEACTIVITY);
@@ -740,5 +778,10 @@ public class Diary extends Controller {
         } else {
             return redirect(routes.Diary.addActivityPage());
         }
+    }
+
+    public static Result addGlucose(){
+
+        return ok();
     }
 }

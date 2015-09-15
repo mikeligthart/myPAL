@@ -1,0 +1,25 @@
+@(label: String, placeholder: String, hasErrors: Boolean = false)
+
+<div class="form-group @if(hasErrors) {has-error}">
+    <label class="col-sm-2 control-label" for="picture_file">@label</label>
+    <div class="col-sm-4">
+        <input type="file"
+               class="form-control"
+               id="picture_file"
+               name="picture_file"
+               placeholder="@placeholder"/>
+    </div>
+    <label class="col-sm-2 control-label text-right">@Messages("page.diary.calendar.or")</label>
+    <button type="submit" class="btn btn-default" id="addfromgallery"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> @Messages("page.diary.calendar.addfromgallery")</button>
+</div>
+<div class="form-group">
+    <input type="hidden" class="form-control" name="isaddfromgallery" id="isaddfromgallery" value="false">
+</div>
+
+<script>
+    $("#addfromgallery").on('click', function(e) {
+        e.preventDefault()
+        document.getElementById("isaddfromgallery").value = "true";
+        this.form.submit();
+    });
+</script>

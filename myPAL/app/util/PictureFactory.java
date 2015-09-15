@@ -2,8 +2,8 @@ package util;
 
 import com.typesafe.config.ConfigFactory;
 import models.User;
-import models.diary.DiaryActivity;
-import models.diary.Picture;
+import models.diary.activity.DiaryActivity;
+import models.diary.activity.Picture;
 import org.apache.commons.io.FilenameUtils;
 import org.imgscalr.Scalr;
 import play.Logger;
@@ -15,7 +15,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.regex.Pattern;

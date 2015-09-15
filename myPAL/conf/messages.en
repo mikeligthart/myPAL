@@ -89,6 +89,13 @@ page.diary.diaryActivityType.source.addActivity=add
 page.diary.diaryActivityType.source.updateActivity=update
 page.diary.diaryActivityType.pickacolor=Click for a new color
 
+# Measurements #
+page.diary.calendar.measurement.glucose=Glucose
+page.diary.calendar.measurement.insulin=Insulin
+page.diary.calendar.measurement.carbohydrate=Carbohydrate
+page.diary.calendar.measurement.select=Select a measurement:
+page.diary.calendar.measurement.addmeasurement=Add a measurement
+page.diary.calendar.measurement.time=Time
 
 # Gallery #
 page.diary.gallery.addpicture=Upload picture

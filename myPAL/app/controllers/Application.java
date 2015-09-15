@@ -6,14 +6,14 @@ import models.User;
 import models.User.Login;
 import models.UserType;
 import models.diary.DiarySettingsManager;
-import models.diary.Picture;
+import models.diary.activity.Picture;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.controlFlow.*;
-import views.html.diary.greeting;
+import views.html.diary.basePages.greeting;
 import views.html.interfaces.interfaces_description_box;
 import java.io.File;
 

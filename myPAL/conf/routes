@@ -39,7 +39,12 @@ GET     /mypal/picture/delete/:id                   controllers.Diary.deletePict
 GET     /mypal/adddiaryactivitytype/:source/:id     controllers.Diary.addDiaryActivityTypePage(source:String, id:Int)
 POST    /mypal/adddiaryactivitytype/:source/:id     controllers.Diary.addDiaryActivityType(source:String, id:Int)
 GET     /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiaryActivityTypePage(source:String, id:Int)
-POST     /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiaryActivityType(source:String, id:Int)
+POST    /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiaryActivityType(source:String, id:Int)
+
+# Measurement #
+GET     /mypal/measurement/select                   controllers.Diary.selectMeasurement()
+GET     /mypal/measurement/addglucose               controllers.Diary.addGlucosePage()
+POST    /mypal/measurement/addglucose               controllers.Diary.addGlucose()
 
 ## ADMIN ##
 GET     /admin                                  controllers.Admin.admin()

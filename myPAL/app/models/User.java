@@ -2,7 +2,10 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.typesafe.config.ConfigFactory;
-import models.diary.*;
+import models.diary.activity.DiaryActivity;
+import models.diary.activity.DiaryActivityType;
+import models.diary.activity.Picture;
+import models.diary.measurement.DiaryMeasurement;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -19,7 +22,6 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Iterator;
 import java.util.List;
 
 /**

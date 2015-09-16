@@ -16,7 +16,7 @@ import play.mvc.Result;
 import views.html.admin.admin_home;
 import views.html.admin.admin_user_update;
 import views.html.admin.admin_user_view;
-import views.html.admin.admin_users;
+import views.html.admin.admin_user;
 import views.html.controlFlow.no_access;
 
 import java.sql.Timestamp;
@@ -95,7 +95,7 @@ public class Admin extends Controller {
         }
 
         Form<User> userForm = form(User.class);
-        return ok(admin_users.render(userForm));
+        return ok(admin_user.render(userForm));
 
     }
 
@@ -170,7 +170,7 @@ public class Admin extends Controller {
 
         Form<User> userForm = form(User.class).bindFromRequest();
         if (userForm.hasErrors()) {
-            return badRequest(admin_users.render(userForm));
+            return badRequest(admin_user.render(userForm));
         } else {
             if(User.byEmail(userForm.data().get("email")) != null){
                 userForm.reject("email", Messages.get("error.emailregisteredalready"));

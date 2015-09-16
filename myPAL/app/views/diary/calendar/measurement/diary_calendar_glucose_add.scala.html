@@ -1,8 +1,8 @@
-@(user: User, glucoseForm: Form[models.diary.measurement.Glucose])
+@(user: User, glucoseForm: Form[models.diary.measurement.Glucose], currentDate: String)
 
 @import play.api.i18n._
 
-@diary_no_avatar(Messages("page.diary.base.calendar"), "calendar", user.getUserType) {
+@views.html.diary.diary_no_avatar(Messages("page.diary.base.calendar"), "calendar", user.getUserType) {
 
 <div class="text-left">
     <h3>@Messages("page.diary.calendar.measurement.addmeasurement")</h3>
@@ -16,7 +16,7 @@
     }
 
     @helper.form(action = routes.Diary.addGlucose(), 'class -> "") {
-        @diary_fieldset_glucose_add(glucoseForm)
+        @views.html.diary.fieldsets.diary_fieldset_glucose_add(glucoseForm, currentDate)
     }
 </div>
 

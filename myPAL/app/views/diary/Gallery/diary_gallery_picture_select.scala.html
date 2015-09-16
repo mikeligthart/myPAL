@@ -1,6 +1,6 @@
 @(userType: UserType, pictures: List[models.diary.activity.Picture], error: String = "", activityID: Int)
 
-@diary_no_avatar(Messages("page.diary.base.gallery"), "gallery", userType) {
+@views.html.diary.diary_no_avatar(Messages("page.diary.base.gallery"), "gallery", userType) {
 <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/ekko-lightbox.min.css")'>
 <div>
     <div class="row">

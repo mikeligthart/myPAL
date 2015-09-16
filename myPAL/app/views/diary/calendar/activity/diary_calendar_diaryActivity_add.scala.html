@@ -2,7 +2,7 @@
 
 @import play.api.i18n._
 
-@diary_no_avatar(Messages("page.diary.base.calendar"), "calendar", user.getUserType) {
+@views.html.diary.diary_no_avatar(Messages("page.diary.base.calendar"), "calendar", user.getUserType) {
 
     <div class="text-left">
         <h3>@Messages("page.diary.calendar.addactivity")</h3>
@@ -16,7 +16,7 @@
         }
 
         @helper.form(action = routes.Diary.addActivity(), 'class -> "", 'enctype -> "multipart/form-data") {
-            @diary_add_diaryActivity_fieldset(activityForm, currentDate, user, types, preselectedType, typeInputErrorMessage)
+            @views.html.diary.fieldsets.diary_fieldset_diaryActivity_add(activityForm, currentDate, user, types, preselectedType, typeInputErrorMessage)
         }
     </div>
 

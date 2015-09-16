@@ -17,7 +17,7 @@ import javax.persistence.*;
  * @version 1.0 21-8-2015
  */
 @Entity
-public class DiaryMeasurement extends DiaryItem {
+public abstract class DiaryMeasurement extends DiaryItem {
 
     private boolean value;
     private DayPart daypart;

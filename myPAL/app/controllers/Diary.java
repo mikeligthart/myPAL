@@ -13,18 +13,13 @@ import play.mvc.Http;
 import util.PictureFactory;
 import views.html.diary.calendar.*;
 import views.html.diary.calendar.activity.*;
-import views.html.diary.calendar.measurement.diary_calendar_glucose_add;
-import views.html.diary.calendar.measurement.diary_calendar_measurement_select;
-import views.html.diary.gallery.diary_add_picture_page;
-import views.html.diary.gallery.diary_add_picture_page_direct;
-import views.html.diary.gallery.diary_gallery;
-import views.html.diary.gallery.diary_gallery_select_picture;
-import views.html.diary.goals.diary_goals;
+import views.html.diary.calendar.measurement.*;
+import views.html.diary.gallery.*;
+import views.html.diary.goals.*;
 import views.interfaces.DiaryActivityToHTML;
 import models.logging.LogActionType;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.diary.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -148,7 +143,7 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSADDPICTUREPAGE);
 
-        return ok(diary_add_picture_page.render());
+        return ok(diary_gallery_picture_add.render());
     }
 
     public static Result viewActivity(int id){
@@ -225,9 +220,9 @@ public class Diary extends Controller {
             //Log user activity
             LogAction.log(email, LogActionType.SELECTPICTUREFROMGALLRERYPAGE);
 
-            return ok(diary_gallery_select_picture.render(user.getUserType(), pictures,"", id));
+            return ok(diary_gallery_picture_select.render(user.getUserType(), pictures,"", id));
         } else {
-            return ok(diary_gallery_select_picture.render(user.getUserType(), pictures, error, id));
+            return ok(diary_gallery_picture_select.render(user.getUserType(), pictures, error, id));
         }
 
     }
@@ -242,7 +237,7 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSADDPICTUREDIRECTLYPAGE);
 
-        return ok(diary_add_picture_page_direct.render(id));
+        return ok(diary_gallery_picture_addDirect.render(id));
     }
 
     public static Result addDiaryActivityTypePage(String source, int id){
@@ -290,7 +285,7 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSADDGLUCOSEPAGE);
 
-        return ok(diary_calendar_glucose_add.render(user, glucoseForm));
+        return ok(diary_calendar_glucose_add.render(user, glucoseForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(true)));
     }
 
     /* FUNCTIONALITIES */

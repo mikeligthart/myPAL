@@ -13,7 +13,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.controlFlow.*;
-import views.html.diary.basePages.greeting;
+import views.html.diary.diary_greeting;
 import views.html.interfaces.interfaces_description_box;
 import java.io.File;
 
@@ -110,7 +110,7 @@ public class Application extends Controller {
             return redirect(routes.Application.login());
         }
         User user = User.byEmail(session().get("email"));
-        return ok(greeting.render(dialogue.getGreeting(user.getFirstName())));
+        return ok(diary_greeting.render(dialogue.getGreeting(user.getFirstName())));
     }
 
     /* PRIVATE FILE MANAGEMENT */

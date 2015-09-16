@@ -2,7 +2,7 @@
 
 @import play.api.i18n._
 
-<div class="form-group @if(field_start.hasErrors || field_end.hasErrors) {has-error}">
+<div class="row form-group @if(field_start.hasErrors || field_end.hasErrors) {has-error}">
     <label class="col-sm-2 control-label" for="@field_start.id">@Messages("page.diary.calendar.settime.starttime")*</label>
     <div class="col-sm-4">
         <input type="text"

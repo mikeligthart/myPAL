@@ -97,6 +97,16 @@ page.diary.calendar.measurement.carbohydrate=Koolhydraten
 page.diary.calendar.measurement.select=Selecteer een meting:
 page.diary.calendar.measurement.addmeasurement=Voeg een meting toe
 page.diary.calendar.measurement.time=Tijd
+page.diary.calendar.measurement.daypart=Dagdeel
+page.diary.calendar.measurement.daypart.sober=NU
+page.diary.calendar.measurement.daypart.afterbreakfast=NO
+page.diary.calendar.measurement.daypart.beforelunch=VL
+page.diary.calendar.measurement.daypart.afterlunch=NL
+page.diary.calendar.measurement.daypart.beforedinner=VA
+page.diary.calendar.measurement.daypart.afterdinner=NA
+page.diary.calendar.measurement.comment=Opmerking
+page.diary.calendar.measurement.value=Waarde
+page.diary.calendar.measurement.glucoseunit=mmol/L
 
 # Gallery #
 page.diary.gallery.addpicture=Foto uploaden

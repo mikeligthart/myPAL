@@ -1,6 +1,6 @@
 @(label: String, placeholder: String, hasErrors: Boolean = false)
 
-<div class="form-group @if(hasErrors) {has-error}">
+<div class="row form-group @if(hasErrors) {has-error}">
     <label class="col-sm-2 control-label" for="picture_file">@label</label>
     <div class="col-sm-4">
         <input type="file"

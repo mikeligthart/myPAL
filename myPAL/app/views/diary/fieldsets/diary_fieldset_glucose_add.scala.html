@@ -5,6 +5,9 @@
 <fieldset>
     @diary_formGroup_date(glucoseForm("date"), Messages("page.diary.calendar.date") + "*", Messages("page.diary.calendar.date"), currentDate)
     @diary_formGroup_singleTime(glucoseForm("starttime"), glucoseForm("endtime"))
+    @diary_formGroup_select_dayPart(glucoseForm("dayPart"), Messages("page.diary.calendar.measurement.daypart") + "*")
+    @diary_formGroup_value(glucoseForm("value"), Messages("page.diary.calendar.measurement.value") + "*", Messages("page.diary.calendar.measurement.value"), Messages("page.diary.calendar.measurement.glucoseunit"))
+    @diary_formGroup_description(glucoseForm("comment"), Messages("page.diary.calendar.measurement.comment"), Messages("page.diary.calendar.measurement.comment"))
 
     <div class="form-group">
         <br />

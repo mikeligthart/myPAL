@@ -1,6 +1,7 @@
 package models.diary.measurement;
 
 import models.diary.DiaryItem;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
 
@@ -19,7 +20,10 @@ import javax.persistence.*;
 @Entity
 public abstract class DiaryMeasurement extends DiaryItem {
 
+    @Constraints.Required(message = " ")
     private boolean value;
+
+    @Constraints.Required(message = " ")
     private DayPart daypart;
 
     public DiaryMeasurement(){

@@ -96,6 +96,16 @@ page.diary.calendar.measurement.carbohydrate=Carbohydrate
 page.diary.calendar.measurement.select=Select a measurement:
 page.diary.calendar.measurement.addmeasurement=Add a measurement
 page.diary.calendar.measurement.time=Time
+page.diary.calendar.measurement.daypart=Day part
+page.diary.calendar.measurement.daypart.sober=SO
+page.diary.calendar.measurement.daypart.afterbreakfast=AB
+page.diary.calendar.measurement.daypart.beforelunch=BL
+page.diary.calendar.measurement.daypart.afterlunch=AL
+page.diary.calendar.measurement.daypart.beforedinner=BD
+page.diary.calendar.measurement.daypart.afterdinner=AD
+page.diary.calendar.measurement.comment=Comment
+page.diary.calendar.measurement.value=Value
+page.diary.calendar.measurement.glucoseunit=mmol/L
 
 # Gallery #
 page.diary.gallery.addpicture=Upload picture

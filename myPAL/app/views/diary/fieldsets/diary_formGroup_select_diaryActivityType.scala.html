@@ -3,7 +3,7 @@
 @import play.api.i18n._
 <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/ekko-lightbox.min.css")'>
 
-<div id="diaryActivityTypeSelecter" class="form-group @if(errorMessage != "") {has-error}">
+<div id="diaryActivityTypeSelecter" class="row form-group @if(errorMessage != "") {has-error}">
     <label class="col-sm-2 control-label">@label</label>
     @for((uType, index) <- types.zipWithIndex){
         @if(index % 5 == 0){

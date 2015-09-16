@@ -1,8 +1,8 @@
 @(field: Field, label: String = "CHANGEME", placeholder: String)
 
-<div class="form-group @if(field.hasErrors) {has-error}">
+<div class="row form-group @if(field.hasErrors) {has-error}">
     <label class="col-sm-12 control-label">@label</label>
-    <div class="row text-center">
+    <div class="text-center">
         <label  class="col-sm-offset-2 col-sm-2" id="emotion_selector_left" >
             <input type="radio" name='@field.name' value="SAD" @if(field.value.getOrElse("") == "SAD"){checked="checked"} />
             <img class="emotionimage" src='@routes.Assets.at("images/smiley1_sad.png")'>

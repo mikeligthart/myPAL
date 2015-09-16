@@ -2,14 +2,14 @@
 
 @import play.api.i18n._
 
-<div class="form-group @if(field_start.hasErrors || field_end.hasErrors) {has-error}">
+<div class="row form-group @if(field_start.hasErrors || field_end.hasErrors) {has-error}">
     <label class="col-sm-2 control-label" for="@field_start.id">@Messages("page.diary.calendar.measurement.time")*</label>
     <div class="col-sm-10">
         <input type="text"
                class="time form-control"
                id="@field_start.id"
                name="@field_start.name"
-               value='@field_start.value.getOrElse("09:00")'
+               value='@field_start.value.getOrElse("07:00")'
                placeholder='@Messages("page.diary.calendar.measurement.time")'/>
         <span class="help-block">@{field_start.error.map { error => error.message }}</span>
     </div>
@@ -19,6 +19,6 @@
                class="form-control"
                id="@field_end.id"
                name="@field_end.name"
-               value='@field_end.value.getOrElse("09:05")'/>
+               value='@field_end.value.getOrElse("07:05")'/>
     </div>
 </div>

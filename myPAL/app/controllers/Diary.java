@@ -6,6 +6,7 @@ import models.diary.*;
 import models.diary.activity.*;
 import models.diary.measurement.Glucose;
 import models.logging.LogAction;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
@@ -23,6 +24,7 @@ import play.mvc.Result;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 
 import static play.data.Form.form;
@@ -776,7 +778,32 @@ public class Diary extends Controller {
     }
 
     public static Result addGlucose(){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        User user = User.byEmail(email);
 
-        return ok();
+        //Retrieve form data
+        Form<Glucose> glucoseForm = form(Glucose.class).bindFromRequest();
+
+        if (glucoseForm.hasErrors()){
+            Logger.debug("[Diary > addGlucose] error(s) found: " + glucoseForm.error("daypart") + " | " + glucoseForm.data().get("daypart"));
+
+            return badRequest(diary_calendar_glucose_add.render(user, glucoseForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
+        } else {
+            //Retrieve glucose object and save it
+            Glucose glucose = glucoseForm.get();
+            glucose.setUser(user);
+            glucose.save();
+
+            //Change the date to match the glucose object's date
+            DiarySettingsManager.getInstance().retrieve(email).dateUpdate(glucose.getDate());
+
+            //Redirect to calendar page
+            LogAction.log(email, LogActionType.ADDEDGLUCOSE);
+            return redirect(routes.Diary.calendar());
+        }
     }
 }

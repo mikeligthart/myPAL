@@ -1,6 +1,7 @@
 package models.diary.measurement;
 
 import models.diary.DiaryItem;
+import play.Logger;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
@@ -21,33 +22,35 @@ import javax.persistence.*;
 public abstract class DiaryMeasurement extends DiaryItem {
 
     @Constraints.Required(message = " ")
-    private boolean value;
+    private double value;
 
-    @Constraints.Required(message = " ")
+    @Constraints.Required
+    @OneToMany
+    @Enumerated
     private DayPart daypart;
 
     public DiaryMeasurement(){
         super();
     }
 
-    public boolean getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(boolean value) {
+    public void setValue(double value) {
         this.value = value;
-    }
-
-    public boolean isValue() {
-        return value;
     }
 
     public DayPart getDaypart() {
         return daypart;
     }
 
-    public void setDaypart(DayPart daypart) {
-        this.daypart = daypart;
+    public void setDaypart(Object daypart) {
+        Logger.debug("[DiaryMeasurement > setDaypart] daypart is instance of " + daypart.getClass().getCanonicalName());
+
+        if (daypart instanceof DayPart) {
+            this.daypart = (DayPart) daypart;
+        }
     }
 
     public static Finder<Integer, DiaryMeasurement> find = new Finder<Integer, DiaryMeasurement>(Integer.class, DiaryMeasurement.class);

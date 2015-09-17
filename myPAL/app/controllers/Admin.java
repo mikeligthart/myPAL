@@ -174,6 +174,7 @@ public class Admin extends Controller {
         } else {
             if(User.byEmail(userForm.data().get("email")) != null){
                 userForm.reject("email", Messages.get("error.emailregisteredalready"));
+                return badRequest(admin_user.render(userForm));
             }
             User newUser = userForm.get();
             newUser.save();

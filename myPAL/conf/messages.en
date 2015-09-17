@@ -106,6 +106,8 @@ page.diary.calendar.measurement.daypart.afterdinner=AD
 page.diary.calendar.measurement.comment=Comment
 page.diary.calendar.measurement.value=Value
 page.diary.calendar.measurement.glucoseunit=mmol/L
+page.diary.calendar.addmeasurement=Add measurement
+page.diary.calendar.notaddmeasurement=Cancel
 
 # Gallery #
 page.diary.gallery.addpicture=Upload picture

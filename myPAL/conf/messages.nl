@@ -107,6 +107,8 @@ page.diary.calendar.measurement.daypart.afterdinner=NA
 page.diary.calendar.measurement.comment=Opmerking
 page.diary.calendar.measurement.value=Waarde
 page.diary.calendar.measurement.glucoseunit=mmol/L
+page.diary.calendar.addmeasurement=Meting toevoegen
+page.diary.calendar.notaddmeasurement=Terug
 
 # Gallery #
 page.diary.gallery.addpicture=Foto uploaden

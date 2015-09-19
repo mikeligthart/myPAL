@@ -1,6 +1,10 @@
 package models.diary.measurement;
 
+import models.User;
+
 import javax.persistence.Entity;
+import java.sql.Date;
+import java.util.List;
 
 /**
  * myPAL
@@ -30,4 +34,23 @@ public class Glucose extends DiaryMeasurement {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public static Finder<Integer, Glucose> find = new Finder<Integer, Glucose>(Integer.class, Glucose.class);
+
+    public static List<Glucose> byUser(User user){
+        return find.where().eq("user", user).findList();
+    }
+
+    public static List<Glucose> byDate(Date date){
+        return find.where().eq("date", date).findList();
+    }
+
+    public static List<Glucose> byUserAndDate(User user, Date date){
+        return find.where().eq("user", user).eq("date", date).setOrderBy("starttime asc").findList();
+    }
+
+    public static Glucose byID(int id){
+        return find.byId(id);
+    }
+
 }

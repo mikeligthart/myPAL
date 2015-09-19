@@ -2,11 +2,13 @@ google.load("visualization", "1", {packages:["timeline"]});
 var drawingObject = new DrawMyData();
 
 $.getJSON('/mypal/activity/list', function(jsonActivities) {
-    drawingObject.draw(jsonActivities);
+    $.getJSON('/mypal/measurement/list', function(jsonMeasurements) {
+        drawingObject.draw(jsonActivities, jsonMeasurements);
+    });
 });
 
 function DrawMyData(){
-    this.draw = function(data){
+    this.draw = function(activities, measurements){
         google.setOnLoadCallback(drawChart);
 
         function drawChart() {
@@ -19,22 +21,23 @@ function DrawMyData(){
                 dataTable.addColumn({ type: 'date', id: 'Start' });
                 dataTable.addColumn({ type: 'date', id: 'End' });
 
-                dataTable.addRows(getRows(data));
+                dataTable.addRows(getActivities(activities));
+                dataTable.addRows(getMeasurements(measurements));
 
                 var options = {
                     'tooltip' : {trigger: 'none'},
-                    colors: setColors(data)
+                    colors: setColors(activities, measurements)
                 };
 
                 function selectHandler() {
                         var selectedItem = chart.getSelection()[0];
                         if (selectedItem) {
-                            var selectedActivity = data[selectedItem.row];
+                            var selectedActivity = activities[selectedItem.row];
                             window.location.href = selectedActivity.viewURL;
                         }
                 }
 
-                function getRows(activities){
+                function getActivities(activities){
                     var rows = [];
                     for(i = 0; i < activities.length; i++) {
                         var activity = activities[i]
@@ -44,11 +47,26 @@ function DrawMyData(){
                     return rows;
                 }
 
-                function setColors(activities){
+                function getMeasurements(measurements){
+                    var rows = [];
+                    for(i = 0; i < measurements.length; i++) {
+                        var measurement = measurements[i]
+                        var row = [ 'Meting', measurement.type, new Date(0,0,0,measurement.startHour,measurement.startMin,0), new Date(0,0,0,measurement.endHour,measurement.endMin,0)];
+                        rows.push(row);
+                    }
+                    return rows;
+                }
+
+                function setColors(activities, measurements){
                     var color = [];
                     for(i = 0; i < activities.length; i++) {
                         var activity = activities[i];
                         color.push(activity.color);
+                    }
+
+                    for(i = 0; i < measurements.length; i++) {
+                        var measurement = measurements[i];
+                        color.push(measurement.color);
                     }
                     return color;
                 }

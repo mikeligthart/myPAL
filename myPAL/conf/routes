@@ -45,6 +45,7 @@ POST    /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiar
 GET     /mypal/measurement/select                   controllers.Diary.selectMeasurement()
 GET     /mypal/measurement/addglucose               controllers.Diary.addGlucosePage()
 POST    /mypal/measurement/addglucose               controllers.Diary.addGlucose()
+GET     /mypal/measurement/list                     controllers.Diary.getMeasurements()
 
 ## ADMIN ##
 GET     /admin                                  controllers.Admin.admin()

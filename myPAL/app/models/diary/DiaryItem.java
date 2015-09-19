@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
  * myPAL
  * Purpose: base class that models the concept of a diary entry
  *
- * Developped for TNO.
+ * Developed for TNO.
  * Kampweg 5
  * 3769 DE Soesterberg
  * General telephone number: +31(0)88 866 15 00

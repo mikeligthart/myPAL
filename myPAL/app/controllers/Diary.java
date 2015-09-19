@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
 import models.diary.*;
 import models.diary.activity.*;
+import models.diary.measurement.DiaryMeasurement;
 import models.diary.measurement.Glucose;
 import models.logging.LogAction;
 import play.Logger;
@@ -21,9 +22,11 @@ import views.interfaces.DiaryActivityToHTML;
 import models.logging.LogActionType;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.interfaces.MeasurementToHTML;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -805,5 +808,24 @@ public class Diary extends Controller {
             LogAction.log(email, LogActionType.ADDEDGLUCOSE);
             return redirect(routes.Diary.calendar());
         }
+    }
+
+    public static Result getMeasurements(){
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("email") == null){
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        User user = User.byEmail(email);
+
+        DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
+        List<DiaryMeasurement> diaryMeasurements = new ArrayList<>();
+        diaryMeasurements.addAll(Glucose.byUserAndDate(user, Date.valueOf(diarySettings.getCalendarDate())));
+
+        List<MeasurementToHTML> measurements = MeasurementToHTML.fromListToList(diaryMeasurements);
+
+        JsonNode jsonActivities = toJson(measurements);
+
+        return ok(jsonActivities);
     }
 }

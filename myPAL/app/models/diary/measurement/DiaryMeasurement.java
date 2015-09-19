@@ -1,10 +1,14 @@
 package models.diary.measurement;
 
+import controllers.Diary;
+import models.User;
 import models.diary.DiaryItem;
 import play.Logger;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.List;
 
 /**
  * myPAL
@@ -52,7 +56,4 @@ public abstract class DiaryMeasurement extends DiaryItem {
             this.daypart = (DayPart) daypart;
         }
     }
-
-    public static Finder<Integer, DiaryMeasurement> find = new Finder<Integer, DiaryMeasurement>(Integer.class, DiaryMeasurement.class);
-
 }

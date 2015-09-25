@@ -5,6 +5,7 @@ import models.User;
 import models.diary.*;
 import models.diary.activity.*;
 import models.diary.measurement.DiaryMeasurement;
+import models.diary.measurement.DiaryMeasurementType;
 import models.diary.measurement.Glucose;
 import models.logging.LogAction;
 import play.Logger;
@@ -67,17 +68,20 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
+        User user = User.byEmail(email);
 
         //Manage the right settings such as date for the calendar
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
+        Date date = Date.valueOf(diarySettings.getCalendarDate());
 
         //Retrieve the number of activities
-        List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
+        int DiaryItemSize = DiaryActivity.byUserAndDate(user, date).size() +
+                Glucose.byUserAndDate(user, date).size();
 
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSCALENDAR);
 
-        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), diaryActivities.size()));
+        return ok(diary_calendar.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryItemSize));
     }
 
     public static Result goals() {
@@ -293,6 +297,43 @@ public class Diary extends Controller {
         return ok(diary_calendar_glucose_add.render(user, glucoseForm, DiarySettingsManager.getInstance().retrieve(email).getDateString(false)));
     }
 
+    public static Result viewMeasurement(int id, int measurementType) {
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        User user = User.byEmail(email);
+
+        DiaryMeasurementType type = DiaryMeasurementType.fromInteger(measurementType);
+        DiaryMeasurement measurement;
+        switch(type){
+            case GLUCOSE: measurement = Glucose.byID(id);
+                break;
+            case INSULIN: measurement = null;
+                break;
+            case CARBOHYDRATE: measurement = null;
+                break;
+            case OTHER:
+            default: measurement = null;
+                break;
+        }
+        //Check if user has access to view this activity
+        if(measurement == null){
+            return forbidden();
+        }
+        if(!measurement.getUser().equals(user)){
+            return forbidden();
+        }
+
+        //Manage the right settings such as date for the calendar
+        DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
+
+        LogAction.log(email, LogActionType.VIEWMEASUREMENT);
+
+        return ok(diary_calendar_measurement_view.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new MeasurementToHTML(measurement)));
+    }
+
     /* FUNCTIONALITIES */
 
     public static Result calendarUpdate(String update){
@@ -301,6 +342,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
+        User user = User.byEmail(email);
 
         //Update calendar based on date change
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
@@ -313,12 +355,14 @@ public class Diary extends Controller {
         } else {
             return forbidden();
         }
+        Date date = Date.valueOf(diarySettings.getCalendarDate());
 
         //Retrieve the number of activities
-        List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
+        int diaryItemSize = DiaryActivity.byUserAndDate(user, date).size() +
+                Glucose.byUserAndDate(user, date).size();
 
 
-        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), diaryActivities.size()));
+        return ok(diary_calendar.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize));
     }
 
     public static Result calendarSet(String day, String month, String year){
@@ -327,18 +371,21 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
+        User user = User.byEmail(email);
 
         //Update calendar based on date change
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
         diarySettings.dateUpdate(day, month, year);
+        Date date = Date.valueOf(diarySettings.getCalendarDate());
 
         //Retrieve the number of activities
-        List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
+        int diaryItemSize = DiaryActivity.byUserAndDate(user, date).size() +
+                Glucose.byUserAndDate(user, date).size();
 
         //Log user activity
         LogAction.log(email, LogActionType.UPDATECALENDARDIRECTLY);
 
-        return ok(diary_calendar.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), diaryActivities.size()));
+        return ok(diary_calendar.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize));
     }
 
     public static Result addActivity() {

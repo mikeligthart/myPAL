@@ -9,6 +9,7 @@ $.getJSON('/mypal/activity/list', function(jsonActivities) {
 
 function DrawMyData(){
     this.draw = function(activities, measurements){
+        var activityCount = Object.keys(activities).length
         google.setOnLoadCallback(drawChart);
 
         function drawChart() {
@@ -30,10 +31,19 @@ function DrawMyData(){
                 };
 
                 function selectHandler() {
-                        var selectedItem = chart.getSelection()[0];
-                        if (selectedItem) {
-                            var selectedActivity = activities[selectedItem.row];
-                            window.location.href = selectedActivity.viewURL;
+                        var selection = chart.getSelection()[0];
+                        if (selection) {
+                            var index = selection.row;
+                            var selectedItem;
+                            if(index < activityCount){
+                                selectedItem = activities[index];
+
+                            } else {
+                                index = index - activityCount;
+                                selectedItem = measurements[index];
+                            }
+                            window.location.href = selectedItem.viewURL;
+
                         }
                 }
 

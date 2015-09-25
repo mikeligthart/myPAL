@@ -50,8 +50,6 @@ public abstract class DiaryMeasurement extends DiaryItem {
     }
 
     public void setDaypart(Object daypart) {
-        Logger.debug("[DiaryMeasurement > setDaypart] daypart is instance of " + daypart.getClass().getCanonicalName());
-
         if (daypart instanceof DayPart) {
             this.daypart = (DayPart) daypart;
         }

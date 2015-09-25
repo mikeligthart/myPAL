@@ -46,6 +46,7 @@ GET     /mypal/measurement/select                   controllers.Diary.selectMeas
 GET     /mypal/measurement/addglucose               controllers.Diary.addGlucosePage()
 POST    /mypal/measurement/addglucose               controllers.Diary.addGlucose()
 GET     /mypal/measurement/list                     controllers.Diary.getMeasurements()
+GET     /mypal/measurement/view/:id/:type           controllers.Diary.viewMeasurement(id:Int, type:Int)
 
 ## ADMIN ##
 GET     /admin                                  controllers.Admin.admin()

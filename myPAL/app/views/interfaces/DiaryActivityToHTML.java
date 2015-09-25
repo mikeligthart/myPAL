@@ -41,40 +41,40 @@ public class DiaryActivityToHTML {
     private static final int longDescriptionMaxLength = 144;
 
     public DiaryActivityToHTML(DiaryActivity diaryActivity){
-        this.id = diaryActivity.getId();
-        this.startHour = diaryActivity.getStarttime().toLocalTime().getHour();
-        this.startMin = diaryActivity.getStarttime().toLocalTime().getMinute();
-        this.endHour = diaryActivity.getEndtime().toLocalTime().getHour();
-        this.endMin = diaryActivity.getEndtime().toLocalTime().getMinute();
-        this.type = diaryActivity.getType().getName();
-        this.description = diaryActivity.getDescription();
-        this.emotion = diaryActivity.getEmotion().name();
-        this.emotionPicture = emotionToPicture(diaryActivity.getEmotion());
-        this.date = dateFormatter.format(diaryActivity.getDate());
-        this.picture = retrievePictureURL(diaryActivity.getPicture(), false);
-        this.fullPicture =retrievePictureURL(diaryActivity.getPicture(), true);
-        this.color = diaryActivity.getType().getColor();
-        this.viewURL = routes.Diary.viewActivity(diaryActivity.getId()).url();
-        this.startTime = timeFormatter.format(diaryActivity.getStarttime());
-        this.endTime = timeFormatter.format(diaryActivity.getEndtime());
-        this.hasPicture = diaryActivity.hasPicture();
+        id = diaryActivity.getId();
+        startHour = diaryActivity.getStarttime().toLocalTime().getHour();
+        startMin = diaryActivity.getStarttime().toLocalTime().getMinute();
+        endHour = diaryActivity.getEndtime().toLocalTime().getHour();
+        endMin = diaryActivity.getEndtime().toLocalTime().getMinute();
+        type = diaryActivity.getType().getName();
+        description = diaryActivity.getDescription();
+        emotion = diaryActivity.getEmotion().name();
+        emotionPicture = emotionToPicture(diaryActivity.getEmotion());
+        date = dateFormatter.format(diaryActivity.getDate());
+        picture = retrievePictureURL(diaryActivity.getPicture(), false);
+        fullPicture =retrievePictureURL(diaryActivity.getPicture(), true);
+        color = diaryActivity.getType().getColor();
+        viewURL = routes.Diary.viewActivity(diaryActivity.getId()).url();
+        startTime = timeFormatter.format(diaryActivity.getStarttime());
+        endTime = timeFormatter.format(diaryActivity.getEndtime());
+        hasPicture = diaryActivity.hasPicture();
         if(hasPicture) {
             hasPictureString = "<a href='" + fullPicture + "' data-toggle='lightbox' data-title='" + type +" - " + date + "'>" + Messages.get("page.general.yes") + "</a>";
         } else {
             hasPictureString = Messages.get("page.general.no");
         }
         if(description.length() <= shortDescriptionMaxLength){
-            this.shortDescription = description;
+            shortDescription = description;
         } else {
-            this.shortDescription = "<a href='" + routes.Application.contentBox(description) +"' data-toggle='lightbox' data-title='" + Messages.get("page.diary.calendar.description") + "'>" + description.substring(0, shortDescriptionMaxLength) + "...</a>";
+            shortDescription = "<a href='" + routes.Application.contentBox(description) +"' data-toggle='lightbox' data-title='" + Messages.get("page.diary.calendar.description") + "'>" + description.substring(0, shortDescriptionMaxLength) + "...</a>";
         }
-        this.firstName = diaryActivity.getUser().getFirstName();
-        this.lastName = diaryActivity.getUser().getLastName();
-        this.email = diaryActivity.getUser().getEmail();
+        firstName = diaryActivity.getUser().getFirstName();
+        lastName = diaryActivity.getUser().getLastName();
+        email = diaryActivity.getUser().getEmail();
         if(description.length() <= longDescriptionMaxLength){
-            this.longDescription = description;
+            longDescription = description;
         } else {
-            this.longDescription = description.substring(0, longDescriptionMaxLength) + "...";
+            longDescription = description.substring(0, longDescriptionMaxLength) + "...";
         }
 
     }

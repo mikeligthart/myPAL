@@ -1,11 +1,17 @@
 package views.interfaces;
 
+import com.typesafe.config.ConfigFactory;
+import controllers.routes;
 import models.diary.measurement.DiaryMeasurement;
+import models.diary.measurement.DiaryMeasurementType;
 import models.diary.measurement.Glucose;
+import play.i18n.Messages;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.zip.DeflaterInputStream;
 
 /**
  * myPAL
@@ -27,12 +33,15 @@ public class MeasurementToHTML {
 
     private int id;
     private int startHour, startMin, endHour, endMin;
-    private String type, value, daypart, comment, color;
+    private String type, value, daypart, comment, color, viewURL, startTime, unit;
+    private DiaryMeasurementType diaryMeasurementType;
 
-    private boolean isGlusose;
+    private static final SimpleDateFormat dateFormatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
+    private static final SimpleDateFormat timeFormatter = new SimpleDateFormat(ConfigFactory.load().getString("time.format"));
 
     public MeasurementToHTML(DiaryMeasurement measurement){
         id = measurement.getId();
+        startTime = timeFormatter.format(measurement.getStarttime());
         startHour = measurement.getStarttime().toLocalTime().getHour();
         startMin = measurement.getStarttime().toLocalTime().getMinute();
         endHour = measurement.getEndtime().toLocalTime().getHour();
@@ -42,15 +51,18 @@ public class MeasurementToHTML {
         daypart = measurement.getDaypart().toString();
 
         if (measurement instanceof Glucose){
-            isGlusose = true;
+            diaryMeasurementType = DiaryMeasurementType.GLUCOSE;
             Glucose glucose = (Glucose) measurement;
             comment = glucose.getComment();
             color = glucoseColor;
+            unit = Messages.get("page.diary.calendar.measurement.glucoseunit");
         } else {
-            isGlusose = false;
+            diaryMeasurementType = DiaryMeasurementType.OTHER;
             comment = "";
             color = defaultColor;
+            unit = "";
         }
+        viewURL = routes.Diary.viewMeasurement(id, diaryMeasurementType.ordinal()).url();
     }
 
     public static List<MeasurementToHTML> fromListToList(List<DiaryMeasurement> measurements){
@@ -133,19 +145,43 @@ public class MeasurementToHTML {
         this.comment = comment;
     }
 
-    public boolean isGlusose() {
-        return isGlusose;
-    }
-
-    public void setIsGlusose(boolean isGlusose) {
-        this.isGlusose = isGlusose;
-    }
-
     public String getColor() {
         return color;
     }
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public DiaryMeasurementType getDiaryMeasurementType() {
+        return diaryMeasurementType;
+    }
+
+    public void setDiaryMeasurementType(DiaryMeasurementType diaryMeasurementType) {
+        this.diaryMeasurementType = diaryMeasurementType;
+    }
+
+    public String getViewURL() {
+        return viewURL;
+    }
+
+    public void setViewURL(String viewURL) {
+        this.viewURL = viewURL;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

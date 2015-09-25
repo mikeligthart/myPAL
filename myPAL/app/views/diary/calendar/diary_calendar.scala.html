@@ -1,4 +1,4 @@
-@(userType: models.UserType, date: String, realDate: String, activitySize: Integer)
+@(userType: models.UserType, date: String, realDate: String, diaryItemSize: Integer)
 
 @import play.api.i18n._
 @import play.api.libs.json.Json
@@ -9,7 +9,7 @@
     <script src=@routes.Assets.at("javascripts/bootstrap-datepicker.js")></script>
 
 
-    @if(activitySize > 0){
+    @if(diaryItemSize > 0){
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script src=@routes.Assets.at("javascripts/showDiaryActivities.js")></script>
     }
@@ -30,7 +30,7 @@
         <div id="timeline" style="width:85%; height:100%;" class="text-center"></div>
     </div>
 
-    @if(activitySize == 0){
+    @if(diaryItemSize == 0){
         <div class="text-center">
             <br />
             <h3>@Messages("page.diary.calendar.noactivities")</h3>

@@ -7,17 +7,17 @@ function setDayPart(time){
     var afterdinner = Date.parse("17:30");
 
     if (time.between(sober, afterbreakfast)){
-        $("#dayPart").val("SOBER");
+        $("#daypart").val("SOBER");
     } else if (time.between(afterbreakfast, beforelunch)){
-        $("#dayPart").val("AFTERBREAKFAST");
+        $("#daypart").val("AFTERBREAKFAST");
     } else if (time.between(beforelunch, afterlunch)){
-        $("#dayPart").val("BEFORELUNCH");
+        $("#daypart").val("BEFORELUNCH");
     } else if (time.between(afterlunch, beforedinner)){
-        $("#dayPart").val("AFTERLUNCH");
+        $("#daypart").val("AFTERLUNCH");
     } else if (time.between(beforedinner, afterdinner)){
-        $("#dayPart").val("BEFOREDINNER");
+        $("#daypart").val("BEFOREDINNER");
     } else {
-        $("#dayPart").val("AFTERDINNER");
+        $("#daypart").val("AFTERDINNER");
     }
 }
 

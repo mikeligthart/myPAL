@@ -1,3 +1,4 @@
+console.log("start loading timeline");
 google.load("visualization", "1", {packages:["timeline"]});
 var drawingObject = new DrawMyData();
 
@@ -22,8 +23,11 @@ function DrawMyData(){
                 dataTable.addColumn({ type: 'date', id: 'Start' });
                 dataTable.addColumn({ type: 'date', id: 'End' });
 
-                dataTable.addRows(getActivities(activities));
-                dataTable.addRows(getMeasurements(measurements));
+                var lastIndexActivities = dataTable.addRows(getActivities(activities));
+                var lastIndexMeasurements = dataTable.addRows(getMeasurements(measurements));
+                console.log("Activities: " + lastIndexActivities + ", Measurements:" + lastIndexMeasurements);
+
+
 
                 var options = {
                     'tooltip' : {trigger: 'none'},
@@ -78,6 +82,7 @@ function DrawMyData(){
                         var measurement = measurements[i];
                         color.push(measurement.color);
                     }
+                    console.log("colors: " + color);
                     return color;
                 }
 

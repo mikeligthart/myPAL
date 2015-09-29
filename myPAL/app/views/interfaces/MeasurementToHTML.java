@@ -2,9 +2,7 @@ package views.interfaces;
 
 import com.typesafe.config.ConfigFactory;
 import controllers.routes;
-import models.diary.measurement.DiaryMeasurement;
-import models.diary.measurement.DiaryMeasurementType;
-import models.diary.measurement.Glucose;
+import models.diary.measurement.*;
 import play.i18n.Messages;
 
 import java.text.SimpleDateFormat;
@@ -57,6 +55,18 @@ public class MeasurementToHTML {
             comment = glucose.getComment();
             color = glucoseColor;
             unit = Messages.get("page.diary.calendar.measurement.glucoseunit");
+        } else if (measurement instanceof Insulin) {
+            diaryMeasurementType = DiaryMeasurementType.INSULIN;
+            Insulin insulin = (Insulin) measurement;
+            comment = insulin.getComment();
+            color = insulinColor;
+            unit = Messages.get("page.diary.calendar.measurement.insulinunit");
+        } else if (measurement instanceof CarboHydrate){
+            diaryMeasurementType = DiaryMeasurementType.CARBOHYDRATE;
+            CarboHydrate carboHydrate = (CarboHydrate) measurement;
+            comment = carboHydrate.getComment();
+            color = carbohydrateColor;
+            unit = Messages.get("page.diary.calendar.measurement.carboHydrateunit");
         } else {
             diaryMeasurementType = DiaryMeasurementType.OTHER;
             comment = "";

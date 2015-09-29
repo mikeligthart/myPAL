@@ -1,0 +1,26 @@
+@(user: User, insulinForm: Form[models.diary.measurement.Insulin], id: Int)
+
+@import play.api.i18n._
+
+@views.html.diary.diary_no_avatar(Messages("page.diary.base.calendar"), "calendar", user.getUserType) {
+
+<div class="text-left">
+    <h3>@Messages("page.diary.calendar.measurement.update")</h3>
+
+    @if(insulinForm.hasGlobalErrors) {
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">@Messages("page.general.error")</span>
+        @insulinForm.globalError.message
+    </div>
+    }
+
+    @helper.form(action = routes.Diary.updateInsulin(id), 'class -> "") {
+    @views.html.diary.fieldsets.diary_fieldset_insulin_update(insulinForm)
+    }
+</div>
+
+<script src='@routes.Assets.at("javascripts/timepicker/jquery.timepicker.min.js")' type="text/javascript"></script>
+<script src='@routes.Assets.at("javascripts/date.js")' type="text/javascript"></script>
+<script src='@routes.Assets.at("javascripts/timepicker/add_insulin_timepicker.js")' type="text/javascript"></script>
+}

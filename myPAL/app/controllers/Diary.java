@@ -334,6 +334,85 @@ public class Diary extends Controller {
         return ok(diary_calendar_measurement_view.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new MeasurementToHTML(measurement)));
     }
 
+    public static Result updateGlucosePage(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        User user = User.byEmail(email);
+        //Check if user has access to view this activity
+
+        Glucose glucose = Glucose.byID(id);
+        if(glucose == null){
+            return forbidden();
+        }
+        if(!glucose.getUser().equals(user)){
+            return forbidden();
+        }
+
+        Form<Glucose> glucoseForm = form(Glucose.class);
+        glucoseForm = glucoseForm.fill(glucose);
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.UPDATEGLUCOSE);
+
+        return ok(diary_calendar_glucose_update.render(user, glucoseForm, id));
+    }
+
+    public static Result updateInsulinPage(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        User user = User.byEmail(email);
+
+        //Check if user has access to view this activity
+        Glucose insulin = Glucose.byID(id);
+        if(insulin == null){
+            return forbidden();
+        }
+        if(!insulin.getUser().equals(user)){
+            return forbidden();
+        }
+
+        Form<Glucose> insulinForm = form(Glucose.class);
+        insulinForm = insulinForm.fill(insulin);
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.UPDATEINSULIN);
+
+        return ok();
+    }
+
+    public static Result updateCarboHydratePage(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        User user = User.byEmail(email);
+
+        //Check if user has access to view this activity
+        Glucose carboHydrate = Glucose.byID(id);
+        if(carboHydrate == null){
+            return forbidden();
+        }
+        if(!carboHydrate.getUser().equals(user)){
+            return forbidden();
+        }
+
+        Form<Glucose> carboHydrateForm = form(Glucose.class);
+        carboHydrateForm = carboHydrateForm.fill(carboHydrate);
+
+        //Log user behavior
+        LogAction.log(email, LogActionType.UPDATEINSULIN);
+
+        return ok();
+    }
+
+
     /* FUNCTIONALITIES */
 
     public static Result calendarUpdate(String update){
@@ -874,5 +953,81 @@ public class Diary extends Controller {
         JsonNode jsonActivities = toJson(measurements);
 
         return ok(jsonActivities);
+    }
+
+    public static Result deleteMeasurement(int id, int measurementType) {
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        User user = User.byEmail(email);
+
+        DiaryMeasurementType type = DiaryMeasurementType.fromInteger(measurementType);
+        switch (type) {
+            case GLUCOSE:
+                Glucose glucose = Glucose.byID(id);
+                //Check if user has access to view this activity
+                if (glucose == null) {
+                    return forbidden();
+                }
+                if (!glucose.getUser().equals(user)) {
+                    return forbidden();
+                }
+                glucose.delete();
+                break;
+            case INSULIN:
+                break;
+            case CARBOHYDRATE:
+                break;
+            case OTHER:
+            default: return forbidden();
+        }
+        LogAction.log(email, LogActionType.REMOVEDMEASUREMENT);
+        return redirect(routes.Diary.calendar());
+    }
+
+    public static Result updateMeasurement(int id, int measurementType){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        User user = User.byEmail(email);
+
+        DiaryMeasurementType type = DiaryMeasurementType.fromInteger(measurementType);
+        switch (type) {
+            case GLUCOSE: return redirect(routes.Diary.updateGlucosePage(id));
+            case INSULIN: return redirect(routes.Diary.updateInsulinPage(id));
+            case CARBOHYDRATE: return redirect(routes.Diary.updateCarboHydratePage(id));
+            case OTHER:
+            default: return forbidden();
+        }
+    }
+
+    public static Result updateGlucose(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        User user = User.byEmail(email);
+
+        //Check if user has access to view this activity
+        Glucose glucose = Glucose.byID(id);
+        if(glucose == null){
+            return forbidden();
+        }
+        if(!glucose.getUser().equals(user)){
+            return forbidden();
+        }
+
+        Form<Glucose> glucoseForm = form(Glucose.class).bindFromRequest();
+        Glucose updatedGlucose = glucoseForm.get();
+        updatedGlucose.update(id);
+        LogAction.log(email, LogActionType.UPDATEDGLUCOSE);
+
+        DiarySettingsManager.getInstance().retrieve(email).dateUpdate(updatedGlucose.getDate());
+        return redirect(routes.Diary.viewMeasurement(id, DiaryMeasurementType.GLUCOSE.ordinal()));
     }
 }

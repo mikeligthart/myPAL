@@ -43,10 +43,16 @@ POST    /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiar
 
 # Measurement #
 GET     /mypal/measurement/select                   controllers.Diary.selectMeasurement()
-GET     /mypal/measurement/addglucose               controllers.Diary.addGlucosePage()
-POST    /mypal/measurement/addglucose               controllers.Diary.addGlucose()
+GET     /mypal/measurement/glucose/add              controllers.Diary.addGlucosePage()
+POST    /mypal/measurement/glucose/add              controllers.Diary.addGlucose()
+GET     /mypal/measurement/glucose/update/:id       controllers.Diary.updateGlucosePage(id:Int)
+POST    /mypal/measurement/glucose/update/:id       controllers.Diary.updateGlucose(id:Int)
+GET     /mypal/measurement/insulin/update/:id       controllers.Diary.updateInsulinPage(id:Int)
+GET     /mypal/measurement/carbohydrate/update/:id  controllers.Diary.updateCarboHydratePage(id:Int)
 GET     /mypal/measurement/list                     controllers.Diary.getMeasurements()
 GET     /mypal/measurement/view/:id/:type           controllers.Diary.viewMeasurement(id:Int, type:Int)
+GET     /mypal/measurement/remove/:id/:type         controllers.Diary.deleteMeasurement(id:Int, type:Int)
+GET     /mypal/measurement/update/:id/:type         controllers.Diary.updateMeasurement(id:Int, type:Int)
 
 ## ADMIN ##
 GET     /admin                                  controllers.Admin.admin()

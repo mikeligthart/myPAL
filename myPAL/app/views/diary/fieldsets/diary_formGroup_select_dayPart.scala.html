@@ -5,7 +5,7 @@
     <div class="col-sm-10">
         <select class="form-control" id="@field.id" name="@field.name">
             @for(dayPart <- models.diary.measurement.DayPart.values()){
-            <option value="@dayPart.name" @if(field.value.getOrElse("") == dayPart.name){selected}>@dayPart.toString</option>
+            <option value="@dayPart.name" @if(field.value.getOrElse("") == dayPart.toString){selected}>@dayPart.toString</option>
             }
         </select>
         <span class="help-block">@{field.error.map { error => error.message }}</span>

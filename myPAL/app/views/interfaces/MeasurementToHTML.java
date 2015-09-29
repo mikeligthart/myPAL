@@ -33,7 +33,7 @@ public class MeasurementToHTML {
 
     private int id;
     private int startHour, startMin, endHour, endMin;
-    private String type, value, daypart, comment, color, viewURL, startTime, unit;
+    private String type, value, daypart, comment, color, viewURL, startTime, unit, displayName;
     private DiaryMeasurementType diaryMeasurementType;
 
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
@@ -46,7 +46,8 @@ public class MeasurementToHTML {
         startMin = measurement.getStarttime().toLocalTime().getMinute();
         endHour = measurement.getEndtime().toLocalTime().getHour();
         endMin = measurement.getEndtime().toLocalTime().getMinute();
-        type = measurement.getClass().getSimpleName();
+        displayName = measurement.getClass().getSimpleName();
+        type = displayName.substring(0,1);
         value = Double.toString(measurement.getValue());
         daypart = measurement.getDaypart().toString();
 
@@ -183,5 +184,13 @@ public class MeasurementToHTML {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 }

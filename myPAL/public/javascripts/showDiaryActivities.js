@@ -1,19 +1,15 @@
-console.log("start loading timeline");
-google.load("visualization", "1", {packages:["timeline"]});
 var drawingObject = new DrawMyData();
 
 $.getJSON('/mypal/activity/list', function(jsonActivities) {
     $.getJSON('/mypal/measurement/list', function(jsonMeasurements) {
-        drawingObject.draw(jsonActivities, jsonMeasurements);
+            drawingObject.draw(jsonActivities, jsonMeasurements);
     });
 });
 
 function DrawMyData(){
     this.draw = function(activities, measurements){
         var activityCount = Object.keys(activities).length
-        google.setOnLoadCallback(drawChart);
-
-        function drawChart() {
+        google.load("visualization", "1", {packages:["timeline"], callback: function () {
                 var container = document.getElementById('timeline');
                 this.chart = new google.visualization.Timeline(container);
                 var dataTable = new google.visualization.DataTable();
@@ -23,11 +19,8 @@ function DrawMyData(){
                 dataTable.addColumn({ type: 'date', id: 'Start' });
                 dataTable.addColumn({ type: 'date', id: 'End' });
 
-                var lastIndexActivities = dataTable.addRows(getActivities(activities));
-                var lastIndexMeasurements = dataTable.addRows(getMeasurements(measurements));
-                console.log("Activities: " + lastIndexActivities + ", Measurements:" + lastIndexMeasurements);
-
-
+                dataTable.addRows(getActivities(activities));
+                dataTable.addRows(getMeasurements(measurements));
 
                 var options = {
                     'tooltip' : {trigger: 'none'},
@@ -82,15 +75,14 @@ function DrawMyData(){
                         var measurement = measurements[i];
                         color.push(measurement.color);
                     }
-                    console.log("colors: " + color);
                     return color;
                 }
 
-                // Listen for the 'select' event, and call my function selectHandler() when
+                // Listen for the 'select' event, and call function selectHandler() when
                 // the user selects something on the chart.
                 google.visualization.events.addListener(chart, 'select', selectHandler);
                 chart.draw(dataTable, options);
-        }
+        }});
     }
 
 }

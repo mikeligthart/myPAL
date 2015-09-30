@@ -58,7 +58,7 @@ function DrawMyData(){
                     var rows = [];
                     for(i = 0; i < measurements.length; i++) {
                         var measurement = measurements[i]
-                        var row = [ 'Meting', measurement.type, new Date(0,0,0,measurement.startHour,measurement.startMin,0), new Date(0,0,0,measurement.endHour,measurement.endMin,0)];
+                        var row = [ 'Meting', measurement.barDisplay, new Date(0,0,0,measurement.startHour,measurement.startMin,0), new Date(0,0,0,measurement.endHour,measurement.endMin,0)];
                         rows.push(row);
                     }
                     return rows;

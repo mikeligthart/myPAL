@@ -31,7 +31,7 @@ public class MeasurementToHTML {
 
     private int id;
     private int startHour, startMin, endHour, endMin;
-    private String type, value, daypart, comment, color, viewURL, startTime, unit, displayName;
+    private String barDisplay, value, daypart, comment, color, viewURL, startTime, unit, displayName;
     private DiaryMeasurementType diaryMeasurementType;
 
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
@@ -44,25 +44,29 @@ public class MeasurementToHTML {
         startMin = measurement.getStarttime().toLocalTime().getMinute();
         endHour = measurement.getEndtime().toLocalTime().getHour();
         endMin = measurement.getEndtime().toLocalTime().getMinute();
-        displayName = measurement.getClass().getSimpleName();
-        type = displayName.substring(0,1);
         value = Double.toString(measurement.getValue());
         daypart = measurement.getDaypart().toString();
 
         if (measurement instanceof Glucose){
             diaryMeasurementType = DiaryMeasurementType.GLUCOSE;
+            displayName = Messages.get("page.diary.calendar.measurement.glucose");
+            barDisplay = displayName.substring(0,1).toUpperCase();
             Glucose glucose = (Glucose) measurement;
             comment = glucose.getComment();
             color = glucoseColor;
             unit = Messages.get("page.diary.calendar.measurement.glucoseunit");
         } else if (measurement instanceof Insulin) {
             diaryMeasurementType = DiaryMeasurementType.INSULIN;
+            displayName = Messages.get("page.diary.calendar.measurement.insulin");
+            barDisplay = displayName.substring(0,1).toUpperCase();
             Insulin insulin = (Insulin) measurement;
             comment = insulin.getComment();
             color = insulinColor;
             unit = Messages.get("page.diary.calendar.measurement.insulinunit");
         } else if (measurement instanceof CarboHydrate){
             diaryMeasurementType = DiaryMeasurementType.CARBOHYDRATE;
+            displayName = Messages.get("page.diary.calendar.measurement.carbohydrate");
+            barDisplay = displayName.substring(0,1).toUpperCase();
             CarboHydrate carboHydrate = (CarboHydrate) measurement;
             comment = carboHydrate.getComment();
             color = carbohydrateColor;
@@ -124,12 +128,12 @@ public class MeasurementToHTML {
         this.endMin = endMin;
     }
 
-    public String getType() {
-        return type;
+    public String getBarDisplay() {
+        return barDisplay;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setBarDisplay(String barDisplay) {
+        this.barDisplay = barDisplay;
     }
 
     public String getValue() {

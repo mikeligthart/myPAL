@@ -1,6 +1,8 @@
-import play.*;
 import com.avaje.ebean.Ebean;
-import models.*;
+import models.User;
+import models.UserType;
+import play.Application;
+import play.GlobalSettings;
 
 import java.sql.Date;
 import java.time.LocalDate;

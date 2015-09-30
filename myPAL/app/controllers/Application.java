@@ -12,9 +12,11 @@ import models.logging.LogActionType;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.controlFlow.*;
+import views.html.controlFlow.login;
+import views.html.controlFlow.no_content;
 import views.html.diary.diary_greeting;
 import views.html.interfaces.interfaces_description_box;
+
 import java.io.File;
 
 import static play.data.Form.form;

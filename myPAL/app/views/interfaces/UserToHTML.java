@@ -2,7 +2,6 @@ package views.interfaces;
 
 import com.typesafe.config.ConfigFactory;
 import models.User;
-import models.UserType;
 import models.logging.LogAction;
 import org.joda.time.Instant;
 import org.joda.time.Years;

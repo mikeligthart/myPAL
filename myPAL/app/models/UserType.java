@@ -1,9 +1,6 @@
 package models;
 
-import play.db.ebean.Model;
 import play.i18n.Messages;
-
-import javax.persistence.Entity;
 
 /**
  * myPAL

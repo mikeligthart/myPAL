@@ -2,10 +2,10 @@ package controllers;
 
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.test.affect_button;
 import views.html.test.bootstrap;
 import views.html.test.dataTest;
 import views.html.test.google_visualization;
-import views.html.test.affect_button;
 
 /**
  * myPAL

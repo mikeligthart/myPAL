@@ -1,14 +1,11 @@
 package models.diary.measurement;
 
-import controllers.Diary;
-import models.User;
 import models.diary.DiaryItem;
-import play.Logger;
 import play.data.validation.Constraints;
 
-import javax.persistence.*;
-import java.sql.Date;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 
 /**
  * myPAL

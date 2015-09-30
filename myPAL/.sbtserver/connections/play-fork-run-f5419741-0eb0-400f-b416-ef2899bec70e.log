@@ -3037,3 +3037,34 @@ Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: Backgr
 Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: BackgroundJobLogEvent(1,LogMessage(info,))
 Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: BackgroundJobLogEvent(1,LogMessage(info,play - database [default] connected at jdbc:h2:mem:play))
 Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: BackgroundJobLogEvent(1,LogMessage(info,play - Application started (Dev)))
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: ExecutionWaiting(15,jobStop 1,ClientInfo(4bd4a49a-53e8-4727-9999-add10ee50905,activator,Activator,3,Vector()))
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: ExecutionStarting(15)
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: DetachedLogEvent(LogMessage(debug,> jobStop 1))
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: DetachedLogEvent(LogMessage(debug,Evaluating tasks: *:jobStop))
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: DetachedLogEvent(LogMessage(debug,Running task... Cancel: sbt.server.ServerTaskCancellation@f132de5, check cycles: false))
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: DetachedLogEvent(LogMessage(debug,cancel strategy start enabled=true lastCommand=Some(LastCommand(CommandExecutionWork(ExecutionId(15),jobStop 1,Set(LiveClient(activator 4bd4a49a-53e8-4727-9999-add10ee50905)),sbt.server.WorkCancellationStatus$$anon$1@3f3029df)))))
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: TaskStarted(15,1657,Some(AttributeKey[void]("jobStop") in Scope(Global)))
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: TaskFinished(15,1657,Some(AttributeKey[void]("jobStop") in Scope(Global)),true,None)
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: TaskStarted(15,1656,None)
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: BackgroundJobLogEvent(1,LogMessage(info,Stopping Play fork run ...))
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: TaskFinished(15,1656,None,true,None)
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: TaskStarted(15,1655,None)
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: TaskFinished(15,1655,None,true,None)
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: DetachedLogEvent(LogMessage(debug,cancel strategy finish enabled=false lastCommand=Some(LastCommand(CommandExecutionWork(ExecutionId(15),jobStop 1,Set(LiveClient(activator 4bd4a49a-53e8-4727-9999-add10ee50905)),sbt.server.WorkCancellationStatus$$anon$1@3f3029df)))))
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: DetachedLogEvent(LogSuccess(Total time: 0 s, completed 30-sep-2015 10:43:28))
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: DetachedLogEvent(LogMessage(debug,> server-post-command-cleanup))
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: ExecutionSuccess(15)
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: DetachedLogEvent(LogMessage(debug,> server-handle-next-server-request))
+Got request: UnlistenToEvents()
+Reading next message from client.
+Sending msg to client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e: (14,ReceivedResponse())
+Got request: UnlistenToValue(AttributeKey[play.forkrun.protocol.ForkConfig]("playForkConfig") in Scope(Build: file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/, , Project: ProjectReference(file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/,root)))
+Reading next message from client.
+Got request: UnlistenToValue(AttributeKey[play.runsupport.Reloader$CompileResult]("playForkReload") in Scope(Build: file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/, , Project: ProjectReference(file:/C:/Users/ligthartmeu/apps/myPAL/myPAL/,root)))
+Reading next message from client.
+Client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e EOF, shutting down.
+Stopping client.
+Client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e thread exiting.
+Dropping message (15,ReceivedResponse()) to dead client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e
+Dropping message (16,ReceivedResponse()) to dead client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e
+Dropping message (0,ReceivedResponse()) to dead client play-fork-run-f5419741-0eb0-400f-b416-ef2899bec70e

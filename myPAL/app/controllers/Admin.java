@@ -156,7 +156,7 @@ public class Admin extends Controller {
 
         List<UserToHTML> users = UserToHTML.fromListToList(User.find.all());
         ObjectNode data = JsonNodeFactory.instance.objectNode();
-        data.put("data", toJson(users));
+        data.set("data", toJson(users));
         return ok(data);
     }
 
@@ -250,7 +250,7 @@ public class Admin extends Controller {
         if (userForLogs != null){
             List<LogActionToHTML> logs = LogActionToHTML.fromListToList(LogAction.find.where().eq("user", userForLogs).findList());
             ObjectNode data = JsonNodeFactory.instance.objectNode();
-            data.put("data", toJson(logs));
+            data.set("data", toJson(logs));
             return ok(data);
         } else {
             return forbidden(no_access.render());
@@ -267,7 +267,7 @@ public class Admin extends Controller {
         if (user != null){
             List<DiaryActivityToHTML> activities = DiaryActivityToHTML.fromListToList(DiaryActivity.byUser(user));
             ObjectNode data = JsonNodeFactory.instance.objectNode();
-            data.put("data", toJson(activities));
+            data.set("data", toJson(activities));
             return ok(data);
         } else {
             return forbidden(no_access.render());

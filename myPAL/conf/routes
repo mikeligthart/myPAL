@@ -40,6 +40,7 @@ GET     /mypal/adddiaryactivitytype/:source/:id     controllers.Diary.addDiaryAc
 POST    /mypal/adddiaryactivitytype/:source/:id     controllers.Diary.addDiaryActivityType(source:String, id:Int)
 GET     /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiaryActivityTypePage(source:String, id:Int)
 POST    /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiaryActivityType(source:String, id:Int)
+GET     /mypal/gluconline                           controllers.Diary.gluconline()
 
 # Measurement #
 GET     /mypal/measurement/select                   controllers.Diary.selectMeasurement()

@@ -1,8 +1,5 @@
 package controllers;
 
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
 import models.diary.DiarySettings;
@@ -17,6 +14,7 @@ import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import util.GluconlineConnector;
 import util.PictureFactory;
 import views.html.diary.calendar.activity.*;
 import views.html.diary.calendar.diary_calendar;
@@ -1193,11 +1191,8 @@ public class Diary extends Controller {
         return redirect(routes.Diary.viewMeasurement(id, DiaryMeasurementType.CARBOHYDRATE.ordinal()));
     }
 
-    /*
-    public private void retrieveMeasurementsFromApp(){
-        AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
-        s3client.
-
+       public static Result gluconline(){
+           return ok(GluconlineConnector.calculateSignature(GluconlineConnector.KEY, GluconlineConnector.MESSAGE));
     }
-    */
+
 }

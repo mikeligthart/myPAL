@@ -1,0 +1,8 @@
+@import play.api.i18n._
+
+@main_basic("@Messages('page.diary.gallery.addpicture')"){
+
+    @helper.form(action = routes.Diary.addPicture(), 'class -> "", 'enctype -> "multipart/form-data") {
+        @views.html.diary.fieldsets.diary_fieldset_picture_add()
+    }
+}

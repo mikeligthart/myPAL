@@ -14,9 +14,12 @@ libraryDependencies ++= Seq(
   javaWs,
   "org.mindrot" % "jbcrypt" % "0.3m",
   "commons-io" % "commons-io" % "2.4",
-  "org.imgscalr" % "imgscalr-lib" % "4.2"
+  "org.imgscalr" % "imgscalr-lib" % "4.2",
+  "com.amazonaws" % "aws-java-sdk" % "1.10.21"
 )
 
+
+fork in run := true
 
 fork in run := true
 

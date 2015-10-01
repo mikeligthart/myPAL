@@ -21,7 +21,7 @@ import util.PictureFactory;
 import views.html.diary.calendar.activity.*;
 import views.html.diary.calendar.diary_calendar;
 import views.html.diary.calendar.measurement.*;
-import views.html.diary.Gallery.*;
+import views.html.diary.gallery.*;
 import views.html.diary.goals.diary_goals;
 import views.interfaces.DiaryActivityToHTML;
 import views.interfaces.MeasurementToHTML;

@@ -1,0 +1,9 @@
+New log file opened at Fri Oct 02 15:56:21 CEST 2015 by 7508@PC-14874
+Sending msg to client activator-4d1b061a-8d97-46f7-947c-b25d95ad4d24: DetachedLogEvent(LogMessage(debug,sbt server socket logs are in: C:\Users\ligthartmeu\apps\myPAL\.sbtserver\connections\master.log))
+Sending msg to client activator-4d1b061a-8d97-46f7-947c-b25d95ad4d24: DetachedLogEvent(LogMessage(debug,sbt general server logs are in: C:\Users\ligthartmeu\apps\myPAL\.sbtserver\master.log))
+Sending msg to client activator-4d1b061a-8d97-46f7-947c-b25d95ad4d24: DetachedLogEvent(LogMessage(debug,sbt client logs are in: C:\Users\ligthartmeu\apps\myPAL\.sbtserver\connections\activator-4d1b061a-8d97-46f7-947c-b25d95ad4d24.log))
+Reading next message from client.
+Client activator-4d1b061a-8d97-46f7-947c-b25d95ad4d24 EOF, shutting down.
+Stopping client.
+Client activator-4d1b061a-8d97-46f7-947c-b25d95ad4d24 thread exiting.
+Dropping message (0,ReceivedResponse()) to dead client activator-4d1b061a-8d97-46f7-947c-b25d95ad4d24

@@ -1,8 +1,5 @@
 package controllers;
 
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.User;
 import models.diary.DiarySettings;
@@ -1192,12 +1189,4 @@ public class Diary extends Controller {
         DiarySettingsManager.getInstance().retrieve(email).dateUpdate(updatedCarboHydrate.getDate());
         return redirect(routes.Diary.viewMeasurement(id, DiaryMeasurementType.CARBOHYDRATE.ordinal()));
     }
-
-    /*
-    public private void retrieveMeasurementsFromApp(){
-        AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
-        s3client.
-
-    }
-    */
 }

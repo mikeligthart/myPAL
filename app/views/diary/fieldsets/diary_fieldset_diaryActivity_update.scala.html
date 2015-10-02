@@ -1,0 +1,39 @@
+@(activityForm: Form[models.diary.activity.DiaryActivity], activity: views.interfaces.DiaryActivityToHTML, user: User, types: List[models.diary.activity.DiaryActivityType], preselectedType: String = "",  typeInputErrorMessage: String = "")
+
+@import play.api.i18n._
+
+<fieldset>
+    <div class="row">
+    @diary_formGroup_select_diaryActivityType(label = Messages("page.diary.calendar.activitytype") + "*", user, types, preselectedType, typeInputErrorMessage, Messages("page.diary.diaryActivityType.source.updateActivity"), Integer.valueOf(activityForm("id").value))
+    @diary_formGroup_date(activityForm("date"), Messages("page.diary.calendar.date") + "*", Messages("page.diary.calendar.date"))
+    @diary_formGroup_doubleTime(activityForm("starttime"), activityForm("endtime"))
+    @diary_formGroup_description(activityForm("description"), label = Messages("page.diary.calendar.description") + "*", placeholder = Messages("page.diary.calendar.description"))
+    @diary_formGroup_select_emotion(activityForm("emotion"), label = Messages("page.diary.calendar.emotion") + "*", placeholder = Messages("page.diary.calendar.emotion"))
+    @if(!activity.hasPicture){
+        @diary_formGroup_picture(Messages("page.diary.calendar.picture"), Messages("page.diary.calendar.picture"), (activityForm("description").hasErrors || activityForm("date").hasErrors || activityForm("emotion").hasErrors || activityForm("starttime").hasErrors || activityForm("endtime").hasErrors))
+        </div>
+    }else{
+    </div>
+        <div class="form-group row">
+            <label class="col-sm-2 control-label" >@Messages("page.diary.calendar.picture")</label>
+            <div class="col-sm-4 text-left"><img class='img-responsive' src='@activity.getPicture' alt=''></div>
+            <div class="text-left col-md-6">
+                <a class='btn btn-default btn-picture-mypal' aria-label='Left Align' data-toggle="confirmation" data-title='@Messages("page.general.areyousuredirect")' data-href='@routes.Diary.deletePictureFromActivity(activity.getId)' data-btnOkLabel='@Messages("page.general.yes")' data-btnCancelLabel='@Messages("page.general.no")' data-btnOkClass="btn btn-sm btn-primary" data-placement="top"><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> @Messages("page.diary.calendar.picture.delete")</a>
+                <br />
+                <a class='btn btn-default btn-picture-mypal' aria-label='Left Align' data-toggle="confirmation" data-title='@Messages("page.general.areyousuredirect")' data-href='@routes.Diary.unlinkPictureFromActivity(activity.getId)' data-btnOkLabel='@Messages("page.general.yes")' data-btnCancelLabel='@Messages("page.general.no")' data-btnOkClass="btn btn-sm btn-primary" data-placement="bottom"><span class='glyphicon glyphicon-export' aria-hidden='true'></span> @Messages("page.diary.calendar.picture.unlink")</a>
+            </div>
+        </div>
+    }
+
+    <div class="form-group row">
+        <div class="col-sm-offset-2 col-sm-2 small text-left">* @Messages("page.general.isrequired")</div>
+        <div class=" col-sm-8 text-right">
+            <button type="submit" class="btn btn-primary">@Messages("page.diary.calendar.updateactivity")</button>
+            <a href="@routes.Diary.viewActivity(activity.getId)" class="btn btn-default">@Messages("page.diary.calendar.notupdateactivity")</a>
+        </div>
+    </div>
+</fieldset>
+
+<script>
+    $('[data-toggle="confirmation"]').confirmation();
+</script>

@@ -1,0 +1,84 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+## APPLICATION ##
+# Control flow
+GET     /                           controllers.Application.login()
+POST    /                           controllers.Application.authenticate()
+GET     /logout                     controllers.Application.logout()
+GET     /private/*fileName          controllers.Application.getPicture(fileName)
+GET     /contentbox/:content        controllers.Application.contentBox(content: String)
+
+# Hello goodbye
+GET     /greeting                   controllers.Application.hello()
+
+## DIARY ##
+GET     /mypal                                      controllers.Diary.diary()
+GET     /mypal/calendar                             controllers.Diary.calendar()
+GET     /mypal/calendar/:update                     controllers.Diary.calendarUpdate(update:String)
+GET     /mypal/calendar/:day/:month/:year           controllers.Diary.calendarSet(day:String, month:String, year:String)
+GET     /mypal/goals                                controllers.Diary.goals()
+GET     /mypal/addactivity                          controllers.Diary.addActivityPage()
+POST    /mypal/addactivity                          controllers.Diary.addActivity()
+GET     /mypal/addactivity/selectfromgallery/:id    controllers.Diary.selectFromGalleryPage(id: Int)
+GET     /mypal/gallery                              controllers.Diary.gallery()
+GET     /mypal/addpicture                           controllers.Diary.addPicturePage()
+POST    /mypal/addpicture                           controllers.Diary.addPicture()
+GET     /mypal/addpicture/directly/:id              controllers.Diary.addPictureDirectlyPage(id:Int)
+POST    /mypal/addpicture/directly/:id              controllers.Diary.addPictureDirectly(id:Int)
+GET     /mypal/activity/list                        controllers.Diary.getActivities()
+GET     /mypal/activity/view/:id                    controllers.Diary.viewActivity(id:Int)
+GET     /mypal/activity/delete/:id                  controllers.Diary.deleteActivity(id:Int)
+GET     /mypal/activity/update/:id                  controllers.Diary.updateActivityPage(id:Int)
+POST    /mypal/activity/update/:id                  controllers.Diary.updateActivity(id:Int)
+GET     /mypal/activity/deletepicture/:id           controllers.Diary.deletePictureFromActivity(id:Int)
+GET     /mypal/activity/unlinkpicture/:id           controllers.Diary.unlinkPictureFromActivity(id:Int)
+GET     /mypal/activity/linkpicture/:aid/:pid       controllers.Diary.linkPictureToActivity(aid:Int, pid:Int)
+GET     /mypal/picture/delete/:id                   controllers.Diary.deletePictureFromGallery(id:Int)
+GET     /mypal/adddiaryactivitytype/:source/:id     controllers.Diary.addDiaryActivityTypePage(source:String, id:Int)
+POST    /mypal/adddiaryactivitytype/:source/:id     controllers.Diary.addDiaryActivityType(source:String, id:Int)
+GET     /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiaryActivityTypePage(source:String, id:Int)
+POST    /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiaryActivityType(source:String, id:Int)
+GET     /mypal/gluconline                           controllers.Diary.gluconline()
+
+# Measurement #
+GET     /mypal/measurement/select                   controllers.Diary.selectMeasurement()
+GET     /mypal/measurement/glucose/add              controllers.Diary.addGlucosePage()
+POST    /mypal/measurement/glucose/add              controllers.Diary.addGlucose()
+GET     /mypal/measurement/glucose/update/:id       controllers.Diary.updateGlucosePage(id:Int)
+POST    /mypal/measurement/glucose/update/:id       controllers.Diary.updateGlucose(id:Int)
+GET     /mypal/measurement/insulin/add              controllers.Diary.addInsulinPage()
+POST    /mypal/measurement/insulin/add              controllers.Diary.addInsulin()
+GET     /mypal/measurement/insulin/update/:id       controllers.Diary.updateInsulinPage(id:Int)
+POST    /mypal/measurement/insulin/update/:id       controllers.Diary.updateInsulin(id:Int)
+GET     /mypal/measurement/carbohydrate/add         controllers.Diary.addCarboHydratePage()
+POST    /mypal/measurement/carbohydrate/add         controllers.Diary.addCarboHydrate()
+GET     /mypal/measurement/carbohydrate/update/:id  controllers.Diary.updateCarboHydratePage(id:Int)
+POST    /mypal/measurement/carbohydrate/update/:id  controllers.Diary.updateCarboHydrate(id:Int)
+GET     /mypal/measurement/list                     controllers.Diary.getMeasurements()
+GET     /mypal/measurement/view/:id/:type           controllers.Diary.viewMeasurement(id:Int, type:Int)
+GET     /mypal/measurement/remove/:id/:type         controllers.Diary.deleteMeasurement(id:Int, type:Int)
+GET     /mypal/measurement/update/:id/:type         controllers.Diary.updateMeasurement(id:Int, type:Int)
+
+## ADMIN ##
+GET     /admin                                  controllers.Admin.admin()
+GET     /admin/users                            controllers.Admin.users()
+GET     /admin/users/list                       controllers.Admin.getUsers()
+POST    /admin/users                            controllers.Admin.addUser()
+GET     /admin/users/view/:email                controllers.Admin.viewUser(email: String)
+GET     /admin/users/view/log/:email            controllers.Admin.getUserLog(email: String)
+GET     /admin/users/view/activities/:email     controllers.Admin.getUserActivities(email: String)
+GET     /admin/users/update/:email              controllers.Admin.updatePageUser(email: String)
+POST    /admin/users/update/:email              controllers.Admin.updateUser(email: String)
+DELETE  /admin/users/delete/:email              controllers.Admin.deleteUser(email: String)
+
+
+## TEST ##
+GET     /test/datatest              controllers.Test.dataTest()
+GET     /test/bootstrap             controllers.Test.showBootstrap()
+GET     /test/google                controllers.Test.googleTest()
+GET     /test/affectbutton          controllers.Test.affectButton()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

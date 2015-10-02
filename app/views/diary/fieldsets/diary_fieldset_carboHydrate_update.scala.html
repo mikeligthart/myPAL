@@ -1,0 +1,20 @@
+@(carboHydrateForm: Form[models.diary.measurement.CarboHydrate])
+
+@import play.api.i18n._
+
+<fieldset>
+    @diary_formGroup_date(carboHydrateForm("date"), Messages("page.diary.calendar.date") + "*", Messages("page.diary.calendar.date"))
+    @diary_formGroup_singleTime(carboHydrateForm("starttime"), carboHydrateForm("endtime"))
+    @diary_formGroup_select_dayPart(carboHydrateForm("daypart"), Messages("page.diary.calendar.measurement.daypart") + "*")
+    @diary_formGroup_value(carboHydrateForm("value"), Messages("page.diary.calendar.measurement.value") + "*", Messages("page.diary.calendar.measurement.value"), Messages("page.diary.calendar.measurement.carboHydrateunit"))
+    @diary_formGroup_description(carboHydrateForm("comment"), Messages("page.diary.calendar.measurement.comment"), Messages("page.diary.calendar.measurement.comment"))
+
+    <div class="form-group">
+        <br />
+        <div class="col-sm-offset-2 col-sm-2 small text-left">* @Messages("page.general.isrequired")</div>
+        <div class=" col-sm-8 text-right">
+            <button type="submit" class="btn btn-primary">@Messages("page.diary.calendar.measurement.update")</button>
+            <a href="@routes.Diary.calendar()" class="btn btn-default">@Messages("page.diary.calendar.measurement.cancel")</a>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,22 @@
+@(field: Field, label: String = "CHANGEME", placeholder: String)
+
+<div class="row form-group @if(field.hasErrors) {has-error}">
+    <label class="col-sm-12 control-label">@label</label>
+    <div class="text-center">
+        <label  class="col-sm-offset-2 col-sm-2" id="emotion_selector_left" >
+            <input type="radio" name='@field.name' value="SAD" @if(field.value.getOrElse("") == "SAD"){checked="checked"} />
+            <img class="emotionimage" src='@routes.Assets.at("images/smiley1_sad.png")'>
+        </label>
+
+        <label class="col-sm-2" id="emotion_selector_center">
+            <input type="radio" name='@field.name' value="NEUTRAL" @if(field.value.getOrElse("") == "NEUTRAL"){checked="checked"}/>
+            <img class="emotionimage" src='@routes.Assets.at("images/smiley1_neutral.png")'>
+        </label>
+
+        <label class="col-sm-2" id="emotion_selector_right">
+            <input type="radio" name='@field.name' value="HAPPY" @if(field.value.getOrElse("") == "HAPPY"){checked="checked"}/>
+            <img class="emotionimage" src='@routes.Assets.at("images/smiley1_happy.png")'>
+        </label>
+    </div>
+    <span class="col-sm-offset-2 help-block">@{field.error.map { error => error.message }}</span>
+</div>

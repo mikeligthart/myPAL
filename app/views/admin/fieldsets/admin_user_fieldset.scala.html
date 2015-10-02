@@ -1,0 +1,18 @@
+@(userForm: Form[User])
+
+@import play.api.i18n._
+
+        <fieldset>
+            @email(userForm("email"), label = Messages("model.user.email"), placeholder = Messages("model.user.email"), isReadonly=false)
+            @text(userForm("firstName"), label = Messages("model.user.firstName"), placeholder = Messages("model.user.firstName"))
+            @text(userForm("lastName"), label = Messages("model.user.lastName"), placeholder = Messages("model.user.lastName"))
+            @date(userForm("birthdate"), label = Messages("model.user.birthdate"), placeholder = Messages("model.user.birthdate"))
+            @select(userForm("userType"), label = Messages("model.user.userType"), placeholder = Messages("model.user.userType"))
+            @password(userForm("password"), label = Messages("model.user.password"), placeholder = Messages("model.user.password"))
+            <div class="form-group">
+                <br />
+                <div class="col-sm-offset-2 col-sm-10 text-right">
+                    <button type="submit" class="btn btn-primary">@Messages("page.admin.users.addUser")</button>
+                </div>
+            </div>
+        </fieldset>

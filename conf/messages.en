@@ -1,0 +1,191 @@
+### MODELS ###
+## User ##
+model.user.email=Email address
+model.user.firstName=First name
+model.user.lastName=Last name
+model.user.birthdate=Birthday
+model.user.lastActivity=Last active
+model.user.lastActivityNever=Never
+model.user.userType=User type
+model.user.password=Password
+model.user.newpassword=New password
+model.user.invalid=Invalid user or password
+model.user.userType.CHILD=Child
+model.user.userType.PARENT=Parent
+model.user.userType.PROFESSIONAL=Medical Professional
+model.user.userType.ADMIN=Admin
+
+### PAGES ###
+## General ##
+page.general.error=Error:
+page.general.navgation=Toggle navigation
+page.general.brand=MyPAL
+page.general.areyousure=Are you sure?
+page.general.areyousuredirect=This will go in effect immediately. Are you sure?
+page.general.yes=Yes
+page.general.no=No
+page.general.isrequired=is required
+page.general.isoptional=is optional
+
+## Control Flow ##
+# Login #
+page.control.login.title=Sign in
+page.control.login.signinheading=Please sign in
+page.control.login.rememberme=Remember me
+page.control.login.login=Sign in
+page.control.login.logout=Sign out
+
+## Diary ##
+# Base #
+page.diary.base.home=Home
+page.diary.base.calendar=Calendar
+page.diary.base.goals=Goals
+page.diary.base.gallery=Gallery
+
+# Calendar #
+page.diary.calendar.today=Today
+page.diary.calendar.tomorrow=Tomorrow
+page.diary.calendar.dayaftertomorrow=Day after tomorrow
+page.diary.calendar.yesterday=Yesterday
+page.diary.calendar.daybeforeyesterday=Day before yesterday
+page.diary.calendar.activitytype.SCHOOL=School
+page.diary.calendar.activitytype.MEAL=Meal
+page.diary.calendar.activitytype.SPORT=Sport
+page.diary.calendar.activitytype.OTHER=Other
+page.diary.calendar.activitytype=Type of activity
+page.diary.calendar.activity=Activity
+page.diary.calendar.measurement=Measurement
+page.diary.calendar.addactivity=Add activity
+page.diary.calendar.addmeasurement=Add measurement
+page.diary.calendar.starttime=Start time
+page.diary.calendar.settime.starttime=From
+page.diary.calendar.endtime=End time
+page.diary.calendar.settime.endtime=Till
+page.diary.calendar.date=Date
+page.diary.calendar.description=Description
+page.diary.calendar.description_howwasit=How was it?
+page.diary.calendar.emotion=Emotion
+page.diary.calendar.picture=Picture
+page.diary.calendar.emotion.HAPPY=Happy
+page.diary.calendar.emotion.NEUTRAL=All right
+page.diary.calendar.emotion.SAD=Sad
+page.diary.calendar.updateactivity=Update activity
+page.diary.calendar.notupdateactivity=Cancel
+page.diary.calendar.picture.unlink=Unlink picture
+page.diary.calendar.picture.delete=Delete picture
+page.diary.calendar.noactivities=Add an activity or measurement
+page.diary.calendar.notaddactivity=Cancel
+page.diary.calendar.addfromgallery=add from gallery
+page.diary.calendar.or=Or
+page.diary.calendar.addnewtype=Add
+page.diary.calendar.removetype=Remove
+page.diary.diaryActivityType.donotadd=Cancel
+page.diary.diaryActivityType.add=Add
+page.diary.diaryActivityType.name=Name
+page.diary.diaryActivityType.color=Color
+page.diary.diaryActivityType.donotremove=Cancel
+page.diary.diaryActivityType.remove=Remove
+page.diary.diaryActivityType.source.addActivity=add
+page.diary.diaryActivityType.source.updateActivity=update
+page.diary.diaryActivityType.pickacolor=Click for a new color
+
+# Measurements #
+page.diary.calendar.measurement.glucose=Glucose
+page.diary.calendar.measurement.insulin=Insulin
+page.diary.calendar.measurement.carbohydrate=Carbohydrate
+page.diary.calendar.measurement.select=Select a measurement:
+page.diary.calendar.measurement.addmeasurement=Add a measurement
+page.diary.calendar.measurement.time=Time
+page.diary.calendar.measurement.daypart=Day part
+page.diary.calendar.measurement.daypart.sober=SO
+page.diary.calendar.measurement.daypart.afterbreakfast=AB
+page.diary.calendar.measurement.daypart.beforelunch=BL
+page.diary.calendar.measurement.daypart.afterlunch=AL
+page.diary.calendar.measurement.daypart.beforedinner=BD
+page.diary.calendar.measurement.daypart.afterdinner=AD
+page.diary.calendar.measurement.comment=Comment
+page.diary.calendar.measurement.value=Value
+page.diary.calendar.measurement.glucoseunit=mmol/L
+page.diary.calendar.measurement.insulinunit=Unit
+page.diary.calendar.measurement.carboHydrateunit=g
+page.diary.calendar.measurement.add=Add measurement
+page.diary.calendar.measurement.update=Update measurement
+page.diary.calendar.measurement.cancel=Cancel
+
+# Gallery #
+page.diary.gallery.addpicture=Upload picture
+page.diary.gallery.donotaddpicture=Add no picture
+page.diary.gallery.nocontent=There are not pictures present at the moment
+page.diary.gallery.unlinkedpicture=Unlinked picture
+page.diary.gallery.selectapicture=Select a picture for your activity or add a new picture
+page.diary.gallery.addthispicture=Link this picture to the activity
+
+
+## Admin ##
+# Base #
+page.admin.base.home=Home
+page.admin.base.users=Users
+page.admin.base.admin=Admin
+page.admin.base.practiseDiary=Practise Diary
+
+# Home #
+page.admin.home.title=Admin | home
+page.admin.home.header=Admin dashboard
+page.admin.home.generaldata=General data
+page.admin.home.usersonline=users online
+page.admin.home.addedactivities=added activities
+page.admin.home.logs=logged actions
+page.admin.home.recentactivities=Recent activities
+page.admin.home.norecentactivities=There are no recent activities
+
+# Users #
+page.admin.users.title=Admin | users
+page.admin.users.overview=Overview
+page.admin.users.addUser=Add user
+page.admin.users.updateUser=Update
+page.admin.users.updateUser.cancel=Cancel
+page.admin.users.update.title=Admin | update user
+page.admin.users.options=Options
+page.admin.users.view.title=Admin | view user
+page.admin.users.viewUser=View
+page.admin.users.log=Activity log
+page.admin.users.viewUser.back=Go back to the overview
+page.admin.users.viewUser.activityOverview=Activity Overview
+page.admin.users.log.timestamp=Time
+page.admin.users.log.activity=Logged activity
+page.admin.users.viewUser.hasPicture=Has picture
+
+
+
+### ERROR MESSAGES ###
+
+### DIALOGUE ###
+## Greeting ##
+# Part 1 #
+dialogue.greeting.part1.count=3
+dialogue.greeting.part1.0=Hi {0},
+dialogue.greeting.part1.1=Hello {0},
+dialogue.greeting.part1.2=Hey {0},
+# Part 2 #
+dialogue.greeting.part2.count=3
+dialogue.greeting.part3.0=good to see you again.
+dialogue.greeting.part3.1=welcome back.
+dialogue.greeting.part3.2=it is good that you are here.
+
+### JAVASCRIPT ###
+## Timepicker ##
+javascript.timepicker.lang={am: 'am', pm: 'pm', AM: 'AM', PM: 'PM', decimal: '.', mins: 'mins', hr: 'hr', hrs: 'hrs'}
+
+### ERROR MESSAGES ###
+## Forms ##
+error.required=This is a required field
+error.fileIsNotSupported=Whoops! This file is not a supported image. The following files are allowed: jpg, png, bmp and gif
+error.pictureCannotBeStored=Whoops! Unfortunately your image could not be stored. Please try to add the activity without an image.
+error.pleaseAddFile=Please add a file
+error.activityNotFound=The activity was not stored properly. Please try to add that again first.
+error.hasAlreadyPicture=The activity already has a picture. You can change that by updating the original activity.
+error.emailregisteredalready=This email address is already registered
+error.notypeselected=No type was selected for this activity
+error.nonameorcolor=Something went wrong. Did you gave the new type a name?
+error.notypeselected=No type was selected
+error.cannotBeRemoved=This type cannot be removed

@@ -1,0 +1,34 @@
+New log file opened at Fri Oct 02 14:36:57 CEST 2015 by 8128@PC-14874
+Taking next connection to: 57695
+New client attempting to connect on port: 57696-57695
+  Address = /139.63.20.113:57695
+This client on port 57696 has uuid c119073d-6318-41e0-b617-aaa360401a34 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-c119073d-6318-41e0-b617-aaa360401a34
+Taking next connection to: 57695
+New client attempting to connect on port: 57698-57695
+  Address = /139.63.20.113:57695
+Handshake exception on socket: 57698
+sbt.impl.ipc.HandshakeException: Unable to perform handshake
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
+	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
+	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
+Caused by: java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readInt(DataInputStream.java:387)
+	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
+	... 2 more
+Taking next connection to: 57695
+New client attempting to connect on port: 57699-57695
+  Address = /139.63.20.113:57695
+This client on port 57699 has uuid d3657c0a-5e38-435c-a929-6ce66a7905db configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-c119073d-6318-41e0-b617-aaa360401a34, play-fork-run-d3657c0a-5e38-435c-a929-6ce66a7905db
+Taking next connection to: 57695
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 57695

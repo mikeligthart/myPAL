@@ -1,0 +1,233 @@
+ #greeting_animation{
+    max-width: 800px;
+    max-height: 1200px;
+    padding: 0;
+    margin-bottom: 0;
+    background: white;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+#colorPicker
+{
+    width:          30px;
+    height:         30px;
+    position: relative;
+    clear: both;
+    margin: 0 auto 20px;
+}
+
+#colorPicker .track {
+    background:     #EFEFEF url(/assets/images/text-color.png) no-repeat 50% 50%;
+    height:         150px;
+    width:          150px;
+    padding:        10px;
+    position:       absolute;
+    cursor:         crosshair;
+    float:          left;
+    left:           -71px;
+    top:            -71px;
+    display:        none;
+    border:         1px solid #ccc;
+    z-index:        10;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    border-radius: 150px;
+
+}
+
+#colorPicker .color {
+    width:          25px;
+    height:         25px;
+    padding:        1px;
+    border:         1px solid #ccc;
+    display:        block;
+    position:       relative;
+    z-index:        11;
+    background-color: #EFEFEF;
+    -webkit-border-radius: 27px;
+    -moz-border-radius: 27px;
+    border-radius: 27px;
+    cursor: pointer;
+}
+
+#colorPicker .colorInner {
+    width:          25px;
+    height:         25px;
+    -webkit-border-radius: 27px;
+    -moz-border-radius: 27px;
+    border-radius: 27px;
+}
+
+#colorPicker .dropdown {
+    list-style: none;
+    display: none;
+    width: 27px;
+    position: absolute;
+    top: 28px;
+    border: 1px solid #ccc;
+    left: 0;
+    z-index: 1000;
+}
+
+#colorPicker .dropdown li{
+    height: 25px;
+    cursor: pointer;
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+.calendarinfo{
+    margin-top: 25px;
+}
+
+#timeline{
+  margin-top: 5%;
+}
+
+.addactivity{
+   padding-top:15px;
+ }
+
+ .addpicture{
+   padding-top:15px;
+   margin-bottom:50px;
+ }
+
+.addactivitybutton{
+  margin-top: 10px;
+}
+
+.buttonWithNavBar {
+  padding-top: 25px;
+}
+
+.withNavBar {
+  padding-top: 50px;
+}
+
+div.avatarfield{
+    border-left: thick solid #46575f;
+    height: 95vh;
+}
+
+.has-error > div > #emotion_selector_left {
+  border-left:1px solid DarkRed;
+  border-top:1px solid DarkRed;
+  border-bottom:1px solid DarkRed;
+}
+
+.has-error > div > #emotion_selector_center {
+  border-top:1px solid DarkRed;
+  border-bottom:1px solid DarkRed;
+}
+
+.has-error > div > #emotion_selector_right {
+  border-right:1px solid DarkRed;
+  border-top:1px solid DarkRed;
+  border-bottom:1px solid DarkRed;
+}
+
+.has-error > #diaryActivityTypeSelecter {
+    border:1px solid DarkRed;
+}
+
+
+.starter-template {
+  text-align: center;
+}
+
+
+.ui-timepicker-wrapper {
+	overflow-y: auto;
+	height: 150px;
+	width: 6.5em;
+	background: #fff;
+	border: 1px solid #ddd;
+	-webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	-moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	outline: none;
+	z-index: 10001;
+	margin: 0;
+}
+
+.ui-timepicker-wrapper.ui-timepicker-with-duration {
+	width: 13em;
+}
+
+.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-30,
+.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-60 {
+	width: 11em;
+}
+
+.ui-timepicker-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ui-timepicker-duration {
+	margin-left: 5px; color: #888;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-duration {
+	color: #888;
+}
+
+.ui-timepicker-list li {
+	padding: 3px 0 3px 5px;
+	cursor: pointer;
+	white-space: nowrap;
+	color: #000;
+	list-style: none;
+	margin: 0;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-selected {
+	background: #fff; color: #000;
+}
+
+li.ui-timepicker-selected,
+.ui-timepicker-list li:hover,
+.ui-timepicker-list .ui-timepicker-selected:hover {
+	background: #1980EC; color: #fff;
+}
+
+li.ui-timepicker-selected .ui-timepicker-duration,
+.ui-timepicker-list li:hover .ui-timepicker-duration {
+	color: #ccc;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled,
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+	color: #888;
+	cursor: default;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+	background: #f2f2f2;
+}
+
+label > input{ /* HIDE RADIO */
+  display:none;
+}
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+  width:50%;
+  height:50%;
+  padding:0;
+  margin:0;
+}
+label > input:checked + img{ /* (CHECKED) IMAGE STYLES */
+  border:2px solid #90d23d;
+}
+
+}
+

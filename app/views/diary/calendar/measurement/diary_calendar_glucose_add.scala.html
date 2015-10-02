@@ -1,0 +1,26 @@
+@(user: User, glucoseForm: Form[models.diary.measurement.Glucose], currentDate: String)
+
+@import play.api.i18n._
+
+@views.html.diary.diary_no_avatar(Messages("page.diary.base.calendar"), "calendar", user.getUserType) {
+
+<div class="text-left">
+    <h3>@Messages("page.diary.calendar.measurement.add")</h3>
+
+    @if(glucoseForm.hasGlobalErrors) {
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">@Messages("page.general.error")</span>
+        @glucoseForm.globalError.message
+    </div>
+    }
+
+    @helper.form(action = routes.Diary.addGlucose(), 'class -> "") {
+        @views.html.diary.fieldsets.diary_fieldset_glucose_add(glucoseForm, currentDate)
+    }
+</div>
+
+<script src='@routes.Assets.at("javascripts/timepicker/jquery.timepicker.min.js")' type="text/javascript"></script>
+<script src='@routes.Assets.at("javascripts/date.js")' type="text/javascript"></script>
+<script src='@routes.Assets.at("javascripts/timepicker/add_glucose_timepicker.js")' type="text/javascript"></script>
+}

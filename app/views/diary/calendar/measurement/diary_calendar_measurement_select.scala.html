@@ -1,0 +1,11 @@
+@import play.api.i18n._
+
+@main_basic("@Messages('page.diary.gallery.addpicture')"){
+
+    <div class="text-center">
+        <a href="@routes.Diary.addGlucosePage()" class="btn btn-primary">@Messages("page.diary.calendar.measurement.glucose")</a>
+        <a href="@routes.Diary.addInsulinPage()" class="btn btn-primary">@Messages("page.diary.calendar.measurement.insulin")</a>
+        <a href="@routes.Diary.addCarboHydratePage()" class="btn btn-primary">@Messages("page.diary.calendar.measurement.carbohydrate")</a>
+    </div>
+
+}

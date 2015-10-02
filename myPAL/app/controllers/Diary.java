@@ -8,6 +8,7 @@ import models.diary.activity.*;
 import models.diary.measurement.*;
 import models.logging.LogAction;
 import models.logging.LogActionType;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
@@ -27,7 +28,9 @@ import views.interfaces.MeasurementToHTML;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static play.data.Form.form;
 import static play.libs.Json.toJson;
@@ -1192,7 +1195,13 @@ public class Diary extends Controller {
     }
 
        public static Result gluconline(){
-           return ok(GluconlineConnector.calculateSignature(GluconlineConnector.KEY, GluconlineConnector.MESSAGE));
+           GluconlineConnector gluconlineConnector = new GluconlineConnector();
+           Map<String, String> params = new HashMap<>();
+           params.put("bsn", "067835880");
+           params.put("searchPeriodStep", "-78");
+           String url = gluconlineConnector.sign(params);
+
+           return ok(url);
     }
 
 }

@@ -14,6 +14,7 @@ import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import util.GluconlineConnector;
 import util.PictureFactory;
 import views.html.diary.calendar.activity.*;
 import views.html.diary.calendar.diary_calendar;
@@ -26,7 +27,9 @@ import views.interfaces.MeasurementToHTML;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static play.data.Form.form;
 import static play.libs.Json.toJson;
@@ -1188,5 +1191,15 @@ public class Diary extends Controller {
 
         DiarySettingsManager.getInstance().retrieve(email).dateUpdate(updatedCarboHydrate.getDate());
         return redirect(routes.Diary.viewMeasurement(id, DiaryMeasurementType.CARBOHYDRATE.ordinal()));
+    }
+
+       public static Result gluconline(){
+           GluconlineConnector gluconlineConnector = new GluconlineConnector();
+           Map<String, String> params = new HashMap<>();
+           params.put("bsn", "067835880");
+           params.put("searchPeriodStep", "-78");
+           String url = gluconlineConnector.sign(params);
+
+           return ok(url);
     }
 }

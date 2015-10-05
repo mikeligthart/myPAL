@@ -2,7 +2,7 @@ package models.diary.activity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import controllers.routes;
-import models.Usermypal;
+import models.UserMyPAL;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -43,7 +43,7 @@ public class DiaryActivityType extends Model {
     @ManyToOne
     @JsonBackReference
     @Constraints.Required(message = " ")
-    private Usermypal user;
+    private UserMyPAL user;
 
     public static String OTHERICONLOCATION = routes.Assets.at("images/other_icon.png").url();
     public static String OTHERCOLOR = "#d47730";
@@ -54,7 +54,7 @@ public class DiaryActivityType extends Model {
 
     }
 
-    public DiaryActivityType(String name, String iconLocation, String color, Usermypal user){
+    public DiaryActivityType(String name, String iconLocation, String color, UserMyPAL user){
         this.name = name;
         this.iconLocation = iconLocation;
         this.color = color;
@@ -64,10 +64,10 @@ public class DiaryActivityType extends Model {
     public static DiaryActivityType byId(int id){
         return find.byId(id);
     }
-    public static DiaryActivityType byNameAndUser(String name, Usermypal user){
+    public static DiaryActivityType byNameAndUser(String name, UserMyPAL user){
             return find.where().eq("user", user).eq("name", name).findUnique();
     }
-    public static List<DiaryActivityType> byUser(Usermypal user){
+    public static List<DiaryActivityType> byUser(UserMyPAL user){
         return find.where().eq("user", user).findList();
     }
 
@@ -103,11 +103,11 @@ public class DiaryActivityType extends Model {
         this.activities = activities;
     }
 
-    public Usermypal getUser() {
+    public UserMyPAL getUser() {
         return user;
     }
 
-    public void setUser(Usermypal user) {
+    public void setUser(UserMyPAL user) {
         this.user = user;
     }
 

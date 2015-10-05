@@ -1,7 +1,7 @@
 package models.diary.activity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import models.Usermypal;
+import models.UserMyPAL;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -33,7 +33,7 @@ public class Picture extends Model {
 
     @ManyToOne
     @JsonBackReference
-    private Usermypal user;
+    private UserMyPAL user;
 
     private Date date;
 
@@ -49,7 +49,7 @@ public class Picture extends Model {
         this.date = diaryActivity.getDate();
     }
 
-    public Picture(String name, String thumbnail, Usermypal user, Date date){
+    public Picture(String name, String thumbnail, UserMyPAL user, Date date){
         this.name = name;
         this.thumbnail = thumbnail;
         this.user = user;
@@ -89,11 +89,11 @@ public class Picture extends Model {
         this.diaryActivity = diaryActivity;
     }
 
-    public Usermypal getUser(){
+    public UserMyPAL getUser(){
         return user;
     }
 
-    public void setUser(Usermypal user){
+    public void setUser(UserMyPAL user){
         this.user = user;
     }
 
@@ -119,11 +119,11 @@ public class Picture extends Model {
         return find.where().eq("diaryActivity", diaryActivity).findUnique();
     }
 
-    public static List<Picture> byUser(Usermypal user){
+    public static List<Picture> byUser(UserMyPAL user){
         return find.where().eq("user", user).findList();
     }
 
-    public static List<Picture> byUser(Usermypal user, PictureSort sort){
+    public static List<Picture> byUser(UserMyPAL user, PictureSort sort){
         switch(sort){
             case DATEASC:
                 return find.where().eq("user", user).setOrderBy("date asc").findList();
@@ -139,7 +139,7 @@ public class Picture extends Model {
 
     }
 
-    public static List<Picture> byUserOnlyUnlinked(Usermypal user, PictureSort sort){
+    public static List<Picture> byUserOnlyUnlinked(UserMyPAL user, PictureSort sort){
         switch(sort){
             case DATEASC:
                 return find.where().eq("user", user).eq("diary_activity_id", null).setOrderBy("date asc").findList();

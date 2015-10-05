@@ -1,6 +1,6 @@
 package models.diary.measurement;
 
-import models.Usermypal;
+import models.UserMyPAL;
 
 import javax.persistence.Entity;
 import java.sql.Date;
@@ -37,7 +37,7 @@ public class CarboHydrate extends DiaryMeasurement {
 
     public static Finder<Integer, CarboHydrate> find = new Finder<Integer, CarboHydrate>(Integer.class, CarboHydrate.class);
 
-    public static List<CarboHydrate> byUser(Usermypal user){
+    public static List<CarboHydrate> byUser(UserMyPAL user){
         return find.where().eq("user", user).findList();
     }
 
@@ -45,7 +45,7 @@ public class CarboHydrate extends DiaryMeasurement {
         return find.where().eq("date", date).findList();
     }
 
-    public static List<CarboHydrate> byUserAndDate(Usermypal user, Date date){
+    public static List<CarboHydrate> byUserAndDate(UserMyPAL user, Date date){
         return find.where().eq("user", user).eq("date", date).setOrderBy("starttime asc").findList();
     }
 

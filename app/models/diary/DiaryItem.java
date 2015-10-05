@@ -2,7 +2,7 @@ package models.diary;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.typesafe.config.ConfigFactory;
-import models.Usermypal;
+import models.UserMyPAL;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
@@ -45,7 +45,7 @@ public abstract class DiaryItem extends Model {
 
     @ManyToOne()
     @JsonBackReference
-    private Usermypal user;
+    private UserMyPAL user;
 
     public int getId() {
         return id;
@@ -106,11 +106,11 @@ public abstract class DiaryItem extends Model {
         }
     }
 
-    public Usermypal getUser() {
+    public UserMyPAL getUser() {
         return user;
     }
 
-    public void setUser(Usermypal user) {
+    public void setUser(UserMyPAL user) {
         this.user = user;
     }
 }

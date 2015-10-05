@@ -2,8 +2,8 @@ package controllers;
 
 import com.typesafe.config.ConfigFactory;
 import dialogue.Dialogue;
-import models.Usermypal;
-import models.Usermypal.Login;
+import models.UserMyPAL;
+import models.UserMyPAL.Login;
 import models.UserType;
 import models.diary.DiarySettingsManager;
 import models.diary.activity.Picture;
@@ -68,7 +68,7 @@ public class Application extends Controller {
             LogAction.log(email, LogActionType.LOGIN);
 
             //Redirect to right page
-            UserType userType = Usermypal.byEmail(email).getUserType();
+            UserType userType = UserMyPAL.byEmail(email).getUserType();
             if(userType == UserType.CHILD){
                 return redirect(routes.Application.hello());
             }
@@ -111,7 +111,7 @@ public class Application extends Controller {
         if (session().isEmpty() || session().get("email") == null) {
             return redirect(routes.Application.login());
         }
-        Usermypal user = Usermypal.byEmail(session().get("email"));
+        UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
         return ok(diary_greeting.render(dialogue.getGreeting(user.getFirstName())));
     }
 
@@ -144,7 +144,7 @@ public class Application extends Controller {
        }
 
         //Check if someone has access to the picture
-        Usermypal user = Usermypal.byEmail(session().get("email"));
+        UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
         if(picture.getUser().equals(user) || user.getUserType() == UserType.ADMIN){
             //Serve the picture
             return ok(new File(ConfigFactory.load().getString("private.data.location") + fileName));

@@ -37,7 +37,7 @@ import java.util.List;
  * @version 1.0 21-8-2015
  */
 @Entity
-public class Usermypal extends Model {
+public class UserMyPAL extends Model {
 
     @Id
     @Constraints.Required
@@ -92,17 +92,17 @@ public class Usermypal extends Model {
         public Login(){};
 
         public String validate() {
-            if (!Usermypal.authenticate(email, password)) {
+            if (!UserMyPAL.authenticate(email, password)) {
                 return Messages.get("model.user.invalid");
             }
             return null;
         }
     }
 
-    public Usermypal(){
+    public UserMyPAL(){
     }
 
-    public Usermypal(String email, String firstName, String lastName, Date birthdate, String password, UserType userType){
+    public UserMyPAL(String email, String firstName, String lastName, Date birthdate, String password, UserType userType){
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -115,14 +115,14 @@ public class Usermypal extends Model {
         }
     }
 
-    public static Finder<String, Usermypal> find = new Finder<String, Usermypal>(String.class, Usermypal.class);
+    public static Finder<String, UserMyPAL> find = new Finder<String, UserMyPAL>(String.class, UserMyPAL.class);
 
-    public static Usermypal byEmail(String email){
+    public static UserMyPAL byEmail(String email){
         return find.byId(email);
     }
 
     public static boolean authenticate(String email, String password) {
-        Usermypal user = byEmail(email);
+        UserMyPAL user = byEmail(email);
         if(user != null){
             if(HashHelper.checkPassword(password, user.getPassword())){
                 return true;
@@ -266,12 +266,12 @@ public class Usermypal extends Model {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Usermypal))
+        if (!(obj instanceof UserMyPAL))
             return false;
         if (obj == this)
             return true;
 
-        Usermypal rhs = (Usermypal) obj;
+        UserMyPAL rhs = (UserMyPAL) obj;
         return new EqualsBuilder().
                 append(email, rhs.email).
                 append(lastActivity, rhs.lastActivity).

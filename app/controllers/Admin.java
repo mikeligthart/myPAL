@@ -2,7 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import models.Usermypal;
+import models.UserMyPAL;
 import models.UserType;
 import models.diary.activity.DiaryActivity;
 import models.logging.LogAction;
@@ -54,17 +54,17 @@ public class Admin extends Controller {
         if(!result.hasAcces){
             return result.denyAction;
         }
-        List<Usermypal> users = Usermypal.find.all();
+        List<UserMyPAL> users = UserMyPAL.find.all();
         List<DiaryActivity> activities = DiaryActivity.find.all();
         int nLogs = LogAction.find.all().size();
 
         return ok(admin_home.render(users.size(), countOnlineUsers(users), activities.size(), nLogs, recentActivities(activities)));
     }
 
-    private static int countOnlineUsers(List<Usermypal> users) {
+    private static int countOnlineUsers(List<UserMyPAL> users) {
         int nOnlineUsers = 0;
         long lowerTimeLimit = System.currentTimeMillis() - TIMEWINDOW;
-        for(Iterator<Usermypal> it = users.iterator(); it.hasNext();){
+        for(Iterator<UserMyPAL> it = users.iterator(); it.hasNext();){
             Timestamp lastActivity = it.next().getLastActivity();
             if (lastActivity != null && lastActivity.getTime() > lowerTimeLimit){
                 nOnlineUsers+=1;
@@ -96,7 +96,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
-        Form<Usermypal> userForm = form(Usermypal.class);
+        Form<UserMyPAL> userForm = form(UserMyPAL.class);
         return ok(admin_user.render(userForm));
 
     }
@@ -112,9 +112,9 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
-        Usermypal user = Usermypal.byEmail(session().get("email"));
-        Usermypal updateThisUser = Usermypal.byEmail(email);
-        Form<Usermypal> userForm = form(Usermypal.class);
+        UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
+        UserMyPAL updateThisUser = UserMyPAL.byEmail(email);
+        Form<UserMyPAL> userForm = form(UserMyPAL.class);
         if (updateThisUser != null) {
             userForm = userForm.fill(updateThisUser);
             return ok(admin_user_update.render(email, userForm, user.equals(updateThisUser)));
@@ -134,7 +134,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
-        Usermypal viewUser = Usermypal.byEmail(email);
+        UserMyPAL viewUser = UserMyPAL.byEmail(email);
         if (viewUser != null) {
             return ok(admin_user_view.render(new UserToHTML(viewUser)));
         } else {
@@ -154,7 +154,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
-        List<UserToHTML> users = UserToHTML.fromListToList(Usermypal.find.all());
+        List<UserToHTML> users = UserToHTML.fromListToList(UserMyPAL.find.all());
         ObjectNode data = JsonNodeFactory.instance.objectNode();
         data.set("data", toJson(users));
         return ok(data);
@@ -170,15 +170,15 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
-        Form<Usermypal> userForm = form(Usermypal.class).bindFromRequest();
+        Form<UserMyPAL> userForm = form(UserMyPAL.class).bindFromRequest();
         if (userForm.hasErrors()) {
             return badRequest(admin_user.render(userForm));
         } else {
-            if(Usermypal.byEmail(userForm.data().get("email")) != null){
+            if(UserMyPAL.byEmail(userForm.data().get("email")) != null){
                 userForm.reject("email", Messages.get("error.emailregisteredalready"));
                 return badRequest(admin_user.render(userForm));
             }
-            Usermypal newUser = userForm.get();
+            UserMyPAL newUser = userForm.get();
             newUser.save();
             return redirect(routes.Admin.users());
         }
@@ -195,13 +195,13 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
-        Usermypal user = Usermypal.byEmail(session().get("email"));
-        Form<Usermypal> userForm = form(Usermypal.class).bindFromRequest();
-        Usermypal updateThisUser = Usermypal.byEmail(email);
+        UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
+        Form<UserMyPAL> userForm = form(UserMyPAL.class).bindFromRequest();
+        UserMyPAL updateThisUser = UserMyPAL.byEmail(email);
         if (userForm.hasErrors()) {
             return badRequest(admin_user_update.render(email, userForm, user.equals(updateThisUser)));
         } else {
-            Usermypal updatedUser = userForm.get();
+            UserMyPAL updatedUser = userForm.get();
             if(userForm.data().get("password").equalsIgnoreCase(Messages.get("page.general.dummypassword"))){
                 updatedUser.setHashedPassword(updateThisUser.getPassword());
             }
@@ -221,8 +221,8 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
-        Usermypal user = Usermypal.byEmail(session().get("email"));
-        Usermypal deleteThisUser = Usermypal.byEmail(email);
+        UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
+        UserMyPAL deleteThisUser = UserMyPAL.byEmail(email);
         if (user.equals(deleteThisUser)){
             return forbidden();
         }
@@ -246,7 +246,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
-        Usermypal userForLogs = Usermypal.byEmail(email);
+        UserMyPAL userForLogs = UserMyPAL.byEmail(email);
         if (userForLogs != null){
             List<LogActionToHTML> logs = LogActionToHTML.fromListToList(LogAction.find.where().eq("user", userForLogs).findList());
             ObjectNode data = JsonNodeFactory.instance.objectNode();
@@ -263,7 +263,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
-        Usermypal user = Usermypal.byEmail(email);
+        UserMyPAL user = UserMyPAL.byEmail(email);
         if (user != null){
             List<DiaryActivityToHTML> activities = DiaryActivityToHTML.fromListToList(DiaryActivity.byUser(user));
             ObjectNode data = JsonNodeFactory.instance.objectNode();
@@ -284,7 +284,7 @@ public class Admin extends Controller {
             if(session().isEmpty() || session().get("email") == null){
                 return new AdminAuthenticationResult(false, redirect(routes.Application.login()));
             }
-            Usermypal user = Usermypal.byEmail(session().get("email"));
+            UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
             if(user.getUserType() != UserType.ADMIN){
                 return new AdminAuthenticationResult(false, forbidden(no_access.render()));
             }

@@ -1,6 +1,6 @@
 package models.diary.activity;
 
-import models.Usermypal;
+import models.UserMyPAL;
 import models.diary.DiaryItem;
 import play.data.validation.Constraints;
 
@@ -83,7 +83,7 @@ public class DiaryActivity extends DiaryItem {
 
     public static Finder<Integer, DiaryActivity> find = new Finder<Integer, DiaryActivity>(Integer.class, DiaryActivity.class);
 
-    public static List<DiaryActivity> byUser(Usermypal user){
+    public static List<DiaryActivity> byUser(UserMyPAL user){
         return find.where().eq("user", user).findList();
     }
 
@@ -91,7 +91,7 @@ public class DiaryActivity extends DiaryItem {
         return find.where().eq("date", date).findList();
     }
 
-    public static List<DiaryActivity> byUserAndDate(Usermypal user, Date date){
+    public static List<DiaryActivity> byUserAndDate(UserMyPAL user, Date date){
         return find.where().eq("user", user).eq("date", date).setOrderBy("starttime asc").findList();
     }
 

@@ -1,7 +1,7 @@
 package views.interfaces;
 
 import com.typesafe.config.ConfigFactory;
-import models.Usermypal;
+import models.UserMyPAL;
 import models.logging.LogAction;
 import org.joda.time.Instant;
 import org.joda.time.Years;
@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * myPAL
- * Purpose: Interface class between a Usermypal and data suitable for HTML
+ * Purpose: Interface class between a UserMyPAL and data suitable for HTML
  *
  * Developped for TNO.
  * Kampweg 5
@@ -31,7 +31,7 @@ public class UserToHTML {
     private String email,firstName,lastName, birthdate, userType, lastActivity;
     private List<LogAction> logActions;
 
-    public UserToHTML(Usermypal user){
+    public UserToHTML(UserMyPAL user){
         this.email = user.getEmail();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
@@ -48,9 +48,9 @@ public class UserToHTML {
         this.logActions = user.getLogActions();
     }
 
-    public static List<UserToHTML> fromListToList(List<Usermypal> users){
+    public static List<UserToHTML> fromListToList(List<UserMyPAL> users){
         List<UserToHTML> htmlReadyUsers = new ArrayList<>();
-        for(Iterator<Usermypal> it = users.iterator(); it.hasNext();){
+        for(Iterator<UserMyPAL> it = users.iterator(); it.hasNext();){
             htmlReadyUsers.add(new UserToHTML(it.next()));
         }
         return htmlReadyUsers;

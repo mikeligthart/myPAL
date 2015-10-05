@@ -1,5 +1,5 @@
-New log file opened at Mon Oct 05 15:33:17 CEST 2015 by 2128@PC-14874
-jvm 2128@PC-14874
+New log file opened at Mon Oct 05 16:06:41 CEST 2015 by 7464@PC-14874
+jvm 7464@PC-14874
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.45-b02
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in C:\Users\ligthartmeu\apps\myPAL\project, returning: (mypal-build)
 Loading project definition from C:\Users\ligthartmeu\apps\myPAL\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@77cb6fb8, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@5f190d96, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -65,9 +65,9 @@ Set current project to myPAL (in build file:/C:/Users/ligthartmeu/apps/myPAL/)
 > iflast shell
 > server-send-ready-for-request
 > server-handle-next-server-request
-> {file:/C:/Users/ligthartmeu/apps/myPAL/}root/compile:discoveredMainClasses
-Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@7a3ea8d5, check cycles: false
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@d1736a5, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -84,18 +84,12 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 1 s, completed 5-okt-2015 15:33:23
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/ligthartmeu/apps/myPAL/}root/compile:mainClass
-Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@3a6dba8, check cycles: false
-Total time: 0 s, completed 5-okt-2015 15:33:24
+Total time: 2 s, completed 5-okt-2015 16:06:48
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/ligthartmeu/apps/myPAL/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@6e4489d3, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@543852a7, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -112,36 +106,58 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 0 s, completed 5-okt-2015 15:33:24
+Total time: 1 s, completed 5-okt-2015 16:06:49
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/ligthartmeu/apps/myPAL/}root/compile:mainClass
 Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@6c5d56aa, check cycles: false
-Total time: 0 s, completed 5-okt-2015 15:33:24
+Running task... Cancel: sbt.server.ServerTaskCancellation@28693ef0, check cycles: false
+Total time: 0 s, completed 5-okt-2015 16:06:49
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/ligthartmeu/apps/myPAL/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@cae1dd3, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 1 s, completed 5-okt-2015 16:06:50
 > server-post-command-cleanup
 > server-handle-next-server-request
 > backgroundRun
 Evaluating tasks: compile:backgroundRun
-Running task... Cancel: sbt.server.ServerTaskCancellation@4d390658, check cycles: false
-Total time: 0 s, completed 5-okt-2015 15:34:18
+Running task... Cancel: sbt.server.ServerTaskCancellation@8cb5cc, check cycles: false
+Total time: 0 s, completed 5-okt-2015 16:10:21
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/ligthartmeu/apps/myPAL/}root/*:playForkConfig
 Evaluating tasks: *:playForkConfig
-Running task... Cancel: sbt.server.ServerTaskCancellation@293109cd, check cycles: false
-Total time: 0 s, completed 5-okt-2015 15:34:19
+Running task... Cancel: sbt.server.ServerTaskCancellation@4f2d0c91, check cycles: false
+Total time: 1 s, completed 5-okt-2015 16:10:23
 > server-post-command-cleanup
 > server-handle-next-server-request
 > root/playForkNotifyStart http://localhost:9000
 Evaluating tasks: *:playForkNotifyStart
-Running task... Cancel: sbt.server.ServerTaskCancellation@3cd6bc5c, check cycles: false
-Total time: 0 s, completed 5-okt-2015 15:34:20
+Running task... Cancel: sbt.server.ServerTaskCancellation@579b170f, check cycles: false
+Total time: 0 s, completed 5-okt-2015 16:10:24
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/ligthartmeu/apps/myPAL/}root/*:playForkReload
 Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@55c001ce, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@5b3d27f7, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -166,12 +182,12 @@ Copy resource mappings:
 	(C:\Users\ligthartmeu\apps\myPAL\conf\routes,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\routes)
 	(C:\Users\ligthartmeu\apps\myPAL\conf\evolutions\default,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\evolutions\default)
 	(C:\Users\ligthartmeu\apps\myPAL\conf\evolutions\default\1.sql,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\evolutions\default\1.sql)
-Total time: 1 s, completed 5-okt-2015 15:34:23
+Total time: 1 s, completed 5-okt-2015 16:10:57
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/ligthartmeu/apps/myPAL/}root/*:playForkReload
 Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@54fff2a0, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@50b42733, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -196,12 +212,12 @@ Copy resource mappings:
 	(C:\Users\ligthartmeu\apps\myPAL\conf\routes,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\routes)
 	(C:\Users\ligthartmeu\apps\myPAL\conf\evolutions\default,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\evolutions\default)
 	(C:\Users\ligthartmeu\apps\myPAL\conf\evolutions\default\1.sql,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\evolutions\default\1.sql)
-Total time: 1 s, completed 5-okt-2015 15:34:28
+Total time: 1 s, completed 5-okt-2015 16:11:00
 > server-post-command-cleanup
 > server-handle-next-server-request
 > jobStop 1
 Evaluating tasks: *:jobStop
-Running task... Cancel: sbt.server.ServerTaskCancellation@3edfcaf7, check cycles: false
-Total time: 0 s, completed 5-okt-2015 15:34:42
+Running task... Cancel: sbt.server.ServerTaskCancellation@3adba0a3, check cycles: false
+Total time: 0 s, completed 5-okt-2015 17:20:43
 > server-post-command-cleanup
 > server-handle-next-server-request

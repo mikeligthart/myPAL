@@ -172,6 +172,9 @@ dialogue.greeting.part3.0=good to see you again.
 dialogue.greeting.part3.1=welcome back.
 dialogue.greeting.part3.2=it is good that you are here.
 
+## Test ##
+dialogue.test.whatdidyoudotoday=What did you do today?
+
 ### JAVASCRIPT ###
 ## Timepicker ##
 javascript.timepicker.lang={am: 'am', pm: 'pm', AM: 'AM', PM: 'PM', decimal: '.', mins: 'mins', hr: 'hr', hrs: 'hrs'}

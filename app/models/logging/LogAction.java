@@ -1,7 +1,7 @@
 package models.logging;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import models.User;
+import models.Usermypal;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -32,9 +32,9 @@ public class LogAction extends Model {
 
     @ManyToOne
     @JsonBackReference
-    private User user;
+    private Usermypal user;
 
-    public LogAction(User user, LogActionType type) {
+    public LogAction(Usermypal user, LogActionType type) {
         this.user = user;
         this.type = type;
         this.timestamp = Timestamp.valueOf(LocalDateTime.now());
@@ -60,7 +60,7 @@ public class LogAction extends Model {
     }
 
     public static void log(String email, LogActionType type){
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         user.addLogAction(type);
         user.update();
     }

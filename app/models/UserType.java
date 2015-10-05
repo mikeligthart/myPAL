@@ -4,7 +4,7 @@ import play.i18n.Messages;
 
 /**
  * myPAL
- * Purpose: enum that contains the different types a User can have
+ * Purpose: enum that contains the different types a Usermypal can have
  *
  * Developped for TNO.
  * Kampweg 5

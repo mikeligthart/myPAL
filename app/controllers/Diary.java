@@ -1,7 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import models.User;
+import models.Usermypal;
 import models.diary.DiarySettings;
 import models.diary.DiarySettingsManager;
 import models.diary.activity.*;
@@ -68,7 +68,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Manage the right settings such as date for the calendar
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
@@ -93,7 +93,7 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSGOALS);
 
-        return ok(diary_goals.render(User.byEmail(email).getUserType()));
+        return ok(diary_goals.render(Usermypal.byEmail(email).getUserType()));
     }
 
     public static Result gallery(){
@@ -108,7 +108,7 @@ public class Diary extends Controller {
         String email = session().get("email");
 
         //Retrieve the pictures belonging to the user
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         List<Picture> pictures = Picture.byUser(user, PictureSort.DATEASC);
 
         //If there is no error load the gallery else return badrequest
@@ -131,7 +131,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Generate addActivity page
         Form<DiaryActivity> activityForm = form(DiaryActivity.class);
@@ -163,7 +163,7 @@ public class Diary extends Controller {
         String email = session().get("email");
 
         //Check if user has access to view this activity
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(id);
         if(activity == null){
             return forbidden();
@@ -178,7 +178,7 @@ public class Diary extends Controller {
         //Log user behavior
         LogAction.log(email, LogActionType.VIEWACTIVITY);
 
-        return ok(diary_calendar_diaryActivity_view.render(User.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity)));
+        return ok(diary_calendar_diaryActivity_view.render(Usermypal.byEmail(email).getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity)));
     }
 
     private static Result updateActivityPage(int id, String error){
@@ -189,7 +189,7 @@ public class Diary extends Controller {
         String email = session().get("email");
 
         //Check if user has access to view this activity
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(id);
         if(activity == null){
             return forbidden();
@@ -222,7 +222,7 @@ public class Diary extends Controller {
         }
         String email = session().get("email");
 
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         List<Picture> pictures = Picture.byUserOnlyUnlinked(user, PictureSort.DATEASC);
 
         if(error.isEmpty()){
@@ -263,7 +263,7 @@ public class Diary extends Controller {
         if (session().isEmpty() || session().get("email") == null) {
             return redirect(routes.Application.login());
         }
-        User user = User.byEmail(session().get("email"));
+        Usermypal user = Usermypal.byEmail(session().get("email"));
         List<DiaryActivityType> diaryActivityTypes = DiaryActivityType.byUser(user);
 
         return ok(diary_calendar_diaryActivityType_remove.render(source, id, diaryActivityTypes));
@@ -286,7 +286,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Generate addActivity page
         Form<Glucose> glucoseForm = form(Glucose.class);
@@ -303,7 +303,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Generate addActivity page
         Form<Insulin> insulinForm = form(Insulin.class);
@@ -320,7 +320,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Generate addActivity page
         Form<CarboHydrate> carboHydrateForm = form(CarboHydrate.class);
@@ -337,7 +337,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         DiaryMeasurementType type = DiaryMeasurementType.fromInteger(measurementType);
         DiaryMeasurement measurement;
@@ -374,7 +374,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         //Check if user has access to view this activity
 
         Glucose glucose = Glucose.byID(id);
@@ -400,7 +400,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Check if user has access to view this activity
         Insulin insulin = Insulin.byID(id);
@@ -426,7 +426,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Check if user has access to view this activity
         CarboHydrate carboHydrate = CarboHydrate.byID(id);
@@ -455,7 +455,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Update calendar based on date change
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
@@ -484,7 +484,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Update calendar based on date change
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
@@ -507,7 +507,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Retrieve data from input elements on webpage
         Form<DiaryActivity> diaryActivityForm = form(DiaryActivity.class).bindFromRequest();
@@ -527,7 +527,7 @@ public class Diary extends Controller {
             //Retrieve the activity from the form
             DiaryActivity newDiaryActivity = diaryActivityForm.get();
             //Link the activity to a user
-            newDiaryActivity.setUser(User.byEmail(email));
+            newDiaryActivity.setUser(Usermypal.byEmail(email));
             //Link the activity to a type
             newDiaryActivity.setType(diaryActivityType);
             DiarySettingsManager.getInstance().retrieve(email).dateUpdate(newDiaryActivity.getDate());
@@ -576,7 +576,7 @@ public class Diary extends Controller {
         if (filePart != null) {
             //Retrieve, move and store image file to disk and save picture object
             PictureFactory pictureFactory = new PictureFactory();
-            Picture picture = pictureFactory.processUploadedFile(filePart, User.byEmail(email), Date.valueOf(LocalDate.now()));
+            Picture picture = pictureFactory.processUploadedFile(filePart, Usermypal.byEmail(email), Date.valueOf(LocalDate.now()));
             if (picture != null) {
                 picture.save();
                 LogAction.log(email, LogActionType.ADDEDPICTURE);
@@ -602,7 +602,7 @@ public class Diary extends Controller {
         }
 
         //Check if user has access to manipulate this activity
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         if(!diaryActivity.getUser().equals(user)) {
             return forbidden();
         }
@@ -642,7 +642,7 @@ public class Diary extends Controller {
         String email = session().get("email");
 
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
-        List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(User.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
+        List<DiaryActivity> diaryActivities = DiaryActivity.byUserAndDate(Usermypal.byEmail(email), Date.valueOf(diarySettings.getCalendarDate()));
 
         List<DiaryActivityToHTML> activities = DiaryActivityToHTML.fromListToList(diaryActivities);
 
@@ -659,7 +659,7 @@ public class Diary extends Controller {
         String email = session().get("email");
 
         //Check if user has access to view this activity
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(id);
         if(activity == null){
             return forbidden();
@@ -695,7 +695,7 @@ public class Diary extends Controller {
         String email = session().get("email");
 
         //Check if user has access to view this activity
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(id);
         if(activity == null){
             return forbidden();
@@ -716,7 +716,7 @@ public class Diary extends Controller {
         DiaryActivityType diaryActivityType = DiaryActivityType.byId(Integer.valueOf(requestData.get("diaryActivityType")));
 
         if (diaryActivityForm.hasErrors()) {
-            return badRequest(diary_calendar_diaryActivity_update.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
+            return badRequest(diary_calendar_diaryActivity_update.render(Usermypal.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
         } else {
             //Retrieve the activity from the form
             DiaryActivity updateActivity = diaryActivityForm.get();
@@ -738,7 +738,7 @@ public class Diary extends Controller {
                     return redirect(routes.Diary.viewActivity(id));
                 } else {
                     diaryActivityForm.reject(pictureFactory.getLatestError());
-                    return badRequest(diary_calendar_diaryActivity_update.render(User.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
+                    return badRequest(diary_calendar_diaryActivity_update.render(Usermypal.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
                 }
             } else {
                 LogAction.log(email, LogActionType.UPDATEACTIVITY);
@@ -756,7 +756,7 @@ public class Diary extends Controller {
 
 
         //Check if user has access to view this activity
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(id);
         if(activity == null){
             return forbidden();
@@ -781,7 +781,7 @@ public class Diary extends Controller {
         String email = session().get("email");
 
         //Check if user has access to view this activity
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(id);
         if(activity == null){
             return forbidden();
@@ -810,7 +810,7 @@ public class Diary extends Controller {
         String email = session().get("email");
 
         //Check permissions
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(activityID);
         DiarySettingsManager.getInstance().retrieve(email).dateUpdate(activity.getDate());
         Picture picture = Picture.byID(pictureID);
@@ -842,7 +842,7 @@ public class Diary extends Controller {
         String email = session().get("email");
 
         //Check if user has access to view this picture
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         Picture picture = Picture.byID(id);
         if(picture == null){
             return forbidden();
@@ -888,7 +888,7 @@ public class Diary extends Controller {
             }
         }
 
-        DiaryActivityTypeManager.createDiaryActivityType(User.byEmail(email), name, color);
+        DiaryActivityTypeManager.createDiaryActivityType(Usermypal.byEmail(email), name, color);
 
         if(isUpdate){
             return redirect(routes.Diary.updateActivity(id));
@@ -902,7 +902,7 @@ public class Diary extends Controller {
         if (session().isEmpty() || session().get("email") == null) {
             return redirect(routes.Application.login());
         }
-        User user = User.byEmail(session().get("email"));
+        Usermypal user = Usermypal.byEmail(session().get("email"));
 
         if(source == null){
             return badRequest();
@@ -946,7 +946,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Retrieve form data
         Form<Glucose> glucoseForm = form(Glucose.class).bindFromRequest();
@@ -974,7 +974,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Retrieve form data
         Form<Insulin> insulinForm = form(Insulin.class).bindFromRequest();
@@ -1002,7 +1002,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Retrieve form data
         Form<CarboHydrate> carboHydrateForm = form(CarboHydrate.class).bindFromRequest();
@@ -1030,7 +1030,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
         DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(email);
         Date date = Date.valueOf(diarySettings.getCalendarDate());
 
@@ -1053,7 +1053,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         DiaryMeasurementType type = DiaryMeasurementType.fromInteger(measurementType);
         switch (type) {
@@ -1103,7 +1103,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         DiaryMeasurementType type = DiaryMeasurementType.fromInteger(measurementType);
         switch (type) {
@@ -1121,7 +1121,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Check if user has access to view this activity
         Glucose glucose = Glucose.byID(id);
@@ -1147,7 +1147,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Check if user has access to view this activity
         Insulin insulin = Insulin.byID(id);
@@ -1173,7 +1173,7 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
-        User user = User.byEmail(email);
+        Usermypal user = Usermypal.byEmail(email);
 
         //Check if user has access to view this activity
         CarboHydrate carboHydrate = CarboHydrate.byID(id);

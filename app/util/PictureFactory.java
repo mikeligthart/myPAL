@@ -1,7 +1,7 @@
 package util;
 
 import com.typesafe.config.ConfigFactory;
-import models.User;
+import models.Usermypal;
 import models.diary.activity.DiaryActivity;
 import models.diary.activity.Picture;
 import org.apache.commons.io.FilenameUtils;
@@ -52,7 +52,7 @@ public class PictureFactory {
         return picture;
     }
 
-    public Picture processUploadedFile(Http.MultipartFormData.FilePart filePart, User user, Date date) {
+    public Picture processUploadedFile(Http.MultipartFormData.FilePart filePart, Usermypal user, Date date) {
         //Check if it has the right extension
         String extension = FilenameUtils.getExtension(filePart.getFilename());
         if(!hasSupportedExtension(extension)){

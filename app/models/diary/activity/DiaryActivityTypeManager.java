@@ -1,7 +1,7 @@
 package models.diary.activity;
 
 import controllers.routes;
-import models.User;
+import models.Usermypal;
 import play.i18n.Messages;
 
 import java.util.Iterator;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class DiaryActivityTypeManager {
 
-    public static List<DiaryActivityType> retrieveDiaryActivityTypes(User user){
+    public static List<DiaryActivityType> retrieveDiaryActivityTypes(Usermypal user){
         List<DiaryActivityType> diaryActivityTypes = DiaryActivityType.byUser(user);
         if (diaryActivityTypes == null || diaryActivityTypes.isEmpty()){
             loadStandardTypes(user);
@@ -30,7 +30,7 @@ public class DiaryActivityTypeManager {
         return diaryActivityTypes;
     }
 
-    public static void loadStandardTypes(User user){
+    public static void loadStandardTypes(Usermypal user){
         DiaryActivityType school = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.SCHOOL"), routes.Assets.at("images/school_icon.png").url(), "#308dd4", user);
         school.save();
         DiaryActivityType sport = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.SPORT"), routes.Assets.at("images/sport_icon.png").url(), "#8dd430", user);
@@ -41,7 +41,7 @@ public class DiaryActivityTypeManager {
         other.save();
     }
 
-    public static void createDiaryActivityType(User user, String name, String color){
+    public static void createDiaryActivityType(Usermypal user, String name, String color){
         name = capitalise(name);
         if(DiaryActivityType.byNameAndUser(name, user) == null){
             DiaryActivityType newDiaryActivityType = new DiaryActivityType(name, routes.Assets.at("images/other_icon.png").url(), color, user);
@@ -49,7 +49,7 @@ public class DiaryActivityTypeManager {
         }
     }
 
-    public static boolean removeDiaryActivity(User user, int id){
+    public static boolean removeDiaryActivity(Usermypal user, int id){
         if(canBeRemoved(user, id)){
             DiaryActivityType type = DiaryActivityType.byId(id);
             List<DiaryActivity> diaryActivities = type.getActivities();
@@ -66,7 +66,7 @@ public class DiaryActivityTypeManager {
         return false;
     }
 
-    public static boolean canBeRemoved(User user, int id){
+    public static boolean canBeRemoved(Usermypal user, int id){
         DiaryActivityType type = DiaryActivityType.byId(id);
         if(type == null){
             return false;

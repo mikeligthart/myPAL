@@ -105,7 +105,7 @@ create table picture (
   constraint pk_picture primary key (id))
 ;
 
-create table user (
+create table usermypal (
   email                     varchar(255) not null,
   first_name                varchar(255),
   last_name                 varchar(255),
@@ -113,8 +113,8 @@ create table user (
   password                  varchar(255),
   user_type                 varchar(20),
   last_activity             timestamp,
-  constraint ck_user_user_type check (user_type in ('CHILD','PARENT','PROFESSIONAL','ADMIN')),
-  constraint pk_user primary key (email))
+  constraint ck_usermypal_user_type check (user_type in ('CHILD','PARENT','PROFESSIONAL','ADMIN')),
+  constraint pk_usermypal primary key (email))
 ;
 
 create sequence carbo_hydrate_seq;
@@ -135,31 +135,31 @@ create sequence log_action_seq;
 
 create sequence picture_seq;
 
-create sequence user_seq;
+create sequence usermypal_seq;
 
-alter table carbo_hydrate add constraint fk_carbo_hydrate_user_1 foreign key (user_email) references user (email);
+alter table carbo_hydrate add constraint fk_carbo_hydrate_user_1 foreign key (user_email) references usermypal (email);
 create index ix_carbo_hydrate_user_1 on carbo_hydrate (user_email);
-alter table diary_activity add constraint fk_diary_activity_user_2 foreign key (user_email) references user (email);
+alter table diary_activity add constraint fk_diary_activity_user_2 foreign key (user_email) references usermypal (email);
 create index ix_diary_activity_user_2 on diary_activity (user_email);
 alter table diary_activity add constraint fk_diary_activity_type_3 foreign key (type_id) references diary_activity_type (id);
 create index ix_diary_activity_type_3 on diary_activity (type_id);
 alter table diary_activity add constraint fk_diary_activity_picture_4 foreign key (picture_id) references picture (id);
 create index ix_diary_activity_picture_4 on diary_activity (picture_id);
-alter table diary_activity_type add constraint fk_diary_activity_type_user_5 foreign key (user_email) references user (email);
+alter table diary_activity_type add constraint fk_diary_activity_type_user_5 foreign key (user_email) references usermypal (email);
 create index ix_diary_activity_type_user_5 on diary_activity_type (user_email);
-alter table diary_item add constraint fk_diary_item_user_6 foreign key (user_email) references user (email);
+alter table diary_item add constraint fk_diary_item_user_6 foreign key (user_email) references usermypal (email);
 create index ix_diary_item_user_6 on diary_item (user_email);
-alter table diary_measurement add constraint fk_diary_measurement_user_7 foreign key (user_email) references user (email);
+alter table diary_measurement add constraint fk_diary_measurement_user_7 foreign key (user_email) references usermypal (email);
 create index ix_diary_measurement_user_7 on diary_measurement (user_email);
-alter table glucose add constraint fk_glucose_user_8 foreign key (user_email) references user (email);
+alter table glucose add constraint fk_glucose_user_8 foreign key (user_email) references usermypal (email);
 create index ix_glucose_user_8 on glucose (user_email);
-alter table insulin add constraint fk_insulin_user_9 foreign key (user_email) references user (email);
+alter table insulin add constraint fk_insulin_user_9 foreign key (user_email) references usermypal (email);
 create index ix_insulin_user_9 on insulin (user_email);
-alter table log_action add constraint fk_log_action_user_10 foreign key (user_email) references user (email);
+alter table log_action add constraint fk_log_action_user_10 foreign key (user_email) references usermypal (email);
 create index ix_log_action_user_10 on log_action (user_email);
 alter table picture add constraint fk_picture_diaryActivity_11 foreign key (diary_activity_id) references diary_activity (id);
 create index ix_picture_diaryActivity_11 on picture (diary_activity_id);
-alter table picture add constraint fk_picture_user_12 foreign key (user_email) references user (email);
+alter table picture add constraint fk_picture_user_12 foreign key (user_email) references usermypal (email);
 create index ix_picture_user_12 on picture (user_email);
 
 
@@ -184,7 +184,7 @@ drop table if exists log_action cascade;
 
 drop table if exists picture cascade;
 
-drop table if exists user cascade;
+drop table if exists usermypal cascade;
 
 drop sequence if exists carbo_hydrate_seq;
 
@@ -204,5 +204,5 @@ drop sequence if exists log_action_seq;
 
 drop sequence if exists picture_seq;
 
-drop sequence if exists user_seq;
+drop sequence if exists usermypal_seq;
 

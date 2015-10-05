@@ -1,5 +1,5 @@
 import com.avaje.ebean.Ebean;
-import models.User;
+import models.Usermypal;
 import models.UserType;
 import play.Application;
 import play.GlobalSettings;
@@ -16,10 +16,10 @@ public class Global extends GlobalSettings {
     static class InitialData {
 
         public static void insert(Application app) {
-            if(Ebean.find(User.class).findRowCount() == 0) {
-                User originalUser = new User("mike.ligthart@gmail.com", "Mike", "Ligthart", Date.valueOf(LocalDate.now()), "mike", UserType.ADMIN);
+            if(Ebean.find(Usermypal.class).findRowCount() == 0) {
+                Usermypal originalUser = new Usermypal("mike.ligthart@gmail.com", "Mike", "Ligthart", Date.valueOf(LocalDate.now()), "mike", UserType.ADMIN);
                 Ebean.save(originalUser);
-                User testAdmin = new User("test@email.com", "Test", "Admin", Date.valueOf(LocalDate.now()), "secret", UserType.ADMIN);
+                Usermypal testAdmin = new Usermypal("test@email.com", "Test", "Admin", Date.valueOf(LocalDate.now()), "secret", UserType.ADMIN);
                 Ebean.save(testAdmin);
             }
         }

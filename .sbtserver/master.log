@@ -1,5 +1,5 @@
-New log file opened at Mon Oct 05 15:10:27 CEST 2015 by 6704@PC-14874
-jvm 6704@PC-14874
+New log file opened at Mon Oct 05 15:33:17 CEST 2015 by 2128@PC-14874
+jvm 2128@PC-14874
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.45-b02
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in C:\Users\ligthartmeu\apps\myPAL\project, returning: (mypal-build)
 Loading project definition from C:\Users\ligthartmeu\apps\myPAL\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@7e3f135e, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@77cb6fb8, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -65,676 +65,9 @@ Set current project to myPAL (in build file:/C:/Users/ligthartmeu/apps/myPAL/)
 > iflast shell
 > server-send-ready-for-request
 > server-handle-next-server-request
-> compile
-Evaluating tasks: compile:compile
-Running task... Cancel: sbt.server.ServerTaskCancellation@682da188, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set()
-	modified: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Application.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\Global.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java, C:\Users\ligthartmeu\apps\myPAL\app\models\UserType.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\Usermypal.java, C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala)
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Application.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\Global.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java, C:\Users\ligthartmeu\apps\myPAL\app\models\UserType.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\Usermypal.java, C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala)
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Application.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\Global.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java, C:\Users\ligthartmeu\apps\myPAL\app\models\UserType.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\Usermypal.java, C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala)
-
-Read from stdout: Compiling 16 Scala sources and 17 Java sources to C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes...
-Compiling 16 Scala sources and 17 Java sources to C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes...
-Getting compiler-interface from component compiler for Scala 2.11.6
-Other repositories:
-Default repositories:
-Getting compiler-interface from component compiler for Scala 2.11.6
-Other repositories:
-Default repositories:
-Running cached compiler 21c7c30e, interfacing (CompilerInterface) with Scala compiler version 2.11.6
-Calling Scala compiler with arguments  (CompilerInterface):
-	-deprecation
-	-unchecked
-	-encoding
-	utf8
-	-bootclasspath
-	c:\Program Files\Java\jdk1.8.0_45\jre\lib\resources.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\rt.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\sunrsasign.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\jsse.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\jce.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\charsets.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\jfr.jar;c:\Program Files\Java\jdk1.8.0_45\jre\classes;C:\Users\ligthartmeu\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.11.6.jar
-	-classpath
-	C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\twirl-api_2.11\jars\twirl-api_2.11-1.0.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.apache.commons\commons-lang3\jars\commons-lang3-3.1.jar;C:\Users\ligthartmeu\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe\config\bundles\config-1.2.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.3.jar;C:\Users\ligthartmeu\.ivy2\cache\org.joda\joda-convert\jars\joda-convert-1.6.jar;C:\Users\ligthartmeu\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.3.2.jar;C:\Users\ligthartmeu\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.3.2.jar;C:\Users\ligthartmeu\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.3.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.scala-lang\scala-reflect\jars\scala-reflect-2.11.1.jar;C:\Users\ligthartmeu\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\io.netty\netty\bundles\netty-3.9.8.Final.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.netty\netty-http-pipelining\jars\netty-http-pipelining-1.1.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.slf4j\slf4j-api\jars\slf4j-api-1.7.6.jar;C:\Users\ligthartmeu\.ivy2\cache\org.slf4j\jul-to-slf4j\jars\jul-to-slf4j-1.7.6.jar;C:\Users\ligthartmeu\.ivy2\cache\org.slf4j\jcl-over-slf4j\jars\jcl-over-slf4j-1.7.6.jar;C:\Users\ligthartmeu\.ivy2\cache\ch.qos.logback\logback-core\jars\logback-core-1.1.1.jar;C:\Users\ligthartmeu\.ivy2\cache\ch.qos.logback\logback-classic\jars\logback-classic-1.1.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.3.4.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.3.4.jar;C:\Users\ligthartmeu\.ivy2\cache\commons-codec\commons-codec\jars\commons-codec-1.9.jar;C:\Users\ligthartmeu\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\ligthartmeu\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\ligthartmeu\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-java_2.11\jars\play-java_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\org.yaml\snakeyaml\bundles\snakeyaml-1.13.jar;C:\Users\ligthartmeu\.ivy2\cache\org.hibernate\hibernate-validator\jars\hibernate-validator-5.0.3.Final.jar;C:\Users\ligthartmeu\.ivy2\cache\javax.validation\validation-api\jars\validation-api-1.1.0.Final.jar;C:\Users\ligthartmeu\.ivy2\cache\com.fasterxml\classmate\bundles\classmate-1.0.0.jar;C:\Users\ligthartmeu\.ivy2\cache\org.jboss.logging\jboss-logging\jars\jboss-logging-3.2.0.Final.jar;C:\Users\ligthartmeu\.ivy2\cache\org.springframework\spring-context\jars\spring-context-4.0.3.RELEASE.jar;C:\Users\ligthartmeu\.ivy2\cache\org.springframework\spring-core\jars\spring-core-4.0.3.RELEASE.jar;C:\Users\ligthartmeu\.ivy2\cache\org.springframework\spring-beans\jars\spring-beans-4.0.3.RELEASE.jar;C:\Users\ligthartmeu\.ivy2\cache\org.javassist\javassist\bundles\javassist-3.19.0-GA.jar;C:\Users\ligthartmeu\.ivy2\cache\org.reflections\reflections\jars\reflections-0.9.8.jar;C:\Users\ligthartmeu\.ivy2\cache\com.google.guava\guava\bundles\guava-16.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\dom4j\dom4j\jars\dom4j-1.6.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.google.code.findbugs\jsr305\jars\jsr305-2.0.3.jar;C:\Users\ligthartmeu\.ivy2\cache\org.apache.tomcat\tomcat-servlet-api\jars\tomcat-servlet-api-8.0.5.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-java-jdbc_2.11\jars\play-java-jdbc_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.jolbox\bonecp\bundles\bonecp-0.8.0.RELEASE.jar;C:\Users\ligthartmeu\.ivy2\cache\com.h2database\h2\jars\h2-1.3.175.jar;C:\Users\ligthartmeu\.ivy2\cache\tyrex\tyrex\jars\tyrex-1.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-java-ebean_2.11\jars\play-java-ebean_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\org.avaje.ebeanorm\avaje-ebeanorm\jars\avaje-ebeanorm-3.3.4.jar;C:\Users\ligthartmeu\.ivy2\cache\org.avaje.ebeanorm\avaje-ebeanorm-agent\jars\avaje-ebeanorm-agent-3.2.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.hibernate.javax.persistence\hibernate-jpa-2.0-api\jars\hibernate-jpa-2.0-api-1.0.1.Final.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\net.sf.ehcache\ehcache-core\jars\ehcache-core-2.6.8.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-java-ws_2.11\jars\play-java-ws_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.ning\async-http-client\jars\async-http-client-1.8.15.jar;C:\Users\ligthartmeu\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\ligthartmeu\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.apache.httpcomponents\httpcore\jars\httpcore-4.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\org.apache.httpcomponents\httpclient\jars\httpclient-4.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar;C:\Users\ligthartmeu\.ivy2\cache\org.mindrot\jbcrypt\jars\jbcrypt-0.3m.jar;C:\Users\ligthartmeu\.ivy2\cache\commons-io\commons-io\jars\commons-io-2.4.jar;C:\Users\ligthartmeu\.ivy2\cache\org.imgscalr\imgscalr-lib\jars\imgscalr-lib-4.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.postgresql\postgresql\jars\postgresql-9.4-1201-jdbc41.jar
-Scala compilation took 6.006422473 s
-Attempting to call com.sun.tools.javac.api.JavacTool@3453f88d directly...
-Java compilation took 1.165975296 s
-Java analysis took 0.401024003 s
-Java compile + analysis took 1.595123475 s
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala source file has the following regular definitions changed:
-	apply, render, diary_calendar_diaryActivity_add, f.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\Usermypal.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\Usermypal.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\Usermypal.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\Usermypal.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\Usermypal.java source file has the following regular definitions changed:
-	setEmail, getLogActions, addPropertyChangeListener, notify, _ebean_setFieldIntercept, idType, find, setPictures, setLastName, cancel, findPagingList, refresh, byEmail, removePropertyChangeListener, findUnique, findFutureRowCount, lastActivity, nextId, setCreatedDiaryActivityTypes, findFutureList, setParameter, wait, getDiaryMeasurements, getLastActivity, setLogActions, server, deleteManyToManyAssociations, setListener, email, setId, equals, getPassword, getMaxRows, _ebean_createCopy, serverName, findVisit, logActions, all, setBirthdate, getCreatedDiaryActivityTypes, getEmail, setReadOnly, setPassword, validate, Model$Finder, _ebean_setEmbeddedLoaded, setDiaryActivities, query, _ebean_getIntercept, setTimeout, ref, setUserType, getFirstRow, getLastName, setQuery, setOrder, _ebean_getFieldNames, UserMyPAL$Login, diaryActivities, byId, setAutofetch, _ebean_getField, notifyAll, addLogAction, _ebean_isEmbeddedNewOrDirty, setUseQueryCache, filter, setRawSql, select, pictures, getExpressionFactory, filterMany, _ebean_getMarker, lastName, firstName, birthdate, setUseCache, <init>, on, getBirthdate, isForUpdate, findSet, getFirstName, saveManyToManyAssociations, getRawSql, getDiaryActivities, order, _ebean_newInstance, findRowCount, setHashedPassword, orderBy, setMaxRows, findFutureIds, getPictures, delete, findIds, fetch, copy, setLoadBeanCache, authenticate, toString, getGeneratedSql, isAutofetchTuned, setMapKey, setBufferFetchSizeHint, UserMyPAL, where, setFirstRow, setOrderBy, setLastActivity, findIterate, getClass, update, type, diaryMeasurements, setFirstName, removeDiaryActivity, setDiaryMeasurements, save, getUserType, Usermypal$Login, userType, having, setDistinct, findList, _ebean_setField, setBackgroundFetchAfter, Usermypal, setForUpdate, createdDiaryActivityTypes, _ebean_intercept, hashCode, findMap, password, _ebean_getFieldIntercept.
-All member reference dependencies will be considered within this context.
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala: Set(email, select, <init>, UserMyPAL, password)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Application.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala: Set(<init>, UserMyPAL, getUserType)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala: Set(email, select, <init>, UserMyPAL, password)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala: Set(<init>, UserMyPAL)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\Global.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala: Set(<init>, UserMyPAL)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala: Set(<init>, UserMyPAL, getUserType)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala: Set(<init>, UserMyPAL, getUserType)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala: Set(<init>, UserMyPAL)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala: Set(<init>, UserMyPAL, getUserType)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala: Set(<init>, UserMyPAL)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala: Set(<init>, authenticate, UserMyPAL)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala: Set(<init>, UserMyPAL, getUserType)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala: Set(<init>, UserMyPAL, getUserType)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala: Set(<init>, UserMyPAL, getUserType)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala: Set(<init>, UserMyPAL)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala: Set(<init>, UserMyPAL, getUserType)
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java source file has the following regular definitions changed:
-	byUser, <init>, byNameAndUser, getUser, user, setUser.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala: Set(<init>, user)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala: Set(<init>, user)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala: Set(<init>)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala: Set(<init>)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_remove.template.scala: Set(<init>)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala: Set(<init>, user)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala: Set(<init>, user)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala: Set(<init>, user)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala source file has the following regular definitions changed:
-	render, f, apply, admin_user_fieldset.
-All member reference dependencies will be considered within this context.
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala: Set(apply, admin_user_fieldset)
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala source file has the following regular definitions changed:
-	render, apply, f, diary_calendar_insulin_add.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala source file has the following regular definitions changed:
-	f, apply, diary_calendar_glucose_add, render.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala source file has the following regular definitions changed:
-	f, render, apply, admin_user_update.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala source file has the following regular definitions changed:
-	diary_calendar_carboHydrate_add, render, f, apply.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java source file has the following regular definitions changed:
-	byUser, CarboHydrate, byUserAndDate, getUser, setUser.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_update.template.scala: Set(CarboHydrate)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala: Set(CarboHydrate)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala: Set(CarboHydrate)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala: Set(CarboHydrate)
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java source file has the following regular definitions changed:
-	byUserOnlyUnlinked, byUser, <init>, getUser, user, setUser.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Application.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala: Set(<init>)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala: Set(<init>)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala source file has the following regular definitions changed:
-	diary_fieldset_diaryActivity_update, render, apply, f.
-All member reference dependencies will be considered within this context.
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala: Set(diary_fieldset_diaryActivity_update, apply)
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java)
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java source file has the following regular definitions changed:
-	user, setUser, getUser.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala. This dependency is not being considered for invalidation.
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala: Set(user)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala: Set(user)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala. This dependency is not being considered for invalidation.
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala: Set(user)
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala. This dependency is not being considered for invalidation.
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala: Set(user)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala: Set(user)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala: Set(user)
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala. This dependency is not being considered for invalidation.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala: Set(user)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala: Set(user)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_update.template.scala. This dependency is not being considered for invalidation.
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala: Set(user)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala. This dependency is not being considered for invalidation.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala: Set(user)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala. This dependency is not being considered for invalidation.
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala source file has the following regular definitions changed:
-	apply, diary_formGroup_select_diaryActivityType, render, f.
-All member reference dependencies will be considered within this context.
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala: Set(apply, diary_formGroup_select_diaryActivityType)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala: Set(apply, diary_formGroup_select_diaryActivityType)
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java source file has the following regular definitions changed:
-	byUser, byUserAndDate, getUser, setUser, Glucose.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala: Set(Glucose)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala: Set(Glucose)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala: Set(Glucose)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala: Set(Glucose)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java source file has the following regular definitions changed:
-	byUserAndDate, byUser, setUser, getUser.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala. This dependency is not being considered for invalidation.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala. This dependency is not being considered for invalidation.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala. This dependency is not being considered for invalidation.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala source file has the following regular definitions changed:
-	render, admin_user, f, apply.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala source file has the following regular definitions changed:
-	render, admin_user_update_fieldset, f, apply.
-All member reference dependencies will be considered within this context.
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala: Set(admin_user_update_fieldset, apply)
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala source file has the following regular definitions changed:
-	apply, login, f, render.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Application.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala source file has the following regular definitions changed:
-	diary_fieldset_diaryActivity_add, f, apply, render.
-All member reference dependencies will be considered within this context.
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala: Set(diary_fieldset_diaryActivity_add, apply)
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala source file has the following regular definitions changed:
-	diary_calendar_diaryActivity_update, f, render, apply.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java source file has the following regular definitions changed:
-	canBeRemoved, loadStandardTypes, retrieveDiaryActivityTypes, removeDiaryActivity, createDiaryActivityType.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala source file has the following regular definitions changed:
-	apply, f, render, diary_calendar_carboHydrate_update.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java source file has the following regular definitions changed:
-	byUser, Insulin, byUserAndDate, getUser, setUser.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala: Set(Insulin)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala: Set(Insulin)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala: Set(Insulin)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala: Set(Insulin)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java source file has the following regular definitions changed:
-	<init>, fromListToList.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_view.template.scala: Set(<init>)
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala source file has the following regular definitions changed:
-	f, apply, render, diary_calendar_glucose_update.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java source file has the following regular definitions changed:
-	processUploadedFile.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala)
-The C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala source file has the following regular definitions changed:
-	render, diary_calendar_insulin_update, f, apply.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java source file has the following regular definitions changed:
-	user, <init>.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Application.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\LogActionToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-New invalidations:
-	Set(C:\Users\ligthartmeu\apps\myPAL\app\controllers\Application.java, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java, C:\Users\ligthartmeu\apps\myPAL\app\Global.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_view.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\LogActionToHTML.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_remove.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java)
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\controllers\Application.java, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java, C:\Users\ligthartmeu\apps\myPAL\app\Global.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_view.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\LogActionToHTML.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_remove.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java)
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_routing.scala by C:\Users\ligthartmeu\apps\myPAL\app\controllers\Application.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_reverseRouting.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_routing.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_reverseRouting.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_reverseRouting.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_home.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_view.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_measurement_view.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\app\Global.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_view.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\LogActionToHTML.java by C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_remove.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_reverseRouting.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_datatables.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_datatables.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_greeting.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_emotion.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_addDirect.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\test\dataTest.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\controllers\Test.java by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\test\dataTest.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_date.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_no_avatar.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\diary_calendar.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_avatar.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_avatar.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\goals\diary_goals.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_measurement_select.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\date.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_basic.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\no_access.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_basic.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\no_content.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_basic.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\test\bootstrap.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_basic.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\test\affect_button.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Previously invalidated, but (transitively) depend on new invalidations:
-	Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java, C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala)
-All newly invalidated sources after taking into account (previously) recompiled sources:Set(C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_view.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java, C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\LogActionToHTML.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_remove.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala)
-Read from stdout: Compiling 26 Scala sources and 20 Java sources to C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes...
-Compiling 26 Scala sources and 20 Java sources to C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes...
-Getting compiler-interface from component compiler for Scala 2.11.6
-Other repositories:
-Default repositories:
-Getting compiler-interface from component compiler for Scala 2.11.6
-Other repositories:
-Default repositories:
-Running cached compiler 7357ee7c, interfacing (CompilerInterface) with Scala compiler version 2.11.6
-Calling Scala compiler with arguments  (CompilerInterface):
-	-deprecation
-	-unchecked
-	-encoding
-	utf8
-	-bootclasspath
-	c:\Program Files\Java\jdk1.8.0_45\jre\lib\resources.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\rt.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\sunrsasign.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\jsse.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\jce.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\charsets.jar;c:\Program Files\Java\jdk1.8.0_45\jre\lib\jfr.jar;c:\Program Files\Java\jdk1.8.0_45\jre\classes;C:\Users\ligthartmeu\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.11.6.jar
-	-classpath
-	C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\twirl-api_2.11\jars\twirl-api_2.11-1.0.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.apache.commons\commons-lang3\jars\commons-lang3-3.1.jar;C:\Users\ligthartmeu\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe\config\bundles\config-1.2.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.3.jar;C:\Users\ligthartmeu\.ivy2\cache\org.joda\joda-convert\jars\joda-convert-1.6.jar;C:\Users\ligthartmeu\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.3.2.jar;C:\Users\ligthartmeu\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.3.2.jar;C:\Users\ligthartmeu\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.3.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.scala-lang\scala-reflect\jars\scala-reflect-2.11.1.jar;C:\Users\ligthartmeu\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\io.netty\netty\bundles\netty-3.9.8.Final.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.netty\netty-http-pipelining\jars\netty-http-pipelining-1.1.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.slf4j\slf4j-api\jars\slf4j-api-1.7.6.jar;C:\Users\ligthartmeu\.ivy2\cache\org.slf4j\jul-to-slf4j\jars\jul-to-slf4j-1.7.6.jar;C:\Users\ligthartmeu\.ivy2\cache\org.slf4j\jcl-over-slf4j\jars\jcl-over-slf4j-1.7.6.jar;C:\Users\ligthartmeu\.ivy2\cache\ch.qos.logback\logback-core\jars\logback-core-1.1.1.jar;C:\Users\ligthartmeu\.ivy2\cache\ch.qos.logback\logback-classic\jars\logback-classic-1.1.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.3.4.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.3.4.jar;C:\Users\ligthartmeu\.ivy2\cache\commons-codec\commons-codec\jars\commons-codec-1.9.jar;C:\Users\ligthartmeu\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\ligthartmeu\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\ligthartmeu\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-java_2.11\jars\play-java_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\org.yaml\snakeyaml\bundles\snakeyaml-1.13.jar;C:\Users\ligthartmeu\.ivy2\cache\org.hibernate\hibernate-validator\jars\hibernate-validator-5.0.3.Final.jar;C:\Users\ligthartmeu\.ivy2\cache\javax.validation\validation-api\jars\validation-api-1.1.0.Final.jar;C:\Users\ligthartmeu\.ivy2\cache\com.fasterxml\classmate\bundles\classmate-1.0.0.jar;C:\Users\ligthartmeu\.ivy2\cache\org.jboss.logging\jboss-logging\jars\jboss-logging-3.2.0.Final.jar;C:\Users\ligthartmeu\.ivy2\cache\org.springframework\spring-context\jars\spring-context-4.0.3.RELEASE.jar;C:\Users\ligthartmeu\.ivy2\cache\org.springframework\spring-core\jars\spring-core-4.0.3.RELEASE.jar;C:\Users\ligthartmeu\.ivy2\cache\org.springframework\spring-beans\jars\spring-beans-4.0.3.RELEASE.jar;C:\Users\ligthartmeu\.ivy2\cache\org.javassist\javassist\bundles\javassist-3.19.0-GA.jar;C:\Users\ligthartmeu\.ivy2\cache\org.reflections\reflections\jars\reflections-0.9.8.jar;C:\Users\ligthartmeu\.ivy2\cache\com.google.guava\guava\bundles\guava-16.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\dom4j\dom4j\jars\dom4j-1.6.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.google.code.findbugs\jsr305\jars\jsr305-2.0.3.jar;C:\Users\ligthartmeu\.ivy2\cache\org.apache.tomcat\tomcat-servlet-api\jars\tomcat-servlet-api-8.0.5.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-java-jdbc_2.11\jars\play-java-jdbc_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.jolbox\bonecp\bundles\bonecp-0.8.0.RELEASE.jar;C:\Users\ligthartmeu\.ivy2\cache\com.h2database\h2\jars\h2-1.3.175.jar;C:\Users\ligthartmeu\.ivy2\cache\tyrex\tyrex\jars\tyrex-1.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-java-ebean_2.11\jars\play-java-ebean_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\org.avaje.ebeanorm\avaje-ebeanorm\jars\avaje-ebeanorm-3.3.4.jar;C:\Users\ligthartmeu\.ivy2\cache\org.avaje.ebeanorm\avaje-ebeanorm-agent\jars\avaje-ebeanorm-agent-3.2.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.hibernate.javax.persistence\hibernate-jpa-2.0-api\jars\hibernate-jpa-2.0-api-1.0.1.Final.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\net.sf.ehcache\ehcache-core\jars\ehcache-core-2.6.8.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-java-ws_2.11\jars\play-java-ws_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.3.9.jar;C:\Users\ligthartmeu\.ivy2\cache\com.ning\async-http-client\jars\async-http-client-1.8.15.jar;C:\Users\ligthartmeu\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\ligthartmeu\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.apache.httpcomponents\httpcore\jars\httpcore-4.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\org.apache.httpcomponents\httpclient\jars\httpclient-4.0.1.jar;C:\Users\ligthartmeu\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar;C:\Users\ligthartmeu\.ivy2\cache\org.mindrot\jbcrypt\jars\jbcrypt-0.3m.jar;C:\Users\ligthartmeu\.ivy2\cache\commons-io\commons-io\jars\commons-io-2.4.jar;C:\Users\ligthartmeu\.ivy2\cache\org.imgscalr\imgscalr-lib\jars\imgscalr-lib-4.2.jar;C:\Users\ligthartmeu\.ivy2\cache\org.postgresql\postgresql\jars\postgresql-9.4-1201-jdbc41.jar
-Scala compilation took 3.204354902 s
-Attempting to call com.sun.tools.javac.api.JavacTool@3453f88d directly...
-Java compilation took 0.428591726 s
-Java analysis took 0.227400754 s
-Java compile + analysis took 0.678858086 s
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java source file has the following regular definitions changed:
-	Insulin.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala: Set(Insulin)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala: Set(Insulin)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala: Set(Insulin)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala: Set(Insulin)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java source file has the following regular definitions changed:
-	Glucose.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala: Set(Glucose)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala: Set(Glucose)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala: Set(Glucose)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala: Set(Glucose)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java)
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java source file has the following regular definitions changed:
-	setUser, getUser.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala. This dependency is not being considered for invalidation.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_update.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala. This dependency is not being considered for invalidation.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala. This dependency is not being considered for invalidation.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala. This dependency is not being considered for invalidation.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\DiaryMeasurement.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala. This dependency is not being considered for invalidation.
-None of the modified names appears in C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala. This dependency is not being considered for invalidation.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Invalidating C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java...
-Invalidating (transitively) by inheritance from C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java...
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java)
-The C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java source file has the following regular definitions changed:
-	CarboHydrate.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_update.template.scala: Set(CarboHydrate)
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala: Set(CarboHydrate)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala: Set(CarboHydrate)
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-The following modified names cause invalidation of C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala: Set(CarboHydrate)
-New invalidations:
-	Set(C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala)
-Initial set of included nodes: Set(C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala, C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java, C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala)
-Including C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java by C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\MeasurementToHTML.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_routing.scala by C:\Users\ligthartmeu\apps\myPAL\app\controllers\Diary.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_reverseRouting.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_routing.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_reverseRouting.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\app\controllers\Admin.java by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\app\controllers\Application.java by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_reverseRouting.scala
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_reverseRouting.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_home.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_view.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\DiaryActivityToHTML.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityTypeManager.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivity.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\app\Global.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_view.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\UserToHTML.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\util\PictureFactory.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_update.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_carboHydrate_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_carboHydrate_add.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\DiaryItem.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\views\interfaces\LogActionToHTML.java by C:\Users\ligthartmeu\apps\myPAL\app\models\logging\LogAction.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\Picture.java by C:\Users\ligthartmeu\apps\myPAL\app\models\UserMyPAL.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_remove.template.scala by C:\Users\ligthartmeu\apps\myPAL\app\models\diary\activity\DiaryActivityType.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\routes_reverseRouting.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_datatables.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_datatables.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_greeting.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_emotion.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_addDirect.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\test\dataTest.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\app\controllers\Test.java by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\test\dataTest.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_date.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_no_avatar.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\diary_calendar.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_avatar.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_avatar.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\goals\diary_goals.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_measurement_view.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_measurement_select.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_add.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\date.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_basic.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\no_access.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_basic.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\no_content.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_basic.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\test\bootstrap.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\main_basic.template.scala
-Including C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\twirl\main\views\html\test\affect_button.template.scala by C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\src_managed\main\controllers\routes.java
-Previously invalidated, but (transitively) depend on new invalidations:
-	Set(C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Insulin.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\Glucose.java, C:\Users\ligthartmeu\apps\myPAL\app\models\diary\measurement\CarboHydrate.java)
-All newly invalidated sources after taking into account (previously) recompiled sources:Set()
-transform> cls: models/diary/measurement/DiaryMeasurement  msg: Error unepxected many type Lmodels/diary/measurement/DayPart;
-transform> cls: models/UserMyPAL  msg: Error unepxected many type Lmodels/UserType;
-Total time: 17 s, completed 5-okt-2015 15:10:50
-> server-post-command-cleanup
-> server-handle-next-server-request
 > {file:/C:/Users/ligthartmeu/apps/myPAL/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@67c38abc, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@7a3ea8d5, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -751,18 +84,18 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 1 s, completed 5-okt-2015 15:10:51
+Total time: 1 s, completed 5-okt-2015 15:33:23
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/ligthartmeu/apps/myPAL/}root/compile:mainClass
 Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@2ada93d, check cycles: false
-Total time: 0 s, completed 5-okt-2015 15:10:51
+Running task... Cancel: sbt.server.ServerTaskCancellation@3a6dba8, check cycles: false
+Total time: 0 s, completed 5-okt-2015 15:33:24
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/ligthartmeu/apps/myPAL/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@24f11db4, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@6e4489d3, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -779,30 +112,36 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 1 s, completed 5-okt-2015 15:10:51
+Total time: 0 s, completed 5-okt-2015 15:33:24
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/ligthartmeu/apps/myPAL/}root/compile:mainClass
+Evaluating tasks: compile:mainClass
+Running task... Cancel: sbt.server.ServerTaskCancellation@6c5d56aa, check cycles: false
+Total time: 0 s, completed 5-okt-2015 15:33:24
 > server-post-command-cleanup
 > server-handle-next-server-request
 > backgroundRun
 Evaluating tasks: compile:backgroundRun
-Running task... Cancel: sbt.server.ServerTaskCancellation@61d93929, check cycles: false
-Total time: 0 s, completed 5-okt-2015 15:10:55
+Running task... Cancel: sbt.server.ServerTaskCancellation@4d390658, check cycles: false
+Total time: 0 s, completed 5-okt-2015 15:34:18
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/ligthartmeu/apps/myPAL/}root/*:playForkConfig
 Evaluating tasks: *:playForkConfig
-Running task... Cancel: sbt.server.ServerTaskCancellation@ef8adfa, check cycles: false
-Total time: 0 s, completed 5-okt-2015 15:10:57
+Running task... Cancel: sbt.server.ServerTaskCancellation@293109cd, check cycles: false
+Total time: 0 s, completed 5-okt-2015 15:34:19
 > server-post-command-cleanup
 > server-handle-next-server-request
 > root/playForkNotifyStart http://localhost:9000
 Evaluating tasks: *:playForkNotifyStart
-Running task... Cancel: sbt.server.ServerTaskCancellation@1b0a4834, check cycles: false
-Total time: 0 s, completed 5-okt-2015 15:10:58
+Running task... Cancel: sbt.server.ServerTaskCancellation@3cd6bc5c, check cycles: false
+Total time: 0 s, completed 5-okt-2015 15:34:20
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/ligthartmeu/apps/myPAL/}root/*:playForkReload
 Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@e6f750d, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@55c001ce, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -827,12 +166,12 @@ Copy resource mappings:
 	(C:\Users\ligthartmeu\apps\myPAL\conf\routes,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\routes)
 	(C:\Users\ligthartmeu\apps\myPAL\conf\evolutions\default,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\evolutions\default)
 	(C:\Users\ligthartmeu\apps\myPAL\conf\evolutions\default\1.sql,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\evolutions\default\1.sql)
-Total time: 1 s, completed 5-okt-2015 15:11:00
+Total time: 1 s, completed 5-okt-2015 15:34:23
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/ligthartmeu/apps/myPAL/}root/*:playForkReload
 Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@7bb0efce, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@54fff2a0, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -857,6 +196,12 @@ Copy resource mappings:
 	(C:\Users\ligthartmeu\apps\myPAL\conf\routes,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\routes)
 	(C:\Users\ligthartmeu\apps\myPAL\conf\evolutions\default,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\evolutions\default)
 	(C:\Users\ligthartmeu\apps\myPAL\conf\evolutions\default\1.sql,C:\Users\ligthartmeu\apps\myPAL\target\scala-2.11\classes\evolutions\default\1.sql)
-Total time: 1 s, completed 5-okt-2015 15:11:31
+Total time: 1 s, completed 5-okt-2015 15:34:28
+> server-post-command-cleanup
+> server-handle-next-server-request
+> jobStop 1
+Evaluating tasks: *:jobStop
+Running task... Cancel: sbt.server.ServerTaskCancellation@3edfcaf7, check cycles: false
+Total time: 0 s, completed 5-okt-2015 15:34:42
 > server-post-command-cleanup
 > server-handle-next-server-request

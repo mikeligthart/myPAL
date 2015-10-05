@@ -168,9 +168,9 @@ dialogue.greeting.part1.1=Hello {0},
 dialogue.greeting.part1.2=Hey {0},
 # Part 2 #
 dialogue.greeting.part2.count=3
-dialogue.greeting.part3.0=good to see you again.
-dialogue.greeting.part3.1=welcome back.
-dialogue.greeting.part3.2=it is good that you are here.
+dialogue.greeting.part2.0=good to see you again.
+dialogue.greeting.part2.1=welcome back.
+dialogue.greeting.part2.2=it is good that you are here.
 
 ## Test ##
 dialogue.test.whatdidyoudotoday=What did you do today?

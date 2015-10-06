@@ -115,7 +115,7 @@ page.diary.calendar.measurement.cancel=Cancel
 # Gallery #
 page.diary.gallery.addpicture=Upload picture
 page.diary.gallery.donotaddpicture=Add no picture
-page.diary.gallery.nocontent=There are not pictures present at the moment
+page.diary.gallery.nocontent=There are no pictures present at the moment
 page.diary.gallery.unlinkedpicture=Unlinked picture
 page.diary.gallery.selectapicture=Select a picture for your activity or add a new picture
 page.diary.gallery.addthispicture=Link this picture to the activity

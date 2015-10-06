@@ -52,7 +52,7 @@ page.diary.calendar.activitytype.SCHOOL=School
 page.diary.calendar.activitytype.MEAL=Meal
 page.diary.calendar.activitytype.SPORT=Sport
 page.diary.calendar.activitytype.OTHER=Other
-page.diary.calendar.activitytype=Type of activity
+page.diary.calendar.activitytype=Activity
 page.diary.calendar.activity=Activity
 page.diary.calendar.measurement=Measurement
 page.diary.calendar.addactivity=Add activity
@@ -61,10 +61,10 @@ page.diary.calendar.starttime=Start time
 page.diary.calendar.settime.starttime=From
 page.diary.calendar.endtime=End time
 page.diary.calendar.settime.endtime=Till
-page.diary.calendar.date=Date
-page.diary.calendar.description=Description
+page.diary.calendar.date=When
+page.diary.calendar.description=Tell me
 page.diary.calendar.description_howwasit=How was it?
-page.diary.calendar.emotion=Emotion
+page.diary.calendar.emotion=Feeling
 page.diary.calendar.picture=Picture
 page.diary.calendar.emotion.HAPPY=Happy
 page.diary.calendar.emotion.NEUTRAL=All right
@@ -97,12 +97,12 @@ page.diary.calendar.measurement.select=Select a measurement:
 page.diary.calendar.measurement.addmeasurement=Add a measurement
 page.diary.calendar.measurement.time=Time
 page.diary.calendar.measurement.daypart=Day part
-page.diary.calendar.measurement.daypart.sober=SO
-page.diary.calendar.measurement.daypart.afterbreakfast=AB
-page.diary.calendar.measurement.daypart.beforelunch=BL
-page.diary.calendar.measurement.daypart.afterlunch=AL
-page.diary.calendar.measurement.daypart.beforedinner=BD
-page.diary.calendar.measurement.daypart.afterdinner=AD
+page.diary.calendar.measurement.daypart.sober=Sober
+page.diary.calendar.measurement.daypart.afterbreakfast=After breakfast
+page.diary.calendar.measurement.daypart.beforelunch=Before lunch
+page.diary.calendar.measurement.daypart.afterlunch=After lunch
+page.diary.calendar.measurement.daypart.beforedinner=Before dinner
+page.diary.calendar.measurement.daypart.afterdinner=After dinner
 page.diary.calendar.measurement.comment=Comment
 page.diary.calendar.measurement.value=Value
 page.diary.calendar.measurement.glucoseunit=mmol/L
@@ -120,13 +120,16 @@ page.diary.gallery.unlinkedpicture=Unlinked picture
 page.diary.gallery.selectapicture=Select a picture for your activity or add a new picture
 page.diary.gallery.addthispicture=Link this picture to the activity
 
+# Goals #
+page.diary.goals.tobeimplemented=The goal section is not yet implemented.
+
 
 ## Admin ##
 # Base #
 page.admin.base.home=Home
 page.admin.base.users=Users
 page.admin.base.admin=Admin
-page.admin.base.practiseDiary=Practise Diary
+page.admin.base.practiseDiary=Practice Diary
 
 # Home #
 page.admin.home.title=Admin | home
@@ -134,7 +137,7 @@ page.admin.home.header=Admin dashboard
 page.admin.home.generaldata=General data
 page.admin.home.usersonline=users online
 page.admin.home.addedactivities=added activities
-page.admin.home.logs=logged actions
+page.admin.home.logs=logbook
 page.admin.home.recentactivities=Recent activities
 page.admin.home.norecentactivities=There are no recent activities
 
@@ -148,7 +151,7 @@ page.admin.users.update.title=Admin | update user
 page.admin.users.options=Options
 page.admin.users.view.title=Admin | view user
 page.admin.users.viewUser=View
-page.admin.users.log=Activity log
+page.admin.users.log=Log
 page.admin.users.viewUser.back=Go back to the overview
 page.admin.users.viewUser.activityOverview=Activity Overview
 page.admin.users.log.timestamp=Time

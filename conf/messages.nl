@@ -121,6 +121,9 @@ page.diary.gallery.unlinkedpicture=Ongekoppelde foto
 page.diary.gallery.selectapicture=Selecteer een foto voor de activiteit of upload een nieuwe foto
 page.diary.gallery.addthispicture=Koppel deze foto aan de activiteit
 
+# Goals #
+page.diary.goals.tobeimplemented=De doelensectie is nog niet geïmplementeerd.
+
 
 ## Admin ##
 # Base #
@@ -148,11 +151,11 @@ page.admin.users.updateUser.cancel=Niet aanpassen
 page.admin.users.update.title=Admin | update gebruiker
 page.admin.users.options=Opties
 page.admin.users.view.title=Admin | bekijk user
-page.admin.users.log=Activiteiten log
+page.admin.users.log=Logboek
 page.admin.users.viewUser.back=Ga terug naar het overzicht
 page.admin.users.viewUser.activityOverview=Activiteiten overzicht
 page.admin.users.log.timestamp=Tijd
-page.admin.users.log.activity=Gelogde activiteit
+page.admin.users.log.activity=Log
 page.admin.users.viewUser.hasPicture=Bevat foto
 
 ### ERROR MESSAGES ###

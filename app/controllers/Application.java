@@ -10,14 +10,19 @@ import models.diary.activity.Picture;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import play.data.Form;
+import play.i18n.Messages;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
+import util.PictureFactory;
 import views.html.controlFlow.login;
 import views.html.controlFlow.no_content;
 import views.html.diary.diary_greeting;
 import views.html.interfaces.interfaces_description_box;
 
 import java.io.File;
+import java.sql.Date;
+import java.time.LocalDate;
 
 import static play.data.Form.form;
 
@@ -150,6 +155,29 @@ public class Application extends Controller {
             return ok(new File(ConfigFactory.load().getString("private.data.location") + fileName));
         }
         return forbidden();
+    }
+
+    public static Result dropForMyPALPhoto(){
+
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart filePart = body.getFile("picture");
+
+        UserMyPAL user = UserMyPAL.byEmail("mike.ligthart@gmail.com");
+        //If a file is added
+        if (filePart != null) {
+            //Retrieve, move and store image file to disk and save picture object
+            PictureFactory pictureFactory = new PictureFactory();
+            Picture picture = pictureFactory.processUploadedFile(filePart, user, Date.valueOf(LocalDate.now()));
+            if (picture != null) {
+                picture.save();
+                LogAction.log(user.getEmail(), LogActionType.UPLOADEDPICTURE);
+                return ok("Received");
+            } else {
+                return badRequest(pictureFactory.getLatestError());
+            }
+        } else {
+            return badRequest(Messages.get("error.pleaseAddFile"));
+        }
     }
 
     public static Result contentBox(String content){

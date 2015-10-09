@@ -14,7 +14,9 @@
         <i>@user.getEmail</i>
         <br />
         <br />
-        @Messages("model.user.birthdate"): @user.getBirthdate
+        @Messages("model.user.birthdate"): @user.getBirthdate (@user.getAge)
+        <br />
+        @Messages("model.user.gluconlineID"): @user.getGluconlineID
         <br />
         @Messages("model.user.lastActivity"): @user.getLastActivity
     </div>

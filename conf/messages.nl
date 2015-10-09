@@ -4,6 +4,7 @@ model.user.email=E-mail adres
 model.user.firstName=Voornaam
 model.user.lastName=Achternaam
 model.user.birthdate=Geboortedatum
+model.user.age=Leeftijd
 model.user.lastActivity=Laatst actief
 model.user.lastActivityNever=Nooit
 model.user.userType=Gebruikerstype
@@ -14,6 +15,7 @@ model.user.userType.CHILD=Kind
 model.user.userType.PARENT=Ouder
 model.user.userType.PROFESSIONAL=Medisch Professional
 model.user.userType.ADMIN=Admin
+model.user.gluconlineID=GluconlineID
 
 ### PAGES ###
 ## General ##
@@ -157,6 +159,7 @@ page.admin.users.viewUser.activityOverview=Activiteiten overzicht
 page.admin.users.log.timestamp=Tijd
 page.admin.users.log.activity=Log
 page.admin.users.viewUser.hasPicture=Bevat foto
+
 
 ### ERROR MESSAGES ###
 

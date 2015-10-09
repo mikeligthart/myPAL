@@ -8,13 +8,15 @@ import models.diary.activity.*;
 import models.diary.measurement.*;
 import models.logging.LogAction;
 import models.logging.LogActionType;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import util.GluconlineConnector;
+import util.GluconlineClient;
+import util.NoValidGluconlineIDException;
 import util.PictureFactory;
 import views.html.diary.calendar.activity.*;
 import views.html.diary.calendar.diary_calendar;
@@ -1193,13 +1195,22 @@ public class Diary extends Controller {
         return redirect(routes.Diary.viewMeasurement(id, DiaryMeasurementType.CARBOHYDRATE.ordinal()));
     }
 
-       public static Result gluconline(){
-           GluconlineConnector gluconlineConnector = new GluconlineConnector();
-           Map<String, String> params = new HashMap<>();
-           params.put("bsn", "067835880");
-           params.put("searchPeriodStep", "-78");
-           String url = gluconlineConnector.sign(params);
+    public static Result gluconline(){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("email") == null) {
+            return redirect(routes.Application.login());
+        }
+        String email = session().get("email");
+        UserMyPAL user = UserMyPAL.byEmail(email);
 
-           return ok(url);
+        JsonNode result = null;
+        try {
+            GluconlineClient gluconlineClient = new GluconlineClient(user);
+            result = gluconlineClient.retrieve();
+            gluconlineClient.updateMeasurements(result);
+        } catch (NoValidGluconlineIDException e) {
+            Logger.error("[Diary > gluconline] NoValidGluconlineIDException: " + e.getLocalizedMessage());
+        }
+       return redirect(routes.Diary.calendar());
     }
 }

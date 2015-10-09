@@ -113,6 +113,7 @@ create table user_my_pal (
   password                  varchar(255),
   user_type                 varchar(20),
   last_activity             timestamp,
+  gluconline_id             varchar(255),
   constraint ck_user_my_pal_user_type check (user_type in ('CHILD','PARENT','PROFESSIONAL','ADMIN')),
   constraint pk_user_my_pal primary key (email))
 ;

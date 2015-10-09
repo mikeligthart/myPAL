@@ -84,6 +84,8 @@ public class UserMyPAL extends Model {
     @JsonManagedReference
     private List<Picture> pictures;
 
+    private String gluconlineID;
+
     //The attributes needed to login with a user
     public static class Login {
         public String email;
@@ -102,12 +104,13 @@ public class UserMyPAL extends Model {
     public UserMyPAL(){
     }
 
-    public UserMyPAL(String email, String firstName, String lastName, Date birthdate, String password, UserType userType){
+    public UserMyPAL(String email, String firstName, String lastName, Date birthdate, String password, UserType userType, String gluconlineID){
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
         this.userType = userType;
+        this.gluconlineID = gluconlineID;
         try {
             this.password = HashHelper.createPassword(password);
         } catch (AppException e) {
@@ -262,6 +265,14 @@ public class UserMyPAL extends Model {
 
     public void setCreatedDiaryActivityTypes(List<DiaryActivityType> createdDiaryActivityTypes) {
         this.createdDiaryActivityTypes = createdDiaryActivityTypes;
+    }
+
+    public String getGluconlineID() {
+        return gluconlineID;
+    }
+
+    public void setGluconlineID(String gluconlineID) {
+        this.gluconlineID = gluconlineID;
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.joda.time.Instant;
 import org.joda.time.Years;
 import org.joda.time.format.DateTimeFormat;
 import play.i18n.Messages;
+import util.GluconlineClient;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,24 +29,27 @@ import java.util.List;
 public class UserToHTML {
 
 
-    private String email,firstName,lastName, birthdate, userType, lastActivity;
+    private String email,firstName,lastName, birthdate, userType, lastActivity, gluconlineID;
+    int age;
     private List<LogAction> logActions;
+    private boolean validGluconlineID;
 
     public UserToHTML(UserMyPAL user){
-        this.email = user.getEmail();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        String birthdateString = new SimpleDateFormat(ConfigFactory.load().getString("date.format")).format(user.getBirthdate());
-        int age = Years.yearsBetween(Instant.parse(birthdateString, DateTimeFormat.forPattern(ConfigFactory.load().getString("date.format"))), Instant.now()).getYears();
-        this.birthdate = age + " - " + birthdateString;
-        this.userType = user.getUserType().toString();
+        email = user.getEmail();
+        firstName = user.getFirstName();
+        lastName = user.getLastName();
+        birthdate = new SimpleDateFormat(ConfigFactory.load().getString("date.format")).format(user.getBirthdate());
+        age = Years.yearsBetween(Instant.parse(birthdate, DateTimeFormat.forPattern(ConfigFactory.load().getString("date.format"))), Instant.now()).getYears();
+        userType = user.getUserType().toString();
+        gluconlineID = user.getGluconlineID();
+        validGluconlineID = GluconlineClient.validateGluconlineID(gluconlineID);
         if(user.getLastActivity() == null){
-            this.lastActivity = Messages.get("model.user.lastActivityNever");
+            lastActivity = Messages.get("model.user.lastActivityNever");
         }
         else {
-            this.lastActivity = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(user.getLastActivity());
+            lastActivity = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(user.getLastActivity());
         }
-        this.logActions = user.getLogActions();
+        logActions = user.getLogActions();
     }
 
     public static List<UserToHTML> fromListToList(List<UserMyPAL> users){
@@ -88,6 +92,14 @@ public class UserToHTML {
         this.birthdate = birthdate;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public String getUserType() {
         return userType;
     }
@@ -110,5 +122,21 @@ public class UserToHTML {
 
     public void setLogActions(List<LogAction> logActions) {
         this.logActions = logActions;
+    }
+
+    public String getGluconlineID() {
+        return gluconlineID;
+    }
+
+    public void setGluconlineID(String gluconlineID) {
+        this.gluconlineID = gluconlineID;
+    }
+
+    public boolean isValidGluconlineID() {
+        return validGluconlineID;
+    }
+
+    public void setValidGluconlineID(boolean validGluconlineID) {
+        this.validGluconlineID = validGluconlineID;
     }
 }

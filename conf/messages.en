@@ -4,6 +4,7 @@ model.user.email=Email address
 model.user.firstName=First name
 model.user.lastName=Last name
 model.user.birthdate=Birthday
+model.user.age=Age
 model.user.lastActivity=Last active
 model.user.lastActivityNever=Never
 model.user.userType=User type
@@ -14,6 +15,7 @@ model.user.userType.CHILD=Child
 model.user.userType.PARENT=Parent
 model.user.userType.PROFESSIONAL=Medical Professional
 model.user.userType.ADMIN=Admin
+model.user.gluconlineID=GluconlineID
 
 ### PAGES ###
 ## General ##

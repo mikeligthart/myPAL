@@ -10,8 +10,9 @@ var table = $('#admin_users').DataTable( {
         { "data": "email" },
         { "data": "firstName" },
         { "data": "lastName" },
-        { "data": "birthdate"},
+        { "data": "age"},
         { "data": "userType"},
+        { "data": "gluconlineID"},
         { "data": "lastActivity"},
         {
             "data": null,

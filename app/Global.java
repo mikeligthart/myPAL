@@ -17,9 +17,9 @@ public class Global extends GlobalSettings {
 
         public static void insert(Application app) {
             if(Ebean.find(UserMyPAL.class).findRowCount() == 0) {
-                UserMyPAL originalUser = new UserMyPAL("mike.ligthart@gmail.com", "Mike", "Ligthart", Date.valueOf(LocalDate.now()), "mike", UserType.ADMIN);
+                UserMyPAL originalUser = new UserMyPAL("mike.ligthart@gmail.com", "Mike", "Ligthart", Date.valueOf(LocalDate.now()), "mike", UserType.ADMIN, "067835880");
                 Ebean.save(originalUser);
-                UserMyPAL testAdmin = new UserMyPAL("test@email.com", "Test", "Admin", Date.valueOf(LocalDate.now()), "secret", UserType.ADMIN);
+                UserMyPAL testAdmin = new UserMyPAL("test@email.com", "Test", "Admin", Date.valueOf(LocalDate.now()), "secret", UserType.ADMIN, "");
                 Ebean.save(testAdmin);
             }
         }

@@ -23,6 +23,11 @@ import java.util.List;
 @Entity
 public class DiaryActivity extends DiaryItem {
 
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int id;
+
     //@Constraints.Required(message = " ")
     @ManyToOne
     private DiaryActivityType type;
@@ -44,6 +49,14 @@ public class DiaryActivity extends DiaryItem {
         super();
     }
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public DiaryActivityType getType() {
         return type;

@@ -125,6 +125,13 @@ page.diary.gallery.addthispicture=Link this picture to the activity
 # Goals #
 page.diary.goals.tobeimplemented=The goal section is not yet implemented.
 
+# Gluconline #
+gluconline.daypart.sober=NU
+gluconline.daypart.afterbreakfast=NO
+gluconline.daypart.beforelunch=VL
+gluconline.daypart.afterlunch=NL
+gluconline.daypart.beforedinner=VA
+gluconline.daypart.afterdinner=NA
 
 ## Admin ##
 # Base #

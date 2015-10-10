@@ -6,10 +6,14 @@ import models.UserMyPAL;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
+import scala.App;
+import util.AppException;
 
 import javax.persistence.*;
+import java.applet.AppletStub;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
@@ -27,10 +31,6 @@ import java.text.SimpleDateFormat;
 @Entity
 public abstract class DiaryItem extends Model {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
-
     @Constraints.Required(message = " ")
     @Formats.DateTime(pattern="dd/MM/yyyy")
     private Date date;
@@ -47,28 +47,24 @@ public abstract class DiaryItem extends Model {
     @JsonBackReference
     private UserMyPAL user;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Object date) throws Exception {
+    public void setDate(Object date) throws AppException {
         if (date instanceof String){
             SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
-            this.date = new Date(sdf.parse((String) date).getTime());
+            try {
+                this.date = new Date(sdf.parse((String) date).getTime());
+            } catch (ParseException e) {
+                throw new AppException(e.getMessage(), e.getCause());
+            }
         } else if (date instanceof Date){
             this.date = (Date) date;
         } else if (date instanceof java.util.Date){
             this.date = new Date(((java.util.Date) date).getTime());
         } else{
-            throw new Exception("date object must be either String sql.Date or java.util.Date");
+            throw new AppException("date object must be either String sql.Date or java.util.Date");
         }
     }
 
@@ -76,16 +72,20 @@ public abstract class DiaryItem extends Model {
         return starttime;
     }
 
-    public void setStarttime(Object starttime) throws Exception  {
+    public void setStarttime(Object starttime) throws AppException  {
         if (starttime instanceof String){
             SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("time.format"));
-            this.starttime = new Time(sdf.parse((String) starttime).getTime());
+            try {
+                this.starttime = new Time(sdf.parse((String) starttime).getTime());
+            } catch (ParseException e) {
+                throw new AppException(e.getMessage(), e.getCause());
+            }
         } else if (starttime instanceof Time){
             this.starttime = (Time) starttime;
         } else if (starttime instanceof java.util.Date){
             this.starttime = new Time(((java.util.Date) starttime).getTime());
         } else{
-            throw new Exception("Time object must be either String sql.Time or java.util.Date");
+            throw new AppException("Time object must be either String sql.Time or java.util.Date");
         }
     }
 
@@ -93,16 +93,20 @@ public abstract class DiaryItem extends Model {
         return endtime;
     }
 
-    public void setEndtime(Object endtime) throws Exception  {
+    public void setEndtime(Object endtime) throws AppException  {
         if (endtime instanceof String){
             SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("time.format"));
-            this.endtime = new Time(sdf.parse((String) endtime).getTime());
+            try {
+                this.endtime = new Time(sdf.parse((String) endtime).getTime());
+            } catch (ParseException e) {
+                throw new AppException(e.getMessage(), e.getCause());
+            }
         } else if (endtime instanceof Time){
             this.endtime = (Time) endtime;
         } else if (endtime instanceof java.util.Date){
             this.endtime = new Time(((java.util.Date) endtime).getTime());
         } else{
-            throw new Exception("Time object must be either String sql.Time or java.util.Date");
+            throw new AppException("Time object must be either String sql.Time or java.util.Date");
         }
     }
 

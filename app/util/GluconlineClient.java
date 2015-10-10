@@ -12,7 +12,9 @@ import java.net.URLEncoder;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Time;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.*;
@@ -23,10 +25,15 @@ import javax.crypto.spec.SecretKeySpec;
 import com.fasterxml.jackson.databind.JsonNode;
 import jdk.nashorn.internal.parser.JSONParser;
 import models.UserMyPAL;
+import models.diary.measurement.DayPart;
+import models.diary.measurement.Insulin;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.math.NumberUtils;
 import play.Logger;
+import play.i18n.Messages;
 import play.libs.Json;
+import scala.App;
+import views.interfaces.MeasurementToHTML;
 
 public class GluconlineClient {
     private static final String UTF8_CHARSET = "UTF-8";
@@ -40,6 +47,10 @@ public class GluconlineClient {
 
     private Mac mac = null;
     private UserMyPAL user;
+
+    public static boolean validateGluconlineID(String id){
+        return !(id.isEmpty() || id.length() != 9 || !NumberUtils.isDigits(id));
+    }
 
     public GluconlineClient(UserMyPAL user) throws NoValidGluconlineIDException {
         this.user = user;
@@ -92,9 +103,8 @@ public class GluconlineClient {
 
         //Connect to server and fetch result
         StringBuilder result = new StringBuilder();
-        URL url = null;
         try {
-            url = new URL(urlToConnect);
+            URL url = new URL(urlToConnect);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod(REQUEST_METHOD);
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -112,12 +122,82 @@ public class GluconlineClient {
         return Json.parse(result.toString());
     }
 
-    public void updateMeasurements(JsonNode node){
-        //TODO: extract measurements from JsonNode and add them to the database
+    public void updateMeasurements(JsonNode rootNode){
+        if (rootNode != null){
+            if(!rootNode.isNull()) {
+                JsonNode resultNode = rootNode.get("GetPatientDiaryResponse").get("Result");
+                JsonNode weekNode = resultNode.get("WEEK");
+                for(int index = 0; index < weekNode.size(); index++){
+                    String dayKey = weekNode.get(index).asText();
+                    JsonNode dayNode = resultNode.get(dayKey);
+                    extractInsulin(dayNode.get("insulin"), dayKey);
+                }
+            }
+        }
     }
 
-    public static boolean validateGluconlineID(String id){
-        return !(id.isEmpty() || id.length() != 9 || NumberUtils.isDigits(id));
+    private void extractInsulin(JsonNode insulinRootNode, String dayKey){
+        Date date = null;
+        try {
+            date =  new SimpleDateFormat("dd-MM-yyyy").parse(dayKey);
+        } catch (ParseException e) {
+            Logger.error("[GluconlineClient > updateMeasurements] ParseException: " + e.getMessage());
+        }
+
+        for(Iterator<String> dayParts = insulinRootNode.fieldNames(); dayParts.hasNext();){
+            String dayPart = dayParts.next();
+            DayPart dayPartEnum = null;
+            try {
+                dayPartEnum = stringToDayPart(dayPart);
+            } catch (AppException e) {
+                Logger.error("[GluconlineClient > updateMeasurements] AppException: " + e.getMessage());
+            }
+            JsonNode dayPartNode = insulinRootNode.get(dayPart).get("tooltip");
+            Logger.debug("dayPartNode: " + dayPartNode);
+            for(Iterator<String> insulinValues = dayPartNode.fieldNames(); insulinValues.hasNext();){
+                JsonNode insulinValueNode = dayPartNode.get(insulinValues.next());
+                Logger.debug("insulinValueNode: " + insulinValueNode);
+                Insulin insulin = new Insulin();
+                try {
+                    insulin.setDate(date);
+                    Long timestamp = new SimpleDateFormat("HH:mm").parse(insulinValueNode.get("time").asText()).getTime();
+                    insulin.setStarttime(new Time(timestamp));
+                    insulin.setEndtime(new Time(timestamp + 300000));
+                } catch (AppException e) {
+                    Logger.error("[GluconlineClient > updateMeasurements] AppException: " + e.getMessage());
+                } catch (ParseException e) {
+                    Logger.error("[GluconlineClient > updateMeasurements] ParseException: " + e.getMessage());
+                }
+                insulin.setUser(user);
+                insulin.setValue(Double.parseDouble(insulinValueNode.get("unit").asText()));
+                insulin.setDaypart(dayPartEnum);
+                insulin.setComment(insulinValueNode.get("comment").asText());
+                Logger.debug(new MeasurementToHTML(insulin).toString());
+                insulin.save();
+            }
+        }
+    }
+
+    private void extractGlucose(JsonNode glucose){
+
+    }
+
+    private DayPart stringToDayPart(String dayPartString) throws AppException{
+        if(dayPartString.equalsIgnoreCase(Messages.get("gluconline.daypart.sober"))){
+            return DayPart.SOBER;
+        } else if (dayPartString.equalsIgnoreCase(Messages.get("gluconline.daypart.afterbreakfast"))){
+            return DayPart.AFTERBREAKFAST;
+        } else if (dayPartString.equalsIgnoreCase(Messages.get("gluconline.daypart.beforelunch"))){
+            return DayPart.BEFORELUNCH;
+        }else if (dayPartString.equalsIgnoreCase(Messages.get("gluconline.daypart.afterlunch"))){
+            return DayPart.AFTERLUNCH;
+        } else if (dayPartString.equalsIgnoreCase(Messages.get("gluconline.daypart.beforedinner"))){
+            return DayPart.BEFOREDINNER;
+        } else if (dayPartString.equalsIgnoreCase(Messages.get("gluconline.daypart.afterdinner"))){
+            return DayPart.AFTERDINNER;
+        } else {
+            throw new AppException("dayPartString does not match any of the known dayparts");
+        }
     }
 
     private String hmac(String stringToSign) {

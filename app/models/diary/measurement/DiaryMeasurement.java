@@ -46,9 +46,7 @@ public abstract class DiaryMeasurement extends DiaryItem {
         return daypart;
     }
 
-    public void setDaypart(Object daypart) {
-        if (daypart instanceof DayPart) {
-            this.daypart = (DayPart) daypart;
-        }
+    public void setDaypart(DayPart daypart) {
+        this.daypart = daypart;
     }
 }

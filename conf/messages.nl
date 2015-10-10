@@ -126,6 +126,13 @@ page.diary.gallery.addthispicture=Koppel deze foto aan de activiteit
 # Goals #
 page.diary.goals.tobeimplemented=De doelensectie is nog niet geïmplementeerd.
 
+# Gluconline #
+gluconline.daypart.sober=NU
+gluconline.daypart.afterbreakfast=NO
+gluconline.daypart.beforelunch=VL
+gluconline.daypart.afterlunch=NL
+gluconline.daypart.beforedinner=VA
+gluconline.daypart.afterdinner=NA
 
 ## Admin ##
 # Base #

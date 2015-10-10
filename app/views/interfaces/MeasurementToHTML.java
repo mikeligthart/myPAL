@@ -30,14 +30,25 @@ public class MeasurementToHTML {
 
     private int id;
     private int startHour, startMin, endHour, endMin;
-    private String barDisplay, value, daypart, comment, color, viewURL, startTime, unit, displayName;
+    private String barDisplay, value, daypart, comment, color, viewURL, startTime, unit, displayName, date;
     private DiaryMeasurementType diaryMeasurementType;
 
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
     private static final SimpleDateFormat timeFormatter = new SimpleDateFormat(ConfigFactory.load().getString("time.format"));
 
+    @Override
+    public String toString(){
+        StringBuilder output = new StringBuilder();
+        output.append(displayName).append("(" + id + ")\n").append("====");
+        output.append("date: ").append(date).append("\n");
+        output.append("from: ").append(startTime).append(" till: ").append(endHour).append(":").append(endMin).append("\n");
+        output.append("daypart: ").append(daypart).append("\n");
+        output.append("value: ").append(value).append(" ").append(unit).append("\n");
+        output.append("comment: ").append(comment);
+        return output.toString();
+    }
+
     public MeasurementToHTML(DiaryMeasurement measurement){
-        id = measurement.getId();
         startTime = timeFormatter.format(measurement.getStarttime());
         startHour = measurement.getStarttime().toLocalTime().getHour();
         startMin = measurement.getStarttime().toLocalTime().getMinute();
@@ -45,12 +56,14 @@ public class MeasurementToHTML {
         endMin = measurement.getEndtime().toLocalTime().getMinute();
         value = Double.toString(measurement.getValue());
         daypart = measurement.getDaypart().toString();
+        date = dateFormatter.format(measurement.getDate());
 
         if (measurement instanceof Glucose){
             diaryMeasurementType = DiaryMeasurementType.GLUCOSE;
             displayName = Messages.get("page.diary.calendar.measurement.glucose");
             barDisplay = displayName.substring(0,1).toUpperCase();
             Glucose glucose = (Glucose) measurement;
+            id = glucose.getId();
             comment = glucose.getComment();
             color = glucoseColor;
             unit = Messages.get("page.diary.calendar.measurement.glucoseunit");
@@ -59,6 +72,7 @@ public class MeasurementToHTML {
             displayName = Messages.get("page.diary.calendar.measurement.insulin");
             barDisplay = displayName.substring(0,1).toUpperCase();
             Insulin insulin = (Insulin) measurement;
+            id = insulin.getId();
             comment = insulin.getComment();
             color = insulinColor;
             unit = Messages.get("page.diary.calendar.measurement.insulinunit");
@@ -67,6 +81,7 @@ public class MeasurementToHTML {
             displayName = Messages.get("page.diary.calendar.measurement.carbohydrate");
             barDisplay = displayName.substring(0,1).toUpperCase();
             CarboHydrate carboHydrate = (CarboHydrate) measurement;
+            id = carboHydrate.getId();
             comment = carboHydrate.getComment();
             color = carbohydrateColor;
             unit = Messages.get("page.diary.calendar.measurement.carboHydrateunit");
@@ -75,6 +90,7 @@ public class MeasurementToHTML {
             comment = "";
             color = defaultColor;
             unit = "";
+            id=-1;
         }
         viewURL = routes.Diary.viewMeasurement(id, diaryMeasurementType.ordinal()).url();
     }
@@ -93,6 +109,14 @@ public class MeasurementToHTML {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getStartHour() {

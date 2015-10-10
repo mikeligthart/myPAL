@@ -40,24 +40,20 @@ create table diary_activity_type (
 ;
 
 create table diary_item (
-  id                        integer not null,
   date                      date,
   starttime                 time,
   endtime                   time,
-  user_email                varchar(255),
-  constraint pk_diary_item primary key (id))
+  user_email                varchar(255))
 ;
 
 create table diary_measurement (
-  id                        integer not null,
   date                      date,
   starttime                 time,
   endtime                   time,
   user_email                varchar(255),
   value                     double,
   daypart                   integer,
-  constraint ck_diary_measurement_daypart check (daypart in (0,1,2,3,4,5)),
-  constraint pk_diary_measurement primary key (id))
+  constraint ck_diary_measurement_daypart check (daypart in (0,1,2,3,4,5)))
 ;
 
 create table glucose (
@@ -123,10 +119,6 @@ create sequence carbo_hydrate_seq;
 create sequence diary_activity_seq;
 
 create sequence diary_activity_type_seq;
-
-create sequence diary_item_seq;
-
-create sequence diary_measurement_seq;
 
 create sequence glucose_seq;
 
@@ -196,10 +188,6 @@ drop sequence if exists carbo_hydrate_seq;
 drop sequence if exists diary_activity_seq;
 
 drop sequence if exists diary_activity_type_seq;
-
-drop sequence if exists diary_item_seq;
-
-drop sequence if exists diary_measurement_seq;
 
 drop sequence if exists glucose_seq;
 

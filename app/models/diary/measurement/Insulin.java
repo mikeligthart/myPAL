@@ -3,6 +3,9 @@ package models.diary.measurement;
 import models.UserMyPAL;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.sql.Date;
 import java.util.List;
 
@@ -21,10 +24,23 @@ import java.util.List;
 @Entity
 public class Insulin extends DiaryMeasurement {
 
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private int id;
+
     private String comment;
 
     public Insulin(){
         super();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getComment() {

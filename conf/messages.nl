@@ -82,6 +82,9 @@ page.diary.calendar.addfromgallery=voeg toe uit gallerij
 page.diary.calendar.or=Of
 page.diary.calendar.addnewtype=Nieuw
 page.diary.calendar.removetype=Verwijder
+page.diary.calendar.downloadfromapp=Download van app
+
+# diaryActivityType #
 page.diary.diaryActivityType.donotadd=Terug
 page.diary.diaryActivityType.add=Toevoegen
 page.diary.diaryActivityType.donotremove=Terug
@@ -91,6 +94,7 @@ page.diary.diaryActivityType.color=Kleur
 page.diary.diaryActivityType.source.addActivity=add
 page.diary.diaryActivityType.source.updateActivity=update
 page.diary.diaryActivityType.pickacolor=Klik voor een nieuwe kleur
+
 
 # Measurements #
 page.diary.calendar.measurement.glucose=Glucose

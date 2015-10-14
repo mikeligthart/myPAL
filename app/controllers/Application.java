@@ -9,11 +9,14 @@ import models.diary.DiarySettingsManager;
 import models.diary.activity.Picture;
 import models.logging.LogAction;
 import models.logging.LogActionType;
+import play.Logger;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import util.GluconlineClient;
+import util.NoValidGluconlineIDException;
 import util.PictureFactory;
 import views.html.controlFlow.login;
 import views.html.controlFlow.no_content;
@@ -65,15 +68,26 @@ public class Application extends Controller {
             session().clear();
             String email = loginForm.get().email;
             session("email", email);
+            UserMyPAL user =  UserMyPAL.byEmail(email);
 
             //Set DiarySettings
             DiarySettingsManager.getInstance().login(email);
+
+            //Load new instances from app if gluconlineID is present
+            if(!user.getGluconlineID().isEmpty()){
+                try {
+                    GluconlineClient gluconlineClient = new GluconlineClient(user);
+                    gluconlineClient.updateMeasurements(gluconlineClient.retrieve());
+                } catch (NoValidGluconlineIDException e) {
+                    Logger.error("[Application > authenticate] NoValidGluconlineIDException: " + e.getMessage());
+                }
+            }
 
             //Log user activity
             LogAction.log(email, LogActionType.LOGIN);
 
             //Redirect to right page
-            UserType userType = UserMyPAL.byEmail(email).getUserType();
+            UserType userType = user.getUserType();
             if(userType == UserType.CHILD){
                 return redirect(routes.Application.hello());
             }

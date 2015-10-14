@@ -28,8 +28,12 @@ import java.text.SimpleDateFormat;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 21-8-2015
  */
-@Entity
+@MappedSuperclass
 public abstract class DiaryItem extends Model {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int id;
 
     @Constraints.Required(message = " ")
     @Formats.DateTime(pattern="dd/MM/yyyy")
@@ -46,6 +50,14 @@ public abstract class DiaryItem extends Model {
     @ManyToOne()
     @JsonBackReference
     private UserMyPAL user;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Date getDate() {
         return date;

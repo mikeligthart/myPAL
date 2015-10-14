@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 /**
@@ -24,11 +25,6 @@ import java.util.List;
 @Entity
 public class Glucose extends DiaryMeasurement {
 
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
-
     private String comment;
 
     public Glucose(){
@@ -37,14 +33,6 @@ public class Glucose extends DiaryMeasurement {
 
     public String getComment() {
         return comment;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setComment(String comment) {
@@ -69,4 +57,7 @@ public class Glucose extends DiaryMeasurement {
         return find.byId(id);
     }
 
+    public static boolean exists(Glucose glucose){
+        return find.where().eq("user", glucose.getUser()).eq("date", glucose.getDate()).eq("starttime", glucose.getStarttime()).eq("value", glucose.getValue()).findList().size() > 0;
+    }
 }

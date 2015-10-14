@@ -1,9 +1,9 @@
-@(userType: models.UserType, date: String, realDate: String, diaryItemSize: Integer)
+@(user: UserMyPAL, date: String, realDate: String, diaryItemSize: Integer)
 
 @import play.api.i18n._
 @import play.api.libs.json.Json
 
-@views.html.diary.diary(Messages("page.diary.base.calendar"), "calendar", userType) {
+@views.html.diary.diary(Messages("page.diary.base.calendar"), "calendar", user.getUserType) {
 
     <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/datepicker.css")'>
     <script src=@routes.Assets.at("javascripts/bootstrap-datepicker.js")></script>
@@ -14,6 +14,10 @@
             <a href='@routes.Diary.addActivityPage()' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.calendar.addactivity")</a>
             <br />
             <a href='@routes.Diary.selectMeasurement()' data-toggle="lightbox"  data-title='@Messages("page.diary.calendar.measurement.select")' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.calendar.addmeasurement") </a>
+            @if(user.getGluconlineID != ""){
+            <br />
+            <a href='@routes.Diary.gluconline' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-download" aria-hidden="true"></span> @Messages("page.diary.calendar.downloadfromapp")</a>
+            }
         </div>
         <div id="calendar_head" class="text-center col-md-4">
             <h1>@Messages("page.diary.base.calendar")</h1>

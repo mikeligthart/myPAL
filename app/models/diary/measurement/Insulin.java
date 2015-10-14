@@ -25,22 +25,10 @@ import java.util.List;
 public class Insulin extends DiaryMeasurement {
 
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
-
     private String comment;
 
     public Insulin(){
         super();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getComment() {
@@ -68,4 +56,9 @@ public class Insulin extends DiaryMeasurement {
     public static Insulin byID(int id){
         return find.byId(id);
     }
+
+    public static boolean exists(Insulin insulin){
+        return find.where().eq("user", insulin.getUser()).eq("date", insulin.getDate()).eq("starttime", insulin.getStarttime()).eq("value", insulin.getValue()).findList().size() > 0;
+    }
+
 }

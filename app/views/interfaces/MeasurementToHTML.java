@@ -30,7 +30,7 @@ public class MeasurementToHTML {
 
     private int id;
     private int startHour, startMin, endHour, endMin;
-    private String barDisplay, value, daypart, comment, color, viewURL, startTime, unit, displayName, date;
+    private String barDisplay, value, daypart, comment, color, viewURL, startTime, unit, displayName, date, user;
     private DiaryMeasurementType diaryMeasurementType;
 
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
@@ -39,7 +39,8 @@ public class MeasurementToHTML {
     @Override
     public String toString(){
         StringBuilder output = new StringBuilder();
-        output.append(displayName).append("(" + id + ")\n").append("====");
+        output.append(displayName).append("(" + id + ")\n").append("====").append("\n");
+        output.append("user: ").append(user).append("\n");
         output.append("date: ").append(date).append("\n");
         output.append("from: ").append(startTime).append(" till: ").append(endHour).append(":").append(endMin).append("\n");
         output.append("daypart: ").append(daypart).append("\n");
@@ -57,6 +58,7 @@ public class MeasurementToHTML {
         value = Double.toString(measurement.getValue());
         daypart = measurement.getDaypart().toString();
         date = dateFormatter.format(measurement.getDate());
+        user=measurement.getUser().getEmail();
 
         if (measurement instanceof Glucose){
             diaryMeasurementType = DiaryMeasurementType.GLUCOSE;
@@ -229,5 +231,13 @@ public class MeasurementToHTML {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

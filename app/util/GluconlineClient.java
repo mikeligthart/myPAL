@@ -23,17 +23,15 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import jdk.nashorn.internal.parser.JSONParser;
 import models.UserMyPAL;
 import models.diary.measurement.DayPart;
+import models.diary.measurement.Glucose;
 import models.diary.measurement.Insulin;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.math.NumberUtils;
 import play.Logger;
 import play.i18n.Messages;
 import play.libs.Json;
-import scala.App;
-import views.interfaces.MeasurementToHTML;
 
 public class GluconlineClient {
     private static final String UTF8_CHARSET = "UTF-8";
@@ -88,7 +86,7 @@ public class GluconlineClient {
         params.put("searchPeriodStep", "-78");
 
         SortedMap<String, String> sortedParamMap =
-                new TreeMap<String, String>(params);
+                new TreeMap<>(params);
         String canonicalQS = canonicalize(sortedParamMap);
         String toSign =
                 REQUEST_METHOD + "\n"
@@ -131,6 +129,7 @@ public class GluconlineClient {
                     String dayKey = weekNode.get(index).asText();
                     JsonNode dayNode = resultNode.get(dayKey);
                     extractInsulin(dayNode.get("insulin"), dayKey);
+                    extractGlucose(dayNode.get("measurements"), dayKey);
                 }
             }
         }
@@ -153,10 +152,8 @@ public class GluconlineClient {
                 Logger.error("[GluconlineClient > updateMeasurements] AppException: " + e.getMessage());
             }
             JsonNode dayPartNode = insulinRootNode.get(dayPart).get("tooltip");
-            Logger.debug("dayPartNode: " + dayPartNode);
             for(Iterator<String> insulinValues = dayPartNode.fieldNames(); insulinValues.hasNext();){
                 JsonNode insulinValueNode = dayPartNode.get(insulinValues.next());
-                Logger.debug("insulinValueNode: " + insulinValueNode);
                 Insulin insulin = new Insulin();
                 try {
                     insulin.setDate(date);
@@ -172,13 +169,45 @@ public class GluconlineClient {
                 insulin.setValue(Double.parseDouble(insulinValueNode.get("unit").asText()));
                 insulin.setDaypart(dayPartEnum);
                 insulin.setComment(insulinValueNode.get("comment").asText());
-                Logger.debug(new MeasurementToHTML(insulin).toString());
-                insulin.save();
+                if(!Insulin.exists(insulin)){
+                    insulin.save();
+                }
+
             }
         }
     }
 
-    private void extractGlucose(JsonNode glucose){
+    private void extractGlucose(JsonNode glucoseRootNode, String dayKey){
+        Date date = null;
+        try {
+            date =  new SimpleDateFormat("dd-MM-yyyy").parse(dayKey);
+        } catch (ParseException e) {
+            Logger.error("[GluconlineClient > updateMeasurements] ParseException: " + e.getMessage());
+        }
+
+        for(Iterator<String> measurements = glucoseRootNode.fieldNames(); measurements.hasNext();){
+            JsonNode measurement = glucoseRootNode.get(measurements.next());
+            String dayPartString = measurement.fieldNames().next();
+            JsonNode glucoseNode = measurement.get(dayPartString);
+            Glucose glucose = new Glucose();
+            try {
+                glucose.setDate(date);
+                Long timestamp = new SimpleDateFormat("HH:mm").parse(glucoseNode.get("time").asText()).getTime();
+                glucose.setStarttime(new Time(timestamp));
+                glucose.setEndtime(new Time(timestamp + 300000));
+                glucose.setUser(user);
+                glucose.setValue(Double.parseDouble(glucoseNode.get("value").asText()));
+                glucose.setDaypart(stringToDayPart(dayPartString));
+                glucose.setComment(glucoseNode.get("comment").asText());
+                if(!Glucose.exists(glucose)) {
+                    glucose.save();
+                }
+            } catch (AppException e) {
+                Logger.error("[GluconlineClient > updateMeasurements] AppException: " + e.getMessage());
+            } catch (ParseException e) {
+                Logger.error("[GluconlineClient > updateMeasurements] ParseException: " + e.getMessage());
+            }
+        }
 
     }
 
@@ -201,7 +230,7 @@ public class GluconlineClient {
     }
 
     private String hmac(String stringToSign) {
-        String signature = null;
+        String signature;
         byte[] data;
         byte[] rawHmac;
         try {
@@ -216,7 +245,7 @@ public class GluconlineClient {
     }
 
     private String timestamp() {
-        String timestamp = null;
+        String timestamp;
         Calendar cal = Calendar.getInstance();
         DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         dfm.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -230,20 +259,20 @@ public class GluconlineClient {
             return "";
         }
 
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
         Iterator<Map.Entry<String, String>> iter =
                 sortedParamMap.entrySet().iterator();
 
         while (iter.hasNext()) {
             Map.Entry<String, String> kvpair = iter.next();
-            buffer.append(percentEncodeRfc3986(kvpair.getKey()));
-            buffer.append("=");
-            buffer.append(percentEncodeRfc3986(kvpair.getValue()));
+            builder.append(percentEncodeRfc3986(kvpair.getKey()));
+            builder.append("=");
+            builder.append(percentEncodeRfc3986(kvpair.getValue()));
             if (iter.hasNext()) {
-                buffer.append("&");
+                builder.append("&");
             }
         }
-        return buffer.toString();
+        return builder.toString();
     }
 
     private String percentEncodeRfc3986(String s) {

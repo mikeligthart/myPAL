@@ -25,22 +25,10 @@ import java.util.List;
 public class CarboHydrate extends DiaryMeasurement {
 
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
-
     private String comment;
 
     public CarboHydrate(){
         super();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getComment() {

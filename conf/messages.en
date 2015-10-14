@@ -81,6 +81,9 @@ page.diary.calendar.addfromgallery=add from gallery
 page.diary.calendar.or=Or
 page.diary.calendar.addnewtype=Add
 page.diary.calendar.removetype=Remove
+page.diary.calendar.downloadfromapp=Download from app
+
+# diaryActivityType #
 page.diary.diaryActivityType.donotadd=Cancel
 page.diary.diaryActivityType.add=Add
 page.diary.diaryActivityType.name=Name

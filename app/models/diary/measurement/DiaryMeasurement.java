@@ -1,10 +1,12 @@
 package models.diary.measurement;
 
+import controllers.Diary;
 import models.diary.DiaryItem;
 import play.data.validation.Constraints;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 /**
@@ -49,4 +51,5 @@ public abstract class DiaryMeasurement extends DiaryItem {
     public void setDaypart(DayPart daypart) {
         this.daypart = daypart;
     }
+
 }

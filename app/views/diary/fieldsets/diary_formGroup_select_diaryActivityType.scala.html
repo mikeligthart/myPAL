@@ -16,10 +16,14 @@
         }else{
             <label  class="col-sm-1 text-center">
         }
-            <input type="radio" name='diaryActivityType' value="@uType.getId" @if(preselected == uType.getName){checked="checked"} @if(preselected == "" && index == 0){checked="checked"} />
-            <img class="typeIcon" src='@uType.getIconLocation'>
-            <br />
-            @uType.getName
+            @if(uType.getName == Messages("page.diary.calendar.activitytype.MEAL")){
+                <input type="radio" name='diaryActivityType' class="ismeal" value="@uType.getId" @if(preselected == uType.getName){checked="checked"} @if(preselected == "" && index == 0){checked="checked"} />
+            }else{
+                <input type="radio" name='diaryActivityType' class="notismeal" value="@uType.getId" @if(preselected == uType.getName){checked="checked"} @if(preselected == "" && index == 0){checked="checked"} />
+            }
+                <img class="typeIcon" src='@uType.getIconLocation'>
+                <br />
+                @uType.getName
             </label>
         @if((index+1) % 5 == 0){
             @if(index < 5){

@@ -33,7 +33,8 @@ public class DiaryActivityToHTML {
     private String type, description, emotion, date, emotionPicture, picture, color, viewURL,
             startTime, endTime, hasPictureString, shortDescription, firstName, lastName, fullPicture, email,
             longDescription;
-    private boolean hasPicture;
+    private double value;
+    private boolean hasPicture, isMeal;
 
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
     private static final SimpleDateFormat timeFormatter = new SimpleDateFormat(ConfigFactory.load().getString("time.format"));
@@ -58,6 +59,12 @@ public class DiaryActivityToHTML {
         startTime = timeFormatter.format(diaryActivity.getStarttime());
         endTime = timeFormatter.format(diaryActivity.getEndtime());
         hasPicture = diaryActivity.hasPicture();
+        value = diaryActivity.getCarbohydrateValue();
+        if(value > -1.0){
+            isMeal = true;
+        } else {
+            isMeal = false;
+        }
         if(hasPicture) {
             hasPictureString = "<a href='" + fullPicture + "' data-toggle='lightbox' data-title='" + type +" - " + date + "'>" + Messages.get("page.general.yes") + "</a>";
         } else {
@@ -290,5 +297,21 @@ public class DiaryActivityToHTML {
 
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public boolean isMeal() {
+        return isMeal;
+    }
+
+    public void setIsMeal(boolean isMeal) {
+        this.isMeal = isMeal;
     }
 }

@@ -3,19 +3,6 @@
 
 # --- !Ups
 
-create table carbo_hydrate (
-  id                        integer not null,
-  date                      date,
-  starttime                 time,
-  endtime                   time,
-  user_email                varchar(255),
-  value                     double,
-  daypart                   integer,
-  comment                   varchar(255),
-  constraint ck_carbo_hydrate_daypart check (daypart in (0,1,2,3,4,5)),
-  constraint pk_carbo_hydrate primary key (id))
-;
-
 create table diary_activity (
   id                        integer not null,
   date                      date,
@@ -26,6 +13,7 @@ create table diary_activity (
   description               varchar(1200),
   picture_id                integer,
   emotion                   varchar(7),
+  carbohydrate_value        double,
   constraint ck_diary_activity_emotion check (emotion in ('HAPPY','NEUTRAL','SAD')),
   constraint pk_diary_activity primary key (id))
 ;
@@ -109,8 +97,6 @@ create table user_my_pal (
   constraint pk_user_my_pal primary key (email))
 ;
 
-create sequence carbo_hydrate_seq;
-
 create sequence diary_activity_seq;
 
 create sequence diary_activity_type_seq;
@@ -127,36 +113,32 @@ create sequence picture_seq;
 
 create sequence user_my_pal_seq;
 
-alter table carbo_hydrate add constraint fk_carbo_hydrate_user_1 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_carbo_hydrate_user_1 on carbo_hydrate (user_email);
-alter table diary_activity add constraint fk_diary_activity_user_2 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_diary_activity_user_2 on diary_activity (user_email);
-alter table diary_activity add constraint fk_diary_activity_type_3 foreign key (type_id) references diary_activity_type (id) on delete restrict on update restrict;
-create index ix_diary_activity_type_3 on diary_activity (type_id);
-alter table diary_activity add constraint fk_diary_activity_picture_4 foreign key (picture_id) references picture (id) on delete restrict on update restrict;
-create index ix_diary_activity_picture_4 on diary_activity (picture_id);
-alter table diary_activity_type add constraint fk_diary_activity_type_user_5 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_diary_activity_type_user_5 on diary_activity_type (user_email);
-alter table diary_measurement add constraint fk_diary_measurement_user_6 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_diary_measurement_user_6 on diary_measurement (user_email);
-alter table glucose add constraint fk_glucose_user_7 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_glucose_user_7 on glucose (user_email);
-alter table insulin add constraint fk_insulin_user_8 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_insulin_user_8 on insulin (user_email);
-alter table log_action add constraint fk_log_action_user_9 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_log_action_user_9 on log_action (user_email);
-alter table picture add constraint fk_picture_diaryActivity_10 foreign key (diary_activity_id) references diary_activity (id) on delete restrict on update restrict;
-create index ix_picture_diaryActivity_10 on picture (diary_activity_id);
-alter table picture add constraint fk_picture_user_11 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_picture_user_11 on picture (user_email);
+alter table diary_activity add constraint fk_diary_activity_user_1 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_diary_activity_user_1 on diary_activity (user_email);
+alter table diary_activity add constraint fk_diary_activity_type_2 foreign key (type_id) references diary_activity_type (id) on delete restrict on update restrict;
+create index ix_diary_activity_type_2 on diary_activity (type_id);
+alter table diary_activity add constraint fk_diary_activity_picture_3 foreign key (picture_id) references picture (id) on delete restrict on update restrict;
+create index ix_diary_activity_picture_3 on diary_activity (picture_id);
+alter table diary_activity_type add constraint fk_diary_activity_type_user_4 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_diary_activity_type_user_4 on diary_activity_type (user_email);
+alter table diary_measurement add constraint fk_diary_measurement_user_5 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_diary_measurement_user_5 on diary_measurement (user_email);
+alter table glucose add constraint fk_glucose_user_6 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_glucose_user_6 on glucose (user_email);
+alter table insulin add constraint fk_insulin_user_7 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_insulin_user_7 on insulin (user_email);
+alter table log_action add constraint fk_log_action_user_8 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_log_action_user_8 on log_action (user_email);
+alter table picture add constraint fk_picture_diaryActivity_9 foreign key (diary_activity_id) references diary_activity (id) on delete restrict on update restrict;
+create index ix_picture_diaryActivity_9 on picture (diary_activity_id);
+alter table picture add constraint fk_picture_user_10 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_picture_user_10 on picture (user_email);
 
 
 
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;
-
-drop table if exists carbo_hydrate;
 
 drop table if exists diary_activity;
 
@@ -175,8 +157,6 @@ drop table if exists picture;
 drop table if exists user_my_pal;
 
 SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists carbo_hydrate_seq;
 
 drop sequence if exists diary_activity_seq;
 

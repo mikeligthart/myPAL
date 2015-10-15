@@ -26,7 +26,6 @@ public class MeasurementToHTML {
     private static final String defaultColor = "#006400";
     private static final String glucoseColor = "#006400";
     private static final String insulinColor = "#ff8c00";
-    private static final String carbohydrateColor = "#9932cc";
 
     private int id;
     private int startHour, startMin, endHour, endMin;
@@ -78,15 +77,6 @@ public class MeasurementToHTML {
             comment = insulin.getComment();
             color = insulinColor;
             unit = Messages.get("page.diary.calendar.measurement.insulinunit");
-        } else if (measurement instanceof CarboHydrate){
-            diaryMeasurementType = DiaryMeasurementType.CARBOHYDRATE;
-            displayName = Messages.get("page.diary.calendar.measurement.carbohydrate");
-            barDisplay = displayName.substring(0,1).toUpperCase();
-            CarboHydrate carboHydrate = (CarboHydrate) measurement;
-            id = carboHydrate.getId();
-            comment = carboHydrate.getComment();
-            color = carbohydrateColor;
-            unit = Messages.get("page.diary.calendar.measurement.carboHydrateunit");
         } else {
             diaryMeasurementType = DiaryMeasurementType.OTHER;
             comment = "";

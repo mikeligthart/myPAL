@@ -30,7 +30,7 @@ public class DiaryActivity extends DiaryItem {
 
     @Constraints.MaxLength(1200)
     @Column(length = 1200)
-    //@Constraints.Required(message = " ")
+    @Constraints.Required(message = " ")
     private String description;
 
     @OneToOne(cascade = CascadeType.ALL, optional = true)
@@ -38,8 +38,11 @@ public class DiaryActivity extends DiaryItem {
 
     @OneToOne
     @Enumerated(EnumType.STRING)
-    //@Constraints.Required(message = " ")
+    @Constraints.Required(message = " ")
     private Emotion emotion;
+
+    @Constraints.Required(message = " ")
+    private double carbohydrateValue;
 
     public DiaryActivity(){
         super();
@@ -79,6 +82,14 @@ public class DiaryActivity extends DiaryItem {
 
     public void setEmotion(Emotion emotion) {
         this.emotion = emotion;
+    }
+
+    public double getCarbohydrateValue() {
+        return carbohydrateValue;
+    }
+
+    public void setCarbohydrateValue(double carbohydrateValue) {
+        this.carbohydrateValue = carbohydrateValue;
     }
 
     public static Finder<Integer, DiaryActivity> find = new Finder<Integer, DiaryActivity>(Integer.class, DiaryActivity.class);

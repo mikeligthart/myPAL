@@ -8,6 +8,9 @@
     @diary_formGroup_doubleTime(activityForm("starttime"), activityForm("endtime"))
     @diary_formGroup_description(activityForm("description"), label = Messages("page.diary.calendar.description") + "*", placeholder = Messages("page.diary.calendar.description_howwasit"))
     @diary_formGroup_select_emotion(activityForm("emotion"), label = Messages("page.diary.calendar.emotion") + "*", placeholder = Messages("page.diary.calendar.emotion"))
+    <div id="showOrHideMeal" style="display:none;">
+        @diary_formGroup_value(activityForm("carbohydrateValue"), Messages("page.diary.calendar.measurement.carbohydrate")+ "*", Messages("page.diary.calendar.measurement.canyoucountcarbs"), Messages("page.diary.calendar.measurement.carboHydrateunit"), "-1.0")
+    </div>
     @diary_formGroup_picture(Messages("page.diary.calendar.picture"), Messages("page.diary.calendar.picture"), (activityForm("description").hasErrors || activityForm("date").hasErrors || activityForm("emotion").hasErrors || activityForm("starttime").hasErrors || activityForm("endtime").hasErrors))
 
     <div class="form-group">
@@ -25,5 +28,15 @@
         e.preventDefault()
         document.getElementById("isaddfromgallery").value = "false";
         this.form.submit();
+    });
+
+    $("input:radio.ismeal").click(function() {
+        $("#carbohydrateValue").val("");
+        $("#showOrHideMeal").show();
+    });
+
+    $("input:radio.notismeal").click(function() {
+        $("#showOrHideMeal").hide();
+        $("#carbohydrateValue").val("-1.0");
     });
 </script>

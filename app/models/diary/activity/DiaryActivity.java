@@ -25,14 +25,12 @@ public class DiaryActivity extends DiaryItem {
 
 
 
-
-    //@Constraints.Required(message = " ")
     @ManyToOne
     private DiaryActivityType type;
 
     @Constraints.MaxLength(1200)
     @Column(length = 1200)
-    @Constraints.Required(message = " ")
+    //@Constraints.Required(message = " ")
     private String description;
 
     @OneToOne(cascade = CascadeType.ALL, optional = true)
@@ -40,7 +38,7 @@ public class DiaryActivity extends DiaryItem {
 
     @OneToOne
     @Enumerated(EnumType.STRING)
-    @Constraints.Required(message = " ")
+    //@Constraints.Required(message = " ")
     private Emotion emotion;
 
     public DiaryActivity(){

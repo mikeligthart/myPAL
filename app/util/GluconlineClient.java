@@ -115,8 +115,12 @@ public class GluconlineClient {
             Logger.error("[GluconlineClient > retrieve] MalformedURLException: " + e.getMessage());
         } catch (IOException e) {
             Logger.error("[GluconlineClient > retrieve] IOException: " + e.getMessage());
+            return null;
         }
 
+        if(result.length() == 0){
+            return null;
+        }
         return Json.parse(result.toString());
     }
 

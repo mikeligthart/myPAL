@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.typesafe.config.ConfigFactory;
 import dialogue.Dialogue;
 import models.UserMyPAL;
@@ -77,7 +78,10 @@ public class Application extends Controller {
             if(!user.getGluconlineID().isEmpty()){
                 try {
                     GluconlineClient gluconlineClient = new GluconlineClient(user);
-                    gluconlineClient.updateMeasurements(gluconlineClient.retrieve());
+                    JsonNode measurements = gluconlineClient.retrieve();
+                    if(measurements != null) {
+                        gluconlineClient.updateMeasurements(measurements);
+                    }
                 } catch (NoValidGluconlineIDException e) {
                     Logger.error("[Application > authenticate] NoValidGluconlineIDException: " + e.getMessage());
                 }

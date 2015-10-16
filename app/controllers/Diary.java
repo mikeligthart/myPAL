@@ -1092,7 +1092,9 @@ public class Diary extends Controller {
         try {
             GluconlineClient gluconlineClient = new GluconlineClient(user);
             JsonNode result = gluconlineClient.retrieve();
-            gluconlineClient.updateMeasurements(result);
+            if(result != null) {
+                gluconlineClient.updateMeasurements(result);
+            }
         } catch (NoValidGluconlineIDException e) {
             Logger.error("[Diary > gluconline] NoValidGluconlineIDException: " + e.getLocalizedMessage());
         }

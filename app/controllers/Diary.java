@@ -201,7 +201,6 @@ public class Diary extends Controller {
 
         Form<DiaryActivity> activityForm = form(DiaryActivity.class);
         activityForm = activityForm.fill(activity);
-
         //Log user behavior
         LogAction.log(email, LogActionType.VIEWACTIVITY);
 
@@ -648,9 +647,9 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
+        UserMyPAL user = UserMyPAL.byEmail(email);
 
         //Check if user has access to view this activity
-        UserMyPAL user = UserMyPAL.byEmail(email);
         DiaryActivity activity = DiaryActivity.byID(id);
         if(activity == null){
             return forbidden();
@@ -670,8 +669,9 @@ public class Diary extends Controller {
         }
         DiaryActivityType diaryActivityType = DiaryActivityType.byId(Integer.valueOf(requestData.get("diaryActivityType")));
 
+
         if (diaryActivityForm.hasErrors()) {
-            return badRequest(diary_calendar_diaryActivity_update.render(UserMyPAL.byEmail(email), diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
+            return badRequest(diary_calendar_diaryActivity_update.render(user, diaryActivityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), diaryActivityType.getName(), ""));
         } else {
             //Retrieve the activity from the form
             DiaryActivity updateActivity = diaryActivityForm.get();

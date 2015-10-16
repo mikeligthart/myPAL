@@ -4,13 +4,17 @@
 
 <fieldset>
     <div class="row">
-    @diary_formGroup_select_diaryActivityType(label = Messages("page.diary.calendar.activitytype") + "*", user, types, preselectedType, typeInputErrorMessage, Messages("page.diary.diaryActivityType.source.updateActivity"), Integer.valueOf(activityForm("id").value))
+    @diary_formGroup_select_diaryActivityType(label = Messages("page.diary.calendar.activitytype") + "*", user, types, preselectedType, typeInputErrorMessage, Messages("page.diary.diaryActivityType.source.updateActivity"), activity.getId())
     @diary_formGroup_date(activityForm("date"), Messages("page.diary.calendar.date") + "*", Messages("page.diary.calendar.date"))
     @diary_formGroup_doubleTime(activityForm("starttime"), activityForm("endtime"))
     @diary_formGroup_description(activityForm("description"), label = Messages("page.diary.calendar.description") + "*", placeholder = Messages("page.diary.calendar.description"))
     @diary_formGroup_select_emotion(activityForm("emotion"), label = Messages("page.diary.calendar.emotion") + "*", placeholder = Messages("page.diary.calendar.emotion"))
+    @if(activity.isMeal){
+    <div id="showOrHideMeal">
+    }else{
     <div id="showOrHideMeal" style="display:none;">
-        @diary_formGroup_value(activityForm("carbohydrateValue"), Messages("page.diary.calendar.measurement.carbohydrate") + "*", Messages("page.diary.calendar.measurement.canyoucountcarbs"), Messages("page.diary.calendar.measurement.carboHydrateunit"))
+    }
+        @diary_formGroup_value(activityForm("carbohydrateValue"), Messages("page.diary.calendar.measurement.carbohydrate") + "*", Messages("page.diary.calendar.measurement.canyoucountcarbs"), Messages("page.diary.calendar.measurement.carboHydrateunit"), "-1.0")
     </div>
     @if(!activity.hasPicture){
         @diary_formGroup_picture(Messages("page.diary.calendar.picture"), Messages("page.diary.calendar.picture"), (activityForm("description").hasErrors || activityForm("date").hasErrors || activityForm("emotion").hasErrors || activityForm("starttime").hasErrors || activityForm("endtime").hasErrors))

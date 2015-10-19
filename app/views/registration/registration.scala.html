@@ -14,7 +14,7 @@
             <div class="row">
                 <h1>@Messages("dialogue.registration.0")</h1>
             </div>
-            <audio id="registrationItemSpeech0" autoplay="autoplay"> -->
+            <audio id="registrationItemSpeech0" autoplay="autoplay">
                 <source src='@routes.Assets.at("robot_speech/dialogue.registration.0.wav")' type="audio/wav">
             </audio>
         </div>
@@ -31,7 +31,7 @@
                     <button class="btn btn-primary registrationNext">@Messages("page.registration.enter")</button>
                 </div>
             </div>
-            <audio id="registrationItemSpeech1" preload="none"> -->
+            <audio id="registrationItemSpeech1" preload="none">
                 <source src='@routes.Assets.at("robot_speech/dialogue.registration.1.wav")' type="audio/wav">
             </audio>
         </div>
@@ -48,7 +48,7 @@
                     <button class="btn btn-primary registrationNext">@Messages("page.registration.enter")</button>
                 </div>
             </div>
-            <audio id="registrationItemSpeech2" preload="none"> -->
+            <audio id="registrationItemSpeech2" preload="none">
                 <source src='@routes.Assets.at("robot_speech/dialogue.registration.2.wav")' type="audio/wav">
             </audio>
         </div>
@@ -57,7 +57,7 @@
             <div class="row">
                 <h1>@Messages("dialogue.registration.3")</h1>
             </div>
-            <audio id="registrationItemSpeech3" preload="none"> -->
+            <audio id="registrationItemSpeech3" preload="none">
                 <source src='@routes.Assets.at("robot_speech/dialogue.registration.3.wav")' type="audio/wav">
             </audio>
         </div>
@@ -66,7 +66,7 @@
             <div class="row">
                 <h1>@Messages("dialogue.registration.4")</h1>
             </div>
-            <audio id="registrationItemSpeech4" preload="none"> -->
+            <audio id="registrationItemSpeech4" preload="none">
                 <source src='@routes.Assets.at("robot_speech/dialogue.registration.4.wav")' type="audio/wav">
             </audio>
         </div>
@@ -77,24 +77,111 @@
             </div>
             <div class="row registrationField">
                 <div class="col-md-offset-4 col-md-2 text-right">
-                    <button class="btn btn-primary">@Messages("page.general.yes")</button>
+                    <button class="btn btn-primary" id="registrationFieldChoiceYes">@Messages("page.general.yes")</button>
                 </div>
                 <div class="col-md-2 text-left">
-                    <button class="btn btn-primary">@Messages("page.general.no")</button>
+                    <button class="btn btn-primary" id="registrationFieldChoiceNo">@Messages("page.general.no")</button>
                 </div>
             </div>
-            <audio id="registrationItemSpeech5" preload="none"> -->
+            <audio id="registrationItemSpeech5" preload="none">
                 <source src='@routes.Assets.at("robot_speech/dialogue.registration.5.wav")' type="audio/wav">
             </audio>
         </div>
 
+        <div class="col-md-12" id="registrationItem6-0" style="display:none;">
+            <div class="row">
+                <h1>@Messages("dialogue.registration.5.0")</h1>
+            </div>
+            <div class="row registrationField">
+                <div class="col-md-offset-4 col-md-4 text-center ">
+                    <textarea rows="5" class="form-control" id="opinion1a" name="opinion1a" placeholder='@Messages("page.diary.calendar.description")'></textarea>
+                </div>
+                <div class="col-md-4 text-left">
+                    <button class="btn btn-primary registrationNext">@Messages("page.registration.enter")</button>
+                </div>
+            </div>
+            <audio id="registrationItemSpeech6-0" preload="none">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.5.0.wav")' type="audio/wav">
+            </audio>
+        </div>
+
+        <div class="col-md-12" id="registrationItem6-1" style="display:none;">
+            <div class="row">
+                <h1>@Messages("dialogue.registration.5.1")</h1>
+            </div>
+            <div class="row registrationField">
+                <div class="col-md-offset-4 col-md-4 text-center ">
+                    <textarea rows="5" class="form-control" id="opinion1b" name="opinion1b" placeholder='@Messages("page.diary.calendar.description")'></textarea>
+                </div>
+                <div class="col-md-4 text-left">
+                    <button class="btn btn-primary registrationNext">@Messages("page.registration.enter")</button>
+                </div>
+            </div>
+            <audio id="registrationItemSpeech6-1" preload="none">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.5.1.wav")' type="audio/wav">
+            </audio>
+        </div>
+
+        <div class="col-md-12" id="registrationItem7" style="display:none;">
+            <div class="row">
+                <h1>@Messages("dialogue.registration.6")</h1>
+            </div>
+            <div class="row registrationField">
+                <div class="col-md-offset-4 col-md-4 text-center ">
+                    <textarea rows="5" class="form-control" id="opinion2" name="opinion2" placeholder='@Messages("page.diary.calendar.description")'></textarea>
+                </div>
+                <div class="col-md-4 text-left">
+                    <button class="btn btn-primary registrationNext">@Messages("page.registration.enter")</button>
+                </div>
+            </div>
+            <audio id="registrationItemSpeech7" preload="none">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.6.wav")' type="audio/wav">
+            </audio>
+        </div>
+
+        <div class="col-md-12" id="registrationItem8" style="display:none;">
+            <div class="row">
+                <h1>@Messages("dialogue.registration.7")</h1>
+            </div>
+            <audio id="registrationItemSpeech8" preload="none">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.7.wav")' type="audio/wav">
+            </audio>
+        </div>
+
+        <div class="col-md-12" id="registrationItem9" style="display:none;">
+            <div class="row">
+                <h1>@Messages("dialogue.registration.8")</h1>
+            </div>
+            <audio id="registrationItemSpeech9" preload="none">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.8.wav")' type="audio/wav">
+            </audio>
+        </div>
+
+        <div class="col-md-12" id="registrationItem10" style="display:none;">
+            <div class="row">
+                <h1>@Messages("dialogue.registration.9")</h1>
+            </div>
+            <audio id="registrationItemSpeech10" preload="none">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.9.wav")' type="audio/wav">
+            </audio>
+        </div>
+
+        <div class="col-md-12" id="registrationItem11" style="display:none;">
+            <div class="row">
+                <h1>@Messages("dialogue.registration.10")</h1>
+            </div>
+            <audio id="registrationItemSpeech11" preload="none">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.10.wav")' type="audio/wav">
+            </audio>
+        </div>
     </div>
 
     <script>
         //Start interactive slideshow
         var slide = 0;
-        var timing = [4000, 0, 0, 3500, 4500, 0];
-        var enterToContinue = [false, true, true, false, false, false];
+        var timing = [4000, 0, 0, 3500, 4500, 0, 0, 0, 2500, 3000, 3500, 3000];
+        var enterToContinue = [false, true, true, false, false, false, true, true, false, false, false, false];
+        var afterChoice = false;
         loadTimeout(timing[slide]);
 
         //Go automatically to the next slide after a certain time if required
@@ -108,16 +195,45 @@
         function goToNextSlide(){
             var nextSlide = slide+1;
             $("#registrationItemSpeech" + nextSlide).trigger('load');
-            $("#registrationItem" + slide).hide();
+            if(afterChoice){
+                itemTitle1 = "#registrationItem" + slide + "-0";
+                itemTitle2 = "#registrationItem" + slide + "-1";
+                $(itemTitle1).hide();
+                $(itemTitle2).hide();
+                afterChoice = false;
+            }else{
+                $("#registrationItem" + slide).hide();
+            }
             $("#registrationItem" + nextSlide).show();
             $("#registrationItemSpeech" + nextSlide).trigger('play');
             loadTimeout(timing[nextSlide]);
             slide = slide + 1;
         }
 
-        //Button listener
+        function goToNextSlideBasedOnChoice(choice){
+            var nextSlide = slide+1;
+            var speechTitle = "#registrationItemSpeech" + nextSlide + "-" + choice;
+            var itemTitle = "#registrationItem" + nextSlide + "-" + choice;
+            $(speechTitle).trigger('load');
+            $("#registrationItem" + slide).hide();
+            $(itemTitle).show();
+            $(speechTitle).trigger('play');
+            loadTimeout(timing[nextSlide]);
+            slide = slide + 1;
+            afterChoice = true;
+        }
+
+        //Button listeners
         $(".registrationNext").click(function() {
             goToNextSlide();
+        });
+
+        $("#registrationFieldChoiceYes").click(function() {
+            goToNextSlideBasedOnChoice(0);
+        });
+
+        $("#registrationFieldChoiceNo").click(function() {
+            goToNextSlideBasedOnChoice(1);
         });
 
         //Keyboard listner

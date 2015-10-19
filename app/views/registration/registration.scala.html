@@ -24,7 +24,7 @@
                 <h1>@Messages("dialogue.registration.1")</h1>
             </div>
             <div class="row registrationField">
-                <div class="col-sm-offset-4 col-md-4 text-center ">
+                <div class="col-md-offset-4 col-md-4 text-center ">
                     <input type="text" class="form-control" id="firstName" name="firstName" placeholder='@Messages("model.user.firstName")' />
                 </div>
                 <div class="col-md-4 text-left">
@@ -41,7 +41,7 @@
                 <h1>@Messages("dialogue.registration.2")</h1>
             </div>
             <div class="row registrationField">
-                <div class="col-sm-offset-4 col-md-4 text-center ">
+                <div class="col-md-offset-4 col-md-4 text-center ">
                     <input type="text" class="form-control" id="age" name="age" placeholder='@Messages("model.user.age")' />
                 </div>
                 <div class="col-md-4 text-left">
@@ -74,6 +74,14 @@
         <div class="col-md-12" id="registrationItem5" style="display:none;">
             <div class="row">
                 <h1>@Messages("dialogue.registration.5")</h1>
+            </div>
+            <div class="row registrationField">
+                <div class="col-md-offset-4 col-md-2 text-right">
+                    <button class="btn btn-primary">@Messages("page.general.yes")</button>
+                </div>
+                <div class="col-md-2 text-left">
+                    <button class="btn btn-primary">@Messages("page.general.no")</button>
+                </div>
             </div>
             <audio id="registrationItemSpeech5" preload="none"> -->
                 <source src='@routes.Assets.at("robot_speech/dialogue.registration.5.wav")' type="audio/wav">
@@ -113,4 +121,10 @@
 
 
     </script>
-        } {<!-- null -->} {<!-- null -->} {<!-- null -->}
+        } {<style>html {
+    background: url(@routes.Assets.at("images/background_without_myPAL.png")) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }</style>} {<!-- null -->} {<!-- null -->}

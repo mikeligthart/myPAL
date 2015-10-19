@@ -129,14 +129,6 @@ page.diary.gallery.addthispicture=Link this picture to the activity
 # Goals #
 page.diary.goals.tobeimplemented=The goal section is not yet implemented.
 
-# Gluconline #
-gluconline.daypart.sober=NU
-gluconline.daypart.afterbreakfast=NO
-gluconline.daypart.beforelunch=VL
-gluconline.daypart.afterlunch=NL
-gluconline.daypart.beforedinner=VA
-gluconline.daypart.afterdinner=NA
-
 ## Admin ##
 # Base #
 page.admin.base.home=Home
@@ -171,7 +163,16 @@ page.admin.users.log.timestamp=Time
 page.admin.users.log.activity=Logged activity
 page.admin.users.viewUser.hasPicture=Has picture
 
+## Registration ##
+page.registration.title=Registration
 
+### Gluconline ###
+gluconline.daypart.sober=NU
+gluconline.daypart.afterbreakfast=NO
+gluconline.daypart.beforelunch=VL
+gluconline.daypart.afterlunch=NL
+gluconline.daypart.beforedinner=VA
+gluconline.daypart.afterdinner=NA
 
 ### ERROR MESSAGES ###
 

@@ -70,6 +70,8 @@ GET     /admin/users/update/:email              controllers.Admin.updatePageUser
 POST    /admin/users/update/:email              controllers.Admin.updateUser(email: String)
 DELETE  /admin/users/delete/:email              controllers.Admin.deleteUser(email: String)
 
+## REGISTRATION ##
+GET     /register                               controllers.Registration.registrationPage()
 
 ## TEST ##
 GET     /test/datatest              controllers.Test.dataTest()

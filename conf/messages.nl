@@ -95,7 +95,6 @@ page.diary.diaryActivityType.source.addActivity=add
 page.diary.diaryActivityType.source.updateActivity=update
 page.diary.diaryActivityType.pickacolor=Klik voor een nieuwe kleur
 
-
 # Measurements #
 page.diary.calendar.measurement.glucose=Glucose
 page.diary.calendar.measurement.insulin=Insuline
@@ -131,14 +130,6 @@ page.diary.gallery.addthispicture=Koppel deze foto aan de activiteit
 # Goals #
 page.diary.goals.tobeimplemented=De doelensectie is nog niet geïmplementeerd.
 
-# Gluconline #
-gluconline.daypart.sober=NU
-gluconline.daypart.afterbreakfast=NO
-gluconline.daypart.beforelunch=VL
-gluconline.daypart.afterlunch=NL
-gluconline.daypart.beforedinner=VA
-gluconline.daypart.afterdinner=NA
-
 ## Admin ##
 # Base #
 page.admin.base.home=Home
@@ -172,6 +163,16 @@ page.admin.users.log.timestamp=Tijd
 page.admin.users.log.activity=Log
 page.admin.users.viewUser.hasPicture=Bevat foto
 
+## Registration ##
+page.registration.title=Registratie
+
+### Gluconline ###
+gluconline.daypart.sober=NU
+gluconline.daypart.afterbreakfast=NO
+gluconline.daypart.beforelunch=VL
+gluconline.daypart.afterlunch=NL
+gluconline.daypart.beforedinner=VA
+gluconline.daypart.afterdinner=NA
 
 ### ERROR MESSAGES ###
 

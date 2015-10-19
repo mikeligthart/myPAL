@@ -94,6 +94,7 @@
         //Start interactive slideshow
         var slide = 0;
         var timing = [4000, 0, 0, 3500, 4500, 0];
+        var enterToContinue = [false, true, true, false, false, false];
         loadTimeout(timing[slide]);
 
         //Go automatically to the next slide after a certain time if required
@@ -119,6 +120,14 @@
             goToNextSlide();
         });
 
+        //Keyboard listner
+        window.onkeyup = function(e) {
+            var key = e.keyCode ? e.keyCode : e.which;
+
+           if (key == 13 && enterToContinue[slide]) {
+               goToNextSlide();
+           }
+        }
 
     </script>
         } {<style>html {

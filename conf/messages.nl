@@ -165,6 +165,7 @@ page.admin.users.viewUser.hasPicture=Bevat foto
 
 ## Registration ##
 page.registration.title=Registratie
+page.registration.enter=Enter
 
 ### Gluconline ###
 gluconline.daypart.sober=NU
@@ -188,6 +189,21 @@ dialogue.greeting.part2.count=3
 dialogue.greeting.part2.0=leuk om je weer te zien.
 dialogue.greeting.part2.1=goed dat je er bent.
 dialogue.greeting.part2.2=fijn dat je er bent.
+
+## Registration ##
+dialogue.registration.0=Hi, ik ben Xander het robotvriendje van charlie.
+dialogue.registration.1=Hoe heet jij?
+dialogue.registration.2=En hoe oud ben jij?
+dialogue.registration.3=Wat gaaf dat je naar dit kamp bent gekomen!
+dialogue.registration.4=Je gaat zo aan de slag met een digitaal diabetes dagboek
+dialogue.registration.5=Heb je al eerder zo iets bijgehouden?
+dialogue.registration.5.0=Oke. En wat vond je er van?
+dialogue.registration.5.1=Oke. Mag ik vragen waarom dan niet?
+dialogue.registration.6=Wat zou je er van vinden als we samen een dagboek bijhouden?
+dialogue.registration.7=Bedankt voor je antwoord.
+dialogue.registration.8=Helaas is het dagboek nog niet af.
+dialogue.registration.9=Je kunt mij en Mike helpen het dagboek verder af te maken.
+dialogue.registration.10=Mike legt uit hoe je dat kunt doen.
 
 ## Test ##
 dialogue.test.whatdidyoudotoday=Wat heb jij vandaag gedaan?

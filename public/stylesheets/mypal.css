@@ -9,6 +9,14 @@
     text-align: center;
 }
 
+.registrationMain{
+    margin-top:50px;
+}
+
+.registrationField{
+    margin-top:50px;
+}
+
 #colorPicker
 {
     width:          30px;

@@ -1,15 +1,85 @@
 
 @main(Messages("page.registration.title")) {
 
-<!-- <script>setTimeout(function(){window.location.replace('@routes.Diary.diary()')}, 5500);</script> -->
-
-<div class="jumbotron" id="greeting_animation">
+<div class="registrationMain text-center">
     <!--<video width="100%" autoplay="autoplay" poster='@routes.Assets.at("robot_animations/avatarvideo_greeting_test1_poster.png")'>
         <source src='@routes.Assets.at("robot_animations/avatarvideo_greeting_test2.mp4")' type="video/mp4">
         Your browser does not support the video tag
     </video>-->
-    <img class="text-left" src='@routes.Assets.at("robot_animations/nao.jpg")'>
+    <div class="col-md-12">
+        <img src='@routes.Assets.at("robot_animations/nao.jpg")'>
+    </div>
 
-    <h1>Text</h1>
-</div>
-} {<!-- null -->} {<!-- null -->} {<!-- null -->}
+    <div class="col-md-12" id="registrationItem0">
+        <div class="row">
+            <h1>@Messages("dialogue.registration.0")</h1>
+        </div>
+        <audio id="registrationItemSpeech0" autoplay="autoplay"> -->
+            <source src='@routes.Assets.at("robot_speech/dialogue.registration.0.wav")' type="audio/wav">
+        </audio>
+    </div>
+
+            <div class="col-md-12" id="registrationItem1" style="display:none;">
+                <div class="row">
+                    <h1>@Messages("dialogue.registration.1")</h1>
+                </div>
+                <div class="row registrationField">
+                    <div class="col-sm-offset-4 col-md-4 text-center ">
+                        <input type="text"
+                               class="form-control "
+                               id="firstName"
+                               name="firstName"
+                               placeholder='@Messages("model.user.firstName")' />
+                    </div>
+                    <div class="col-md-4 text-left">
+                        <button class="btn btn-primary registrationNext">@Messages("page.registration.enter")</button>
+                    </div>
+                </div>
+                <audio id="registrationItemSpeech1" preload="none"> -->
+                    <source src='@routes.Assets.at("robot_speech/dialogue.registration.1.wav")' type="audio/wav">
+                </audio>
+            </div>
+
+            <div class="col-md-12" id="registrationItem2" style="display:none;">
+                <div class="row">
+                    <h1>@Messages("dialogue.registration.2")</h1>
+                </div>
+                <div class="row registrationField">
+                    <div class="col-sm-offset-4 col-md-4 text-center ">
+                        <input type="text"
+                               class="form-control "
+                               id="age"
+                               name="age"
+                               placeholder='@Messages("model.user.age")' />
+                    </div>
+                    <div class="col-md-4 text-left">
+                        <button class="btn btn-primary registrationNext">@Messages("page.registration.enter")</button>
+                    </div>
+                </div>
+            </div>
+            <audio id="registrationItemSpeech2" preload="none"> -->
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.2.wav")' type="audio/wav">
+            </audio>
+        </div>
+
+        <script>
+            var stage = 0;
+
+            setTimeout(function(){nextSlide();}, 4000);
+
+            $(".registrationNext").click(function() {
+                nextSlide();
+            });
+
+            function nextSlide(){
+                var nextStage = stage+1;
+                $("registrationItemSpeech" + nextStage).trigger('load');
+                $("#registrationItem" + stage).hide();
+                $("#registrationItem" + nextStage).show();
+                $("registrationItemSpeech" + nextStage).trigger('play');
+                stage = stage + 1;
+            }
+
+
+        </script>
+        } {<!-- null -->} {<!-- null -->} {<!-- null -->}

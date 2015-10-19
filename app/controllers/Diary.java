@@ -17,6 +17,7 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import util.AppException;
 import util.GluconlineClient;
 import util.NoValidGluconlineIDException;
 import util.PictureFactory;
@@ -1097,6 +1098,8 @@ public class Diary extends Controller {
             }
         } catch (NoValidGluconlineIDException e) {
             Logger.error("[Diary > gluconline] NoValidGluconlineIDException: " + e.getLocalizedMessage());
+        } catch (AppException e) {
+            Logger.error("[Application > authenticate] AppException: " + e.getMessage());
         }
 
         return redirect(routes.Diary.calendar());

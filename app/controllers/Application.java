@@ -16,6 +16,7 @@ import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import util.AppException;
 import util.GluconlineClient;
 import util.NoValidGluconlineIDException;
 import util.PictureFactory;
@@ -84,6 +85,8 @@ public class Application extends Controller {
                     }
                 } catch (NoValidGluconlineIDException e) {
                     Logger.error("[Application > authenticate] NoValidGluconlineIDException: " + e.getMessage());
+                } catch (AppException e) {
+                    Logger.error("[Application > authenticate] AppException: " + e.getMessage());
                 }
             }
 

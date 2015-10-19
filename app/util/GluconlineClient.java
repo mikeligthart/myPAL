@@ -124,18 +124,34 @@ public class GluconlineClient {
         return Json.parse(result.toString());
     }
 
-    public void updateMeasurements(JsonNode rootNode){
+    public void updateMeasurements(JsonNode rootNode) throws AppException {
         if (rootNode != null){
             if(!rootNode.isNull()) {
-                JsonNode resultNode = rootNode.get("GetPatientDiaryResponse").get("Result");
-                JsonNode weekNode = resultNode.get("WEEK");
-                for(int index = 0; index < weekNode.size(); index++){
-                    String dayKey = weekNode.get(index).asText();
-                    JsonNode dayNode = resultNode.get(dayKey);
-                    extractInsulin(dayNode.get("insulin"), dayKey);
-                    extractGlucose(dayNode.get("measurements"), dayKey);
+                if(rootNode.hasNonNull("GetPatientDiaryResponse")){
+                    if(rootNode.get("GetPatientDiaryResponse").hasNonNull("Result")){
+                        JsonNode resultNode = rootNode.get("GetPatientDiaryResponse").get("Result");
+                        JsonNode weekNode = resultNode.get("WEEK");
+                        for(int index = 0; index < weekNode.size(); index++){
+                            String dayKey = weekNode.get(index).asText();
+                            JsonNode dayNode = resultNode.get(dayKey);
+                            if(dayNode.hasNonNull("insulin")) {
+                                extractInsulin(dayNode.get("insulin"), dayKey);
+                            }
+                            if(dayNode.hasNonNull("measurements")) {
+                                extractGlucose(dayNode.get("measurements"), dayKey);
+                            }
+                        }
+                    } else {
+                        throw new AppException("rootNode does not contain any diary information");
+                    }
+                } else {
+                    throw new AppException("rootNode does not contain any diary information");
                 }
+            } else {
+                throw new AppException("rootNode cannot be null");
             }
+        } else {
+            throw new AppException("rootNode cannot be null");
         }
     }
 

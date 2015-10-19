@@ -1,13 +1,13 @@
-New log file opened at Mon Oct 19 08:53:24 CEST 2015 by 6208@Obsidian
-Taking next connection to: 63422
-New client attempting to connect on port: 63423-63422
-  Address = /192.168.178.14:63422
-This client on port 63423 has uuid 89ff5555-10f2-42f8-afbf-42052daa70b1 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-89ff5555-10f2-42f8-afbf-42052daa70b1
-Taking next connection to: 63422
-New client attempting to connect on port: 63424-63422
-  Address = /192.168.178.14:63422
-Handshake exception on socket: 63424
+New log file opened at Mon Oct 19 09:30:11 CEST 2015 by 8440@Obsidian
+Taking next connection to: 50378
+New client attempting to connect on port: 50379-50378
+  Address = /192.168.178.14:50378
+This client on port 50379 has uuid d9b0875d-d5f2-4b62-9e40-903e2d5c03b4 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-d9b0875d-d5f2-4b62-9e40-903e2d5c03b4
+Taking next connection to: 50378
+New client attempting to connect on port: 50380-50378
+  Address = /192.168.178.14:50378
+Handshake exception on socket: 50380
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -23,30 +23,18 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 63422
-New client attempting to connect on port: 63425-63422
-  Address = /192.168.178.14:63422
-This client on port 63425 has uuid 4667f74c-7ae4-4e92-a3b0-d82f9ae5bf20 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-89ff5555-10f2-42f8-afbf-42052daa70b1, activator-4667f74c-7ae4-4e92-a3b0-d82f9ae5bf20
-Taking next connection to: 63422
+Taking next connection to: 50378
+New client attempting to connect on port: 50381-50378
+  Address = /192.168.178.14:50378
+This client on port 50381 has uuid d59f660a-30b5-473d-aa14-c7cd0a9ea0e2 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-d9b0875d-d5f2-4b62-9e40-903e2d5c03b4, activator-d59f660a-30b5-473d-aa14-c7cd0a9ea0e2
+Taking next connection to: 50378
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 63422
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 63422
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 63422
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 63422
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 63422
-New client attempting to connect on port: 63521-63422
-  Address = /192.168.178.14:63422
-Handshake exception on socket: 63521
+Taking next connection to: 50378
+New client attempting to connect on port: 50527-50378
+  Address = /192.168.178.14:50378
+Handshake exception on socket: 50527
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -62,12 +50,18 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 63422
-New client attempting to connect on port: 63522-63422
-  Address = /192.168.178.14:63422
-This client on port 63522 has uuid c185d490-a4db-4f3b-b2b0-6d21bcb19687 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-4667f74c-7ae4-4e92-a3b0-d82f9ae5bf20, play-fork-run-c185d490-a4db-4f3b-b2b0-6d21bcb19687
-Taking next connection to: 63422
+Taking next connection to: 50378
+New client attempting to connect on port: 50528-50378
+  Address = /192.168.178.14:50378
+This client on port 50528 has uuid ef78b2ce-74b7-4648-8186-b11c674456e0 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-d59f660a-30b5-473d-aa14-c7cd0a9ea0e2, play-fork-run-ef78b2ce-74b7-4648-8186-b11c674456e0
+Taking next connection to: 50378
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 63422
+Taking next connection to: 50378
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 50378
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 50378

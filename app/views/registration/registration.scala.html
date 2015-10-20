@@ -1,6 +1,6 @@
 
 @main(Messages("page.registration.title")) {
-
+<form action="@routes.Registration.register()" method="post">
     <div class="registrationMain text-center">
         <!--<video width="100%" autoplay="autoplay" poster='@routes.Assets.at("robot_animations/avatarvideo_greeting_test1_poster.png")'>
             <source src='@routes.Assets.at("robot_animations/avatarvideo_greeting_test2.mp4")' type="video/mp4">
@@ -174,86 +174,18 @@
                 <source src='@routes.Assets.at("robot_speech/dialogue.registration.11.wav")' type="audio/wav">
             </audio>
         </div>
+
+        <div class="col-md-12" id="registrationItem12" style="display:none;">
+            <div class="text-center registrationField">
+                <input type="submit" value='@Messages("page.registration.start")' class="btn btn-primary btn-lg" />
+            </div>
+        </div>
     </div>
-
-    <script>
-        //Start interactive slideshow
-        var slide = 0;
-        var timing = [4000, 0, 0, 3500, 4500, 0, 0, 0, 2500, 3000, 3500, 3000];
-        var enterToContinue = [false, true, true, false, false, false, true, true, false, false, false, false];
-        var afterChoice = false;
-        loadTimeout(timing[slide]);
-
-        //Go automatically to the next slide after a certain time if required
-        function loadTimeout(time){
-            if(time > 0){
-                setTimeout(function(){goToNextSlide();}, time);
-            }
-        }
-
-        //Go to the next slide
-        function goToNextSlide(){
-            var nextSlide = slide+1;
-            $("#registrationItemSpeech" + nextSlide).trigger('load');
-            console.log("#registrationItemSpeech" + nextSlide + " loaded");
-            if(afterChoice){
-                console.log("afterChoice is true");
-                itemTitle1 = "#registrationItem" + slide + "-0";
-                itemTitle2 = "#registrationItem" + slide + "-1";
-                $(itemTitle1).hide();
-                $(itemTitle2).hide();
-                afterChoice = false;
-            }else{
-                $("#registrationItem" + slide).hide();
-            }
-            console.log("show #registrationItem" + nextSlide)
-            $("#registrationItem" + nextSlide).show();
-            console.log("play #registrationItemSpeech" + nextSlide);
-            $("#registrationItemSpeech" + nextSlide).trigger('play');
-            loadTimeout(timing[nextSlide]);
-            slide = slide + 1;
-        }
-
-        function goToNextSlideBasedOnChoice(choice){
-            var nextSlide = slide+1;
-            var speechTitle = "#registrationItemSpeech" + nextSlide + "-" + choice;
-            var itemTitle = "#registrationItem" + nextSlide + "-" + choice;
-            $(speechTitle).trigger('load');
-            $("#registrationItem" + slide).hide();
-            $(itemTitle).show();
-            $(speechTitle).trigger('play');
-            loadTimeout(timing[nextSlide]);
-            slide = slide + 1;
-            afterChoice = true;
-        }
-
-        //Button listeners
-        $(".registrationNext").click(function() {
-            goToNextSlide();
-        });
-
-        $("#registrationFieldChoiceYes").click(function() {
-            goToNextSlideBasedOnChoice(0);
-        });
-
-        $("#registrationFieldChoiceNo").click(function() {
-            goToNextSlideBasedOnChoice(1);
-        });
-
-        //Keyboard listner
-        window.onkeyup = function(e) {
-            var key = e.keyCode ? e.keyCode : e.which;
-
-           if (key == 13 && enterToContinue[slide]) {
-               goToNextSlide();
-           }
-        }
-
-    </script>
+</form>
         } {<style>html {
     background: url(@routes.Assets.at("images/background_without_myPAL.png")) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    }</style>} {<!-- null -->} {<!-- null -->}
+    }</style>} {<!-- null -->} { <script src='@routes.Assets.at("javascripts/registrationPage.js")' type="text/javascript"></script>}

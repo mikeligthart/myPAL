@@ -1,8 +1,17 @@
 package controllers;
 
+import models.UserMyPAL;
+import models.UserType;
+import play.Logger;
+import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
+import util.AppException;
+import util.RegistrationToDisk;
 import views.html.registration.*;
+
+import static play.data.Form.form;
+
 /**
  * myPAL
  * Purpose: [ENTER PURPOSE]
@@ -20,5 +29,39 @@ public class Registration extends Controller {
     public static Result registrationPage(){
 
         return ok(views.html.registration.registration.render());
+    }
+
+    public static Result register(){
+        //Retrieve data from registrationForm
+        DynamicForm requestData = form().bindFromRequest();
+        String firstName = requestData.get("firstName");
+        int age = Integer.valueOf(requestData.get("age"));
+        String opinion1a = requestData.get("opinion1a");
+        String opinion1b = requestData.get("opinion1b");
+        String opinion2 = requestData.get("opinion2");
+        String emailName = firstName +  UserMyPAL.find.all().size();
+
+        //Save data to file
+        RegistrationToDisk.writeToDisk(emailName, opinion1a, opinion1b, opinion2);
+
+        //Create new user with this data
+        UserMyPAL user = new UserMyPAL();
+        user.setEmail(emailName + "@pal4u.eu");
+        user.setFirstName(firstName);
+        user.setLastName("Kamp");
+        user.setBirthdate("20/10/" + (2015 - age));
+        try {
+            user.setPassword("secret");
+        } catch (AppException e) {
+            Logger.error("[Registration > register] AppException " + e.getMessage());
+        }
+        user.setUserType(UserType.CHILD);
+        user.save();
+
+        //Add user to session
+        session().clear();
+        session("email", user.getEmail());
+
+        return redirect(routes.Diary.diary());
     }
 }

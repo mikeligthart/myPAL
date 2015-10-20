@@ -166,6 +166,7 @@ page.admin.users.viewUser.hasPicture=Has picture
 ## Registration ##
 page.registration.title=Registration
 page.registration.enter=Enter
+page.registration.start=Start
 
 ### Gluconline ###
 gluconline.daypart.sober=NU

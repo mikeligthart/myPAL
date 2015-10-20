@@ -84,7 +84,7 @@ public class UserMyPAL extends Model {
     @JsonManagedReference
     private List<Picture> pictures;
 
-    private String gluconlineID;
+    private String gluconlineID = "";
 
     //The attributes needed to login with a user
     public static class Login {

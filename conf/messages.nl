@@ -166,6 +166,7 @@ page.admin.users.viewUser.hasPicture=Bevat foto
 ## Registration ##
 page.registration.title=Registratie
 page.registration.enter=Enter
+page.registration.start=Start
 
 ### Gluconline ###
 gluconline.daypart.sober=NU

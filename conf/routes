@@ -72,6 +72,7 @@ DELETE  /admin/users/delete/:email              controllers.Admin.deleteUser(ema
 
 ## REGISTRATION ##
 GET     /register                               controllers.Registration.registrationPage()
+POST    /register                               controllers.Registration.register()
 
 ## TEST ##
 GET     /test/datatest              controllers.Test.dataTest()

@@ -3,6 +3,7 @@ var slide = 0;
 var endSlide = 12;
 var timing = [4000, 0, 0, 3500, 4500, 0, 0, 0, 2500, 3000, 3500, 3000];
 var enterToContinue = [false, true, true, false, false, false, true, true, false, false, false, false];
+var focus = ["", "#firstName", "#age", "", "", "", "#opinion1", "#opinion2", "", "", "", ""];
 var afterChoice = false;
 loadTimeout(timing[slide]);
 
@@ -27,6 +28,9 @@ function goToNextSlide(){
         $("#registrationItem" + slide).hide();
     }
     $("#registrationItem" + nextSlide).show();
+    if(focus[nextSlide] != ""){
+        $(focus[nextSlide]).focus();
+    }
     $("#registrationItemSpeech" + nextSlide).trigger('play');
     loadTimeout(timing[nextSlide]);
     slide = slide + 1;
@@ -39,6 +43,10 @@ function goToNextSlideBasedOnChoice(choice){
     $(speechTitle).trigger('load');
     $("#registrationItem" + slide).hide();
     $(itemTitle).show();
+    if(focus[nextSlide] != ""){
+        var focusTitle = focus[nextSlide] + "-" + choice;
+        $(focusTitle).focus();
+    }
     $(speechTitle).trigger('play');
     loadTimeout(timing[nextSlide]);
     slide = slide + 1;

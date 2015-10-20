@@ -36,8 +36,8 @@ public class Registration extends Controller {
         DynamicForm requestData = form().bindFromRequest();
         String firstName = requestData.get("firstName");
         int age = Integer.valueOf(requestData.get("age"));
-        String opinion1a = requestData.get("opinion1a");
-        String opinion1b = requestData.get("opinion1b");
+        String opinion1a = requestData.get("opinion1-0");
+        String opinion1b = requestData.get("opinion1-1");
         String opinion2 = requestData.get("opinion2");
         String emailName = firstName +  UserMyPAL.find.all().size();
 

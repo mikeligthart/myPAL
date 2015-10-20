@@ -90,7 +90,7 @@
 
         <div class="col-md-12" id="registrationItem6-0" style="display:none;">
             <div class="row">
-                <h1>@Messages("dialogue.registration.5.0")</h1>
+                <h1>@Messages("dialogue.registration.6.0")</h1>
             </div>
             <div class="row registrationField">
                 <div class="col-md-offset-4 col-md-4 text-center ">
@@ -101,13 +101,13 @@
                 </div>
             </div>
             <audio id="registrationItemSpeech6-0" preload="none">
-                <source src='@routes.Assets.at("robot_speech/dialogue.registration.5.0.wav")' type="audio/wav">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.6.0.wav")' type="audio/wav">
             </audio>
         </div>
 
         <div class="col-md-12" id="registrationItem6-1" style="display:none;">
             <div class="row">
-                <h1>@Messages("dialogue.registration.5.1")</h1>
+                <h1>@Messages("dialogue.registration.6.1")</h1>
             </div>
             <div class="row registrationField">
                 <div class="col-md-offset-4 col-md-4 text-center ">
@@ -118,13 +118,13 @@
                 </div>
             </div>
             <audio id="registrationItemSpeech6-1" preload="none">
-                <source src='@routes.Assets.at("robot_speech/dialogue.registration.5.1.wav")' type="audio/wav">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.6.1.wav")' type="audio/wav">
             </audio>
         </div>
 
         <div class="col-md-12" id="registrationItem7" style="display:none;">
             <div class="row">
-                <h1>@Messages("dialogue.registration.6")</h1>
+                <h1>@Messages("dialogue.registration.7")</h1>
             </div>
             <div class="row registrationField">
                 <div class="col-md-offset-4 col-md-4 text-center ">
@@ -135,43 +135,43 @@
                 </div>
             </div>
             <audio id="registrationItemSpeech7" preload="none">
-                <source src='@routes.Assets.at("robot_speech/dialogue.registration.6.wav")' type="audio/wav">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.7.wav")' type="audio/wav">
             </audio>
         </div>
 
         <div class="col-md-12" id="registrationItem8" style="display:none;">
             <div class="row">
-                <h1>@Messages("dialogue.registration.7")</h1>
+                <h1>@Messages("dialogue.registration.8")</h1>
             </div>
             <audio id="registrationItemSpeech8" preload="none">
-                <source src='@routes.Assets.at("robot_speech/dialogue.registration.7.wav")' type="audio/wav">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.8.wav")' type="audio/wav">
             </audio>
         </div>
 
         <div class="col-md-12" id="registrationItem9" style="display:none;">
             <div class="row">
-                <h1>@Messages("dialogue.registration.8")</h1>
+                <h1>@Messages("dialogue.registration.9")</h1>
             </div>
             <audio id="registrationItemSpeech9" preload="none">
-                <source src='@routes.Assets.at("robot_speech/dialogue.registration.8.wav")' type="audio/wav">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.9.wav")' type="audio/wav">
             </audio>
         </div>
 
         <div class="col-md-12" id="registrationItem10" style="display:none;">
             <div class="row">
-                <h1>@Messages("dialogue.registration.9")</h1>
+                <h1>@Messages("dialogue.registration.10")</h1>
             </div>
             <audio id="registrationItemSpeech10" preload="none">
-                <source src='@routes.Assets.at("robot_speech/dialogue.registration.9.wav")' type="audio/wav">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.10.wav")' type="audio/wav">
             </audio>
         </div>
 
         <div class="col-md-12" id="registrationItem11" style="display:none;">
             <div class="row">
-                <h1>@Messages("dialogue.registration.10")</h1>
+                <h1>@Messages("dialogue.registration.11")</h1>
             </div>
             <audio id="registrationItemSpeech11" preload="none">
-                <source src='@routes.Assets.at("robot_speech/dialogue.registration.10.wav")' type="audio/wav">
+                <source src='@routes.Assets.at("robot_speech/dialogue.registration.11.wav")' type="audio/wav">
             </audio>
         </div>
     </div>
@@ -195,7 +195,9 @@
         function goToNextSlide(){
             var nextSlide = slide+1;
             $("#registrationItemSpeech" + nextSlide).trigger('load');
+            console.log("#registrationItemSpeech" + nextSlide + " loaded");
             if(afterChoice){
+                console.log("afterChoice is true");
                 itemTitle1 = "#registrationItem" + slide + "-0";
                 itemTitle2 = "#registrationItem" + slide + "-1";
                 $(itemTitle1).hide();
@@ -204,7 +206,9 @@
             }else{
                 $("#registrationItem" + slide).hide();
             }
+            console.log("show #registrationItem" + nextSlide)
             $("#registrationItem" + nextSlide).show();
+            console.log("play #registrationItemSpeech" + nextSlide);
             $("#registrationItemSpeech" + nextSlide).trigger('play');
             loadTimeout(timing[nextSlide]);
             slide = slide + 1;

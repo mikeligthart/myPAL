@@ -4,6 +4,7 @@ var endSlide = 12;
 var timing = [4000, 0, 0, 3500, 4500, 0, 0, 0, 2500, 3000, 3500, 3000];
 var enterToContinue = [false, true, true, false, false, false, true, true, false, false, false, false];
 var focus = ["", "#firstName", "#age", "", "", "", "#opinion1", "#opinion2", "", "", "", ""];
+var naoImage = ["#nao_hand_above_head", "#nao_hand_above_head", "#nao_hand_above_head", "#nao_hand_in_hip", "#nao_hand_in_hip", "#nao_hand_in_hip", "#nao_hand_in_hip", "#nao_foot_on_ball", "#nao_hand_in_hip", "#nao_hand_in_hip", "#nao_hand_in_hip", "#nao_hand_above_head", "#nao_hand_in_hip"]
 var afterChoice = false;
 loadTimeout(timing[slide]);
 
@@ -28,6 +29,8 @@ function goToNextSlide(){
         $("#registrationItem" + slide).hide();
     }
     $("#registrationItem" + nextSlide).show();
+    $(naoImage[slide]).hide()
+    $(naoImage[nextSlide]).show();
     if(focus[nextSlide] != ""){
         $(focus[nextSlide]).focus();
     }
@@ -43,6 +46,8 @@ function goToNextSlideBasedOnChoice(choice){
     $(speechTitle).trigger('load');
     $("#registrationItem" + slide).hide();
     $(itemTitle).show();
+    $(naoImage[slide]).hide()
+    $(naoImage[nextSlide]).show();
     if(focus[nextSlide] != ""){
         var focusTitle = focus[nextSlide] + "-" + choice;
         $(focusTitle).focus();

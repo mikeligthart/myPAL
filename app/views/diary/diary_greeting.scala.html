@@ -2,15 +2,14 @@
 
 @main_basic("Hi there!") {
 
-    <script>setTimeout(function(){window.location.replace('@routes.Diary.diary()')}, 5500);</script>
+<script>setTimeout(function(){window.location.replace('@routes.Diary.diary()')}, 5500);</script>
 
-    <div class="jumbotron" id="greeting_animation">
-        <!--<video width="100%" autoplay="autoplay" poster='@routes.Assets.at("robot_animations/avatarvideo_greeting_test1_poster.png")'>
-            <source src='@routes.Assets.at("robot_animations/avatarvideo_greeting_test2.mp4")' type="video/mp4">
-            Your browser does not support the video tag
-        </video>-->
-        <img class="text-left" src='@routes.Assets.at("robot_animations/nao.jpg")'>
+<div class="jumbotron" id="greeting_animation">
+    <video width="500px" height="500px" autoplay="autoplay">
+        <source src='@routes.Assets.at("robot_animations/avatar_standing_wave.mp4")' type="video/mp4">
+    </video>
+    <!-- <img class="text-left" src='@routes.Assets.at("robot_animations/nao.jpg")'> -->
 
-        <h1>@message</h1>
-    </div>
+    <h1>@message</h1>
+</div>
 }

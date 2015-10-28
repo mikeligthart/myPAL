@@ -1,7 +1,8 @@
 package models.avatar;
 
-import java.util.Iterator;
-import java.util.List;
+import models.UserMyPAL;
+
+import java.util.*;
 
 /**
  * myPAL
@@ -17,35 +18,57 @@ import java.util.List;
  */
 public class AvatarBehavior {
 
+    private int id;
+    private UserMyPAL user;
+
     private AvatarGestureType gestureType;
     private String gestureSource;
     private String audioSource;
-    private List<String> text;
-    private Iterator<String> lines;
+    private Map<Integer, String> linesAndTiming;
+    private int lineIndex, numberOfLines;
 
-    public int numberOfLines(){
-        if(text != null){
-            return text.size();
-        }
-        return 0;
+    public AvatarBehavior(int id, UserMyPAL user){
+        this.id = id;
+        this.user = user;
+        linesAndTiming = new LinkedHashMap<>();
+        lineIndex = 0;
+        numberOfLines = 0;
+    }
+
+    public void addLine(String line, int timing){
+        linesAndTiming.put(timing, line);
+        numberOfLines += 1;
     }
 
     public boolean hasNextLine(){
-        if(lines == null){
-            reset();
-        }
-        return lines.hasNext();
+        return (lineIndex < numberOfLines-1);
     }
 
-    public String nextLine(){
-        if(lines == null){
-            reset();
+    public String nextLine() {
+        if(hasNextLine()){
+            String line = linesAndTiming.get(lineIndex);
+            lineIndex += 1;
+            return line;
         }
-        return lines.next();
+        else
+            throw new NoSuchElementException();
     }
 
     public void reset(){
-        lines = text.iterator();
+        lineIndex = 0;
+    }
+
+    public Map<Integer, String> getLinesAndTiming() {
+        return linesAndTiming;
+    }
+
+    public void setLinesAndTiming(Map<Integer, String> linesAndTiming) {
+        this.linesAndTiming = linesAndTiming;
+        numberOfLines = linesAndTiming.size();
+    }
+
+    public int getNumberOfLines() {
+        return numberOfLines;
     }
 
     public AvatarGestureType getGestureType() {
@@ -72,19 +95,19 @@ public class AvatarBehavior {
         this.audioSource = audioSource;
     }
 
-    public List<String> getText() {
-        return text;
+    public int getId() {
+        return id;
     }
 
-    public void setText(List<String> text) {
-        this.text = text;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Iterator<String> getLines() {
-        return lines;
+    public UserMyPAL getUser() {
+        return user;
     }
 
-    public void setLines(Iterator<String> lines) {
-        this.lines = lines;
+    public void setUser(UserMyPAL user) {
+        this.user = user;
     }
 }

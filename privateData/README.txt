@@ -1,0 +1,1 @@
+Pictures and other data that needs to be stored privately this is the folder.

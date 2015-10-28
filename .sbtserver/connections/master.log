@@ -1,13 +1,13 @@
-New log file opened at Mon Oct 26 19:46:08 CET 2015 by 6088@Obsidian
-Taking next connection to: 61034
-New client attempting to connect on port: 61035-61034
-  Address = /192.168.178.14:61034
-This client on port 61035 has uuid 9b9525ab-ae4e-457f-bac1-528230f7a114 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-9b9525ab-ae4e-457f-bac1-528230f7a114
-Taking next connection to: 61034
-New client attempting to connect on port: 61036-61034
-  Address = /192.168.178.14:61034
-Handshake exception on socket: 61036
+New log file opened at Wed Oct 28 16:06:33 CET 2015 by 11612@Obsidian
+Taking next connection to: 54857
+New client attempting to connect on port: 54858-54857
+  Address = /192.168.178.14:54857
+This client on port 54858 has uuid be43e16e-573b-4a5a-951b-eb6442a30800 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-be43e16e-573b-4a5a-951b-eb6442a30800
+Taking next connection to: 54857
+New client attempting to connect on port: 54865-54857
+  Address = /192.168.178.14:54857
+Handshake exception on socket: 54865
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -23,45 +23,18 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 61034
-New client attempting to connect on port: 61037-61034
-  Address = /192.168.178.14:61034
-This client on port 61037 has uuid cb6825bf-8dee-4537-95a2-0656688d0e10 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-9b9525ab-ae4e-457f-bac1-528230f7a114, activator-cb6825bf-8dee-4537-95a2-0656688d0e10
-Taking next connection to: 61034
-New client attempting to connect on port: 61040-61034
-  Address = /192.168.178.14:61034
-Handshake exception on socket: 61040
-sbt.impl.ipc.HandshakeException: Unable to perform handshake
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
-	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
-	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
-Caused by: java.net.SocketException: Software caused connection abort: recv failed
-	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.socketRead(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.io.BufferedInputStream.fill(Unknown Source)
-	at java.io.BufferedInputStream.read(Unknown Source)
-	at java.io.DataInputStream.readInt(Unknown Source)
-	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
-	... 2 more
-Taking next connection to: 61034
-New client attempting to connect on port: 61041-61034
-  Address = /192.168.178.14:61034
-This client on port 61041 has uuid 584036f1-7c8b-4fef-9c8b-0fe1a6b0ab22 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-cb6825bf-8dee-4537-95a2-0656688d0e10, play-fork-run-584036f1-7c8b-4fef-9c8b-0fe1a6b0ab22
-Taking next connection to: 61034
+Taking next connection to: 54857
+New client attempting to connect on port: 54866-54857
+  Address = /192.168.178.14:54857
+This client on port 54866 has uuid d697cb95-663d-470d-87f7-1904a83da486 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-be43e16e-573b-4a5a-951b-eb6442a30800, play-fork-run-d697cb95-663d-470d-87f7-1904a83da486
+Taking next connection to: 54857
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 61034
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 61034
+Taking next connection to: 54857
 Checking to see if clients are empty...
 No non-daemon clients connected after 3 min. Shutting down.
 Server socket thread exiting.
 0 clients open, will close them...
 All client sockets have been closed.
-Closing the 6088@Obsidian logs at Mon Oct 26 19:55:52 CET 2015, goodbye.
+Closing the 11612@Obsidian logs at Wed Oct 28 16:14:04 CET 2015, goodbye.

@@ -386,3 +386,10 @@ Running task... Cancel: sbt.server.ServerTaskCancellation@2e84ac39, check cycles
 Total time: 0 s, completed 26-okt-2015 19:54:16
 > server-post-command-cleanup
 > server-handle-next-server-request
+Done executing sbt server engine, result Right(Exit(0))
+Closing listening server socket
+Waiting for socket thread
+Waiting for request processor thread
+Waiting for command engine result
+Returning control to sbt launcher with result Exit(0)
+Closing the 6088@Obsidian logs at Mon Oct 26 19:55:52 CET 2015, goodbye.

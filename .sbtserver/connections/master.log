@@ -59,3 +59,9 @@ Taking next connection to: 61034
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
 Taking next connection to: 61034
+Checking to see if clients are empty...
+No non-daemon clients connected after 3 min. Shutting down.
+Server socket thread exiting.
+0 clients open, will close them...
+All client sockets have been closed.
+Closing the 6088@Obsidian logs at Mon Oct 26 19:55:52 CET 2015, goodbye.

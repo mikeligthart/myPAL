@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -186,7 +187,7 @@ public class GluconlineClient {
                     Logger.error("[GluconlineClient > updateMeasurements] ParseException: " + e.getMessage());
                 }
                 insulin.setUser(user);
-                insulin.setValue(Double.parseDouble(insulinValueNode.get("unit").asText()));
+                insulin.setValue(BigDecimal.valueOf(Double.parseDouble(insulinValueNode.get("unit").asText())));
                 insulin.setDaypart(dayPartEnum);
                 insulin.setComment(insulinValueNode.get("comment").asText());
                 if(!Insulin.exists(insulin)){
@@ -216,7 +217,7 @@ public class GluconlineClient {
                 glucose.setStarttime(new Time(timestamp));
                 glucose.setEndtime(new Time(timestamp + 300000));
                 glucose.setUser(user);
-                glucose.setValue(Double.parseDouble(glucoseNode.get("value").asText()));
+                glucose.setValue(BigDecimal.valueOf(Double.parseDouble(glucoseNode.get("value").asText())));
                 glucose.setDaypart(stringToDayPart(dayPartString));
                 glucose.setComment(glucoseNode.get("comment").asText());
                 if(!Glucose.exists(glucose)) {

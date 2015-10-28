@@ -7,6 +7,7 @@ import models.diary.activity.Emotion;
 import models.diary.activity.Picture;
 import play.i18n.Messages;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class DiaryActivityToHTML {
     private String type, description, emotion, date, emotionPicture, picture, color, viewURL,
             startTime, endTime, hasPictureString, shortDescription, firstName, lastName, fullPicture, email,
             longDescription;
-    private double value;
+    private BigDecimal value;
     private boolean hasPicture, isMeal;
 
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
@@ -60,7 +61,8 @@ public class DiaryActivityToHTML {
         endTime = timeFormatter.format(diaryActivity.getEndtime());
         hasPicture = diaryActivity.hasPicture();
         value = diaryActivity.getCarbohydrateValue();
-        if(value > -1.0){
+
+        if(value.compareTo(BigDecimal.valueOf(-1.0)) == 1){
             isMeal = true;
         } else {
             isMeal = false;
@@ -299,11 +301,11 @@ public class DiaryActivityToHTML {
         this.longDescription = longDescription;
     }
 
-    public double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 

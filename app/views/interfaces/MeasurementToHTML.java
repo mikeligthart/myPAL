@@ -54,7 +54,7 @@ public class MeasurementToHTML {
         startMin = measurement.getStarttime().toLocalTime().getMinute();
         endHour = measurement.getEndtime().toLocalTime().getHour();
         endMin = measurement.getEndtime().toLocalTime().getMinute();
-        value = Double.toString(measurement.getValue());
+        value = measurement.getValue().toEngineeringString();
         daypart = measurement.getDaypart().toString();
         date = dateFormatter.format(measurement.getDate());
         user=measurement.getUser().getEmail();

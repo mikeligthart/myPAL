@@ -1,5 +1,5 @@
-New log file opened at Wed Oct 28 16:05:47 CET 2015 by 11600@Obsidian
-jvm 11600@Obsidian
+New log file opened at Wed Oct 28 16:06:33 CET 2015 by 11612@Obsidian
+jvm 11612@Obsidian
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.60-b23
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in C:\Users\Mike\Documents\GitHub\myPAL\project, returning: (mypal-build)
 Loading project definition from C:\Users\Mike\Documents\GitHub\myPAL\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@37744c00, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@4e92dc5e, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -65,137 +65,9 @@ Set current project to myPAL (in build file:/C:/Users/Mike/Documents/GitHub/myPA
 > iflast shell
 > server-send-ready-for-request
 > server-handle-next-server-request
-> compile
-Evaluating tasks: compile:compile
-Running task... Cancel: sbt.server.ServerTaskCancellation@1c843d7e, check cycles: false
-
-Initial source changes: 
-	removed:Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Gesture.java, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Text.java, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Dialogue.java, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\ShareFile.java, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Question.java, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\BehaviorItem.java, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Behavior.java)
-	added: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarState.java, C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarBehavior.java, C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarGestureType.java)
-	modified: Set(C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_view.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_home.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_addDirect.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\date.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\email.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\bootstrap.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_measurement_select.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\no_access.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\no_content.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_picture_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_picture.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\interfaces\interfaces_description_box.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\main_datatables.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_value.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\diary_calendar.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\affect_button.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_measurement_view.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\main_basic.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\dataTest.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_greeting.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_description.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_dayPart.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_singleTime.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_view.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\registration\registration.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_remove.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\select.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_date.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\password.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_doubleTime.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_avatar.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\google_visualization.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\goals\diary_goals.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\main.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_emotion.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\text.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_no_avatar.template.scala)
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_view.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_home.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_addDirect.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\date.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarState.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\email.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\bootstrap.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_measurement_select.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\no_access.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\no_content.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_picture_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_picture.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\interfaces\interfaces_description_box.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\main_datatables.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_value.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\diary_calendar.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Gesture.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Text.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\affect_button.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Dialogue.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_measurement_view.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\main_basic.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\ShareFile.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Question.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\dataTest.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\BehaviorItem.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_greeting.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_description.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_dayPart.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_singleTime.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_view.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\registration\registration.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_remove.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\select.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_date.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\password.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Behavior.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_doubleTime.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_avatar.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarBehavior.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\google_visualization.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarGestureType.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\goals\diary_goals.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\main.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_emotion.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\text.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_no_avatar.template.scala)
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set(C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_view.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\login.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_update_fieldset.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_home.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_addDirect.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\date.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarState.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\email.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\bootstrap.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_measurement_select.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\no_access.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\controlFlow\no_content.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_picture_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_picture.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\interfaces\interfaces_description_box.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\main_datatables.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_value.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\diary_calendar.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Gesture.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_insulin_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Text.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\affect_button.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Dialogue.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_measurement_view.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_diaryActivity_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\main_basic.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\ShareFile.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\admin_user_fieldset.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Question.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\dataTest.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_insulin_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\BehaviorItem.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_greeting.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_description.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_dayPart.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_singleTime.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_view.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\registration\registration.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivityType_remove.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\select.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_date.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_select.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\password.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Behavior.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_doubleTime.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\measurement\diary_calendar_glucose_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_avatar.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\gallery\diary_gallery_picture_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarBehavior.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_fieldset_glucose_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\test\google_visualization.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarGestureType.java, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\goals\diary_goals.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\calendar\activity\diary_calendar_diaryActivity_add.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_diaryActivityType.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\main.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\fieldsets\diary_formGroup_select_emotion.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\fieldsets\text.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\admin\admin_user_update.template.scala, C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\twirl\main\views\html\diary\diary_no_avatar.template.scala)
-
-Recompiling all 102 sources: invalidated sources (71) exceeded 50.0% of all sources
-Read from stdout: Compiling 63 Scala sources and 39 Java sources to C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes...
-Compiling 63 Scala sources and 39 Java sources to C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes...
-Getting compiler-interface from component compiler for Scala 2.11.6
-Other repositories:
-Default repositories:
-Getting compiler-interface from component compiler for Scala 2.11.6
-Other repositories:
-Default repositories:
-Running cached compiler 47f9abae, interfacing (CompilerInterface) with Scala compiler version 2.11.6
-Calling Scala compiler with arguments  (CompilerInterface):
-	-deprecation
-	-unchecked
-	-encoding
-	utf8
-	-bootclasspath
-	C:\Program Files\Java\jre1.8.0_60\lib\resources.jar;C:\Program Files\Java\jre1.8.0_60\lib\rt.jar;C:\Program Files\Java\jre1.8.0_60\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_60\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_60\lib\jce.jar;C:\Program Files\Java\jre1.8.0_60\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_60\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_60\classes;C:\Users\Mike\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.11.6.jar
-	-classpath
-	C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes;C:\Users\Mike\.ivy2\cache\com.typesafe.play\twirl-api_2.11\jars\twirl-api_2.11-1.0.2.jar;C:\Users\Mike\.ivy2\cache\org.apache.commons\commons-lang3\jars\commons-lang3-3.1.jar;C:\Users\Mike\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.3.9.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.3.9.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\Users\Mike\.ivy2\cache\com.typesafe\config\bundles\config-1.2.1.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.3.jar;C:\Users\Mike\.ivy2\cache\org.joda\joda-convert\jars\joda-convert-1.6.jar;C:\Users\Mike\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.3.2.jar;C:\Users\Mike\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.3.2.jar;C:\Users\Mike\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.3.2.jar;C:\Users\Mike\.ivy2\cache\org.scala-lang\scala-reflect\jars\scala-reflect-2.11.1.jar;C:\Users\Mike\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.1.jar;C:\Users\Mike\.ivy2\cache\io.netty\netty\bundles\netty-3.9.8.Final.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.netty\netty-http-pipelining\jars\netty-http-pipelining-1.1.2.jar;C:\Users\Mike\.ivy2\cache\org.slf4j\slf4j-api\jars\slf4j-api-1.7.6.jar;C:\Users\Mike\.ivy2\cache\org.slf4j\jul-to-slf4j\jars\jul-to-slf4j-1.7.6.jar;C:\Users\Mike\.ivy2\cache\org.slf4j\jcl-over-slf4j\jars\jcl-over-slf4j-1.7.6.jar;C:\Users\Mike\.ivy2\cache\ch.qos.logback\logback-core\jars\logback-core-1.1.1.jar;C:\Users\Mike\.ivy2\cache\ch.qos.logback\logback-classic\jars\logback-classic-1.1.1.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.3.4.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.3.4.jar;C:\Users\Mike\.ivy2\cache\commons-codec\commons-codec\jars\commons-codec-1.9.jar;C:\Users\Mike\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\Mike\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\Mike\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-java_2.11\jars\play-java_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\org.yaml\snakeyaml\bundles\snakeyaml-1.13.jar;C:\Users\Mike\.ivy2\cache\org.hibernate\hibernate-validator\jars\hibernate-validator-5.0.3.Final.jar;C:\Users\Mike\.ivy2\cache\javax.validation\validation-api\jars\validation-api-1.1.0.Final.jar;C:\Users\Mike\.ivy2\cache\com.fasterxml\classmate\bundles\classmate-1.0.0.jar;C:\Users\Mike\.ivy2\cache\org.jboss.logging\jboss-logging\jars\jboss-logging-3.2.0.Final.jar;C:\Users\Mike\.ivy2\cache\org.springframework\spring-context\jars\spring-context-4.0.3.RELEASE.jar;C:\Users\Mike\.ivy2\cache\org.springframework\spring-core\jars\spring-core-4.0.3.RELEASE.jar;C:\Users\Mike\.ivy2\cache\org.springframework\spring-beans\jars\spring-beans-4.0.3.RELEASE.jar;C:\Users\Mike\.ivy2\cache\org.javassist\javassist\bundles\javassist-3.19.0-GA.jar;C:\Users\Mike\.ivy2\cache\org.reflections\reflections\jars\reflections-0.9.8.jar;C:\Users\Mike\.ivy2\cache\com.google.guava\guava\bundles\guava-16.0.1.jar;C:\Users\Mike\.ivy2\cache\dom4j\dom4j\jars\dom4j-1.6.1.jar;C:\Users\Mike\.ivy2\cache\com.google.code.findbugs\jsr305\jars\jsr305-2.0.3.jar;C:\Users\Mike\.ivy2\cache\org.apache.tomcat\tomcat-servlet-api\jars\tomcat-servlet-api-8.0.5.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-java-jdbc_2.11\jars\play-java-jdbc_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\com.jolbox\bonecp\bundles\bonecp-0.8.0.RELEASE.jar;C:\Users\Mike\.ivy2\cache\com.h2database\h2\jars\h2-1.3.175.jar;C:\Users\Mike\.ivy2\cache\tyrex\tyrex\jars\tyrex-1.0.1.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-java-ebean_2.11\jars\play-java-ebean_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\org.avaje.ebeanorm\avaje-ebeanorm\jars\avaje-ebeanorm-3.3.4.jar;C:\Users\Mike\.ivy2\cache\org.avaje.ebeanorm\avaje-ebeanorm-agent\jars\avaje-ebeanorm-agent-3.2.2.jar;C:\Users\Mike\.ivy2\cache\org.hibernate.javax.persistence\hibernate-jpa-2.0-api\jars\hibernate-jpa-2.0-api-1.0.1.Final.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\net.sf.ehcache\ehcache-core\jars\ehcache-core-2.6.8.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-java-ws_2.11\jars\play-java-ws_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.3.9.jar;C:\Users\Mike\.ivy2\cache\com.ning\async-http-client\jars\async-http-client-1.8.15.jar;C:\Users\Mike\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\Mike\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\Users\Mike\.ivy2\cache\org.apache.httpcomponents\httpcore\jars\httpcore-4.0.1.jar;C:\Users\Mike\.ivy2\cache\org.apache.httpcomponents\httpclient\jars\httpclient-4.0.1.jar;C:\Users\Mike\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.1.jar;C:\Users\Mike\.ivy2\cache\org.mindrot\jbcrypt\jars\jbcrypt-0.3m.jar;C:\Users\Mike\.ivy2\cache\commons-io\commons-io\jars\commons-io-2.4.jar;C:\Users\Mike\.ivy2\cache\org.imgscalr\imgscalr-lib\jars\imgscalr-lib-4.2.jar;C:\Users\Mike\.ivy2\cache\org.postgresql\postgresql\jars\postgresql-9.4-1201-jdbc41.jar
-Scala compilation took 14.212864084 s
-Java compilation took 2.535848594 s
-Java analysis took 0.440667726 s
-Java compile + analysis took 3.01165224 s
-Invalidating C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarBehavior.java...
-Invalidating (transitively) by inheritance from C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarBehavior.java...
-Initial set of included nodes: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarBehavior.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarBehavior.java)
-The C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarBehavior.java source file has the following regular definitions changed:
-	hasNextLine, notify, setAudioSource, wait, equals, AvatarBehavior, numberOfLines, gestureSource, setGestureType, getLines, text, nextLine, getGestureType, audioSource, notifyAll, setText, <init>, setLines, reset, toString, gestureType, getClass, getGestureSource, lines, setGestureSource, getText, getAudioSource, hashCode.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarBehavior.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarState.java
-Invalidating C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Behavior.java...
-Invalidating (transitively) by inheritance from C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Behavior.java...
-Initial set of included nodes: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Behavior.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Behavior.java)
-The C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Behavior.java source file has the following regular definitions changed:
-	notify, wait, equals, Behavior, gesture, setGesture, text, notifyAll, setText, <init>, toString, getClass, getGesture, getText, hashCode.
-All member reference dependencies will be considered within this context.
-Invalidating C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarState.java...
-Invalidating (transitively) by inheritance from C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarState.java...
-Initial set of included nodes: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarState.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarState.java)
-The C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarState.java source file has the following regular definitions changed:
-	notify, getTimer, setNextStates, setTimer, wait, setHtmlSource, getNextStates, equals, nextStates, nextState, AvatarState, notifyAll, getBehavior, <init>, htmlSource, toString, setBehavior, getHtmlSource, hasNextState, getClass, behavior, timer, hashCode.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarState.java
-Invalidating C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Question.java...
-Invalidating (transitively) by inheritance from C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Question.java...
-Initial set of included nodes: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Question.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Question.java)
-The C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Question.java source file has the following regular definitions changed:
-	notify, wait, equals, Question, notifyAll, <init>, toString, getClass, hashCode.
-All member reference dependencies will be considered within this context.
-Invalidating C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Text.java...
-Invalidating (transitively) by inheritance from C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Text.java...
-Initial set of included nodes: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Text.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Text.java)
-The C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Text.java source file has the following regular definitions changed:
-	notify, wait, equals, notifyAll, <init>, Text, toString, getClass, hashCode.
-All member reference dependencies will be considered within this context.
-Invalidating C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\BehaviorItem.java...
-Invalidating (transitively) by inheritance from C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\BehaviorItem.java...
-Initial set of included nodes: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\BehaviorItem.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\BehaviorItem.java)
-The C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\BehaviorItem.java source file has the following regular definitions changed:
-	set, BehaviorItem, build.
-All member reference dependencies will be considered within this context.
-Invalidating C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\ShareFile.java...
-Invalidating (transitively) by inheritance from C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\ShareFile.java...
-Initial set of included nodes: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\ShareFile.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\ShareFile.java)
-The C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\ShareFile.java source file has the following regular definitions changed:
-	notify, wait, equals, notifyAll, <init>, ShareFile, toString, getClass, hashCode.
-All member reference dependencies will be considered within this context.
-Invalidating C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Gesture.java...
-Invalidating (transitively) by inheritance from C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Gesture.java...
-Initial set of included nodes: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Gesture.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Gesture.java)
-The C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Gesture.java source file has the following regular definitions changed:
-	notify, wait, equals, notifyAll, Gesture, <init>, toString, getClass, hashCode.
-All member reference dependencies will be considered within this context.
-Invalidating C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarGestureType.java...
-Invalidating (transitively) by inheritance from C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarGestureType.java...
-Initial set of included nodes: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarGestureType.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarGestureType.java)
-The C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarGestureType.java source file has the following regular definitions changed:
-	notify, name, wait, valueOf, equals, getDeclaringClass, $VALUES, AvatarGestureType, notifyAll, compareTo, <init>, ordinal, values, toString, getClass, VIDEO, IMAGE, hashCode.
-All member reference dependencies will be considered within this context.
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarGestureType.java
-Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\Mike\Documents\GitHub\myPAL\app\models\avatar\AvatarBehavior.java
-Invalidating C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Dialogue.java...
-Invalidating (transitively) by inheritance from C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Dialogue.java...
-Initial set of included nodes: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Dialogue.java)
-Invalidated by transitive inheritance dependency: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Dialogue.java)
-The C:\Users\Mike\Documents\GitHub\myPAL\app\avatar\behavior\Dialogue.java source file has the following regular definitions changed:
-	notify, wait, texts, equals, set, gesture, isBuild, build, text, notifyAll, <init>, id, toString, getClass, gestures, Dialogue, hashCode.
-All member reference dependencies will be considered within this context.
-New invalidations:
-	Set()
-Initial set of included nodes: Set()
-Previously invalidated, but (transitively) depend on new invalidations:
-	Set()
-All newly invalidated sources after taking into account (previously) recompiled sources:Set()
-transform> cls: models/diary/measurement/DiaryMeasurement  msg: Error unepxected many type Lmodels/diary/measurement/DayPart;
-transform> cls: models/UserMyPAL  msg: Error unepxected many type Lmodels/UserType;
-Total time: 29 s, completed 28-okt-2015 16:06:26
-> server-post-command-cleanup
-> server-handle-next-server-request
 > {file:/C:/Users/Mike/Documents/GitHub/myPAL/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@730eae0, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@4af90ea7, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -212,13 +84,125 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 1 s, completed 28-okt-2015 16:06:27
+Total time: 1 s, completed 28-okt-2015 16:06:38
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/Mike/Documents/GitHub/myPAL/}root/compile:mainClass
 Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@2a4a0db1, check cycles: false
-Total time: 0 s, completed 28-okt-2015 16:06:27
+Running task... Cancel: sbt.server.ServerTaskCancellation@6f38aa95, check cycles: false
+Total time: 0 s, completed 28-okt-2015 16:06:38
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/Mike/Documents/GitHub/myPAL/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@2e852b13, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 0 s, completed 28-okt-2015 16:06:38
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/Mike/Documents/GitHub/myPAL/}root/compile:mainClass
+Evaluating tasks: compile:mainClass
+Running task... Cancel: sbt.server.ServerTaskCancellation@6603841d, check cycles: false
+Total time: 0 s, completed 28-okt-2015 16:06:38
+> server-post-command-cleanup
+> server-handle-next-server-request
+> backgroundRun
+Evaluating tasks: compile:backgroundRun
+Running task... Cancel: sbt.server.ServerTaskCancellation@5ca648b7, check cycles: false
+Total time: 0 s, completed 28-okt-2015 16:08:01
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/Mike/Documents/GitHub/myPAL/}root/*:playForkConfig
+Evaluating tasks: *:playForkConfig
+Running task... Cancel: sbt.server.ServerTaskCancellation@264bf4dd, check cycles: false
+Total time: 0 s, completed 28-okt-2015 16:08:05
+> server-post-command-cleanup
+> server-handle-next-server-request
+> root/playForkNotifyStart http://localhost:9000
+Evaluating tasks: *:playForkNotifyStart
+Running task... Cancel: sbt.server.ServerTaskCancellation@42bb40bb, check cycles: false
+Total time: 0 s, completed 28-okt-2015 16:08:05
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/Mike/Documents/GitHub/myPAL/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@73c36351, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\application.conf,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\application.conf)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\messages.en,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\messages.en)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\messages.nl,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\messages.nl)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\routes,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\routes)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions\default,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions\default)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions\default\1.sql,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions\default\1.sql)
+Total time: 1 s, completed 28-okt-2015 16:08:08
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/Mike/Documents/GitHub/myPAL/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@60666cf5, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\application.conf,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\application.conf)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\messages.en,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\messages.en)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\messages.nl,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\messages.nl)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\routes,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\routes)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions\default,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions\default)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions\default\1.sql,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions\default\1.sql)
+Total time: 1 s, completed 28-okt-2015 16:08:13
+> server-post-command-cleanup
+> server-handle-next-server-request
+> jobStop 1
+Evaluating tasks: *:jobStop
+Running task... Cancel: sbt.server.ServerTaskCancellation@581f7b99, check cycles: false
+Total time: 0 s, completed 28-okt-2015 16:12:07
 > server-post-command-cleanup
 > server-handle-next-server-request
 Done executing sbt server engine, result Right(Exit(0))
@@ -227,4 +211,4 @@ Waiting for socket thread
 Waiting for request processor thread
 Waiting for command engine result
 Returning control to sbt launcher with result Exit(0)
-Closing the 11600@Obsidian logs at Wed Oct 28 16:06:27 CET 2015, goodbye.
+Closing the 11612@Obsidian logs at Wed Oct 28 16:14:04 CET 2015, goodbye.

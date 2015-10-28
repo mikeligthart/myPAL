@@ -5,6 +5,7 @@ import models.diary.DiaryItem;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
@@ -42,7 +43,8 @@ public class DiaryActivity extends DiaryItem {
     private Emotion emotion;
 
     @Constraints.Required(message = " ")
-    private double carbohydrateValue;
+    @Column(columnDefinition = "NUMERIC")
+    private BigDecimal carbohydrateValue;
 
     public DiaryActivity(){
         super();
@@ -84,11 +86,11 @@ public class DiaryActivity extends DiaryItem {
         this.emotion = emotion;
     }
 
-    public double getCarbohydrateValue() {
+    public BigDecimal getCarbohydrateValue() {
         return carbohydrateValue;
     }
 
-    public void setCarbohydrateValue(double carbohydrateValue) {
+    public void setCarbohydrateValue(BigDecimal carbohydrateValue) {
         this.carbohydrateValue = carbohydrateValue;
     }
 

@@ -1,13 +1,13 @@
-New log file opened at Wed Oct 28 16:06:33 CET 2015 by 11612@Obsidian
-Taking next connection to: 54857
-New client attempting to connect on port: 54858-54857
-  Address = /192.168.178.14:54857
-This client on port 54858 has uuid be43e16e-573b-4a5a-951b-eb6442a30800 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-be43e16e-573b-4a5a-951b-eb6442a30800
-Taking next connection to: 54857
-New client attempting to connect on port: 54865-54857
-  Address = /192.168.178.14:54857
-Handshake exception on socket: 54865
+New log file opened at Wed Oct 28 18:03:25 CET 2015 by 6984@Obsidian
+Taking next connection to: 56528
+New client attempting to connect on port: 56529-56528
+  Address = /192.168.178.14:56528
+This client on port 56529 has uuid 54f15725-0579-48bc-bd39-cb663bf6bfbe configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-54f15725-0579-48bc-bd39-cb663bf6bfbe
+Taking next connection to: 56528
+New client attempting to connect on port: 56530-56528
+  Address = /192.168.178.14:56528
+Handshake exception on socket: 56530
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -23,18 +23,42 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 54857
-New client attempting to connect on port: 54866-54857
-  Address = /192.168.178.14:54857
-This client on port 54866 has uuid d697cb95-663d-470d-87f7-1904a83da486 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-be43e16e-573b-4a5a-951b-eb6442a30800, play-fork-run-d697cb95-663d-470d-87f7-1904a83da486
-Taking next connection to: 54857
+Taking next connection to: 56528
+New client attempting to connect on port: 56531-56528
+  Address = /192.168.178.14:56528
+This client on port 56531 has uuid 7890096c-a6f0-4cbf-9cdb-3be7791ee3ec configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-54f15725-0579-48bc-bd39-cb663bf6bfbe, activator-7890096c-a6f0-4cbf-9cdb-3be7791ee3ec
+Taking next connection to: 56528
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 54857
+Taking next connection to: 56528
 Checking to see if clients are empty...
-No non-daemon clients connected after 3 min. Shutting down.
-Server socket thread exiting.
-0 clients open, will close them...
-All client sockets have been closed.
-Closing the 11612@Obsidian logs at Wed Oct 28 16:14:04 CET 2015, goodbye.
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 56528
+New client attempting to connect on port: 56723-56528
+  Address = /192.168.178.14:56528
+Handshake exception on socket: 56723
+sbt.impl.ipc.HandshakeException: Unable to perform handshake
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
+	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
+	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
+Caused by: java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.io.BufferedInputStream.fill(Unknown Source)
+	at java.io.BufferedInputStream.read(Unknown Source)
+	at java.io.DataInputStream.readInt(Unknown Source)
+	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
+	... 2 more
+Taking next connection to: 56528
+New client attempting to connect on port: 56724-56528
+  Address = /192.168.178.14:56528
+This client on port 56724 has uuid 5a7219ab-a552-4bdd-9f45-d108b6f00071 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-7890096c-a6f0-4cbf-9cdb-3be7791ee3ec, play-fork-run-5a7219ab-a552-4bdd-9f45-d108b6f00071
+Taking next connection to: 56528
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 56528

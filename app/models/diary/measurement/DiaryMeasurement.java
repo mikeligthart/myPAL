@@ -4,10 +4,8 @@ import controllers.Diary;
 import models.diary.DiaryItem;
 import play.data.validation.Constraints;
 
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * myPAL
@@ -25,7 +23,8 @@ import javax.persistence.OneToMany;
 public abstract class DiaryMeasurement extends DiaryItem {
 
     @Constraints.Required(message = " ")
-    private double value;
+    @Column(columnDefinition = "NUMERIC")
+    private BigDecimal value;
 
     @Constraints.Required
     @OneToMany
@@ -36,11 +35,11 @@ public abstract class DiaryMeasurement extends DiaryItem {
         super();
     }
 
-    public double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 

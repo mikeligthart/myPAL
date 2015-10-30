@@ -18,12 +18,11 @@ public class AvatarState {
 
     private AvatarBehavior behavior;
     private String htmlSource;
-    private int timer;
     private List<AvatarState> nextStates;
 
     public AvatarState nextState(int choice){
         if(hasNextState()) {
-            if (timer > 0) {
+            if (behavior.getTimer() > 0) {
                 return nextStates.get(0);
             } else {
                 if(nextStates.size() > choice){
@@ -61,11 +60,7 @@ public class AvatarState {
     }
 
     public int getTimer() {
-        return timer;
-    }
-
-    public void setTimer(int timer) {
-        this.timer = timer;
+        return behavior.getTimer();
     }
 
     public List<AvatarState> getNextStates() {

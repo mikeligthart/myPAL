@@ -1,8 +1,7 @@
 package models.avatar;
 
 import models.UserMyPAL;
-
-import java.util.*;
+import play.twirl.api.Html;
 
 /**
  * myPAL
@@ -23,49 +22,30 @@ public class AvatarBehavior {
 
     private AvatarGestureType gestureType;
     private String gestureSource;
-    private List<String> audioSource;
-    private Map<Integer, String> linesAndTiming;
-    private int lineIndex, numberOfLines;
+    private String audioSource;
+    private String line;
+    private int timer;
+    private Html html;
 
     public AvatarBehavior(int id, UserMyPAL user){
         this.id = id;
         this.user = user;
-        linesAndTiming = new LinkedHashMap<>();
-        audioSource = new LinkedList<>();
-        lineIndex = 0;
-        numberOfLines = 0;
     }
 
-    public void addLine(String line, String source, int timing){
-        linesAndTiming.put(timing, line);
-        audioSource.add(source);
-        numberOfLines += 1;
+    public int getId() {
+        return id;
     }
 
-    public boolean hasNextLine(){
-        return (lineIndex < numberOfLines-1);
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String nextLine() {
-        if(hasNextLine()){
-            String line = linesAndTiming.get(lineIndex);
-            lineIndex += 1;
-            return line;
-        }
-        else
-            throw new NoSuchElementException();
+    public UserMyPAL getUser() {
+        return user;
     }
 
-    public void reset(){
-        lineIndex = 0;
-    }
-
-    public Map<Integer, String> getLinesAndTiming() {
-        return linesAndTiming;
-    }
-
-    public int getNumberOfLines() {
-        return numberOfLines;
+    public void setUser(UserMyPAL user) {
+        this.user = user;
     }
 
     public AvatarGestureType getGestureType() {
@@ -84,24 +64,35 @@ public class AvatarBehavior {
         this.gestureSource = gestureSource;
     }
 
-    public List<String> getAudioSource() {
+    public String getAudioSource() {
         return audioSource;
     }
 
-
-    public int getId() {
-        return id;
+    public void setAudioSource(String audioSource) {
+        this.audioSource = audioSource;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getLine() {
+        return line;
     }
 
-    public UserMyPAL getUser() {
-        return user;
+    public void setLine(String line) {
+        this.line = line;
     }
 
-    public void setUser(UserMyPAL user) {
-        this.user = user;
+    public int getTimer() {
+        return timer;
+    }
+
+    public void setTimer(int timer) {
+        this.timer = timer;
+    }
+
+    public Html getHtml() {
+        return html;
+    }
+
+    public void setHtml(Html html) {
+        this.html = html;
     }
 }

@@ -182,25 +182,21 @@ gluconline.daypart.afterdinner=NA
 ## === EXAMPLE === ##
 # Note: there is a max. of 3 variables that can be inserted into the lines.
 #
-# dialogue.id.0.count=2
 # dialogue.id.0.gestureExtension=mp4
-# dialogue.id.0.0.versions=3
-# dialogue.id.0.0.0.variables=1
-# dialogue.id.0.0.0.line=Hallo {0}, wat leuk om je weer te zien.
-# dialogue.id.0.0.0.time=3000
-# dialogue.id.0.0.0.variable0=firstName
-# dialogue.id.0.0.1.variables=2
-# dialogue.id.0.0.1.line=Beste {0} {1}, wat goed om u weer terug te zien.
-# dialogue.id.0.0.1.time=3500
-# dialogue.id.0.0.1.variable0=firstName
-# dialogue.id.0.0.1.variable1=lastName
-# dialogue.id.0.0.2.variables=0
-# dialogue.id.0.0.2.line=Hallo
-# dialogue.id.0.0.2.time=500
-# dialogue.id.0.1.versions=1
-# dialogue.id.0.1.0.variables=0
-# dialogue.id.0.1.0.line=This is an example
-# dialogue.id.0.1.0.time=1000
+# dialogue.id.0.html=null
+# dialogue.id.0.versions=3
+# dialogue.id.0.0.variables=1
+# dialogue.id.0.0.line=Hallo {0}, wat leuk om je weer te zien.
+# dialogue.id.0.0.timer=3000
+# dialogue.id.0.0.variable0=firstName
+# dialogue.id.0.1.variables=2
+# dialogue.id.0.1.line=Beste {0} {1}, wat goed om u weer terug te zien.
+# dialogue.id.0.1.timer=3500
+# dialogue.id.0.1.variable0=firstName
+# dialogue.id.0.1.variable1=lastName
+# dialogue.id.0.2.variables=0
+# dialogue.id.0.2.line=Hallo
+# dialogue.id.0.2.timer=500
 
 
 ## Greeting ##

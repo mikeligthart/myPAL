@@ -2,6 +2,8 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import models.UserMyPAL;
+import models.avatar.AvatarBehavior;
+import models.avatar.AvatarBehaviorFactory;
 import models.diary.DiarySettings;
 import models.diary.DiarySettingsManager;
 import models.diary.activity.*;
@@ -83,7 +85,11 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSCALENDAR);
 
-        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryItemSize));
+        //Generate AvatarBehavior
+        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
+        AvatarBehavior avatarBehavior = avatarBehaviorFactory.reason();
+
+        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryItemSize, avatarBehavior));
     }
 
     public static Result goals() {
@@ -91,11 +97,16 @@ public class Diary extends Controller {
             return redirect(routes.Application.login());
         }
         String email = session().get("email");
+        UserMyPAL user = UserMyPAL.byEmail(email);
 
         //Log user activity
         LogAction.log(email, LogActionType.ACCESSGOALS);
 
-        return ok(diary_goals.render(UserMyPAL.byEmail(email).getUserType()));
+        //Generate AvatarBehavior
+        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
+        AvatarBehavior avatarBehavior = avatarBehaviorFactory.reason();
+
+        return ok(diary_goals.render(user.getUserType(), avatarBehavior));
     }
 
     public static Result gallery(){
@@ -180,7 +191,11 @@ public class Diary extends Controller {
         //Log user behavior
         LogAction.log(email, LogActionType.VIEWACTIVITY);
 
-        return ok(diary_calendar_diaryActivity_view.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity)));
+        //Generate AvatarBehavior
+        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
+        AvatarBehavior avatarBehavior = avatarBehaviorFactory.reason();
+
+        return ok(diary_calendar_diaryActivity_view.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity), avatarBehavior));
     }
 
     private static Result updateActivityPage(int id, String error){
@@ -347,7 +362,11 @@ public class Diary extends Controller {
 
         LogAction.log(email, LogActionType.VIEWMEASUREMENT);
 
-        return ok(diary_calendar_measurement_view.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new MeasurementToHTML(measurement)));
+        //Generate AvatarBehavior
+        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
+        AvatarBehavior avatarBehavior = avatarBehaviorFactory.reason();
+
+        return ok(diary_calendar_measurement_view.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new MeasurementToHTML(measurement), avatarBehavior));
     }
 
     public static Result updateGlucosePage(int id){
@@ -430,7 +449,12 @@ public class Diary extends Controller {
         int diaryItemSize = DiaryActivity.byUserAndDate(user, date).size() +
                 Glucose.byUserAndDate(user, date).size() + Insulin.byUserAndDate(user, date).size();
 
-        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize));
+
+        //Generate AvatarBehavior
+        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
+        AvatarBehavior avatarBehavior = avatarBehaviorFactory.reason();
+
+        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, avatarBehavior));
     }
 
     public static Result calendarSet(String day, String month, String year){
@@ -453,7 +477,11 @@ public class Diary extends Controller {
         //Log user activity
         LogAction.log(email, LogActionType.UPDATECALENDARDIRECTLY);
 
-        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize));
+        //Generate AvatarBehavior
+        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
+        AvatarBehavior avatarBehavior = avatarBehaviorFactory.reason();
+
+        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, avatarBehavior));
     }
 
     public static Result addActivity() {
@@ -920,6 +948,8 @@ public class Diary extends Controller {
 
             //Redirect to calendar page
             LogAction.log(email, LogActionType.ADDEDGLUCOSE);
+
+
             return redirect(routes.Diary.calendar());
         }
     }

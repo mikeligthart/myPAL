@@ -187,17 +187,93 @@ gluconline.daypart.afterdinner=NA
 # dialogue.id.0.versions=3
 # dialogue.id.0.0.variables=1
 # dialogue.id.0.0.line=Hallo {0}, wat leuk om je weer te zien.
-# dialogue.id.0.0.timer=3000
 # dialogue.id.0.0.variable0=firstName
 # dialogue.id.0.1.variables=2
 # dialogue.id.0.1.line=Beste {0} {1}, wat goed om u weer terug te zien.
-# dialogue.id.0.1.timer=3500
 # dialogue.id.0.1.variable0=firstName
 # dialogue.id.0.1.variable1=lastName
 # dialogue.id.0.2.variables=0
 # dialogue.id.0.2.line=Hallo
-# dialogue.id.0.2.timer=500
 
+## TEST ##
+dialogue.id.0.gesture=avatar_standing_wave.mp4
+dialogue.id.0.html=null
+dialogue.id.0.versions=0
+dialogue.id.0.0.variables=0
+dialogue.id.0.0.line=Hi, ik ben Xander het robotvriendje van Charlie.
+
+dialogue.id.1.gesture=nao_hand_in_hip.jpg
+dialogue.id.1.html=text
+dialogue.id.1.versions=0
+dialogue.id.1.0.variables=0
+dialogue.id.1.0.line=Hoe heet jij?
+
+dialogue.id.2.gesture=nao_hand_in_hip.jpg
+dialogue.id.2.html=text
+dialogue.id.2.versions=0
+dialogue.id.2.0.variables=0
+dialogue.id.2.0.line=En hoe oud ben jij?
+
+dialogue.id.3.gesture=nao_hand_in_hip.jpg
+dialogue.id.3.html=null
+dialogue.id.3.versions=0
+dialogue.id.3.0.variables=1
+dialogue.id.3.0.line=Wat gaaf dat je naar dit kamp bent gekomen {0}!
+dialogue.id.3.0.variable0=firstName
+
+dialogue.id.4.gesture=nao_hand_in_hip.jpg
+dialogue.id.4.html=null
+dialogue.id.4.versions=0
+dialogue.id.4.0.variables=0
+dialogue.id.4.0.line=Je gaat zo aan de slag met een digitaal diabetesdagboek
+
+dialogue.id.5.gesture=nao_hand_in_hip.jpg
+dialogue.id.5.html=yes_no
+dialogue.id.5.versions=0
+dialogue.id.5.0.variables=0
+dialogue.id.5.0.line=Heb je al eerder zo iets bijgehouden?
+
+dialogue.id.6.gesture=nao_hand_in_hip.jpg
+dialogue.id.6.html=textfield
+dialogue.id.6.versions=0
+dialogue.id.6.0.variables=0
+dialogue.id.6.0.line=Oke. En wat vond je ervan?
+
+dialogue.id.7.gesture=nao_hand_in_hip.jpg
+dialogue.id.7.html=textfield
+dialogue.id.7.versions=0
+dialogue.id.7.0.variables=0
+dialogue.id.7.0.line=Oke. Mag ik vragen waarom dan niet?
+
+dialogue.id.8.gesture=nao_hand_in_hip.jpg
+dialogue.id.8.html=textfield
+dialogue.id.8.versions=0
+dialogue.id.8.0.variables=0
+dialogue.id.8.0.line=Wat zou je ervan vinden als we samen een dagboek bijhouden?
+
+dialogue.id.9.gesture=nao_hand_in_hip.jpg
+dialogue.id.9.html=null
+dialogue.id.9.versions=0
+dialogue.id.9.0.variables=0
+dialogue.id.9.0.line=Bedankt voor je antwoord.
+
+dialogue.id.10.gesture=nao_hand_in_hip.jpg
+dialogue.id.10.html=null
+dialogue.id.10.versions=0
+dialogue.id.10.0.variables=0
+dialogue.id.10.0.line=Helaas is het dagboek nog niet af.
+
+dialogue.id.11.gesture=nao_hand_in_hip.jpg
+dialogue.id.11.html=null
+dialogue.id.11.versions=0
+dialogue.id.11.0.variables=0
+dialogue.id.11.0.line=Je kunt mij en Mike helpen het dagboek verder af te maken.
+
+dialogue.id.12.gesture=nao_hand_in_hip.jpg
+dialogue.id.12.html=null
+dialogue.id.12.versions=0
+dialogue.id.12.0.variables=0
+dialogue.id.12.0.line=Mike legt uit hoe je dat kunt doen.
 
 ## Greeting ##
 # Part 1 #

@@ -3,6 +3,7 @@ package models.avatar;
 import models.UserMyPAL;
 import play.twirl.api.Html;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -37,6 +38,11 @@ public class AvatarBehavior {
     public AvatarBehavior(int id, UserMyPAL user){
         this.id = id;
         this.user = user;
+        nextStates = new LinkedList<>();
+    }
+
+    public void addChild(AvatarBehavior child){
+        nextStates.add(child);
     }
 
     public AvatarBehavior nextState(int choice){

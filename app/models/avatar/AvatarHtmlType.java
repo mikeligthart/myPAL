@@ -14,5 +14,5 @@ package models.avatar;
  */
 public enum AvatarHtmlType {
     
-    YES_NO, YES_NO_DONTKNOW;
+    YES_NO, YES_NO_DONTKNOW, TEXT, TEXTFIELD;
 }

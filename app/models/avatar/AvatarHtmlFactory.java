@@ -30,6 +30,10 @@ public class AvatarHtmlFactory {
                 return avatar_yes_no.render();
             case YES_NO_DONTKNOW:
                 return avatar_yes_no_dontknow.render();
+            case TEXT:
+                return avatar_text.render();
+            case TEXTFIELD:
+                return avatar_textfield.render();
         }
         return null;
     }

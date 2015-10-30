@@ -1,20 +1,33 @@
+@(avatarBehavior: models.avatar.AvatarBehavior)
+
 <div>
-    <!--
     <h1>PAL</h1>
-    -->
-    <!-- <video width="100%" autoplay="autoplay" poster='@routes.Assets.at("robot_animations/avatarvideo_greeting_test1_poster.png")'>
-        <source src='@routes.Assets.at("robot_animations/avatarvideo_greeting_test3.mp4")' type="video/mp4">
-    </video> -->
-    <!--
-    <img class="text-left" src='@routes.Assets.at("robot_animations/nao.jpg")'>
+
+    @if(avatarBehavior == null){
+        <img class="text-left" src='@routes.Assets.at("robot_animations/nao.jpg")'>
+    }else{
+        @if(avatarBehavior.getGestureType == models.avatar.AvatarGestureType.VIDEO){
+            <video width="500px" height="500px" autoplay="autoplay">
+                <source src='@avatarBehavior.getGesture' type="video/mp4">
+            </video>
+        }else{
+            <img class="text-left" src='@avatarBehavior.getGesture'>
+        }
+    }
 </div>
-<div>
-    <h3>@Messages("dialogue.test.whatdidyoudotoday")</h3>
-</div>
-<div>
-    <audio id="speech" autoplay="autoplay"> -->
-        <!-- <source src='@routes.Assets.at("robot_speech/brahms.ogg")' type="audio/ogg"> -->
-    <!--
-    </audio>
-    <button class="btn btn-default" id="mute_speech">Mute</button> -->
-</div>
+
+@if(avatarBehavior != null){
+    <div>
+        <h3>@avatarBehavior.getLine</h3>
+    </div>
+    <div>
+        @if(avatarBehavior.getHtml != null){
+            @avatarBehavior.getHtml
+        }
+    </div>
+    <div>
+        <audio id="speech" autoplay="autoplay"> -->
+            <source src='@avatarBehavior.getSpeech' type="audio/wav">
+        </audio>
+    </div>
+}

@@ -1,5 +1,7 @@
 package models.avatar;
 
+import play.twirl.api.Html;
+
 import java.util.List;
 
 /**
@@ -17,7 +19,6 @@ import java.util.List;
 public class AvatarState {
 
     private AvatarBehavior behavior;
-    private String htmlSource;
     private List<AvatarState> nextStates;
 
     public AvatarState nextState(int choice){
@@ -43,24 +44,28 @@ public class AvatarState {
         return false;
     }
 
-    public AvatarBehavior getBehavior() {
-        return behavior;
+    public String getLine(){
+        return behavior.getLine();
     }
 
-    public void setBehavior(AvatarBehavior behavior) {
-        this.behavior = behavior;
+    public String getSpeech(){
+        return behavior.getSpeech();
     }
 
-    public String getHtmlSource() {
-        return htmlSource;
-    }
-
-    public void setHtmlSource(String htmlSource) {
-        this.htmlSource = htmlSource;
+    public String getGesture(){
+        return behavior.getGesture();
     }
 
     public int getTimer() {
         return behavior.getTimer();
+    }
+
+    public Html getHtml(){
+        return behavior.getHtml();
+    }
+
+    public void setBehavior(AvatarBehavior behavior) {
+        this.behavior = behavior;
     }
 
     public List<AvatarState> getNextStates() {

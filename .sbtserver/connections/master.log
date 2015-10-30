@@ -1,13 +1,13 @@
-New log file opened at Wed Oct 28 16:06:33 CET 2015 by 11612@Obsidian
-Taking next connection to: 54857
-New client attempting to connect on port: 54858-54857
-  Address = /192.168.178.14:54857
-This client on port 54858 has uuid be43e16e-573b-4a5a-951b-eb6442a30800 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-be43e16e-573b-4a5a-951b-eb6442a30800
-Taking next connection to: 54857
-New client attempting to connect on port: 54865-54857
-  Address = /192.168.178.14:54857
-Handshake exception on socket: 54865
+New log file opened at Fri Oct 30 15:08:48 CET 2015 by 3668@Obsidian
+Taking next connection to: 64769
+New client attempting to connect on port: 64770-64769
+  Address = /192.168.178.14:64769
+This client on port 64770 has uuid d6b7c145-5cbe-469f-ad31-c8d8593181a3 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-d6b7c145-5cbe-469f-ad31-c8d8593181a3
+Taking next connection to: 64769
+New client attempting to connect on port: 64771-64769
+  Address = /192.168.178.14:64769
+Handshake exception on socket: 64771
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -23,18 +23,51 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 54857
-New client attempting to connect on port: 54866-54857
-  Address = /192.168.178.14:54857
-This client on port 54866 has uuid d697cb95-663d-470d-87f7-1904a83da486 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-be43e16e-573b-4a5a-951b-eb6442a30800, play-fork-run-d697cb95-663d-470d-87f7-1904a83da486
-Taking next connection to: 54857
+Taking next connection to: 64769
+New client attempting to connect on port: 64772-64769
+  Address = /192.168.178.14:64769
+This client on port 64772 has uuid 94302fb7-27e7-459d-b59a-123c243ce4b4 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-d6b7c145-5cbe-469f-ad31-c8d8593181a3, activator-94302fb7-27e7-459d-b59a-123c243ce4b4
+Taking next connection to: 64769
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 54857
+Taking next connection to: 64769
 Checking to see if clients are empty...
-No non-daemon clients connected after 3 min. Shutting down.
-Server socket thread exiting.
-0 clients open, will close them...
-All client sockets have been closed.
-Closing the 11612@Obsidian logs at Wed Oct 28 16:14:04 CET 2015, goodbye.
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 64769

@@ -23,11 +23,12 @@ import java.util.*;
  */
 public class AvatarBehaviorFactory {
 
-    //Static attributes
+    //General attributes
     private static final String GESTUREROOT = routes.Assets.at("robot_animations/gesture.").url();
     private static final String SPEECHROOT = routes.Assets.at("robot_speech/dialogue.id.").url();
     private static final String SPEECHEXTENSION = ".wav";
 
+    //Factory management attributes
     private static Map<UserMyPAL, AvatarBehaviorFactory> avatarBehaviorFactories;
 
     //Factory management
@@ -50,13 +51,15 @@ public class AvatarBehaviorFactory {
 
     //Object attributes
     private UserMyPAL user;
+    
 
     //AvatarBehaviorFactory object definition
     private AvatarBehaviorFactory(UserMyPAL user){
         this.user = user;
     }
 
-    public AvatarBehavior getAvatarBehavior(int id) throws AppException {
+    //Retrieve and build AvatarBehavior from file
+    private AvatarBehavior retrieveAvatarBehavior(int id) throws AppException {
         AvatarBehavior behavior = new AvatarBehavior(id, user);
 
         //Retrieve gesture
@@ -73,7 +76,7 @@ public class AvatarBehaviorFactory {
         String gestureSource = GESTUREROOT + id + "." + gestureExtension;
         if(!new File(gestureSource).exists())
             throw new AppException(gestureDef + " is not defined");
-        behavior.setGestureSource(gestureSource);
+        behavior.setGesture(gestureSource);
 
         //Retrieve line and speech
         //Detect and randomly select a version of a line
@@ -96,10 +99,10 @@ public class AvatarBehaviorFactory {
         String speechSource = SPEECHROOT + id + "." + selectedVersion + SPEECHEXTENSION;
         if(!new File(speechSource).exists())
             throw new AppException(speechSource + " is not defined");
-        behavior.setAudioSource(speechSource);
+        behavior.setSpeech(speechSource);
 
         //Retrieve the right timing of the line
-        String timingDef = "dialogue.id." + id + "." + selectedVersion + ".timer";
+        String timingDef = "dialogue.id." + id + "." + selectedVersion + ".timer-";
         if(!Messages.isDefined(timingDef))
             throw new AppException(timingDef + " is not defined");
         int timing = Integer.parseInt(Messages.get(timingDef));
@@ -115,6 +118,7 @@ public class AvatarBehaviorFactory {
         return behavior;
     }
 
+    //Retrieve and build Html belonging to a certain behavior from file
     private Html retrieveHtml(String htmlType) {
         if(htmlType.equalsIgnoreCase("null"))
             return null;

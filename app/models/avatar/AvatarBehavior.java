@@ -3,6 +3,8 @@ package models.avatar;
 import models.UserMyPAL;
 import play.twirl.api.Html;
 
+import java.util.List;
+
 /**
  * myPAL
  * Purpose: [ENTER PURPOSE]
@@ -17,19 +19,47 @@ import play.twirl.api.Html;
  */
 public class AvatarBehavior {
 
+    //Identifying attributes
     private int id;
     private UserMyPAL user;
 
+    //Behavior attributes
     private AvatarGestureType gestureType;
-    private String gestureSource;
-    private String audioSource;
+    private String gesture;
+    private String speech;
     private String line;
     private int timer;
     private Html html;
 
+    //State attribute
+    private List<AvatarBehavior> nextStates;
+
     public AvatarBehavior(int id, UserMyPAL user){
         this.id = id;
         this.user = user;
+    }
+
+    public AvatarBehavior nextState(int choice){
+        if(hasNextState()) {
+            if (timer > 0) {
+                return nextStates.get(0);
+            } else {
+                if(nextStates.size() > choice){
+                    return nextStates.get(choice);
+                } else {
+                    return null;
+                }
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public boolean hasNextState() {
+        if(nextStates != null)
+            if(!nextStates.isEmpty())
+                return true;
+        return false;
     }
 
     public int getId() {
@@ -56,20 +86,20 @@ public class AvatarBehavior {
         this.gestureType = gestureType;
     }
 
-    public String getGestureSource() {
-        return gestureSource;
+    public String getGesture() {
+        return gesture;
     }
 
-    public void setGestureSource(String gestureSource) {
-        this.gestureSource = gestureSource;
+    public void setGesture(String gesture) {
+        this.gesture = gesture;
     }
 
-    public String getAudioSource() {
-        return audioSource;
+    public String getSpeech() {
+        return speech;
     }
 
-    public void setAudioSource(String audioSource) {
-        this.audioSource = audioSource;
+    public void setSpeech(String speech) {
+        this.speech = speech;
     }
 
     public String getLine() {

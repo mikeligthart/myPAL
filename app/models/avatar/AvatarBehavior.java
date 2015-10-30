@@ -23,7 +23,7 @@ public class AvatarBehavior {
 
     private AvatarGestureType gestureType;
     private String gestureSource;
-    private String audioSource;
+    private List<String> audioSource;
     private Map<Integer, String> linesAndTiming;
     private int lineIndex, numberOfLines;
 
@@ -31,12 +31,14 @@ public class AvatarBehavior {
         this.id = id;
         this.user = user;
         linesAndTiming = new LinkedHashMap<>();
+        audioSource = new LinkedList<>();
         lineIndex = 0;
         numberOfLines = 0;
     }
 
-    public void addLine(String line, int timing){
+    public void addLine(String line, String source, int timing){
         linesAndTiming.put(timing, line);
+        audioSource.add(source);
         numberOfLines += 1;
     }
 
@@ -62,11 +64,6 @@ public class AvatarBehavior {
         return linesAndTiming;
     }
 
-    public void setLinesAndTiming(Map<Integer, String> linesAndTiming) {
-        this.linesAndTiming = linesAndTiming;
-        numberOfLines = linesAndTiming.size();
-    }
-
     public int getNumberOfLines() {
         return numberOfLines;
     }
@@ -87,13 +84,10 @@ public class AvatarBehavior {
         this.gestureSource = gestureSource;
     }
 
-    public String getAudioSource() {
+    public List<String> getAudioSource() {
         return audioSource;
     }
 
-    public void setAudioSource(String audioSource) {
-        this.audioSource = audioSource;
-    }
 
     public int getId() {
         return id;

@@ -35,8 +35,9 @@ public class AvatarBehaviorFactory {
     //General attributes
     private static final String GESTUREROOT = routes.Assets.at("robot_animations/").url();
     private static final String SPEECHROOT = routes.Assets.at("robot_speech/dialogue.id.").url();
+    private static final String SPEECHFILEROOT = "public/robot_speech/dialogue.id.";
     private static final String SPEECHEXTENSION = ".wav";
-    private static final int WAITINGTIME = 250;
+    private static final int WAITINGTIME = 500;
 
     //Factory management attributes
     private static Map<UserMyPAL, AvatarBehaviorFactory> avatarBehaviorFactories;
@@ -64,44 +65,21 @@ public class AvatarBehaviorFactory {
     private List<LogAction> userHistory;
 
     //AvatarBehaviorFactory object definition
-    public AvatarBehavior reason(){
+    public List<AvatarBehavior> reason(){
         updateInformation();
-        Logger.debug("[AvatarBehaviorFactory > reason()] reason function call");
-        AvatarBehavior root = null;
+        List<AvatarBehavior> output = new LinkedList<>();
         if(userHistory.get(userHistory.size()-1).getType() == LogActionType.ADDEDACTIVITY || userHistory.get(userHistory.size()-2).getType() == LogActionType.ADDEDACTIVITY) {
-            Logger.debug("[AvatarBehaviorFactory > reason()] loaded special behavior");
             try {
-                AvatarBehavior b12 = retrieveAvatarBehavior(12);
-                AvatarBehavior b11 = retrieveAvatarBehavior(11);
-                b11.addChild(b12);
-                AvatarBehavior b10 = retrieveAvatarBehavior(10);
-                b10.addChild(b11);
-                AvatarBehavior b9 = retrieveAvatarBehavior(9);
-                b9.addChild(b10);
-                AvatarBehavior b8 = retrieveAvatarBehavior(8);
-                b8.addChild(b9);
-                AvatarBehavior b7 = retrieveAvatarBehavior(7);
-                b7.addChild(b8);
-                AvatarBehavior b6 = retrieveAvatarBehavior(6);
-                b6.addChild(b8);
-                AvatarBehavior b5 = retrieveAvatarBehavior(5);
-                b5.addChild(b6);
-                b5.addChild(b7);
-                AvatarBehavior b4 = retrieveAvatarBehavior(4);
-                b4.addChild(b5);
-                AvatarBehavior b3 = retrieveAvatarBehavior(3);
-                b3.addChild(b4);
-                AvatarBehavior b2 = retrieveAvatarBehavior(2);
-                b2.addChild(b3);
-                AvatarBehavior b1 = retrieveAvatarBehavior(1);
-                b1.addChild(b2);
-                root = retrieveAvatarBehavior(0);
-                root.addChild(b1);
+                for(int index = 0; index < 13; index++){
+                    output.add(retrieveAvatarBehavior(index));
+                }
             } catch (AppException e) {
                 Logger.error("[AvatarBehaviorFactory > reason()] AppException while retrievingAvatarBehavior " + e.getMessage());
             }
+        } else {
+            output.add(null);
         }
-        return root;
+        return output;
     }
 
     private AvatarBehaviorFactory(UserMyPAL user){
@@ -164,54 +142,48 @@ public class AvatarBehaviorFactory {
         behavior.setLine(line);
 
         //Retrieve the right speechSource for the line
-        String speechSource = SPEECHROOT + id + "." + selectedVersion + SPEECHEXTENSION;
-        File audioFile = new File(speechSource);
-        /*
-        if(!audioFile.exists())
-            throw new AppException(speechSource + " is not defined");
-        */
+        String speechSourceEnd = id + "." + selectedVersion + SPEECHEXTENSION;
+        String speechSource = SPEECHROOT + speechSourceEnd;
         behavior.setSpeech(speechSource);
-
-        //Retrieve the right timing of the line
-        AudioInputStream audioInputStream = null;
-        try {
-            audioInputStream = AudioSystem.getAudioInputStream(audioFile);
-            AudioFormat format = audioInputStream.getFormat();
-            long frames = audioInputStream.getFrameLength();
-            int durationInMilliSeconds = (Math.round((frames) / format.getFrameRate())*1000) + WAITINGTIME;
-            behavior.setTimer(durationInMilliSeconds);
-        } catch (UnsupportedAudioFileException e) {
-            Logger.error("[AvatarBehaviorFactory > retrieveAvatarBehavior] UnsupportedAudioFileException " + e.getMessage());
-            behavior.setTimer(0);
-        } catch (IOException e) {
-            Logger.error("[AvatarBehaviorFactory > retrieveAvatarBehavior] IOException " + e.getMessage());
-            behavior.setTimer(0);
-        }
-
+        File audioFile = new File(SPEECHFILEROOT + speechSourceEnd);
 
         //Retrieve html source
-        String htmlDef = "dialogue.id." + id + "." + selectedVersion + ".html";
-        /*
-        if(!Messages.isDefined(htmlDef))
-            throw new AppException(htmlDef + " is not defined");
-        */
-        Html html = retrieveHtml(Messages.get(htmlDef));
-        behavior.setHtml(html);
+        String htmlDef = "dialogue.id." + id + ".html";
+        AvatarHtml avatarHtml = retrieveAvatarHtml(Messages.get(htmlDef));
+        behavior.setAvatarHtml(avatarHtml);
+
+        if(!avatarHtml.isActiveHtml()) {
+            //Retrieve the right timing of the line
+            AudioInputStream audioInputStream = null;
+            try {
+                audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+                AudioFormat format = audioInputStream.getFormat();
+                long frames = audioInputStream.getFrameLength();
+                int durationInMilliSeconds = (Math.round((frames) / format.getFrameRate()) * 1000) + WAITINGTIME;
+                behavior.setTimer(durationInMilliSeconds);
+            } catch (UnsupportedAudioFileException e) {
+                Logger.error("[AvatarBehaviorFactory > retrieveAvatarBehavior] UnsupportedAudioFileException " + e.getMessage());
+                behavior.setTimer(0);
+            } catch (IOException e) {
+                Logger.error("[AvatarBehaviorFactory > retrieveAvatarBehavior] IOException " + e.getMessage());
+                behavior.setTimer(0);
+            }
+        } else {
+            behavior.setTimer(0);
+        }
 
         return behavior;
     }
 
     //Retrieve and build Html belonging to a certain behavior from file
-    private Html retrieveHtml(String htmlType) {
-        if(htmlType.equalsIgnoreCase("null"))
-            return null;
-
+    private AvatarHtml retrieveAvatarHtml(String htmlType) {
         for(AvatarHtmlType type : AvatarHtmlType.values()){
             if(htmlType.equalsIgnoreCase(type.name())){
-                return new AvatarHtmlFactory(user).getHtml(type);
+                return new AvatarHtmlFactory(user).getAvatarHtml(type);
             }
         }
-        return null;
+        Logger.debug("AvatarBehaviorFactory > retrieveHtml no match found returning null");
+        return new AvatarHtml(1, null);
     }
 
     //Up till three different variables can be inserted into a line.

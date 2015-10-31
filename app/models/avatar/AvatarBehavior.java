@@ -1,6 +1,7 @@
 package models.avatar;
 
 import models.UserMyPAL;
+import play.Logger;
 import play.twirl.api.Html;
 
 import java.util.LinkedList;
@@ -30,42 +31,11 @@ public class AvatarBehavior {
     private String speech;
     private String line;
     private int timer;
-    private Html html;
-
-    //State attribute
-    private List<AvatarBehavior> nextStates;
+    private AvatarHtml avatarHtml;
 
     public AvatarBehavior(int id, UserMyPAL user){
         this.id = id;
         this.user = user;
-        nextStates = new LinkedList<>();
-    }
-
-    public void addChild(AvatarBehavior child){
-        nextStates.add(child);
-    }
-
-    public AvatarBehavior nextState(int choice){
-        if(hasNextState()) {
-            if (timer > 0) {
-                return nextStates.get(0);
-            } else {
-                if(nextStates.size() > choice){
-                    return nextStates.get(choice);
-                } else {
-                    return null;
-                }
-            }
-        } else {
-            return null;
-        }
-    }
-
-    public boolean hasNextState() {
-        if(nextStates != null)
-            if(!nextStates.isEmpty())
-                return true;
-        return false;
     }
 
     public int getId() {
@@ -124,11 +94,19 @@ public class AvatarBehavior {
         this.timer = timer;
     }
 
-    public Html getHtml() {
-        return html;
+    public AvatarHtml getAvatarHtml() {
+        return avatarHtml;
     }
 
-    public void setHtml(Html html) {
-        this.html = html;
+    public void setAvatarHtml(AvatarHtml html) {
+        this.avatarHtml = html;
+    }
+
+    public Html getHtml(int index){
+        return avatarHtml.getHtml(index);
+    }
+
+    public int getNumberOfOptions(){
+        return avatarHtml.getNumberOfOptions();
     }
 }

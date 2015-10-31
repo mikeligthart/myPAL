@@ -1,8 +1,8 @@
-@(userType: UserType, avatarBehavior: AvatarBehavior)
+@(userType: UserType, avatarBehaviors: List[models.avatar.AvatarBehavior])
 
 @import play.api.i18n._
 
-@views.html.diary.diary(Messages("page.diary.base.goals"), "goals", userType, avatarBehavior) {
+@views.html.diary.diary(Messages("page.diary.base.goals"), "goals", userType, avatarBehaviors) {
 
 
 <div class="starter-template">

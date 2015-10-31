@@ -202,74 +202,74 @@ dialogue.id.0.versions=0
 dialogue.id.0.0.variables=0
 dialogue.id.0.0.line=Hi, ik ben Xander het robotvriendje van Charlie.
 
-dialogue.id.1.gesture=nao_hand_in_hip.jpg
+dialogue.id.1.gesture=avatar_standing.png
 dialogue.id.1.html=text
 dialogue.id.1.versions=0
 dialogue.id.1.0.variables=0
 dialogue.id.1.0.line=Hoe heet jij?
 
-dialogue.id.2.gesture=nao_hand_in_hip.jpg
+dialogue.id.2.gesture=avatar_standing.png
 dialogue.id.2.html=text
 dialogue.id.2.versions=0
 dialogue.id.2.0.variables=0
 dialogue.id.2.0.line=En hoe oud ben jij?
 
-dialogue.id.3.gesture=nao_hand_in_hip.jpg
+dialogue.id.3.gesture=avatar_standing.png
 dialogue.id.3.html=null
 dialogue.id.3.versions=0
 dialogue.id.3.0.variables=1
 dialogue.id.3.0.line=Wat gaaf dat je naar dit kamp bent gekomen {0}!
 dialogue.id.3.0.variable0=firstName
 
-dialogue.id.4.gesture=nao_hand_in_hip.jpg
+dialogue.id.4.gesture=avatar_standing.png
 dialogue.id.4.html=null
 dialogue.id.4.versions=0
 dialogue.id.4.0.variables=0
 dialogue.id.4.0.line=Je gaat zo aan de slag met een digitaal diabetesdagboek
 
-dialogue.id.5.gesture=nao_hand_in_hip.jpg
+dialogue.id.5.gesture=avatar_standing.png
 dialogue.id.5.html=yes_no
 dialogue.id.5.versions=0
 dialogue.id.5.0.variables=0
 dialogue.id.5.0.line=Heb je al eerder zo iets bijgehouden?
 
-dialogue.id.6.gesture=nao_hand_in_hip.jpg
+dialogue.id.6.gesture=avatar_standing.png
 dialogue.id.6.html=textfield
 dialogue.id.6.versions=0
 dialogue.id.6.0.variables=0
 dialogue.id.6.0.line=Oke. En wat vond je ervan?
 
-dialogue.id.7.gesture=nao_hand_in_hip.jpg
+dialogue.id.7.gesture=avatar_standing.png
 dialogue.id.7.html=textfield
 dialogue.id.7.versions=0
 dialogue.id.7.0.variables=0
 dialogue.id.7.0.line=Oke. Mag ik vragen waarom dan niet?
 
-dialogue.id.8.gesture=nao_hand_in_hip.jpg
+dialogue.id.8.gesture=avatar_standing.png
 dialogue.id.8.html=textfield
 dialogue.id.8.versions=0
 dialogue.id.8.0.variables=0
 dialogue.id.8.0.line=Wat zou je ervan vinden als we samen een dagboek bijhouden?
 
-dialogue.id.9.gesture=nao_hand_in_hip.jpg
+dialogue.id.9.gesture=avatar_standing.png
 dialogue.id.9.html=null
 dialogue.id.9.versions=0
 dialogue.id.9.0.variables=0
 dialogue.id.9.0.line=Bedankt voor je antwoord.
 
-dialogue.id.10.gesture=nao_hand_in_hip.jpg
+dialogue.id.10.gesture=avatar_standing.png
 dialogue.id.10.html=null
 dialogue.id.10.versions=0
 dialogue.id.10.0.variables=0
 dialogue.id.10.0.line=Helaas is het dagboek nog niet af.
 
-dialogue.id.11.gesture=nao_hand_in_hip.jpg
+dialogue.id.11.gesture=avatar_standing.png
 dialogue.id.11.html=null
 dialogue.id.11.versions=0
 dialogue.id.11.0.variables=0
 dialogue.id.11.0.line=Je kunt mij en Mike helpen het dagboek verder af te maken.
 
-dialogue.id.12.gesture=nao_hand_in_hip.jpg
+dialogue.id.12.gesture=avatar_standing.png
 dialogue.id.12.html=null
 dialogue.id.12.versions=0
 dialogue.id.12.0.variables=0

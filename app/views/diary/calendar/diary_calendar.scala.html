@@ -1,9 +1,9 @@
-@(user: UserMyPAL, date: String, realDate: String, diaryItemSize: Integer, avatarBehavior: AvatarBehavior)
+@(user: UserMyPAL, date: String, realDate: String, diaryItemSize: Integer, avatarBehaviors: List[models.avatar.AvatarBehavior])
 
 @import play.api.i18n._
 @import play.api.libs.json.Json
 
-@views.html.diary.diary(Messages("page.diary.base.calendar"), "calendar", user.getUserType, avatarBehavior) {
+@views.html.diary.diary(Messages("page.diary.base.calendar"), "calendar", user.getUserType, avatarBehaviors) {
 
     <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/datepicker.css")'>
     <script src=@routes.Assets.at("javascripts/bootstrap-datepicker.js")></script>

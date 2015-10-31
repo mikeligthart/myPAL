@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+@(index: Int)
 
-</body>
-</html>
+<div class="col-md-offset-4 col-md-4 text-center ">
+    <input type="text" class="form-control" id="text@index" name="text@index" placeholder='' />
+</div>
+<div class="col-md-4 text-left">
+    <button id="avatarEnterButton@index" class="btn btn-primary avatarEnter">@Messages("page.registration.enter")</button>
+</div>

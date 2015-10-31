@@ -1,6 +1,11 @@
 package models.avatar;
 
 import models.UserMyPAL;
+import models.avatar.viewHolders.AvatarHtmlViewText;
+import models.avatar.viewHolders.AvatarHtmlViewTextfield;
+import models.avatar.viewHolders.AvatarHtmlViewYesNo;
+import models.avatar.viewHolders.AvatarHtmlViewYesNoDontknow;
+import play.Logger;
 import play.twirl.api.Html;
 import views.html.avatar.*;
 
@@ -24,17 +29,19 @@ public class AvatarHtmlFactory {
         this.user = user;
     }
 
-    public Html getHtml(AvatarHtmlType type){
+    public AvatarHtml getAvatarHtml(AvatarHtmlType type){
         switch(type){
             case YES_NO:
-                return avatar_yes_no.render();
+                return new AvatarHtml(2, new AvatarHtmlViewYesNo());
             case YES_NO_DONTKNOW:
-                return avatar_yes_no_dontknow.render();
+                return new AvatarHtml(3, new AvatarHtmlViewYesNoDontknow());
             case TEXT:
-                return avatar_text.render();
+                return new AvatarHtml(1, new AvatarHtmlViewText());
             case TEXTFIELD:
-                return avatar_textfield.render();
+                return new AvatarHtml(1, new AvatarHtmlViewTextfield());
+            case NULL:
+            default:
+                return new AvatarHtml(1, null);
         }
-        return null;
     }
 }

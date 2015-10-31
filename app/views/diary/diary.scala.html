@@ -1,4 +1,4 @@
-@(title: String, page: String, userType: UserType, avatarBehavior: AvatarBehavior)(content: Html)
+@(title: String, page: String, userType: UserType, avatarBehaviors: List[models.avatar.AvatarBehavior])(content: Html)
 
 @import play.api.i18n._
 
@@ -32,7 +32,7 @@
 <div class="container withNavBar">
     <div class="row">
         <div class="col-sm-8 text-center">@content</div>
-        <div class="col-sm-4 avatarfield text-center">@diary_avatar(avatarBehavior)</div>
+        <div class="col-sm-4 avatarfield text-center">@diary_avatar(avatarBehaviors)</div>
     </div>
 </div><!-- /.container -->
 

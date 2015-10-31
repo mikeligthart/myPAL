@@ -1,0 +1,62 @@
+package models.avatar;
+
+import models.avatar.viewHolders.AvatarHtmlView;
+import play.Logger;
+import play.twirl.api.Html;
+
+/**
+ * myPAL
+ * Purpose: [ENTER PURPOSE]
+ * <p>
+ * Developed for TNO.
+ * Kampweg 5
+ * 3769 DE Soesterberg
+ * General telephone number: +31(0)88 866 15 00
+ *
+ * @author Mike Ligthart - mike.ligthart@gmail.com
+ * @version 1.0 31-10-2015
+ */
+public class AvatarHtml {
+
+    private int numberOfOptions;
+    private AvatarHtmlView view;
+    private boolean isActiveHtml;
+
+    public AvatarHtml(int numberOfOptions, AvatarHtmlView view){
+        this.numberOfOptions = numberOfOptions;
+        this.view = view;
+        if(view != null){
+            isActiveHtml = true;
+        } else {
+            isActiveHtml = false;
+        }
+    }
+
+    public int getNumberOfOptions() {
+        return numberOfOptions;
+    }
+
+    public void setNumberOfOptions(int numberOfOptions) {
+        this.numberOfOptions = numberOfOptions;
+    }
+
+    public Html getHtml(int index) {
+        if(view == null){
+            return null;
+        } else {
+            return view.renderHtml(index);
+        }
+    }
+
+    public AvatarHtmlView getView() {
+        return view;
+    }
+
+    public void setView(AvatarHtmlView view) {
+        this.view = view;
+    }
+
+    public boolean isActiveHtml(){
+        return isActiveHtml;
+    }
+}

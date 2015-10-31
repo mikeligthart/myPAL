@@ -13,6 +13,6 @@ package models.avatar;
  * @version 1.0 30-10-2015
  */
 public enum AvatarHtmlType {
-    
-    YES_NO, YES_NO_DONTKNOW, TEXT, TEXTFIELD;
+
+    NULL, YES_NO, YES_NO_DONTKNOW, TEXT, TEXTFIELD;
 }

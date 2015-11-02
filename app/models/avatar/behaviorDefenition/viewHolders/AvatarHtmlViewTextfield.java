@@ -1,4 +1,4 @@
-package models.avatar.viewHolders;
+package models.avatar.behaviorDefenition.viewHolders;
 
 import play.twirl.api.Html;
 
@@ -14,9 +14,9 @@ import play.twirl.api.Html;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 31-10-2015
  */
-public class AvatarHtmlViewYesNoDontknow implements AvatarHtmlView {
+public class AvatarHtmlViewTextfield implements AvatarHtmlView {
 
-    private views.html.avatar.avatar_yes_no_dontknow view;
+    private views.html.avatar.avatar_textfield view;
 
     @Override
     public Html renderHtml(int index) {

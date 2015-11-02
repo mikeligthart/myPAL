@@ -2,12 +2,9 @@ package models.avatar;
 
 import controllers.routes;
 import models.UserMyPAL;
-import models.logging.LogAction;
-import models.logging.LogActionType;
+import models.avatar.behaviorDefenition.*;
 import play.Logger;
 import play.i18n.Messages;
-import play.twirl.api.Html;
-import scala.App;
 import util.AppException;
 
 import javax.sound.sampled.AudioFormat;
@@ -62,38 +59,16 @@ public class AvatarBehaviorFactory {
 
     //Object attributes
     private UserMyPAL user;
-    private List<LogAction> userHistory;
+    private AvatarDecisionFactory decisionFactory;
 
     //AvatarBehaviorFactory object definition
-    public List<AvatarBehavior> reason(){
-        updateInformation();
-        List<AvatarBehavior> output = new LinkedList<>();
-        if(userHistory.get(userHistory.size()-1).getType() == LogActionType.ADDEDACTIVITY || userHistory.get(userHistory.size()-2).getType() == LogActionType.ADDEDACTIVITY) {
-            try {
-                for(int index = 0; index < 13; index++){
-                    output.add(retrieveAvatarBehavior(index));
-                }
-                output.add(null);
-            } catch (AppException e) {
-                Logger.error("[AvatarBehaviorFactory > reason()] AppException while retrievingAvatarBehavior " + e.getMessage());
-            }
-        } else {
-            output.add(null);
-        }
-        return output;
-    }
-
     private AvatarBehaviorFactory(UserMyPAL user){
         this.user = user;
-        userHistory = user.getLogActions();
-    }
-
-    private void updateInformation(){
-        userHistory = user.getLogActions();
+        this.decisionFactory = AvatarDecisionFactory.getFactory(user);
     }
 
     //Retrieve and build AvatarBehavior from file
-    private AvatarBehavior retrieveAvatarBehavior(int id) throws AppException {
+    public AvatarBehavior getAvatarBehavior(int id) throws AppException {
         AvatarBehavior behavior = new AvatarBehavior(id, user);
 
         //Retrieve gesture

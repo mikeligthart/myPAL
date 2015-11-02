@@ -1,13 +1,10 @@
-package models.avatar;
+package models.avatar.behaviorDefenition;
 
 import models.UserMyPAL;
-import models.avatar.viewHolders.AvatarHtmlViewText;
-import models.avatar.viewHolders.AvatarHtmlViewTextfield;
-import models.avatar.viewHolders.AvatarHtmlViewYesNo;
-import models.avatar.viewHolders.AvatarHtmlViewYesNoDontknow;
-import play.Logger;
-import play.twirl.api.Html;
-import views.html.avatar.*;
+import models.avatar.behaviorDefenition.viewHolders.AvatarHtmlViewText;
+import models.avatar.behaviorDefenition.viewHolders.AvatarHtmlViewTextfield;
+import models.avatar.behaviorDefenition.viewHolders.AvatarHtmlViewYesNo;
+import models.avatar.behaviorDefenition.viewHolders.AvatarHtmlViewYesNoDontknow;
 
 /**
  * myPAL

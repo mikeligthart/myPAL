@@ -1,6 +1,4 @@
-package models.avatar.viewHolders;
-
-import play.twirl.api.Html;
+package models.avatar.behaviorDefenition;
 
 /**
  * myPAL
@@ -12,9 +10,9 @@ import play.twirl.api.Html;
  * General telephone number: +31(0)88 866 15 00
  *
  * @author Mike Ligthart - mike.ligthart@gmail.com
- * @version 1.0 31-10-2015
+ * @version 1.0 30-10-2015
  */
-public interface AvatarHtmlView {
+public enum AvatarHtmlType {
 
-    Html renderHtml(int index);
+    NULL, YES_NO, YES_NO_DONTKNOW, TEXT, TEXTFIELD;
 }

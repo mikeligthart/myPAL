@@ -2,7 +2,8 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import models.UserMyPAL;
-import models.avatar.AvatarBehavior;
+import models.avatar.AvatarReasoner;
+import models.avatar.behaviorDefenition.AvatarBehavior;
 import models.avatar.AvatarBehaviorFactory;
 import models.diary.DiarySettings;
 import models.diary.DiarySettingsManager;
@@ -10,12 +11,10 @@ import models.diary.activity.*;
 import models.diary.measurement.*;
 import models.logging.LogAction;
 import models.logging.LogActionType;
-import org.apache.commons.lang3.math.NumberUtils;
 import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
-import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -86,10 +85,9 @@ public class Diary extends Controller {
         LogAction.log(email, LogActionType.ACCESSCALENDAR);
 
         //Generate AvatarBehavior
-        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
-        List<AvatarBehavior> avatarBehaviors = avatarBehaviorFactory.reason();
+        AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
 
-        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryItemSize, avatarBehaviors));
+        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryItemSize, reasoner.selectAvatarBehaviors()));
     }
 
     public static Result goals() {
@@ -103,10 +101,10 @@ public class Diary extends Controller {
         LogAction.log(email, LogActionType.ACCESSGOALS);
 
         //Generate AvatarBehavior
-        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
-        List<AvatarBehavior> avatarBehaviors = avatarBehaviorFactory.reason();
+        //Generate AvatarBehavior
+        AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
 
-        return ok(diary_goals.render(user.getUserType(), avatarBehaviors));
+        return ok(diary_goals.render(user.getUserType(), reasoner.selectAvatarBehaviors()));
     }
 
     public static Result gallery(){
@@ -192,10 +190,9 @@ public class Diary extends Controller {
         LogAction.log(email, LogActionType.VIEWACTIVITY);
 
         //Generate AvatarBehavior
-        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
-        List<AvatarBehavior> avatarBehaviors = avatarBehaviorFactory.reason();
+        AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
 
-        return ok(diary_calendar_diaryActivity_view.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity), avatarBehaviors));
+        return ok(diary_calendar_diaryActivity_view.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity), reasoner.selectAvatarBehaviors()));
     }
 
     private static Result updateActivityPage(int id, String error){
@@ -363,10 +360,9 @@ public class Diary extends Controller {
         LogAction.log(email, LogActionType.VIEWMEASUREMENT);
 
         //Generate AvatarBehavior
-        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
-        List<AvatarBehavior> avatarBehaviors = avatarBehaviorFactory.reason();
+        AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
 
-        return ok(diary_calendar_measurement_view.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new MeasurementToHTML(measurement), avatarBehaviors));
+        return ok(diary_calendar_measurement_view.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new MeasurementToHTML(measurement), reasoner.selectAvatarBehaviors()));
     }
 
     public static Result updateGlucosePage(int id){
@@ -451,10 +447,9 @@ public class Diary extends Controller {
 
 
         //Generate AvatarBehavior
-        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
-        List<AvatarBehavior> avatarBehaviors = avatarBehaviorFactory.reason();
+        AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
 
-        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, avatarBehaviors));
+        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, reasoner.selectAvatarBehaviors()));
     }
 
     public static Result calendarSet(String day, String month, String year){
@@ -478,10 +473,9 @@ public class Diary extends Controller {
         LogAction.log(email, LogActionType.UPDATECALENDARDIRECTLY);
 
         //Generate AvatarBehavior
-        AvatarBehaviorFactory avatarBehaviorFactory = AvatarBehaviorFactory.getFactory(user);
-        List<AvatarBehavior> avatarBehaviors = avatarBehaviorFactory.reason();
+        AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
 
-        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, avatarBehaviors));
+        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, reasoner.selectAvatarBehaviors()));
     }
 
     public static Result addActivity() {

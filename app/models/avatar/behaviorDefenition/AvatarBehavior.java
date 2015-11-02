@@ -1,11 +1,7 @@
-package models.avatar;
+package models.avatar.behaviorDefenition;
 
 import models.UserMyPAL;
-import play.Logger;
 import play.twirl.api.Html;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * myPAL

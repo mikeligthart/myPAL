@@ -1,4 +1,4 @@
-package models.avatar;
+package models.avatar.behaviorDefenition;
 
 /**
  * myPAL

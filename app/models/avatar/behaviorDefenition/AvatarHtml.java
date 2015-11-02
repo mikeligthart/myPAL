@@ -1,7 +1,6 @@
-package models.avatar;
+package models.avatar.behaviorDefenition;
 
-import models.avatar.viewHolders.AvatarHtmlView;
-import play.Logger;
+import models.avatar.behaviorDefenition.viewHolders.AvatarHtmlView;
 import play.twirl.api.Html;
 
 /**

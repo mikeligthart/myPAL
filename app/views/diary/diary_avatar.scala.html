@@ -1,4 +1,4 @@
-@(avatarBehaviors: List[models.avatar.AvatarBehavior])
+@(avatarBehaviors: List[models.avatar.behaviorDefenition.AvatarBehavior])
 
 <script src='@routes.Assets.at("javascripts/avatar.js")' type="text/javascript"></script>
 
@@ -17,7 +17,7 @@
             @if(avatarBehavior == null){
                 <img class="text-left" src='@routes.Assets.at("robot_animations/avatar_standing.png")'>
             }else{
-                @if(avatarBehavior.getGestureType == models.avatar.AvatarGestureType.VIDEO){
+                @if(avatarBehavior.getGestureType == models.avatar.behaviorDefenition.AvatarGestureType.VIDEO){
                     <video width="500px" height="500px" id='avatarGestureVideo@index' @if(index == 0){autoplay="autoplay"}>
                         <source src='@avatarBehavior.getGesture' type="video/mp4">
                     </video>

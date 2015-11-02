@@ -215,7 +215,7 @@ dialogue.id.2.versions=0
 dialogue.id.2.0.variables=0
 dialogue.id.2.0.line=En hoe oud ben jij?
 
-dialogue.id.3.gesture=avatar_standing.png
+dialogue.id.3.gesture=avatar_standing_wave.mp4
 dialogue.id.3.html=null
 dialogue.id.3.versions=0
 dialogue.id.3.0.variables=1

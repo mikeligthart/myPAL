@@ -32,16 +32,16 @@ public class AvatarHtmlFactory {
     public AvatarHtml getAvatarHtml(AvatarHtmlType type){
         switch(type){
             case YES_NO:
-                return new AvatarHtml(2, new AvatarHtmlViewYesNo());
+                return new AvatarHtml(new AvatarHtmlViewYesNo());
             case YES_NO_DONTKNOW:
-                return new AvatarHtml(3, new AvatarHtmlViewYesNoDontknow());
+                return new AvatarHtml(new AvatarHtmlViewYesNoDontknow());
             case TEXT:
-                return new AvatarHtml(1, new AvatarHtmlViewText());
+                return new AvatarHtml(new AvatarHtmlViewText());
             case TEXTFIELD:
-                return new AvatarHtml(1, new AvatarHtmlViewTextfield());
+                return new AvatarHtml(new AvatarHtmlViewTextfield());
             case NULL:
             default:
-                return new AvatarHtml(1, null);
+                return new AvatarHtml(null);
         }
     }
 }

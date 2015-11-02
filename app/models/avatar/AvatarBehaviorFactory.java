@@ -97,32 +97,28 @@ public class AvatarBehaviorFactory {
         AvatarBehavior behavior = new AvatarBehavior(id, user);
 
         //Retrieve gesture
-        String gestureDef = "dialogue.id." + id + ".gesture";
-        String gestureFilename = Messages.get(gestureDef);
-        if(gestureFilename.contains(".mp4")){
+        String gestureSource = GESTUREROOT + Messages.get("dialogue.id." + id + ".gesture");
+        if(gestureSource.contains(".mp4")){
             behavior.setGestureType(AvatarGestureType.VIDEO);
         } else {
             behavior.setGestureType(AvatarGestureType.IMAGE);
         }
-        String gestureSource = GESTUREROOT + gestureFilename;
-
         behavior.setGesture(gestureSource);
 
         //Retrieve line and speech
         //Detect and randomly select a version of a line
         Random rand = new Random();
-        String lineVersionsDef = "dialogue.id." + id + ".versions";
-        int lineVersions = Integer.parseInt(Messages.get(lineVersionsDef));
+        int lineVersions = Integer.parseInt(Messages.get("dialogue.id." + id + ".versions"));
         String selectedVersion = "0";
         if(lineVersions > 0){
             selectedVersion = Integer.toString(rand.nextInt(lineVersions));
         }
 
         //Detect the number of variables that need to be inserted into the line
-        String variableCountDef = "dialogue.id." + id + "." + selectedVersion + ".variables";
-        int variableCount = Integer.parseInt(Messages.get(variableCountDef));
+        int variableCount = Integer.parseInt(Messages.get("dialogue.id." + id + "." + selectedVersion + ".variables"));
         String line = insertVariableIntoLine(id, selectedVersion, variableCount);
         behavior.setLine(line);
+
 
         //Retrieve the right speechSource for the line
         String speechSourceEnd = id + "." + selectedVersion + SPEECHEXTENSION;
@@ -131,10 +127,8 @@ public class AvatarBehaviorFactory {
         File audioFile = new File(SPEECHFILEROOT + speechSourceEnd);
 
         //Retrieve html source
-        String htmlDef = "dialogue.id." + id + ".html";
-        AvatarHtml avatarHtml = retrieveAvatarHtml(Messages.get(htmlDef));
+        AvatarHtml avatarHtml = retrieveAvatarHtml(Messages.get("dialogue.id." + id + ".html"));
         behavior.setAvatarHtml(avatarHtml);
-
         if(!avatarHtml.isActiveHtml()) {
             //Retrieve the right timing of the line
             AudioInputStream audioInputStream = null;
@@ -165,8 +159,7 @@ public class AvatarBehaviorFactory {
                 return new AvatarHtmlFactory(user).getAvatarHtml(type);
             }
         }
-        Logger.debug("AvatarBehaviorFactory > retrieveHtml no match found returning null");
-        return new AvatarHtml(1, null);
+        return new AvatarHtml(null);
     }
 
     //Up till three different variables can be inserted into a line.
@@ -177,20 +170,17 @@ public class AvatarBehaviorFactory {
                 return Messages.get(lineDef);
             case 1:
                 String variable1_1 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable0");
-                String lineDef1 = "dialogue.id." + id + "." + selectedVersion + ".line";
-                return Messages.get(lineDef1, extractVariableFromIndicator(variable1_1));
+                return Messages.get("dialogue.id." + id + "." + selectedVersion + ".line", extractVariableFromIndicator(variable1_1));
             case 2:
                 String variable2_1 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable0");
                 String variable2_2 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable1");
-                String lineDef2 = "dialogue.id." + id + "." + selectedVersion + ".line";
-                return Messages.get(lineDef2, extractVariableFromIndicator(variable2_1), extractVariableFromIndicator(variable2_2));
+                return Messages.get("dialogue.id." + id + "." + selectedVersion + ".line", extractVariableFromIndicator(variable2_1), extractVariableFromIndicator(variable2_2));
             case 3:
             default:
                 String variable3_1 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable0");
                 String variable3_2 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable1");
                 String variable3_3 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable2");
-                String lineDef3 = "dialogue.id." + id + "." + selectedVersion + ".line";
-                return Messages.get(lineDef3, extractVariableFromIndicator(variable3_1), extractVariableFromIndicator(variable3_2), extractVariableFromIndicator(variable3_3));
+                return Messages.get("dialogue.id." + id + "." + selectedVersion + ".line", extractVariableFromIndicator(variable3_1), extractVariableFromIndicator(variable3_2), extractVariableFromIndicator(variable3_3));
         }
     }
 

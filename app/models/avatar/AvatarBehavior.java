@@ -105,8 +105,4 @@ public class AvatarBehavior {
     public Html getHtml(int index){
         return avatarHtml.getHtml(index);
     }
-
-    public int getNumberOfOptions(){
-        return avatarHtml.getNumberOfOptions();
-    }
 }

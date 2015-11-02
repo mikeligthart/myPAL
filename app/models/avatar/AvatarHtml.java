@@ -18,26 +18,16 @@ import play.twirl.api.Html;
  */
 public class AvatarHtml {
 
-    private int numberOfOptions;
     private AvatarHtmlView view;
     private boolean isActiveHtml;
 
-    public AvatarHtml(int numberOfOptions, AvatarHtmlView view){
-        this.numberOfOptions = numberOfOptions;
+    public AvatarHtml(AvatarHtmlView view){
         this.view = view;
         if(view != null){
             isActiveHtml = true;
         } else {
             isActiveHtml = false;
         }
-    }
-
-    public int getNumberOfOptions() {
-        return numberOfOptions;
-    }
-
-    public void setNumberOfOptions(int numberOfOptions) {
-        this.numberOfOptions = numberOfOptions;
     }
 
     public Html getHtml(int index) {

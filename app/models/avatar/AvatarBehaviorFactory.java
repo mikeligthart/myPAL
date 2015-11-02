@@ -73,6 +73,7 @@ public class AvatarBehaviorFactory {
                 for(int index = 0; index < 13; index++){
                     output.add(retrieveAvatarBehavior(index));
                 }
+                output.add(null);
             } catch (AppException e) {
                 Logger.error("[AvatarBehaviorFactory > reason()] AppException while retrievingAvatarBehavior " + e.getMessage());
             }
@@ -97,12 +98,6 @@ public class AvatarBehaviorFactory {
 
         //Retrieve gesture
         String gestureDef = "dialogue.id." + id + ".gesture";
-        /*
-        if(!Messages.isDefined(gestureDef)){
-            throw new AppException(gestureDef + " is not defined");
-        }
-        */
-
         String gestureFilename = Messages.get(gestureDef);
         if(gestureFilename.contains(".mp4")){
             behavior.setGestureType(AvatarGestureType.VIDEO);
@@ -111,20 +106,12 @@ public class AvatarBehaviorFactory {
         }
         String gestureSource = GESTUREROOT + gestureFilename;
 
-        /*
-        if(!new File(gestureSource).exists())
-            throw new AppException(gestureSource + " is not defined");
-        */
         behavior.setGesture(gestureSource);
 
         //Retrieve line and speech
         //Detect and randomly select a version of a line
         Random rand = new Random();
         String lineVersionsDef = "dialogue.id." + id + ".versions";
-        /*
-        if(!Messages.isDefined(lineVersionsDef))
-            throw new AppException(lineVersionsDef + " is not defined");
-        */
         int lineVersions = Integer.parseInt(Messages.get(lineVersionsDef));
         String selectedVersion = "0";
         if(lineVersions > 0){
@@ -133,10 +120,6 @@ public class AvatarBehaviorFactory {
 
         //Detect the number of variables that need to be inserted into the line
         String variableCountDef = "dialogue.id." + id + "." + selectedVersion + ".variables";
-        /*
-        if(!Messages.isDefined(variableCountDef))
-            throw new AppException(variableCountDef + " is not defined");
-        */
         int variableCount = Integer.parseInt(Messages.get(variableCountDef));
         String line = insertVariableIntoLine(id, selectedVersion, variableCount);
         behavior.setLine(line);
@@ -191,68 +174,22 @@ public class AvatarBehaviorFactory {
         switch(variableCount){
             case 0:
                 String lineDef = "dialogue.id." + id + "." + selectedVersion + ".line";
-                /*
-                if(!Messages.isDefined(lineDef))
-                    throw new AppException(lineDef + " is not defined");
-                */
                 return Messages.get(lineDef);
             case 1:
                 String variable1_1 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable0");
-                /*
-                if(!Messages.isDefined(variable1_1))
-                    throw new AppException(variable1_1 + " is not defined");
-                */
                 String lineDef1 = "dialogue.id." + id + "." + selectedVersion + ".line";
-
-                /*
-                if(!Messages.isDefined(lineDef1))
-                    throw new AppException(lineDef1 + " is not defined");
-                */
                 return Messages.get(lineDef1, extractVariableFromIndicator(variable1_1));
             case 2:
                 String variable2_1 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable0");
-                /*
-                if(!Messages.isDefined(variable2_1))
-                    throw new AppException(variable2_1 + " is not defined");
-                */
-
                 String variable2_2 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable1");
-                /*
-                if(!Messages.isDefined(variable2_2))
-                    throw new AppException(variable2_2 + " is not defined");
-                */
-
                 String lineDef2 = "dialogue.id." + id + "." + selectedVersion + ".line";
-                /*
-                if(!Messages.isDefined(lineDef2))
-                    throw new AppException(lineDef2 + " is not defined");
-                */
                 return Messages.get(lineDef2, extractVariableFromIndicator(variable2_1), extractVariableFromIndicator(variable2_2));
             case 3:
             default:
                 String variable3_1 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable0");
-                /*
-                if(!Messages.isDefined(variable3_1))
-                    throw new AppException(variable3_1 + " is not defined");
-                */
-
                 String variable3_2 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable1");
-                /*
-                if(!Messages.isDefined(variable3_2))
-                    throw new AppException(variable3_2 + " is not defined");
-                */
-
                 String variable3_3 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable2");
-                /*
-                if(!Messages.isDefined(variable3_3))
-                    throw new AppException(variable3_3 + " is not defined");
-                */
-
                 String lineDef3 = "dialogue.id." + id + "." + selectedVersion + ".line";
-                /*
-                if(!Messages.isDefined(lineDef3))
-                    throw new AppException(lineDef3 + " is not defined");
-                */
                 return Messages.get(lineDef3, extractVariableFromIndicator(variable3_1), extractVariableFromIndicator(variable3_2), extractVariableFromIndicator(variable3_3));
         }
     }

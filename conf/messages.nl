@@ -26,6 +26,7 @@ page.general.areyousure=Weet je het zeker?
 page.general.areyousuredirect=Dit gebeurt direct. Weet je het zeker?
 page.general.yes=Ja
 page.general.no=Nee
+page.general.dontknow=Weet ik niet
 page.general.isrequired=is verplicht
 page.general.isoptional=is optioneel
 page.general.dummypassword=)))))

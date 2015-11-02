@@ -52,12 +52,44 @@
     <script>
         avatarBehaviorManager.start();
 
+        //Button listeners
         $(".avatarEnter").click(function(e) {
             e.preventDefault();
             avatarBehaviorManager.nextBehavior();
         });
 
-        //Keyboard listner
+        $(".avatarHtmlYesNo.avatarValueYes").click(function(e) {
+            e.preventDefault();
+            avatarBehaviorManager.setChoice(2,1);
+            avatarBehaviorManager.nextBehavior();
+        });
+
+        $(".avatarHtmlYesNo.avatarValueNo").click(function(e) {
+            e.preventDefault();
+            avatarBehaviorManager.setChoice(2,2);
+            avatarBehaviorManager.nextBehavior();
+        });
+
+        $(".avatarHtmlYesNoDontknow.avatarValueYes").click(function(e) {
+            e.preventDefault();
+            avatarBehaviorManager.setChoice(3,1);
+            avatarBehaviorManager.nextBehavior();
+        });
+
+        $(".avatarHtmlYesNoDontknow.avatarValueNo").click(function(e) {
+            e.preventDefault();
+            avatarBehaviorManager.setChoice(3,2);
+            avatarBehaviorManager.nextBehavior();
+        });
+
+        $(".avatarHtmlYesNoDontknow.avatarValueDontknow").click(function(e) {
+            e.preventDefault();
+            avatarBehaviorManager.setChoice(3,3);
+            avatarBehaviorManager.nextBehavior();
+        });
+
+
+        //Keyboard listeners
         $(document).ready(function() {
           $(window).keydown(function(event){
             if( (event.keyCode == 13) && !avatarBehaviorManager.isLastBehavior() ) {

@@ -1,6 +1,7 @@
 var AvatarBehaviorManager = function (numberOfSlides) {
     this.numberOfSlides = numberOfSlides;
     this.behaviorIndex = 0;
+    this.activeBehavior = 0;
     this.timers = [];
     this.addTimer = function(time) {
         this.timers.push(time)
@@ -15,9 +16,11 @@ var AvatarBehaviorManager = function (numberOfSlides) {
             }
         }
     }
+    this.choice = [false, 0, 0];
 
     this.start = function() {
         this.behaviorIndex = 0;
+        this.activeBehavior = 0;
         this.fillEnterToContinue();
         this.setTimer(this.timers[this.behaviorIndex]);
     };
@@ -30,24 +33,42 @@ var AvatarBehaviorManager = function (numberOfSlides) {
     };
 
     this.nextBehavior = function() {
-        nextBehaviorIndex = this.behaviorIndex + 1;
-        $("#avatarSpeechAudio" + nextBehaviorIndex).trigger('load');
-        $("#avatarGesture" + this.behaviorIndex).hide();
-        $("#avatarLine" + this.behaviorIndex).hide();
-        $("#avatarHtml" + this.behaviorIndex).hide();
-        $("#avatarSpeech" + this.behaviorIndex).hide();
-
-        $("#avatarGesture" + nextBehaviorIndex).show();
-        $("#avatarLine" + nextBehaviorIndex).show();
-        $("#avatarHtml" + nextBehaviorIndex).show();
-        $("#avatarSpeech" + nextBehaviorIndex).show();
-        $("#avatarSpeechAudio" + nextBehaviorIndex).trigger('play');
-        if($("#avatarGestureVideo" + nextBehaviorIndex).get(0)){
-            $("#avatarGestureVideo" + nextBehaviorIndex).get(0).play();
+        if(this.choice[0]){
+            this.behaviorIndex += this.choice[2];
+        } else {
+            this.behaviorIndex++;
         }
-        this.setTimer(this.timers[nextBehaviorIndex]);
-        this.behaviorIndex = nextBehaviorIndex;
+        $("#avatarSpeechAudio" + this.behaviorIndex).trigger('load');
+        $("#avatarGesture" + this.activeBehavior).hide();
+        $("#avatarLine" + this.activeBehavior).hide();
+        $("#avatarHtml" + this.activeBehavior).hide();
+        $("#avatarSpeech" + this.activeBehavior).hide();
+        $("#avatarSpeechAudio" + this.activeBehavior).trigger('pause');
+
+        $("#avatarGesture" + this.behaviorIndex).show();
+        $("#avatarLine" + this.behaviorIndex).show();
+        $("#avatarHtml" + this.behaviorIndex).show();
+        $("#avatarSpeech" + this.behaviorIndex).show();
+        $("#avatarSpeechAudio" + this.behaviorIndex).trigger('play');
+        if($("#avatarGestureVideo" + this.behaviorIndex).get(0)){
+            $("#avatarGestureVideo" + this.behaviorIndex).get(0).play();
+        }
+        if($(".avatarInputFocus" + this.behaviorIndex).get(0)){
+            $(".avatarInputFocus" + this.behaviorIndex).focus();
+        }
+        this.activeBehavior = this.behaviorIndex;
+        this.setTimer(this.timers[this.behaviorIndex]);
+        if(this.choice[0]){
+            this.behaviorIndex += (this.choice[1] - this.choice[2]);
+            this.choice = [false, 0, 0];
+        } else {
+            this.choice = [false, 0, 0];
+        }
     };
+
+    this.setChoice = function(numberOfChoices, choiceIndex) {
+        this.choice = [true, numberOfChoices, choiceIndex];
+    }
 
     this.isLastBehavior = function() {
         if(this.behaviorIndex >= this.numberOfSlides-1){

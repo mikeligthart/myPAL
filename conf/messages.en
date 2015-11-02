@@ -26,8 +26,10 @@ page.general.areyousure=Are you sure?
 page.general.areyousuredirect=This will go in effect immediately. Are you sure?
 page.general.yes=Yes
 page.general.no=No
+page.general.dontknow=I don't know
 page.general.isrequired=is required
 page.general.isoptional=is optional
+page.general.dummypassword=)))))
 
 ## Control Flow ##
 # Login #

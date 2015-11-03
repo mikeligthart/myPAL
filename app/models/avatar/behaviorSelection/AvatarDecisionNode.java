@@ -3,6 +3,7 @@ package models.avatar.behaviorSelection;
 import models.avatar.behaviorDefenition.AvatarBehavior;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * myPAL
@@ -16,21 +17,28 @@ import java.util.List;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 2-11-2015
  */
-public class AvatarDecisionNode {
+public class AvatarDecisionNode<E> {
 
     private List<Integer> behaviors;
-    private AvatarDecisionFunction decisionFunction;
+    private E currentInformation;
+    private Map<E, AvatarDecisionNode> children;
 
-    public AvatarDecisionNode(List<Integer> behaviors, AvatarDecisionFunction decisionFunction){
+    public AvatarDecisionNode(List<Integer> behaviors, E currentInformation, Map<E, AvatarDecisionNode> children){
         this.behaviors = behaviors;
-        this.decisionFunction = decisionFunction;
+        this.currentInformation = currentInformation;
+        this.children = children;
     }
 
     public List<Integer> getAvatarBehaviors(){
         if(behaviors != null){
             return behaviors;
-        } else if (decisionFunction != null) {
-            return decisionFunction.selectNextAvatarDecisionNode().getAvatarBehaviors();
+        } else if (children != null) {
+            AvatarDecisionNode selectedChild = children.getOrDefault(currentInformation, null);
+            if(selectedChild != null){
+                return selectedChild.getAvatarBehaviors();
+            } else {
+                return null;
+            }
         } else {
             return null;
         }

@@ -5,6 +5,7 @@ import models.UserMyPAL;
 import models.avatar.AvatarReasoner;
 import models.avatar.behaviorDefenition.AvatarBehavior;
 import models.avatar.AvatarBehaviorFactory;
+import models.avatar.behaviorSelection.decisionInformation.AvatarTrigger;
 import models.diary.DiarySettings;
 import models.diary.DiarySettingsManager;
 import models.diary.activity.*;
@@ -86,8 +87,9 @@ public class Diary extends Controller {
 
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
 
-        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryItemSize, reasoner.selectAvatarBehaviors()));
+        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryItemSize, avatarBehavior));
     }
 
     public static Result goals() {
@@ -103,8 +105,9 @@ public class Diary extends Controller {
         //Generate AvatarBehavior
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
 
-        return ok(diary_goals.render(user.getUserType(), reasoner.selectAvatarBehaviors()));
+        return ok(diary_goals.render(user.getUserType(), avatarBehavior));
     }
 
     public static Result gallery(){
@@ -191,8 +194,9 @@ public class Diary extends Controller {
 
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
 
-        return ok(diary_calendar_diaryActivity_view.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity), reasoner.selectAvatarBehaviors()));
+        return ok(diary_calendar_diaryActivity_view.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity), avatarBehavior));
     }
 
     private static Result updateActivityPage(int id, String error){
@@ -361,8 +365,9 @@ public class Diary extends Controller {
 
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
 
-        return ok(diary_calendar_measurement_view.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new MeasurementToHTML(measurement), reasoner.selectAvatarBehaviors()));
+        return ok(diary_calendar_measurement_view.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new MeasurementToHTML(measurement), avatarBehavior));
     }
 
     public static Result updateGlucosePage(int id){
@@ -448,8 +453,9 @@ public class Diary extends Controller {
 
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
 
-        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, reasoner.selectAvatarBehaviors()));
+        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, avatarBehavior));
     }
 
     public static Result calendarSet(String day, String month, String year){
@@ -474,8 +480,9 @@ public class Diary extends Controller {
 
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
 
-        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, reasoner.selectAvatarBehaviors()));
+        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, avatarBehavior));
     }
 
     public static Result addActivity() {

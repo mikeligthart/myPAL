@@ -587,3 +587,9 @@ Taking next connection to: 57716
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
 Taking next connection to: 57716
+Checking to see if clients are empty...
+No non-daemon clients connected after 3 min. Shutting down.
+Server socket thread exiting.
+0 clients open, will close them...
+All client sockets have been closed.
+Closing the 9072@Obsidian logs at Mon Nov 02 19:50:13 CET 2015, goodbye.

@@ -2,6 +2,7 @@ package models.avatar;
 
 import models.UserMyPAL;
 import models.avatar.behaviorDefenition.AvatarBehavior;
+import models.avatar.behaviorSelection.decisionInformation.AvatarTrigger;
 import play.Logger;
 import util.AppException;
 
@@ -50,9 +51,9 @@ public class AvatarReasoner {
         decisionFactory = AvatarDecisionFactory.getFactory(user);
     }
 
-    public List<AvatarBehavior> selectAvatarBehaviors(){
+    public List<AvatarBehavior> selectAvatarBehaviors(AvatarTrigger trigger){
         List<AvatarBehavior> behaviors = new LinkedList<>();
-        List<Integer> behaviorIds = decisionFactory.getAvatarBehaviorIds();
+        List<Integer> behaviorIds = decisionFactory.getAvatarBehaviorIds(trigger);
         if(behaviorIds != null) {
             for (Integer id : behaviorIds) {
                 if (id == null) {

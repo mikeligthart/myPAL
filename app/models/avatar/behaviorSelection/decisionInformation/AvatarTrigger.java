@@ -1,4 +1,4 @@
-package models.avatar.behaviorSelection;
+package models.avatar.behaviorSelection.decisionInformation;
 
 /**
  * myPAL
@@ -10,8 +10,8 @@ package models.avatar.behaviorSelection;
  * General telephone number: +31(0)88 866 15 00
  *
  * @author Mike Ligthart - mike.ligthart@gmail.com
- * @version 1.0 2-11-2015
+ * @version 1.0 3-11-2015
  */
-public interface AvatarDecisionPacket {
-
+public enum AvatarTrigger {
+        PAGE, OTHER;
 }

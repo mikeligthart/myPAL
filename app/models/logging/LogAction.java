@@ -64,4 +64,5 @@ public class LogAction extends Model {
         user.addLogAction(type);
         user.update();
     }
+
 }

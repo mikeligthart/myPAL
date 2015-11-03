@@ -1,27 +1,25 @@
 package models.avatar;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.ConfigFactory;
 import models.UserMyPAL;
-import models.avatar.behaviorDefenition.AvatarBehavior;
 import models.avatar.behaviorSelection.AvatarDecisionNode;
+import models.avatar.behaviorSelection.decisionInformation.AvatarDecisionFunction;
 import models.avatar.behaviorSelection.decisionInformation.AvatarTrigger;
 import models.avatar.behaviorSelection.decisionInformation.AvatarUserHistory;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import play.Logger;
 import play.libs.Json;
-import sun.security.x509.AVA;
-import util.AppException;
+
+import util.ParseAvatarDecisionModelException;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 /**
  * myPAL
@@ -60,19 +58,22 @@ public class AvatarDecisionFactory {
 
     //Information sources
     private UserMyPAL user;
-    private AvatarTrigger trigger;
-    private AvatarUserHistory userHistory;
+    private AvatarTrigger currentTrigger;
+    private AvatarUserHistory currentUserHistory;
 
     //Model
     private String decisionModelLocation;
     private String activeDecisionModel;
     private JsonNode model;
+    private ObjectMapper mapper;
 
     private AvatarDecisionFactory(UserMyPAL user) {
+        mapper =  new ObjectMapper();
+
         //Load initial information
         this.user = user;
-        this.trigger = null;
-        this.userHistory = new AvatarUserHistory(null, null);
+        this.currentTrigger = null;
+        this.currentUserHistory = new AvatarUserHistory(null, null);
 
         //Load initial model
         model = null;
@@ -87,49 +88,119 @@ public class AvatarDecisionFactory {
         refreshModel();
         refreshInformation(trigger);
 
-        AvatarDecisionNode rootNode = generateRootNode();
+        AvatarDecisionNode rootNode = null;
+        try {
+            rootNode = generateRootNode();
+        } catch (ParseAvatarDecisionModelException e) {
+            Logger.error("[AvatarDecisionFactory > getAvatarBehaviorIds] ParseAvatarDecisionModelException: " + e.getMessage());
+        }
+
         if (rootNode != null) {
-            return rootNode.getAvatarBehaviors();
+            List<Integer> behaviors = rootNode.getAvatarBehaviors();
+            return behaviors;
         } else {
             return null;
         }
-        /*
-        List<LogAction> userHistory = user.getLogActions();
-        List<Integer> output = new LinkedList<>();
-        if(userHistory.get(userHistory.size()-1).getType() == LogActionType.ADDEDACTIVITY || userHistory.get(userHistory.size()-2).getType() == LogActionType.ADDEDACTIVITY) {
-            for(int index = 0; index < 13; index++){
-                output.add(index);
-            }
-            output.add(null);
-        } else {
-            output.add(null);
-        }
-        return output;
-        */
     }
 
-    private AvatarDecisionNode generateRootNode(){
-        //TODO: Parse model to java objects
+    private AvatarDecisionNode generateRootNode() throws ParseAvatarDecisionModelException {
+        if(model.has("root")) {
+            JsonNode rootNode = model.get("root");
+            try {
+                return parseNode(rootNode);
+            } catch (IOException e) {
+                throw new ParseAvatarDecisionModelException("IOException - " + e.getMessage(), e.getCause());
+            }
+        } else {
+            throw new ParseAvatarDecisionModelException("'root' is missing in the model structure");
+        }
+    }
+
+    private AvatarDecisionNode parseNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
+        if(!node.has("class") || !node.has("behaviors") || !node.has("children")){
+            throw new ParseAvatarDecisionModelException("Node structure check for 'class', 'behaviors' and 'children' failed");
+        }
+
+        //Check if node is a leaf node and if so retrieve the behaviors
+        List<Integer> behavior = null;
+        JsonNode behaviorNode = node.get("behaviors");
+        if(behaviorNode.isArray() && !behaviorNode.isNull()) {
+            behavior = mapper.convertValue(node.get("behaviors"), List.class);
+        }
+
+        //If it is a leaf node return it
+        if(behavior != null){
+            return new AvatarDecisionNode(behavior, null, null);
+        }
+
+        //Else search for child nodes
+        JsonNode childrenNode = node.get("children");
+        if(!childrenNode.isArray() || childrenNode.isNull()) {
+            throw new ParseAvatarDecisionModelException("The attribute 'children' of AvatarTrigger is either empty or not in the right format");
+        }
+
+        String nodeClass = node.get("class").asText();
+        if(nodeClass.equalsIgnoreCase(AvatarTrigger.class.getSimpleName())){
+            return parseAvatarTriggerNode(childrenNode);
+        } else if(nodeClass.equalsIgnoreCase(AvatarUserHistory.class.getSimpleName())){
+            return parseAvatarUserHistoryNode(childrenNode);
+        }
         return null;
+    }
+
+    private AvatarDecisionNode parseAvatarTriggerNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException{
+        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        for(int index = 0; index < node.size(); index++){
+            JsonNode avatarTriggerNode = node.get(index).get(Integer.toString(index));
+            if(!avatarTriggerNode.has("trigger") || !avatarTriggerNode.has("child")){
+                throw new ParseAvatarDecisionModelException("AvatarTriggerNode check for 'trigger' and 'child' failed");
+            } else {
+                String proposedTrigger = avatarTriggerNode.get("trigger").asText().toUpperCase();
+                if(!AvatarTrigger.isLegalTrigger(proposedTrigger)){
+                    throw new ParseAvatarDecisionModelException(proposedTrigger + " not recognized as AvatarTrigger");
+                }
+                AvatarTrigger trigger = new AvatarTrigger(proposedTrigger);
+                AvatarDecisionNode child = parseNode(avatarTriggerNode.get("child"));
+                children.put(trigger, child);
+            }
+        }
+        return new AvatarDecisionNode(null, currentTrigger, children);
+    }
+
+    private AvatarDecisionNode parseAvatarUserHistoryNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException{
+        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        for(int index = 0; index < node.size(); index++){
+            JsonNode userHistoryNode = node.get(index).get(Integer.toString(index));
+            if(!userHistoryNode.has("last") || !userHistoryNode.has("beforeLast") || !userHistoryNode.has("child")){
+                throw new ParseAvatarDecisionModelException("AvatarTriggerNode check for 'last', 'beforeLast' and 'child' failed");
+            } else {
+                LogActionType last = LogActionType.valueOf(userHistoryNode.get("last").asText().toUpperCase());
+                LogActionType beforeLast = LogActionType.valueOf(userHistoryNode.get("beforeLast").asText().toUpperCase());
+                AvatarUserHistory userHistory = new AvatarUserHistory(last, beforeLast);
+                AvatarDecisionNode child = parseNode(userHistoryNode.get("child"));
+                children.put(userHistory, child);
+            }
+        }
+        return new AvatarDecisionNode(null, currentUserHistory, children);
     }
 
     private void refreshInformation(AvatarTrigger trigger){
         List<LogAction> logActions = user.getLogActions();
         int logActionsSize = logActions.size();
         if(logActionsSize >= 2){
-            userHistory = new AvatarUserHistory(logActions.get(logActionsSize-1), logActions.get(logActionsSize-2));
+            currentUserHistory = new AvatarUserHistory(logActions.get(logActionsSize-1).getType(), logActions.get(logActionsSize-2).getType());
         } else if(logActionsSize == 1){
-            userHistory = new AvatarUserHistory(logActions.get(0), null);
+            currentUserHistory = new AvatarUserHistory(logActions.get(0).getType(), null);
         } else {
-            userHistory = new AvatarUserHistory(null, null);
+            currentUserHistory = new AvatarUserHistory(null, null);
         }
-        this.trigger = trigger;
+        this.currentTrigger = trigger;
     }
 
     private void loadModelFromFile(){
         File modelFile = new File(decisionModelLocation + activeDecisionModel);
         try {
-            model = Json.toJson(new String(Files.readAllBytes(Paths.get(modelFile.getAbsolutePath()))));
+            model = Json.parse(new FileInputStream(modelFile));
         } catch (IOException e) {
             Logger.error("IOException in AvatarDecisionFactory while trying to refresh the decision model from this location: " + modelFile.getAbsolutePath());
         }
@@ -143,6 +214,9 @@ public class AvatarDecisionFactory {
             activeDecisionModel = potentialNewActiveModel;
             loadModelFromFile();
         }
+
+        //TODO: Check whether file has been updated instead of loading it on each event
+        loadModelFromFile();
     }
 
 

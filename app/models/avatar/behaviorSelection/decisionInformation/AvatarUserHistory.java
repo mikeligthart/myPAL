@@ -1,7 +1,9 @@
 package models.avatar.behaviorSelection.decisionInformation;
 
 import models.logging.LogAction;
+import models.logging.LogActionType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import play.Logger;
 
 /**
  * myPAL
@@ -15,28 +17,28 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 3-11-2015
  */
-public class AvatarUserHistory {
+public class AvatarUserHistory implements AvatarDecisionFunction {
 
-    private LogAction last, beforeLast;
+    private LogActionType last, beforeLast;
 
-    public AvatarUserHistory(LogAction last, LogAction beforeLast){
+    public AvatarUserHistory(LogActionType last, LogActionType beforeLast){
         this.last = last;
         this.beforeLast = beforeLast;
     }
 
-    public LogAction getLast() {
+    public LogActionType getLast() {
         return last;
     }
 
-    public void setLast(LogAction last) {
+    public void setLast(LogActionType last) {
         this.last = last;
     }
 
-    public LogAction getBeforeLast() {
+    public LogActionType getBeforeLast() {
         return beforeLast;
     }
 
-    public void setBeforeLast(LogAction beforeLast) {
+    public void setBeforeLast(LogActionType beforeLast) {
         this.beforeLast = beforeLast;
     }
 

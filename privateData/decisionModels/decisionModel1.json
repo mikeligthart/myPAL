@@ -1,0 +1,56 @@
+{
+  "root": {
+    "class": "AvatarTrigger",
+    "behaviors": null,
+    "children": [
+      {
+        "0": {
+          "trigger": "PAGE",
+          "child": {
+            "class": "AvatarUserHistory",
+            "behaviors": null,
+            "children": [
+              {
+                "0": {
+                  "last": "ACCESSCALENDAR",
+                  "beforeLast": "ADDEDACTIVITY",
+                  "child": {
+                    "class": "AvatarLeafNode",
+                    "behaviors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9,
+                      10,
+                      11,
+                      12
+                    ],
+                    "children": null
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "1": {
+          "trigger": "OTHER",
+          "child": {
+            "class": "AvatarLeafNode",
+            "behaviors": [
+              0
+            ],
+            "children": null
+          }
+        }
+      }
+    ]
+  }
+}

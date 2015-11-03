@@ -87,7 +87,7 @@ public class Diary extends Controller {
 
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
-        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.PAGE));
 
         return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryItemSize, avatarBehavior));
     }
@@ -105,7 +105,7 @@ public class Diary extends Controller {
         //Generate AvatarBehavior
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
-        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.PAGE));
 
         return ok(diary_goals.render(user.getUserType(), avatarBehavior));
     }
@@ -194,7 +194,7 @@ public class Diary extends Controller {
 
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
-        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.PAGE));
 
         return ok(diary_calendar_diaryActivity_view.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), new DiaryActivityToHTML(activity), avatarBehavior));
     }
@@ -365,7 +365,7 @@ public class Diary extends Controller {
 
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
-        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.PAGE));
 
         return ok(diary_calendar_measurement_view.render(user.getUserType(), diarySettings.getDateString(true), diarySettings.getDateString(false), new MeasurementToHTML(measurement), avatarBehavior));
     }
@@ -453,7 +453,7 @@ public class Diary extends Controller {
 
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
-        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.PAGE));
 
         return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, avatarBehavior));
     }
@@ -480,7 +480,7 @@ public class Diary extends Controller {
 
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
-        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(AvatarTrigger.PAGE);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.PAGE));
 
         return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), diaryItemSize, avatarBehavior));
     }

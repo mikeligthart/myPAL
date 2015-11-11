@@ -1,16 +1,13 @@
 package models.avatar;
 
-import controllers.routes;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.typesafe.config.ConfigFactory;
 import models.UserMyPAL;
-import models.avatar.behaviorDefenition.*;
+import models.avatar.behaviorDefinition.*;
+import org.apache.commons.io.FilenameUtils;
 import play.Logger;
-import play.i18n.Messages;
 import util.AppException;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -30,20 +27,23 @@ import java.util.*;
 public class AvatarBehaviorFactory {
 
     //General attributes
-    private static final String GESTUREROOT = routes.Assets.at("robot_animations/").url();
-    private static final String SPEECHROOT = routes.Assets.at("robot_speech/dialogue.id.").url();
-    private static final String SPEECHFILEROOT = "public/robot_speech/dialogue.id.";
-    private static final String SPEECHEXTENSION = ".wav";
-    private static final int WAITINGTIME = 500;
+    private static final File BEHAVIORROOT = new File(ConfigFactory.load().getString("private.avatarbehaviors.location"));
+    private static final String BEHAVIORFILENAME = "behavior.";
+    private static final String BEHAVIORFILETYPE = ".json";
 
     //Factory management attributes
     private static Map<UserMyPAL, AvatarBehaviorFactory> avatarBehaviorFactories;
+    private static int numberOfBehaviors = 0;
+    private static int numberOfGestures = 0;
+    private static Map<Integer, Long> lastModified;
+    private static ObjectMapper MAPPER = new ObjectMapper();
 
     //Factory management
     public static AvatarBehaviorFactory getFactory(UserMyPAL user){
         AvatarBehaviorFactory factory;
         if(avatarBehaviorFactories == null){
             avatarBehaviorFactories = new HashMap<>();
+            lastModified = new HashMap<>();
             factory = new AvatarBehaviorFactory(user);
             avatarBehaviorFactories.put(user, factory);
         } else {
@@ -59,17 +59,124 @@ public class AvatarBehaviorFactory {
 
     //Object attributes
     private UserMyPAL user;
-    private AvatarDecisionFactory decisionFactory;
 
     //AvatarBehaviorFactory object definition
     private AvatarBehaviorFactory(UserMyPAL user){
         this.user = user;
-        this.decisionFactory = AvatarDecisionFactory.getFactory(user);
     }
 
+    public AvatarBehavior getAvatarBehavior(int id) throws AppException {
+        gestureManagement();
+        behaviorManagement();
+        AvatarBehavior behavior = AvatarBehavior.byID(id);
+        if(behavior == null){
+            throw new AppException("Behavior with id " + id + " does not exists in database");
+        } else {
+            AvatarLineVariables variables = new AvatarLineVariables(user);
+            behavior.load(variables);
+        }
+        return behavior;
+
+    }
+
+    private void behaviorManagement(){
+        int currentNumberOfBehaviors = BEHAVIORROOT.list().length;
+        //Remove behaviors from database if they have been removed from file
+        if (numberOfBehaviors > currentNumberOfBehaviors){
+            List<AvatarBehavior> behaviors = AvatarBehavior.find.all();
+            for(AvatarBehavior behavior : behaviors){
+                if(!new File(BEHAVIORROOT + BEHAVIORFILENAME + behavior.getId() + BEHAVIORFILETYPE).exists()){
+                    lastModified.remove(behavior.getId());
+                    behavior.delete();
+                    numberOfBehaviors--;
+                }
+            }
+            numberOfBehaviors = currentNumberOfBehaviors;
+        }
+
+        //Add new behaviors or update changed behaviors
+        if(numberOfBehaviors < currentNumberOfBehaviors){
+            for(File file : BEHAVIORROOT.listFiles()){
+                int behaviorId = Integer.valueOf(file.getName().replace(BEHAVIORFILENAME, "").replace(BEHAVIORFILETYPE, ""));
+                //If behavior does not exists create a new one and store it in de the database;
+                if(!AvatarBehavior.exists(behaviorId)){
+                   try {
+                       AvatarBehavior newBehavior = MAPPER.readValue(file, AvatarBehavior.class);
+                       newBehavior.save();
+                       Logger.debug("Added new behavior with id: " + newBehavior.getId() + ", with lines: " + newBehavior.getLines());
+                       Logger.debug("Added behavior retrieved from db: lines: " + AvatarBehavior.byID(newBehavior.getId()).getLines());
+                       lastModified.put(behaviorId, file.lastModified());
+                       numberOfBehaviors++;
+                   } catch (IOException e) {
+                       Logger.error("[AvatarBehaviorFactory > behaviorManagement] Could not read behaviorFile " + file.getAbsolutePath());
+                   }
+                }
+                //if behavior exists, check whether the file is updated and if so update the database entry.
+                else {
+                    if(lastModified.get(behaviorId) != file.lastModified()){
+                        AvatarBehavior updatedBehavior = null;
+                        try {
+                            updatedBehavior = MAPPER.readValue(file, AvatarBehavior.class);
+
+                        } catch (IOException e) {
+                            Logger.error("[AvatarBehaviorFactory > behaviorManagement] Could not read behaviorFile " + file.getAbsolutePath());
+                        }
+                        if(updatedBehavior != null){
+                            AvatarBehavior oldBehavior = AvatarBehavior.byID(behaviorId);
+                            oldBehavior.delete();
+                            updatedBehavior.save();
+                            lastModified.put(behaviorId, file.lastModified());
+                        }
+
+                    }
+                }
+            }
+            numberOfBehaviors = currentNumberOfBehaviors;
+        }
+    }
+
+    private void gestureManagement(){
+        File gestureFileRoot = new File(AvatarGesture.GESTUREFILEROOT);
+        int currentNumberOfGestures = gestureFileRoot.list().length;
+
+        Logger.debug("gestureManagement -> numberOfGestures: " + numberOfGestures + ", currentNumberOfGestures:" + currentNumberOfGestures);
+        //Remove gesture from database that have been removed from file
+        if(numberOfGestures > currentNumberOfGestures){
+            List<AvatarGesture> gestures = AvatarGesture.find.all();
+            for(AvatarGesture gesture : gestures){
+                if(!gesture.refreshGesture()){
+                    gesture.delete();
+                    numberOfGestures--;
+                }
+            }
+        }
+
+        //Add new gestures
+        if(numberOfGestures < currentNumberOfGestures){
+            for(File file : gestureFileRoot.listFiles()){
+                String fileName = file.getName();
+                int gestureId = Integer.valueOf(fileName.substring(fileName.indexOf("_")+1, fileName.lastIndexOf("_")));
+                int gestureLength = Integer.valueOf(fileName.substring(fileName.indexOf("-")+1, fileName.lastIndexOf(".")));
+                Logger.debug("gestureId: " + gestureId + ", gestureLength: " + gestureLength);
+                Logger.debug("Gesture exists: " + AvatarGesture.exists(gestureId));
+                if(!AvatarGesture.exists(gestureId)) {
+                    try {
+                        Logger.debug("File: " + file.getAbsolutePath());
+                        AvatarGesture gesture = new AvatarGesture(gestureId, file, gestureLength);
+                        gesture.save();
+                        numberOfGestures++;
+                    } catch (AppException e) {
+                        Logger.error("[AvatarBehaviorFactory > gestureManagement] " + e.getLocalizedMessage());
+                    }
+                }
+            }
+        }
+    }
+
+    /*
     //Retrieve and build AvatarBehavior from file
     public AvatarBehavior getAvatarBehavior(int id) throws AppException {
-        AvatarBehavior behavior = new AvatarBehavior(id, user);
+        AvatarBehavior behavior = new AvatarBehavior(id);
 
         //Retrieve gesture
         String gestureSource = GESTUREROOT + Messages.get("dialogue.id." + id + ".gesture");
@@ -136,36 +243,5 @@ public class AvatarBehaviorFactory {
         }
         return new AvatarHtml(null);
     }
-
-    //Up till three different variables can be inserted into a line.
-    private String insertVariableIntoLine(int id, String selectedVersion, int variableCount) throws AppException {
-        switch(variableCount){
-            case 0:
-                String lineDef = "dialogue.id." + id + "." + selectedVersion + ".line";
-                return Messages.get(lineDef);
-            case 1:
-                String variable1_1 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable0");
-                return Messages.get("dialogue.id." + id + "." + selectedVersion + ".line", extractVariableFromIndicator(variable1_1));
-            case 2:
-                String variable2_1 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable0");
-                String variable2_2 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable1");
-                return Messages.get("dialogue.id." + id + "." + selectedVersion + ".line", extractVariableFromIndicator(variable2_1), extractVariableFromIndicator(variable2_2));
-            case 3:
-            default:
-                String variable3_1 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable0");
-                String variable3_2 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable1");
-                String variable3_3 = Messages.get("dialogue.id." + id + "." + selectedVersion + ".variable2");
-                return Messages.get("dialogue.id." + id + "." + selectedVersion + ".line", extractVariableFromIndicator(variable3_1), extractVariableFromIndicator(variable3_2), extractVariableFromIndicator(variable3_3));
-        }
-    }
-
-    private String extractVariableFromIndicator(String variableIndicator) {
-        if(variableIndicator.equalsIgnoreCase("firstName"))
-            return user.getFirstName();
-        else if(variableIndicator.equalsIgnoreCase("lastName"))
-            return user.getLastName();
-        return "";
-    }
-
-
+     */
 }

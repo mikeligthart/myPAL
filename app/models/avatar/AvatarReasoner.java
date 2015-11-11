@@ -1,7 +1,7 @@
 package models.avatar;
 
 import models.UserMyPAL;
-import models.avatar.behaviorDefenition.AvatarBehavior;
+import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorSelection.decisionInformation.AvatarTrigger;
 import play.Logger;
 import util.AppException;

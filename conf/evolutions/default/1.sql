@@ -3,6 +3,23 @@
 
 # --- !Ups
 
+create table avatar_behavior (
+  id                        integer not null,
+  gesture_id                integer,
+  avatar_html_type          integer,
+  version                   integer,
+  constraint ck_avatar_behavior_avatar_html_type check (avatar_html_type in (0,1,2,3,4)),
+  constraint pk_avatar_behavior primary key (id))
+;
+
+create table avatar_gesture (
+  id                        integer not null,
+  file_name                 varchar(255),
+  is_video                  boolean,
+  duration                  integer,
+  constraint pk_avatar_gesture primary key (id))
+;
+
 create table diary_activity (
   id                        integer not null,
   date                      date,
@@ -97,6 +114,10 @@ create table user_my_pal (
   constraint pk_user_my_pal primary key (email))
 ;
 
+create sequence avatar_behavior_seq;
+
+create sequence avatar_gesture_seq;
+
 create sequence diary_activity_seq;
 
 create sequence diary_activity_type_seq;
@@ -140,6 +161,10 @@ create index ix_picture_user_10 on picture (user_email);
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
+drop table if exists avatar_behavior;
+
+drop table if exists avatar_gesture;
+
 drop table if exists diary_activity;
 
 drop table if exists diary_activity_type;
@@ -157,6 +182,10 @@ drop table if exists picture;
 drop table if exists user_my_pal;
 
 SET REFERENTIAL_INTEGRITY TRUE;
+
+drop sequence if exists avatar_behavior_seq;
+
+drop sequence if exists avatar_gesture_seq;
 
 drop sequence if exists diary_activity_seq;
 

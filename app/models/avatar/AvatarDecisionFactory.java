@@ -66,6 +66,7 @@ public class AvatarDecisionFactory {
     private String activeDecisionModel;
     private JsonNode model;
     private ObjectMapper mapper;
+    private long modelLastModified;
 
     private AvatarDecisionFactory(UserMyPAL user) {
         mapper =  new ObjectMapper();
@@ -201,6 +202,7 @@ public class AvatarDecisionFactory {
         File modelFile = new File(decisionModelLocation + activeDecisionModel);
         try {
             model = Json.parse(new FileInputStream(modelFile));
+            modelLastModified = modelFile.lastModified();
         } catch (IOException e) {
             Logger.error("IOException in AvatarDecisionFactory while trying to refresh the decision model from this location: " + modelFile.getAbsolutePath());
         }
@@ -215,8 +217,9 @@ public class AvatarDecisionFactory {
             loadModelFromFile();
         }
 
-        //TODO: Check whether file has been updated instead of loading it on each event
-        loadModelFromFile();
+        if(modelLastModified != new File(decisionModelLocation + activeDecisionModel).lastModified()){
+            loadModelFromFile();
+        }
     }
 
 

@@ -1,9 +1,6 @@
 package models.avatar.behaviorSelection;
 
-import models.avatar.behaviorDefenition.AvatarBehavior;
 import models.avatar.behaviorSelection.decisionInformation.AvatarDecisionFunction;
-import models.avatar.behaviorSelection.decisionInformation.AvatarUserHistory;
-import play.Logger;
 
 import java.util.List;
 import java.util.Map;

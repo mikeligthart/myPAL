@@ -4,17 +4,17 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.UserMyPAL;
 import models.UserType;
+import models.avatar.behaviorDefinition.AvatarBehavior;
+import models.avatar.behaviorDefinition.AvatarGesture;
 import models.diary.activity.DiaryActivity;
 import models.logging.LogAction;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.admin.admin_home;
-import views.html.admin.admin_user;
-import views.html.admin.admin_user_update;
-import views.html.admin.admin_user_view;
+import views.html.admin.*;
 import views.html.controlFlow.no_access;
+import views.interfaces.AvatarBehaviorToHTML;
 import views.interfaces.DiaryActivityToHTML;
 import views.interfaces.LogActionToHTML;
 import views.interfaces.UserToHTML;
@@ -140,6 +140,25 @@ public class Admin extends Controller {
         } else {
             return forbidden();
         }
+    }
+
+    public static Result behavior(){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        return ok(admin_behavior.render());
+    }
+
+    public static Result addBehaviorPage(){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        List<AvatarGesture> gestures = AvatarGesture.find.all();
+        return ok(admin_behavior_add.render(gestures));
     }
 
      /* FUNCTIONS */
@@ -273,6 +292,27 @@ public class Admin extends Controller {
             return forbidden(no_access.render());
         }
 
+    }
+
+    public static Result getBehaviors(){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        List<AvatarBehaviorToHTML> behaviors = AvatarBehaviorToHTML.fromListToList(AvatarBehavior.find.all());
+        ObjectNode data = JsonNodeFactory.instance.objectNode();
+        data.set("data", toJson(behaviors));
+        return ok(data);
+    }
+
+    public static Result addBehavior(){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        return redirect(routes.Admin.behavior());
     }
 
     /**

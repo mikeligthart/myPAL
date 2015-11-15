@@ -1,0 +1,67 @@
+@(gestures: List[models.avatar.behaviorDefinition.AvatarGesture])
+
+@admin(title = Messages("page.admin.behavior.title"), page = "behavior") {
+
+    <style>
+        textarea
+        {
+            width:100%;
+        }
+    </style>
+
+    <div class="text-left row">
+        <h1>@Messages("page.admin.behavior.add.title")</h1>
+        <h3>@Messages("page.admin.behavior.add.step1")</h3>
+    </div>
+
+    <form action="@routes.Admin.addBehavior()" method="post">
+
+        <div class="text-center">
+            @for((gesture, index) <- gestures.zipWithIndex){
+                @if(index % 4 == 0){
+                    <div class="row">
+                }
+                <div class="col-md-3 portfolio-item">
+                    @if(gesture.isVideo){
+                        <video width="250px" height="250px" autoplay="autoplay" controls>
+                            <source src='@gesture.getGesture' type="video/mp4">
+                        </video>
+                    }else{
+                        <img width="250px" height="250px" class="text-left img-responsive" src='@gesture.getGesture'>
+                    }
+                    <button class="gestureSelectButton btn btn-default" value="@gesture.getId">@Messages("page.admin.behavior.add.selectGesture")</button>
+                </div>
+                @if((index+1) % 4 == 0){
+                    </div>
+                }
+            }
+            @if(gestures.size == 1 || gestures.size-1 % 4 != 0){
+                </div>
+            }
+            <input id="gestureId" name="gestureId" type="hidden" value="1" />
+        </div>
+
+        <div class="row">
+            <h3>@Messages("page.admin.behavior.add.step2")</h3>
+            <textarea rows="5" id="lines" name="lines" placeholder='@Messages("page.admin.behavior.add.step2.explanation")'></textarea>
+        </div>
+
+        <div class="row text-right">
+            <input type="submit" value='@Messages("page.admin.behavior.add.submit")' class="btn btn-primary"/>
+            <a href="@routes.Admin.behavior()" class="btn btn-default">@Messages("page.admin.behavior.add.back")</a>
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+        $(".gestureSelectButton").click(function(e) {
+            e.preventDefault();
+            $(".gestureSelectButton").removeClass("btn-primary");
+            $(".gestureSelectButton").addClass("btn-default");
+            $(this).removeClass("btn-default");
+            $(this).addClass("btn-primary");
+            $("#gestureId").val($(this).attr("value"));
+        });
+    </script>
+
+}

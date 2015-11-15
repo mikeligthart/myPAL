@@ -10,6 +10,7 @@ GET     /logout                     controllers.Application.logout()
 GET     /private/*fileName          controllers.Application.getPicture(fileName)
 GET     /contentbox/:content        controllers.Application.contentBox(content: String)
 POST    /dropphoto                  controllers.Application.dropForMyPALPhoto()
+GET     /show/gesture/:source       controllers.Application.showGesture(source: String)
 
 # Hello goodbye
 GET     /greeting                   controllers.Application.hello()
@@ -69,6 +70,10 @@ GET     /admin/users/view/activities/:email     controllers.Admin.getUserActivit
 GET     /admin/users/update/:email              controllers.Admin.updatePageUser(email: String)
 POST    /admin/users/update/:email              controllers.Admin.updateUser(email: String)
 DELETE  /admin/users/delete/:email              controllers.Admin.deleteUser(email: String)
+GET     /admin/behavior                         controllers.Admin.behavior()
+GET     /admin/behavior/list                    controllers.Admin.getBehaviors()
+GET     /admin/behavior/add                     controllers.Admin.addBehaviorPage()
+POST    /admin/behavior/add                     controllers.Admin.addBehavior()
 
 ## REGISTRATION ##
 GET     /register                               controllers.Registration.registrationPage()

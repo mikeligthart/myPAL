@@ -24,6 +24,7 @@ import views.html.controlFlow.login;
 import views.html.controlFlow.no_content;
 import views.html.diary.diary_greeting;
 import views.html.interfaces.interfaces_description_box;
+import views.html.interfaces.interfaces_show_gesture_video;
 
 import java.io.File;
 import java.sql.Date;
@@ -207,6 +208,14 @@ public class Application extends Controller {
         }
 
         return ok(interfaces_description_box.render(content));
+    }
+
+    public static Result showGesture(String source){
+        if(session().isEmpty() || session().get("email") == null || source.isEmpty()){
+            return forbidden();
+        }
+
+        return ok(interfaces_show_gesture_video.render(source));
     }
 }
 

@@ -91,30 +91,35 @@ public class AvatarBehavior extends Model {
     public int getTimer() {
         if (!avatarHtml.isActiveHtml()) {
             //Retrieve the right timing of the line
-            AudioInputStream audioInputStream;
             File speechFile = new File(SPEECHFILEROOT + id + "." + version + ".wav");
-            try {
-                audioInputStream = AudioSystem.getAudioInputStream(speechFile);
-                AudioFormat format = audioInputStream.getFormat();
-                long frames = audioInputStream.getFrameLength();
-                int speechDuration = (Math.round((frames) / format.getFrameRate()) * 1000);
-                int gestureDuration = avatarGesture.getDuration();
-                //if speechDuration is longer or equal to the gesture duration than return the longest with a pause of SPEECHWAIT
-                if (speechDuration >= gestureDuration) {
-                    return speechDuration + SPEECHWAIT;
-                } else { //else if gestureDuration is longer return gestureDuration and wait at most SPEECHWAIT after speechDuration;
-                    int wait = SPEECHWAIT - (gestureDuration - speechDuration);
-                    if (wait > 0) {
-                        return gestureDuration + wait;
-                    } else {
-                        return gestureDuration;
+            if(speechFile.exists()){
+                AudioInputStream audioInputStream;
+                try {
+                    audioInputStream = AudioSystem.getAudioInputStream(speechFile);
+                    AudioFormat format = audioInputStream.getFormat();
+                    long frames = audioInputStream.getFrameLength();
+                    int speechDuration = (Math.round((frames) / format.getFrameRate()) * 1000);
+                    int gestureDuration = avatarGesture.getDuration();
+                    //if speechDuration is longer or equal to the gesture duration than return the longest with a pause of SPEECHWAIT
+                    if (speechDuration >= gestureDuration) {
+                        return speechDuration + SPEECHWAIT;
+                    } else { //else if gestureDuration is longer return gestureDuration and wait at most SPEECHWAIT after speechDuration;
+                        int wait = SPEECHWAIT - (gestureDuration - speechDuration);
+                        if (wait > 0) {
+                            return gestureDuration + wait;
+                        } else {
+                            return gestureDuration;
+                        }
                     }
+                } catch (UnsupportedAudioFileException e) {
+                    Logger.error("[AvatarBehavior > getTimer()] UnsupportedAudioFileException " + e.getMessage());
+                    return avatarGesture.getDuration();
+                } catch (IOException e) {
+                    Logger.error("[AvatarBehavior > getTimer()] IOException " + e.getMessage());
+                    return avatarGesture.getDuration();
                 }
-            } catch (UnsupportedAudioFileException e) {
-                Logger.error("[AvatarBehavior > getTimer()] UnsupportedAudioFileException " + e.getMessage());
-                return avatarGesture.getDuration();
-            } catch (IOException e) {
-                Logger.error("[AvatarBehavior > getTimer()] IOException " + e.getMessage());
+            } else {
+                Logger.error("[AvatarBehavior > getTimer()] IOException " + speechFile.getName() + " does not exists");
                 return avatarGesture.getDuration();
             }
         } else {

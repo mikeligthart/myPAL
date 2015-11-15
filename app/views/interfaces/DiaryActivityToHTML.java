@@ -87,11 +87,11 @@ public class DiaryActivityToHTML {
     }
 
     public static List<DiaryActivityToHTML> fromListToList(List<DiaryActivity> activities){
-        List<DiaryActivityToHTML> htmlReadyAcitivies = new ArrayList<>();
+        List<DiaryActivityToHTML> htmlReadyActivities = new ArrayList<>();
         for(Iterator<DiaryActivity> it = activities.iterator(); it.hasNext();){
-            htmlReadyAcitivies.add(new DiaryActivityToHTML(it.next()));
+            htmlReadyActivities.add(new DiaryActivityToHTML(it.next()));
         }
-        return htmlReadyAcitivies;
+        return htmlReadyActivities;
     }
 
     public static String dateToFormattedString(Date date){

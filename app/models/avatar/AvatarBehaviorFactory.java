@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.ConfigFactory;
 import models.UserMyPAL;
 import models.avatar.behaviorDefinition.*;
-import org.apache.commons.io.FilenameUtils;
 import play.Logger;
 import util.AppException;
 
@@ -87,7 +86,7 @@ public class AvatarBehaviorFactory {
             for(AvatarBehavior behavior : behaviors){
                 if(!new File(BEHAVIORROOT + BEHAVIORFILENAME + behavior.getId() + BEHAVIORFILETYPE).exists()){
                     lastModified.remove(behavior.getId());
-                    behavior.delete();
+                    behavior.deleteBehavior();
                     numberOfBehaviors--;
                 }
             }
@@ -101,13 +100,12 @@ public class AvatarBehaviorFactory {
                 //If behavior does not exists create a new one and store it in de the database;
                 if(!AvatarBehavior.exists(behaviorId)){
                    try {
-                       AvatarBehavior newBehavior = MAPPER.readValue(file, AvatarBehavior.class);
-                       newBehavior.save();
-                       Logger.debug("Added new behavior with id: " + newBehavior.getId() + ", with lines: " + newBehavior.getLines());
-                       Logger.debug("Added behavior retrieved from db: lines: " + AvatarBehavior.byID(newBehavior.getId()).getLines());
-                       lastModified.put(behaviorId, file.lastModified());
-                       numberOfBehaviors++;
-                   } catch (IOException e) {
+                        AvatarBehavior newBehavior = MAPPER.readValue(file, AvatarBehavior.class);
+                        newBehavior.saveBehavior();
+                        lastModified.put(behaviorId, file.lastModified());
+                        numberOfBehaviors++;
+                   }
+                    catch (IOException e) {
                        Logger.error("[AvatarBehaviorFactory > behaviorManagement] Could not read behaviorFile " + file.getAbsolutePath());
                    }
                 }
@@ -123,8 +121,8 @@ public class AvatarBehaviorFactory {
                         }
                         if(updatedBehavior != null){
                             AvatarBehavior oldBehavior = AvatarBehavior.byID(behaviorId);
-                            oldBehavior.delete();
-                            updatedBehavior.save();
+                            oldBehavior.deleteBehavior();
+                            updatedBehavior.saveBehavior();
                             lastModified.put(behaviorId, file.lastModified());
                         }
 
@@ -139,7 +137,6 @@ public class AvatarBehaviorFactory {
         File gestureFileRoot = new File(AvatarGesture.GESTUREFILEROOT);
         int currentNumberOfGestures = gestureFileRoot.list().length;
 
-        Logger.debug("gestureManagement -> numberOfGestures: " + numberOfGestures + ", currentNumberOfGestures:" + currentNumberOfGestures);
         //Remove gesture from database that have been removed from file
         if(numberOfGestures > currentNumberOfGestures){
             List<AvatarGesture> gestures = AvatarGesture.find.all();
@@ -157,12 +154,9 @@ public class AvatarBehaviorFactory {
                 String fileName = file.getName();
                 int gestureId = Integer.valueOf(fileName.substring(fileName.indexOf("_")+1, fileName.lastIndexOf("_")));
                 int gestureLength = Integer.valueOf(fileName.substring(fileName.indexOf("-")+1, fileName.lastIndexOf(".")));
-                Logger.debug("gestureId: " + gestureId + ", gestureLength: " + gestureLength);
-                Logger.debug("Gesture exists: " + AvatarGesture.exists(gestureId));
                 if(!AvatarGesture.exists(gestureId)) {
                     try {
-                        Logger.debug("File: " + file.getAbsolutePath());
-                        AvatarGesture gesture = new AvatarGesture(gestureId, file, gestureLength);
+                        AvatarGesture gesture = new AvatarGesture(gestureId, fileName, gestureLength);
                         gesture.save();
                         numberOfGestures++;
                     } catch (AppException e) {

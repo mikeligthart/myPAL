@@ -1,5 +1,6 @@
 package models.avatar.behaviorDefinition;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import controllers.routes;
 import play.Logger;
 import play.db.ebean.Model;
@@ -40,28 +41,35 @@ public class AvatarBehavior extends Model {
     //Behavior attributes that can be loaded using json
     @Id
     private int id;
-
     private int gestureId;
-    private List<String> lines;
+
+    @OneToMany
+    @Enumerated(EnumType.STRING)
     private AvatarHtmlType avatarHtmlType;
+    private List<String> lines;
 
     //Process attributes
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "behavior")
+    @JsonManagedReference
+    private List<AvatarLine> avatarLines;
+
     private int version;
     private AvatarLineVariables variables;
     private AvatarHtml avatarHtml;
     private AvatarGesture avatarGesture;
 
-    public AvatarBehavior(){
+
+    public AvatarBehavior() {
         version = 0;
         lines = new LinkedList<>();
     }
 
-    public void load(AvatarLineVariables variables){
+    public void load(AvatarLineVariables variables) {
         Random rand = new Random();
+        lines = this.getLines();
         if (lines.size() > 0) {
             version = rand.nextInt(lines.size());
-        }
-        else {
+        } else {
             version = 0;
         }
         avatarGesture = AvatarGesture.byID(gestureId);
@@ -69,16 +77,19 @@ public class AvatarBehavior extends Model {
         this.variables = variables;
     }
 
-    public String getLine(){
+    @Transient
+    public String getLine() {
         return variables.processLine(lines.get(version));
     }
 
-    public String getSpeech(){
+    @Transient
+    public String getSpeech() {
         return SPEECHROOT + id + "." + version + ".wav";
     }
 
-    public int getTimer(){
-        if(!avatarHtml.isActiveHtml()) {
+    @Transient
+    public int getTimer() {
+        if (!avatarHtml.isActiveHtml()) {
             //Retrieve the right timing of the line
             AudioInputStream audioInputStream;
             File speechFile = new File(SPEECHFILEROOT + id + "." + version + ".wav");
@@ -89,11 +100,11 @@ public class AvatarBehavior extends Model {
                 int speechDuration = (Math.round((frames) / format.getFrameRate()) * 1000);
                 int gestureDuration = avatarGesture.getDuration();
                 //if speechDuration is longer or equal to the gesture duration than return the longest with a pause of SPEECHWAIT
-                if(speechDuration >= gestureDuration){
+                if (speechDuration >= gestureDuration) {
                     return speechDuration + SPEECHWAIT;
                 } else { //else if gestureDuration is longer return gestureDuration and wait at most SPEECHWAIT after speechDuration;
                     int wait = SPEECHWAIT - (gestureDuration - speechDuration);
-                    if(wait > 0) {
+                    if (wait > 0) {
                         return gestureDuration + wait;
                     } else {
                         return gestureDuration;
@@ -111,6 +122,16 @@ public class AvatarBehavior extends Model {
         }
     }
 
+    @Transient
+    public boolean isGestureAVideo() {
+        return avatarGesture.isVideo();
+    }
+
+    @Transient
+    public Html getHtml(int index) {
+        return avatarHtml.render(index);
+    }
+
     public int getId() {
         return id;
     }
@@ -119,25 +140,22 @@ public class AvatarBehavior extends Model {
         this.id = id;
     }
 
-    public void setLines(List<String> line) {
-        this.lines = line;
-    }
-
-    public List<String> getLines(){
-        return lines;
-    }
-
-    public String getGesture(){
-        try {
-            return avatarGesture.getGesture();
-        } catch (AppException e) {
-            Logger.error("Gesture could not be retrieved: " + e.getLocalizedMessage());
-            return AvatarGesture.DEFAULTGESTURE;
+    @Transient
+    public List<String> getLines() {
+        List<String> output = new LinkedList<>();
+        for(AvatarLine line : AvatarLine.byBehavior(this)){
+            output.add(line.getLine());
         }
+        return output;
     }
 
-    public boolean isGestureAVideo(){
-        return avatarGesture.isVideo();
+    @Transient
+    public void setLines(List<String> lines) {
+        this.lines = lines;
+        avatarLines = new LinkedList<>();
+        for(String line : lines){
+            avatarLines.add(new AvatarLine(this, line));
+        }
     }
 
     public int getGestureId() {
@@ -148,22 +166,6 @@ public class AvatarBehavior extends Model {
         this.gestureId = gestureId;
     }
 
-    public void setAvatarHtml(AvatarHtml html) {
-        this.avatarHtml = html;
-    }
-
-    public Html getHtml(int index){
-        return avatarHtml.render(index);
-    }
-
-    public AvatarLineVariables getVariables() {
-        return variables;
-    }
-
-    public void setVariables(AvatarLineVariables variables) {
-        this.variables = variables;
-    }
-
     public AvatarHtmlType getAvatarHtmlType() {
         return avatarHtmlType;
     }
@@ -172,15 +174,87 @@ public class AvatarBehavior extends Model {
         this.avatarHtmlType = avatarHtmlType;
     }
 
+    @Transient
+    public String getGesture() {
+        try {
+            return avatarGesture.getGesture();
+        } catch (AppException e) {
+            Logger.error("Gesture could not be retrieved: " + e.getLocalizedMessage());
+            return AvatarGesture.DEFAULTGESTURE;
+        }
+    }
+
+    @Transient
+    public AvatarLineVariables getVariables() {
+        return variables;
+    }
+
+    @Transient
+    public void setVariables(AvatarLineVariables variables) {
+        this.variables = variables;
+    }
+
     public static Finder<Integer, AvatarBehavior> find = new Finder<Integer, AvatarBehavior>(Integer.class, AvatarBehavior.class);
 
-    public static AvatarBehavior byID(int id){
+    public static AvatarBehavior byID(int id) {
         return find.byId(id);
     }
 
-    public static boolean exists(int id){
+    public static boolean exists(int id) {
         return (byID(id) != null);
     }
 
+    @Transient
+    public int getVersion() {
+        return version;
+    }
 
+    @Transient
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
+    @Transient
+    public AvatarHtml getAvatarHtml() {
+        return avatarHtml;
+    }
+
+    @Transient
+    public void setAvatarHtml(AvatarHtml html) {
+        this.avatarHtml = html;
+    }
+
+    @Transient
+    public AvatarGesture getAvatarGesture() {
+        return avatarGesture;
+    }
+
+    @Transient
+    public void setAvatarGesture(AvatarGesture avatarGesture) {
+        this.avatarGesture = avatarGesture;
+    }
+
+    public List<AvatarLine> getAvatarLines() {
+        return avatarLines;
+    }
+
+    public void setAvatarLines(List<AvatarLine> avatarLines) {
+        this.avatarLines = avatarLines;
+    }
+
+    public void saveBehavior(){
+        this.save();
+        for(AvatarLine line : avatarLines){
+            line.save();
+        }
+    }
+
+    public void deleteBehavior(){
+        for(AvatarLine line : avatarLines){
+            line.delete();
+        }
+        this.delete();
+    }
 }
+
+

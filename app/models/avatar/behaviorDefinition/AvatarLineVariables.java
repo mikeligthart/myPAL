@@ -31,6 +31,6 @@ public class AvatarLineVariables {
     }
 
     public String processLine(String line){
-        return line.replace("#firstName", user.getFirstName());
+        return line.replace("#firstName#", user.getFirstName());
     }
 }

@@ -32,27 +32,14 @@ public class AvatarGesture extends Model {
 
     @Id
     private int id;
-
-    private File file;
     private String fileName;
     private boolean isVideo;
     private int duration;
 
-    public AvatarGesture(){
-
-    }
-
-    public AvatarGesture(int id, File file, int duration) throws AppException {
-        if(file == null){
-            throw new AppException("[AvatarGesture > constructor] File cannot be null");
-        }
-        if(!file.exists()){
-            throw new AppException("Gesture file: " + file.getAbsolutePath() + " does not exist");
-        }
+    public AvatarGesture(int id, String fileName, int duration) throws AppException {
         this.id = id;
-        this.file = file;
         this.duration = duration;
-        fileName = file.getName();
+        this.fileName = fileName;
         String fileExtension = FilenameUtils.getExtension(fileName);
         if(fileExtension.equalsIgnoreCase("mp4")){
             isVideo = true;
@@ -71,11 +58,7 @@ public class AvatarGesture extends Model {
     }
 
     public boolean refreshGesture() {
-        if(file == null){
-            return false;
-        }
-        //TODO: file == null propably not fixed.
-        if (!file.exists()){
+        if (!new File(GESTUREFILEROOT + fileName).exists()){
             File newFile;
             if(isVideo){
                 newFile = new File(GESTUREFILEROOT + id + ".png");
@@ -83,7 +66,6 @@ public class AvatarGesture extends Model {
                 newFile = new File(GESTUREFILEROOT + id + ".mp4");
             }
             if(newFile.exists()){
-                file = newFile;
                 fileName = newFile.getName();
                 isVideo = !isVideo;
             } else {
@@ -121,14 +103,6 @@ public class AvatarGesture extends Model {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public File getFile() {
-        return file;
-    }
-
-    public void setFile(File file) {
-        this.file = file;
     }
 
     public String getFileName() {

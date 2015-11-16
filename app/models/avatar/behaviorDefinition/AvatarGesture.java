@@ -116,4 +116,8 @@ public class AvatarGesture extends Model {
     public void setVideo(boolean video) {
         isVideo = video;
     }
+
+    public static int getCount() {
+        return find.all().size();
+    }
 }

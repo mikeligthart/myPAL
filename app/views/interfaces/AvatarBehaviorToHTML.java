@@ -2,6 +2,9 @@ package views.interfaces;
 
 import controllers.routes;
 import models.avatar.behaviorDefinition.AvatarBehavior;
+import models.avatar.behaviorDefinition.AvatarHtml;
+import models.avatar.behaviorDefinition.AvatarHtmlType;
+import models.avatar.behaviorDefinition.AvatarLine;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,7 +25,7 @@ import java.util.List;
 public class AvatarBehaviorToHTML {
 
     private int id;
-    private String gesture, lines;
+    private String gesture, lines, avatarHtmlType;
 
     public AvatarBehaviorToHTML(AvatarBehavior behavior){
         behavior.load(null);
@@ -38,13 +41,19 @@ public class AvatarBehaviorToHTML {
         }
 
         StringBuilder lineBuilder = new StringBuilder();
-        for(Iterator<String> line = behavior.getLines().iterator(); line.hasNext();){
-            lineBuilder.append(line.next());
-            if(line.hasNext()){
-                lineBuilder.append(" <br /> ");
+        for(Iterator<AvatarLine> avatarLines = behavior.getAvatarLines().iterator(); avatarLines.hasNext();){
+            AvatarLine line = avatarLines.next();
+            line.checkIfComplete();
+            if(!line.isComplete()){
+                lineBuilder.append("<p style='color:#FF0000;'>" + line.getLine() + "</p>");
+            } else {
+                lineBuilder.append("<p>" + line.getLine() + "</p>");
             }
         }
         lines = lineBuilder.toString();
+
+        AvatarHtmlType type = behavior.getAvatarHtmlType();
+        avatarHtmlType = "<a href='" + AvatarHtml.getAvatarHtmlImage(type) + "' data-toggle='lightbox' data-title='" + type.name() + "'>" + type.name() + "</a>";
 
     }
 
@@ -78,5 +87,13 @@ public class AvatarBehaviorToHTML {
 
     public void setLines(String lines) {
         this.lines = lines;
+    }
+
+    public String getAvatarHtmlType() {
+        return avatarHtmlType;
+    }
+
+    public void setAvatarHtmlType(String avatarHtmlType) {
+        this.avatarHtmlType = avatarHtmlType;
     }
 }

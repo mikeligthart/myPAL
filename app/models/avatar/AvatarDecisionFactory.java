@@ -35,27 +35,7 @@ import java.util.*;
  */
 public class AvatarDecisionFactory {
 
-    //Factory management attributes
-    private static Map<UserMyPAL, AvatarDecisionFactory> avatarDecisionFactories;
-
-    //Factory management
-    public static AvatarDecisionFactory getFactory(UserMyPAL user){
-        AvatarDecisionFactory factory;
-        if(avatarDecisionFactories == null){
-            avatarDecisionFactories = new HashMap<>();
-            factory = new AvatarDecisionFactory(user);
-            avatarDecisionFactories.put(user, factory);
-        } else {
-            if(avatarDecisionFactories.containsKey(user)){
-                factory = avatarDecisionFactories.get(user);
-            } else {
-                factory = new AvatarDecisionFactory(user);
-                avatarDecisionFactories.put(user, factory);
-            }
-        }
-        return factory;
-    }
-
+    private static ObjectMapper mapper = new ObjectMapper();
     //Information sources
     private UserMyPAL user;
     private AvatarTrigger currentTrigger;
@@ -65,12 +45,9 @@ public class AvatarDecisionFactory {
     private String decisionModelLocation;
     private String activeDecisionModel;
     private JsonNode model;
-    private ObjectMapper mapper;
     private long modelLastModified;
 
-    private AvatarDecisionFactory(UserMyPAL user) {
-        mapper =  new ObjectMapper();
-
+    public AvatarDecisionFactory(UserMyPAL user) {
         //Load initial information
         this.user = user;
         this.currentTrigger = null;
@@ -82,8 +59,6 @@ public class AvatarDecisionFactory {
         activeDecisionModel = ConfigFactory.load().getString("private.decisionmodels.active");
         loadModelFromFile();
     }
-
-
 
     public List<Integer> getAvatarBehaviorIds(AvatarTrigger trigger){
         refreshModel();
@@ -186,7 +161,7 @@ public class AvatarDecisionFactory {
     }
 
     private void refreshInformation(AvatarTrigger trigger){
-        List<LogAction> logActions = user.getLogActions();
+        List<LogAction> logActions = UserMyPAL.byEmail(user.getEmail()).getLogActions();
         int logActionsSize = logActions.size();
         if(logActionsSize >= 2){
             currentUserHistory = new AvatarUserHistory(logActions.get(logActionsSize-1).getType(), logActions.get(logActionsSize-2).getType());

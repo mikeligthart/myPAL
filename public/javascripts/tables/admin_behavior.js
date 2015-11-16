@@ -9,7 +9,8 @@ var table = $('#admin_behavior').DataTable( {
     "columns": [
         { "data": "id" },
         { "data": "gesture" },
-        { "data": "lines"}
+        { "data": "lines"},
+        { "data": "avatarHtmlType"}
     ],
     "order": [[ 0, "asc" ]],
     "language": {

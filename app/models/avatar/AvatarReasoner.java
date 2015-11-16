@@ -23,7 +23,7 @@ import java.util.*;
 public class AvatarReasoner {
 
     //Factory management attributes
-    private static Map<UserMyPAL, AvatarReasoner> avatarReasoners;
+    private static Map<String, AvatarReasoner> avatarReasoners;
 
     //Factory management
     public static AvatarReasoner getReasoner(UserMyPAL user){
@@ -31,13 +31,13 @@ public class AvatarReasoner {
         if(avatarReasoners == null){
             avatarReasoners = new HashMap<>();
             reasoner = new AvatarReasoner(user);
-            avatarReasoners.put(user, reasoner);
+            avatarReasoners.put(user.getEmail(), reasoner);
         } else {
-            if(avatarReasoners.containsKey(user)){
-                reasoner = avatarReasoners.get(user);
+            if(avatarReasoners.containsKey(user.getEmail())){
+                reasoner = avatarReasoners.get(user.getEmail());
             } else {
                 reasoner = new AvatarReasoner(user);
-                avatarReasoners.put(user, reasoner);
+                avatarReasoners.put(user.getEmail(), reasoner);
             }
         }
         return reasoner;
@@ -47,8 +47,8 @@ public class AvatarReasoner {
     private AvatarDecisionFactory decisionFactory;
 
     private AvatarReasoner(UserMyPAL user) {
-        behaviorFactory = AvatarBehaviorFactory.getFactory(user);
-        decisionFactory = AvatarDecisionFactory.getFactory(user);
+        behaviorFactory = new AvatarBehaviorFactory(user);
+        decisionFactory = new AvatarDecisionFactory(user);
     }
 
     public List<AvatarBehavior> selectAvatarBehaviors(AvatarTrigger trigger){

@@ -1,5 +1,6 @@
 package models.avatar.behaviorDefinition;
 
+import controllers.routes;
 import models.avatar.behaviorDefinition.viewHolders.*;
 import play.twirl.api.Html;
 
@@ -63,5 +64,9 @@ public class AvatarHtml {
             default:
                 return new AvatarHtml(null);
         }
+    }
+
+    public static String getAvatarHtmlImage(AvatarHtmlType type){
+        return routes.Assets.at("images/" + type.name().toLowerCase() + ".png").url();
     }
 }

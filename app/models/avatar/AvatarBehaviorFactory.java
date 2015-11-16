@@ -11,6 +11,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import java.io.FileWriter;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 /**
  * myPAL
  * Purpose: [ENTER PURPOSE]
@@ -29,44 +34,23 @@ public class AvatarBehaviorFactory {
     private static final File BEHAVIORROOT = new File(ConfigFactory.load().getString("private.avatarbehaviors.location"));
     private static final String BEHAVIORFILENAME = "behavior.";
     private static final String BEHAVIORFILETYPE = ".json";
-
-    //Factory management attributes
-    private static Map<UserMyPAL, AvatarBehaviorFactory> avatarBehaviorFactories;
-    private static int numberOfBehaviors = 0;
-    private static int numberOfGestures = 0;
-    private static Map<Integer, Long> lastModified;
     private static ObjectMapper MAPPER = new ObjectMapper();
-
-    //Factory management
-    public static AvatarBehaviorFactory getFactory(UserMyPAL user){
-        AvatarBehaviorFactory factory;
-        if(avatarBehaviorFactories == null){
-            avatarBehaviorFactories = new HashMap<>();
-            lastModified = new HashMap<>();
-            factory = new AvatarBehaviorFactory(user);
-            avatarBehaviorFactories.put(user, factory);
-        } else {
-            if(avatarBehaviorFactories.containsKey(user)){
-                factory = avatarBehaviorFactories.get(user);
-            } else {
-                factory = new AvatarBehaviorFactory(user);
-                avatarBehaviorFactories.put(user, factory);
-            }
-        }
-        return factory;
-    }
 
     //Object attributes
     private UserMyPAL user;
 
     //AvatarBehaviorFactory object definition
-    private AvatarBehaviorFactory(UserMyPAL user){
+    public AvatarBehaviorFactory(UserMyPAL user){
         this.user = user;
     }
 
-    public AvatarBehavior getAvatarBehavior(int id) throws AppException {
+    public static void refresh(){
         gestureManagement();
         behaviorManagement();
+    }
+
+    public AvatarBehavior getAvatarBehavior(int id) throws AppException {
+        refresh();
         AvatarBehavior behavior = AvatarBehavior.byID(id);
         if(behavior == null){
             throw new AppException("Behavior with id " + id + " does not exists in database");
@@ -78,40 +62,73 @@ public class AvatarBehaviorFactory {
 
     }
 
-    private void behaviorManagement(){
-        int currentNumberOfBehaviors = BEHAVIORROOT.list().length;
+    @SuppressWarnings("unchecked")
+    public static void addBehavior(int gestureId, List<String> lines, AvatarHtmlType avatarHtmlType){
+        refresh();
+        int id = AvatarBehavior.getCount();
+
+        //Create new JsonFile
+        JSONObject obj = new JSONObject();
+        obj.put("id", id);
+        obj.put("gestureId", gestureId);
+
+        JSONArray lineArray = new JSONArray();
+        for(String line : lines){
+            lineArray.add(line);
+        }
+        obj.put("lines", lineArray);
+        obj.put("avatarHtmlType", avatarHtmlType.name());
+
+        String fileName = BEHAVIORROOT + BEHAVIORFILENAME + id + BEHAVIORFILETYPE;
+        try{
+            FileWriter file = new FileWriter(fileName);
+            file.write(obj.toJSONString());
+        } catch (IOException e) {
+            Logger.error("[AvatarBehaviorFactory > addBehavior] IOException: behavior with id " + id + " not writen to file - " + e.getMessage());
+        }
+
+        //Save behavior to database
+        AvatarBehavior behavior = new AvatarBehavior();
+        behavior.setId(AvatarBehavior.getCount());
+        behavior.setGestureId(gestureId);
+        behavior.setLines(lines);
+        behavior.setLastModified(new File(fileName).lastModified());
+        behavior.saveBehavior();
+
+    }
+
+    private static void behaviorManagement(){
+        int behaviorFileCount = BEHAVIORROOT.list().length;
+        int behaviorDBCount = AvatarBehavior.getCount();
         //Remove behaviors from database if they have been removed from file
-        if (numberOfBehaviors > currentNumberOfBehaviors){
+        if (behaviorDBCount > behaviorFileCount){
             List<AvatarBehavior> behaviors = AvatarBehavior.find.all();
             for(AvatarBehavior behavior : behaviors){
                 if(!new File(BEHAVIORROOT + BEHAVIORFILENAME + behavior.getId() + BEHAVIORFILETYPE).exists()){
-                    lastModified.remove(behavior.getId());
                     behavior.deleteBehavior();
-                    numberOfBehaviors--;
                 }
             }
-            numberOfBehaviors = currentNumberOfBehaviors;
         }
 
         //Add new behaviors or update changed behaviors
-        if(numberOfBehaviors < currentNumberOfBehaviors){
+        if(behaviorDBCount < behaviorFileCount){
             for(File file : BEHAVIORROOT.listFiles()){
                 int behaviorId = Integer.valueOf(file.getName().replace(BEHAVIORFILENAME, "").replace(BEHAVIORFILETYPE, ""));
                 //If behavior does not exists create a new one and store it in de the database;
                 if(!AvatarBehavior.exists(behaviorId)){
                    try {
-                        AvatarBehavior newBehavior = MAPPER.readValue(file, AvatarBehavior.class);
-                        newBehavior.saveBehavior();
-                        lastModified.put(behaviorId, file.lastModified());
-                        numberOfBehaviors++;
+                       AvatarBehavior newBehavior = MAPPER.readValue(file, AvatarBehavior.class);
+                       newBehavior.setLastModified(file.lastModified());
+                       newBehavior.saveBehavior();
                    }
-                    catch (IOException e) {
-                       Logger.error("[AvatarBehaviorFactory > behaviorManagement] Could not read behaviorFile " + file.getAbsolutePath());
+                   catch (IOException e) {
+                       Logger.error("[AvatarBehaviorFactory > behaviorManagement] IOException Could not read behaviorFile " + file.getAbsolutePath());
                    }
                 }
                 //if behavior exists, check whether the file is updated and if so update the database entry.
                 else {
-                    if(lastModified.get(behaviorId) != file.lastModified()){
+                    AvatarBehavior behavior = AvatarBehavior.byID(behaviorId);
+                    if(behavior.getLastModified() != file.lastModified()){
                         AvatarBehavior updatedBehavior = null;
                         try {
                             updatedBehavior = MAPPER.readValue(file, AvatarBehavior.class);
@@ -120,36 +137,34 @@ public class AvatarBehaviorFactory {
                             Logger.error("[AvatarBehaviorFactory > behaviorManagement] Could not read behaviorFile " + file.getAbsolutePath());
                         }
                         if(updatedBehavior != null){
-                            AvatarBehavior oldBehavior = AvatarBehavior.byID(behaviorId);
-                            oldBehavior.deleteBehavior();
+                            behavior.deleteBehavior();
+                            updatedBehavior.setLastModified(file.lastModified());
                             updatedBehavior.saveBehavior();
-                            lastModified.put(behaviorId, file.lastModified());
                         }
 
                     }
                 }
             }
-            numberOfBehaviors = currentNumberOfBehaviors;
         }
     }
 
-    private void gestureManagement(){
+    private static void gestureManagement(){
         File gestureFileRoot = new File(AvatarGesture.GESTUREFILEROOT);
-        int currentNumberOfGestures = gestureFileRoot.list().length;
+        int gestureFileCount = gestureFileRoot.list().length;
+        int gestureDBCount = AvatarGesture.getCount();
 
         //Remove gesture from database that have been removed from file
-        if(numberOfGestures > currentNumberOfGestures){
+        if(gestureDBCount > gestureFileCount){
             List<AvatarGesture> gestures = AvatarGesture.find.all();
             for(AvatarGesture gesture : gestures){
                 if(!gesture.refreshGesture()){
                     gesture.delete();
-                    numberOfGestures--;
                 }
             }
         }
 
         //Add new gestures
-        if(numberOfGestures < currentNumberOfGestures){
+        if(gestureDBCount < gestureFileCount){
             for(File file : gestureFileRoot.listFiles()){
                 String fileName = file.getName();
                 int gestureId = Integer.valueOf(fileName.substring(fileName.indexOf("_")+1, fileName.lastIndexOf("_")));
@@ -158,7 +173,6 @@ public class AvatarBehaviorFactory {
                     try {
                         AvatarGesture gesture = new AvatarGesture(gestureId, fileName, gestureLength);
                         gesture.save();
-                        numberOfGestures++;
                     } catch (AppException e) {
                         Logger.error("[AvatarBehaviorFactory > gestureManagement] " + e.getLocalizedMessage());
                     }

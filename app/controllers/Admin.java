@@ -4,10 +4,13 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.UserMyPAL;
 import models.UserType;
+import models.avatar.AvatarBehaviorFactory;
 import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorDefinition.AvatarGesture;
+import models.avatar.behaviorDefinition.AvatarHtmlType;
 import models.diary.activity.DiaryActivity;
 import models.logging.LogAction;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Controller;
@@ -22,8 +25,10 @@ import views.interfaces.UserToHTML;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static play.data.Form.form;
 import static play.libs.Json.toJson;
@@ -158,7 +163,8 @@ public class Admin extends Controller {
         }
 
         List<AvatarGesture> gestures = AvatarGesture.find.all();
-        return ok(admin_behavior_add.render(gestures));
+        List<AvatarHtmlType> htmlTypes = Arrays.asList(AvatarHtmlType.values());
+        return ok(admin_behavior_add.render(gestures, htmlTypes));
     }
 
      /* FUNCTIONS */
@@ -312,9 +318,19 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
+        DynamicForm requestData = form().bindFromRequest();
+        int gestureId = Integer.valueOf(requestData.get("gestureId"));
+        List<String> lines = processLines(requestData.get("lines"));
+        AvatarHtmlType avatarHtmlType = AvatarHtmlType.valueOf(requestData.get("avatarHtmlType"));
+        AvatarBehaviorFactory.addBehavior(gestureId, lines, avatarHtmlType);
+
         return redirect(routes.Admin.behavior());
     }
 
+    private static List<String> processLines(String stringOfLines){
+        Pattern delimiter = Pattern.compile(";\\s*");
+        return Arrays.asList(stringOfLines.split(delimiter.pattern()));
+    }
     /**
      * Private classes that check whether a user is logged in properly.
      */
@@ -350,4 +366,6 @@ public class Admin extends Controller {
             return denyAction;
         }
     }
+
+
 }

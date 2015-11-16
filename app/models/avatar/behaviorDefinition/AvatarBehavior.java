@@ -33,35 +33,31 @@ import java.util.Random;
 @Entity
 public class AvatarBehavior extends Model {
 
-    //Class attributes
-    private static final String SPEECHROOT = routes.Assets.at("avatar/speech/speech.").url();
-    private static final String SPEECHFILEROOT = "public/avatar/speech/speech.";
-    private static final int SPEECHWAIT = 500;
-
     //Behavior attributes that can be loaded using json
     @Id
     private int id;
     private int gestureId;
-
     @OneToMany
     @Enumerated(EnumType.STRING)
     private AvatarHtmlType avatarHtmlType;
     private List<String> lines;
 
     //Process attributes
+    //For database
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "behavior")
     @JsonManagedReference
     private List<AvatarLine> avatarLines;
+    private long lastModified;
 
+    //Not for database
     private int version;
     private AvatarLineVariables variables;
     private AvatarHtml avatarHtml;
     private AvatarGesture avatarGesture;
+    private AvatarLine avatarLine;
 
 
     public AvatarBehavior() {
-        version = 0;
-        lines = new LinkedList<>();
     }
 
     public void load(AvatarLineVariables variables) {
@@ -73,6 +69,7 @@ public class AvatarBehavior extends Model {
             version = 0;
         }
         avatarGesture = AvatarGesture.byID(gestureId);
+        avatarLine = avatarLines.get(version);
         avatarHtml = AvatarHtml.getAvatarHtml(avatarHtmlType);
         this.variables = variables;
     }
@@ -84,44 +81,16 @@ public class AvatarBehavior extends Model {
 
     @Transient
     public String getSpeech() {
-        return SPEECHROOT + id + "." + version + ".wav";
+        Logger.debug("AvatarBehavior getSpeech: " + avatarLine.getSpeechSource());
+        return avatarLine.getSpeechSource();
     }
 
     @Transient
     public int getTimer() {
         if (!avatarHtml.isActiveHtml()) {
-            //Retrieve the right timing of the line
-            File speechFile = new File(SPEECHFILEROOT + id + "." + version + ".wav");
-            if(speechFile.exists()){
-                AudioInputStream audioInputStream;
-                try {
-                    audioInputStream = AudioSystem.getAudioInputStream(speechFile);
-                    AudioFormat format = audioInputStream.getFormat();
-                    long frames = audioInputStream.getFrameLength();
-                    int speechDuration = (Math.round((frames) / format.getFrameRate()) * 1000);
-                    int gestureDuration = avatarGesture.getDuration();
-                    //if speechDuration is longer or equal to the gesture duration than return the longest with a pause of SPEECHWAIT
-                    if (speechDuration >= gestureDuration) {
-                        return speechDuration + SPEECHWAIT;
-                    } else { //else if gestureDuration is longer return gestureDuration and wait at most SPEECHWAIT after speechDuration;
-                        int wait = SPEECHWAIT - (gestureDuration - speechDuration);
-                        if (wait > 0) {
-                            return gestureDuration + wait;
-                        } else {
-                            return gestureDuration;
-                        }
-                    }
-                } catch (UnsupportedAudioFileException e) {
-                    Logger.error("[AvatarBehavior > getTimer()] UnsupportedAudioFileException " + e.getMessage());
-                    return avatarGesture.getDuration();
-                } catch (IOException e) {
-                    Logger.error("[AvatarBehavior > getTimer()] IOException " + e.getMessage());
-                    return avatarGesture.getDuration();
-                }
-            } else {
-                Logger.error("[AvatarBehavior > getTimer()] IOException " + speechFile.getName() + " does not exists");
-                return avatarGesture.getDuration();
-            }
+            int lineDuration = avatarLines.get(version).getTimer(variables.getUser().getBirthdate());
+            int gestureDuration = avatarGesture.getDuration();
+            return Math.max(lineDuration, gestureDuration);
         } else {
             return 0;
         }
@@ -158,8 +127,10 @@ public class AvatarBehavior extends Model {
     public void setLines(List<String> lines) {
         this.lines = lines;
         avatarLines = new LinkedList<>();
+        int index = 0;
         for(String line : lines){
-            avatarLines.add(new AvatarLine(this, line));
+            avatarLines.add(new AvatarLine(this, line, index));
+            index++;
         }
     }
 
@@ -197,16 +168,6 @@ public class AvatarBehavior extends Model {
     @Transient
     public void setVariables(AvatarLineVariables variables) {
         this.variables = variables;
-    }
-
-    public static Finder<Integer, AvatarBehavior> find = new Finder<Integer, AvatarBehavior>(Integer.class, AvatarBehavior.class);
-
-    public static AvatarBehavior byID(int id) {
-        return find.byId(id);
-    }
-
-    public static boolean exists(int id) {
-        return (byID(id) != null);
     }
 
     @Transient
@@ -247,6 +208,24 @@ public class AvatarBehavior extends Model {
         this.avatarLines = avatarLines;
     }
 
+    @Transient
+    public AvatarLine getAvatarLine() {
+        return avatarLine;
+    }
+
+    @Transient
+    public void setAvatarLine(AvatarLine avatarLine) {
+        this.avatarLine = avatarLine;
+    }
+
+    public long getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(long lastModified) {
+        this.lastModified = lastModified;
+    }
+
     public void saveBehavior(){
         this.save();
         for(AvatarLine line : avatarLines){
@@ -259,6 +238,20 @@ public class AvatarBehavior extends Model {
             line.delete();
         }
         this.delete();
+    }
+
+    public static Finder<Integer, AvatarBehavior> find = new Finder<Integer, AvatarBehavior>(Integer.class, AvatarBehavior.class);
+
+    public static AvatarBehavior byID(int id) {
+        return find.byId(id);
+    }
+
+    public static boolean exists(int id) {
+        return (byID(id) != null);
+    }
+
+    public static int getCount(){
+        return find.all().size();
     }
 }
 

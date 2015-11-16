@@ -7,6 +7,7 @@ create table avatar_behavior (
   id                        integer not null,
   gesture_id                integer,
   avatar_html_type          varchar(15),
+  last_modified             bigint,
   constraint ck_avatar_behavior_avatar_html_type check (avatar_html_type in ('NULL','YES_NO','YES_NO_DONTKNOW','TEXT','TEXTFIELD')),
   constraint pk_avatar_behavior primary key (id))
 ;
@@ -21,8 +22,12 @@ create table avatar_gesture (
 
 create table avatar_line (
   id                        integer not null,
-  line                      varchar(255),
   behavior_id               integer,
+  line                      varchar(255),
+  version                   integer,
+  speech_source             varchar(255),
+  speech_file_source        varchar(255),
+  is_complete               boolean,
   constraint pk_avatar_line primary key (id))
 ;
 

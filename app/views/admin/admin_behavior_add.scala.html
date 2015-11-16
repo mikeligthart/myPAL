@@ -1,4 +1,4 @@
-@(gestures: List[models.avatar.behaviorDefinition.AvatarGesture])
+@(gestures: List[models.avatar.behaviorDefinition.AvatarGesture], avatarHtmlTypes: List[models.avatar.behaviorDefinition.AvatarHtmlType])
 
 @admin(title = Messages("page.admin.behavior.title"), page = "behavior") {
 
@@ -29,7 +29,7 @@
                     }else{
                         <img width="250px" height="250px" class="text-left img-responsive" src='@gesture.getGesture'>
                     }
-                    <button class="gestureSelectButton btn btn-default" value="@gesture.getId">@Messages("page.admin.behavior.add.selectGesture")</button>
+                    <button class='gestureSelectButton btn @if(index == 0){btn-primary}else{btn-default}' value="@gesture.getId">@Messages("page.admin.behavior.add.selectGesture")</button>
                 </div>
                 @if((index+1) % 4 == 0){
                     </div>
@@ -40,13 +40,38 @@
             }
             <input id="gestureId" name="gestureId" type="hidden" value="1" />
         </div>
+        <hr />
 
         <div class="row">
             <h3>@Messages("page.admin.behavior.add.step2")</h3>
             <textarea rows="5" id="lines" name="lines" placeholder='@Messages("page.admin.behavior.add.step2.explanation")'></textarea>
         </div>
+        <hr />
 
-        <div class="row text-right">
+        <div class="row text-left">
+            <h3>@Messages("page.admin.behavior.add.step3")</h3>
+        </div>
+        <div class="text-center">
+            @for((avatarHtmlType, index) <- avatarHtmlTypes.zipWithIndex){
+                @if(index % 4 == 0){
+                    <div class="row">
+                }
+                <div class="col-md-3 portfolio-item">
+                    <img width="250px" height="250px" class="text-left img-responsive" src='@models.avatar.behaviorDefinition.AvatarHtml.getAvatarHtmlImage(avatarHtmlType)'>
+                    <button class="htmlSelectButton btn @if(index == 0){btn-primary} else{btn-default}" value="avatarHtmlType.name">@Messages("page.admin.behavior.add.selectAvatarHtml")</button>
+                </div>
+                @if((index+1) % 4 == 0){
+            </div>
+            }
+            }
+            @if(gestures.size == 1 || gestures.size-1 % 4 != 0){
+        </div>
+        }
+        <input id="avatarHtmlType" name="gestureId" type="hidden" value="NULL" />
+        </div>
+        <hr />
+        <h3>@Messages("page.admin.behavior.add.step4")</h3>
+        <div class="row text-center">
             <input type="submit" value='@Messages("page.admin.behavior.add.submit")' class="btn btn-primary"/>
             <a href="@routes.Admin.behavior()" class="btn btn-default">@Messages("page.admin.behavior.add.back")</a>
         </div>
@@ -61,6 +86,15 @@
             $(this).removeClass("btn-default");
             $(this).addClass("btn-primary");
             $("#gestureId").val($(this).attr("value"));
+        });
+
+        $(".htmlSelectButton").click(function(e) {
+            e.preventDefault();
+            $(".htmlSelectButton").removeClass("btn-primary");
+            $(".htmlSelectButton").addClass("btn-default");
+            $(this).removeClass("btn-default");
+            $(this).addClass("btn-primary");
+            $("#avatarHtmlType").val($(this).attr("value"));
         });
     </script>
 

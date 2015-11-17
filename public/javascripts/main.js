@@ -6,7 +6,6 @@ function deleteUser(email){
         data: {email:email},
     });
 }
-
 function getFormattedDate(date) {
   var year = date.getFullYear();
   var month = (1 + date.getMonth()).toString();

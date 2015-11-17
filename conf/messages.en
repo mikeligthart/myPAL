@@ -17,6 +17,9 @@ model.user.userType.PROFESSIONAL=Medical Professional
 model.user.userType.ADMIN=Admin
 model.user.gluconlineID=GluconlineID
 
+## AvatarLineVariables ##
+model.avatarLineVariables.firstName=First name of user
+
 ### PAGES ###
 ## General ##
 page.general.error=Error:
@@ -184,6 +187,12 @@ page.admin.behavior.add.step4=Stap 4: confirmation
 page.admin.behavior.add.step2.explanation=Enter all the versions of the same line separated by a semicolon (;). For exmaple: Hi, I'm a robot.; Hey, I am not a human.
 page.admin.behavior.add.back=Cancel
 page.admin.behavior.add.submit=Add
+page.admin.behavior.add.displayLineProcessors=You can add the following tags (#tag#) to insert specific information:
+page.admin.behavior.legendHeader=Legend
+page.admin.behavior.noaudiofile=No audio file detected
+page.admin.behavior.validatedvariable=Valid variable
+page.admin.behavior.unvalidatedvariable=Not a valid variable
+page.admin.behavior.downloadaudiotemplace=Download template to generate audio files
 
 ## Registration ##
 page.registration.title=Registration

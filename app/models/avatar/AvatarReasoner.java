@@ -72,4 +72,8 @@ public class AvatarReasoner {
         return behaviors;
     }
 
+    public static void refresh(){
+        AvatarBehaviorFactory.refresh();
+    }
+
 }

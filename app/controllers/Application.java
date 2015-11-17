@@ -6,6 +6,7 @@ import dialogue.Dialogue;
 import models.UserMyPAL;
 import models.UserMyPAL.Login;
 import models.UserType;
+import models.avatar.AvatarReasoner;
 import models.diary.DiarySettingsManager;
 import models.diary.activity.Picture;
 import models.logging.LogAction;
@@ -75,6 +76,9 @@ public class Application extends Controller {
 
             //Set DiarySettings
             DiarySettingsManager.getInstance().login(email);
+
+            //Load avatarReasoner
+            AvatarReasoner.refresh();
 
             //Load new instances from app if gluconlineID is present
             if(!user.getGluconlineID().isEmpty()){

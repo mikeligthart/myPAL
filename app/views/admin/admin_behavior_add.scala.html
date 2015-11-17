@@ -46,6 +46,11 @@
             <h3>@Messages("page.admin.behavior.add.step2")</h3>
             <textarea rows="5" id="lines" name="lines" placeholder='@Messages("page.admin.behavior.add.step2.explanation")'></textarea>
         </div>
+        <div clas="row text-left">
+            <small>@Messages("page.admin.behavior.add.displayLineProcessors")</small>
+            <br />
+            <small>@models.avatar.behaviorDefinition.AvatarLineVariables.lineVariablesToString</small>
+        </div>
         <hr />
 
         <div class="row text-left">
@@ -58,7 +63,7 @@
                 }
                 <div class="col-md-3 portfolio-item">
                     <img width="250px" height="250px" class="text-left img-responsive" src='@models.avatar.behaviorDefinition.AvatarHtml.getAvatarHtmlImage(avatarHtmlType)'>
-                    <button class="htmlSelectButton btn @if(index == 0){btn-primary} else{btn-default}" value="avatarHtmlType.name">@Messages("page.admin.behavior.add.selectAvatarHtml")</button>
+                    <button class="htmlSelectButton btn @if(index == 0){btn-primary} else{btn-default}" value="@avatarHtmlType.name">@Messages("page.admin.behavior.add.selectAvatarHtml")</button>
                 </div>
                 @if((index+1) % 4 == 0){
             </div>
@@ -67,7 +72,7 @@
             @if(gestures.size == 1 || gestures.size-1 % 4 != 0){
         </div>
         }
-        <input id="avatarHtmlType" name="gestureId" type="hidden" value="NULL" />
+        <input id="avatarHtmlType" name="avatarHtmlType" type="hidden" value="NULL" />
         </div>
         <hr />
         <h3>@Messages("page.admin.behavior.add.step4")</h3>

@@ -2,14 +2,18 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.typesafe.config.ConfigFactory;
 import models.UserMyPAL;
 import models.UserType;
 import models.avatar.AvatarBehaviorFactory;
+import models.avatar.AvatarReasoner;
 import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorDefinition.AvatarGesture;
 import models.avatar.behaviorDefinition.AvatarHtmlType;
+import models.avatar.behaviorDefinition.AvatarLine;
 import models.diary.activity.DiaryActivity;
 import models.logging.LogAction;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
@@ -22,12 +26,11 @@ import views.interfaces.DiaryActivityToHTML;
 import views.interfaces.LogActionToHTML;
 import views.interfaces.UserToHTML;
 
+import java.io.*;
+import java.nio.file.Files;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import static play.data.Form.form;
@@ -152,7 +155,6 @@ public class Admin extends Controller {
         if(!result.hasAcces){
             return result.denyAction;
         }
-
         return ok(admin_behavior.render());
     }
 
@@ -161,7 +163,6 @@ public class Admin extends Controller {
         if(!result.hasAcces){
             return result.denyAction;
         }
-
         List<AvatarGesture> gestures = AvatarGesture.find.all();
         List<AvatarHtmlType> htmlTypes = Arrays.asList(AvatarHtmlType.values());
         return ok(admin_behavior_add.render(gestures, htmlTypes));
@@ -306,6 +307,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
+        AvatarReasoner.refresh();
         List<AvatarBehaviorToHTML> behaviors = AvatarBehaviorToHTML.fromListToList(AvatarBehavior.find.all());
         ObjectNode data = JsonNodeFactory.instance.objectNode();
         data.set("data", toJson(behaviors));
@@ -318,6 +320,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
+        AvatarReasoner.refresh();
         DynamicForm requestData = form().bindFromRequest();
         int gestureId = Integer.valueOf(requestData.get("gestureId"));
         List<String> lines = processLines(requestData.get("lines"));
@@ -327,10 +330,89 @@ public class Admin extends Controller {
         return redirect(routes.Admin.behavior());
     }
 
-    private static List<String> processLines(String stringOfLines){
-        Pattern delimiter = Pattern.compile(";\\s*");
-        return Arrays.asList(stringOfLines.split(delimiter.pattern()));
+    public static Result deleteBehavior(int id){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        if(AvatarBehaviorFactory.deleteBehavior(id)){
+            return ok();
+        } else {
+            return forbidden();
+        }
     }
+
+    public static Result generateAudioTemplate(){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        String filePath = ConfigFactory.load().getString("private.data.location") + "audiotext.txt";
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), "utf-8"));
+        } catch (FileNotFoundException e) {
+            Logger.error("[Admin > generateAudioTemplate] failed due to FileNotFoundException " + e.getLocalizedMessage());
+            return noContent();
+        } catch (UnsupportedEncodingException e) {
+            Logger.error("[Admin > generateAudioTemplate] failed due to UnsupportedEncodingException " + e.getLocalizedMessage());
+            return noContent();
+        }
+
+        AvatarReasoner.refresh();
+        List<AvatarBehavior> behaviors = AvatarBehavior.find.all();
+        for(AvatarBehavior behavior : behaviors){
+            for(AvatarLine line : behavior.getAvatarLines()){
+                line.checkIfComplete();
+                if(!line.isComplete()){
+                    try {
+                        writer.write("speech." + behavior.getId() + "." + line.getVersion() + ".wav#"+ line.getLine());
+                        writer.newLine();
+                    } catch (IOException e) {
+                        Logger.error("[Admin > generateAudioTemplate] failed due to IOException " + e.getLocalizedMessage());
+                        return noContent();
+                    }
+
+                }
+            }
+        }
+        try {
+            writer.close();
+        } catch (IOException e) {
+            Logger.error("[Admin > generateAudioTemplate] failed to close file " + e.getLocalizedMessage());
+            return noContent();
+        }
+
+        File audioTemplate = new File(filePath);
+        if(audioTemplate.exists()){
+            return ok(audioTemplate);
+        } else {
+            return noContent();
+        }
+
+    }
+
+    private static List<String> processLines(String stringOfLines){
+        List<String> processedLines = new ArrayList<>();
+        Pattern delimiter = Pattern.compile(";\\s*");
+        List<String> lines = Arrays.asList(stringOfLines.split(delimiter.pattern()));
+        for(String line : lines){
+            processedLines.add(processLine(line));
+        }
+        return processedLines;
+    }
+
+    private static String processLine(String line){
+        line = line.trim();
+        line = line.substring(0, 1).toUpperCase() + line.substring(1).toLowerCase();
+        if(!Character.toString(line.charAt(line.length()-1)).matches("\\.|\\?|\\!")){
+            line = line + ".";
+        }
+        return line;
+    }
+
     /**
      * Private classes that check whether a user is logged in properly.
      */
@@ -366,6 +448,5 @@ public class Admin extends Controller {
             return denyAction;
         }
     }
-
 
 }

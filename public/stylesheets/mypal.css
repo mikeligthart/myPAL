@@ -17,6 +17,20 @@
     margin-top:50px;
 }
 
+.noaudiofile{
+    color: red;
+}
+
+.validatedLineVariable{
+    color: #00FF00;
+}
+
+.unvalidatedLineVariable{
+    color: #FFA500;
+}
+
+
+
 #colorPicker
 {
     width:          30px;

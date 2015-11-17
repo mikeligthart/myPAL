@@ -1,3 +1,11 @@
+function deleteBehavior(id){
+    $.ajax({
+        type: "DELETE",
+        url: "/admin/behavior/delete/" + id,
+        data: {id:id},
+    });
+}
+
 var userLang = navigator.language || navigator.userLanguage;
 var lang = "/assets/javascripts/tables/en.json"
 if(userLang = "nl"){
@@ -10,10 +18,20 @@ var table = $('#admin_behavior').DataTable( {
         { "data": "id" },
         { "data": "gesture" },
         { "data": "lines"},
-        { "data": "avatarHtmlType"}
+        { "data": "avatarHtmlType"},
+        {
+            "data": null,
+            "orderable":      false,
+            "defaultContent":  '<button type="button" class="btn btn-default removeButton" aria-label="Left Align" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button> <button type="button" class="btn btn-default editButton" aria-label="Left Align"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>'
+        }
     ],
     "order": [[ 0, "asc" ]],
     "language": {
         "url": lang
     }
+} );
+
+$('#admin_behavior tbody').on( 'click', '.removeButton', function () {
+    deleteBehavior(table.row($(this).closest('tr')).data().id);
+    table.row($(this).closest('tr')).remove().draw( false );
 } );

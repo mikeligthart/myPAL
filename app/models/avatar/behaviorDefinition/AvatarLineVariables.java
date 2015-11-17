@@ -1,6 +1,10 @@
 package models.avatar.behaviorDefinition;
 
 import models.UserMyPAL;
+import play.i18n.Messages;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * myPAL
@@ -32,5 +36,17 @@ public class AvatarLineVariables {
 
     public String processLine(String line){
         return line.replace("#firstName#", user.getFirstName());
+    }
+
+    public static String lineVariablesToString(){
+        StringBuilder builder = new StringBuilder();
+        builder.append("* #firstName#: ").append(Messages.get("model.avatarLineVariables.firstName"));
+        return builder.toString();
+    }
+
+    public static boolean isLineVariable(String potentialLineVariable){
+        if(potentialLineVariable.equalsIgnoreCase("#firstName#"))
+            return true;
+        return false;
     }
 }

@@ -81,7 +81,6 @@ public class AvatarBehavior extends Model {
 
     @Transient
     public String getSpeech() {
-        Logger.debug("AvatarBehavior getSpeech: " + avatarLine.getSpeechSource());
         return avatarLine.getSpeechSource();
     }
 
@@ -252,6 +251,11 @@ public class AvatarBehavior extends Model {
 
     public static int getCount(){
         return find.all().size();
+    }
+
+    public static int getHighestId(){
+        List<AvatarBehavior> behaviors = find.where().orderBy("id desc").findList();
+        return behaviors.get(0).getId();
     }
 }
 

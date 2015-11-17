@@ -17,6 +17,9 @@ model.user.userType.PROFESSIONAL=Medisch Professional
 model.user.userType.ADMIN=Admin
 model.user.gluconlineID=GluconlineID
 
+## AvatarLineVariables ##
+model.avatarLineVariables.firstName=Voornaam van gebruiker
+
 ### PAGES ###
 ## General ##
 page.general.error=Fout:
@@ -129,7 +132,7 @@ page.diary.gallery.selectapicture=Selecteer een foto voor de activiteit of uploa
 page.diary.gallery.addthispicture=Koppel deze foto aan de activiteit
 
 # Goals #
-page.diary.goals.tobeimplemented=De doelensectie is nog niet ge�mplementeerd.
+page.diary.goals.tobeimplemented=De doelensectie is nog niet geïmplementeerd.
 
 ## Admin ##
 # Base #
@@ -180,9 +183,15 @@ page.admin.behavior.add.step1=Stap 1: kies een gebaar.
 page.admin.behavior.add.step2=Stap 2: voer de zinnen in.
 page.admin.behavior.add.step3=Stap 3: voeg html sectie in.
 page.admin.behavior.add.step4=Stap 4: bevestigen
-page.admin.behavior.add.step2.explanation=Voer all versies van dezelfde zin in gescheiden met een puntkomma (;). Bijvoorbeeld: Hallo, ik ben een robot.; Hoi, ik ben geen mens.
+page.admin.behavior.add.step2.explanation=Voer all versies van dezelfde zin in gescheiden met een puntkomma (;). Bijvoorbeeld: Hallo, ik ben een robot.; Hoi #fistName#, ik ben ik ben een robot.
 page.admin.behavior.add.back=Terug
 page.admin.behavior.add.submit=Voeg toe
+page.admin.behavior.add.displayLineProcessors=Je kunt de volgende tags (#tag#) toevoegen om specifieke informatie automatisch in de zin te laten voegen:
+page.admin.behavior.legendHeader=Legenda
+page.admin.behavior.noaudiofile=Geen audiobestand gevonden
+page.admin.behavior.validatedvariable=Bestaande variable
+page.admin.behavior.unvalidatedvariable=Niet bestaande variable
+page.admin.behavior.downloadaudiotemplace=Download template om audiobestanden te genereren
 
 ## Registration ##
 page.registration.title=Registratie

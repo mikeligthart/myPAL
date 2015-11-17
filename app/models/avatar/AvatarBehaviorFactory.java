@@ -9,6 +9,7 @@ import util.AppException;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 
 import java.io.FileWriter;
@@ -31,9 +32,9 @@ import org.json.simple.JSONObject;
 public class AvatarBehaviorFactory {
 
     //General attributes
-    private static final File BEHAVIORROOT = new File(ConfigFactory.load().getString("private.avatarbehaviors.location"));
-    private static final String BEHAVIORFILENAME = "behavior.";
-    private static final String BEHAVIORFILETYPE = ".json";
+    public static final String BEHAVIORROOT = ConfigFactory.load().getString("private.avatarbehaviors.location");
+    public static final String BEHAVIORFILENAME = "behavior.";
+    public static final String BEHAVIORFILETYPE = ".json";
     private static ObjectMapper MAPPER = new ObjectMapper();
 
     //Object attributes
@@ -65,7 +66,7 @@ public class AvatarBehaviorFactory {
     @SuppressWarnings("unchecked")
     public static void addBehavior(int gestureId, List<String> lines, AvatarHtmlType avatarHtmlType){
         refresh();
-        int id = AvatarBehavior.getCount();
+        int id = AvatarBehavior.getHighestId()+1;
 
         //Create new JsonFile
         JSONObject obj = new JSONObject();
@@ -83,22 +84,40 @@ public class AvatarBehaviorFactory {
         try{
             FileWriter file = new FileWriter(fileName);
             file.write(obj.toJSONString());
+            file.close();
         } catch (IOException e) {
             Logger.error("[AvatarBehaviorFactory > addBehavior] IOException: behavior with id " + id + " not writen to file - " + e.getMessage());
         }
-
         //Save behavior to database
         AvatarBehavior behavior = new AvatarBehavior();
-        behavior.setId(AvatarBehavior.getCount());
+        behavior.setId(id);
         behavior.setGestureId(gestureId);
         behavior.setLines(lines);
+        behavior.setAvatarHtmlType(avatarHtmlType);
         behavior.setLastModified(new File(fileName).lastModified());
         behavior.saveBehavior();
-
     }
 
+    public static boolean deleteBehavior(int id){
+        try {
+            Files.deleteIfExists(new File(BEHAVIORROOT + BEHAVIORFILENAME + id + BEHAVIORFILETYPE).toPath());
+        } catch (IOException e) {
+            Logger.error("[AvatarBehaviorFactory > deleteBehavior] IOException while deleting file " + e.getLocalizedMessage());
+            return false;
+        }
+
+        AvatarBehavior deleteThisBehavior = AvatarBehavior.byID(id);
+        if(deleteThisBehavior != null){
+            deleteThisBehavior.deleteBehavior();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     private static void behaviorManagement(){
-        int behaviorFileCount = BEHAVIORROOT.list().length;
+        int behaviorFileCount = new File(BEHAVIORROOT).list().length;
         int behaviorDBCount = AvatarBehavior.getCount();
         //Remove behaviors from database if they have been removed from file
         if (behaviorDBCount > behaviorFileCount){
@@ -112,7 +131,7 @@ public class AvatarBehaviorFactory {
 
         //Add new behaviors or update changed behaviors
         if(behaviorDBCount < behaviorFileCount){
-            for(File file : BEHAVIORROOT.listFiles()){
+            for(File file : new File(BEHAVIORROOT).listFiles()){
                 int behaviorId = Integer.valueOf(file.getName().replace(BEHAVIORFILENAME, "").replace(BEHAVIORFILETYPE, ""));
                 //If behavior does not exists create a new one and store it in de the database;
                 if(!AvatarBehavior.exists(behaviorId)){

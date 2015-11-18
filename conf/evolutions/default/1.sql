@@ -8,8 +8,16 @@ create table avatar_behavior (
   gesture_id                integer,
   avatar_html_type          varchar(15),
   last_modified             bigint,
+  behavior_bundle_id        integer,
   constraint ck_avatar_behavior_avatar_html_type check (avatar_html_type in ('NULL','YES_NO','YES_NO_DONTKNOW','TEXT','TEXTFIELD')),
   constraint pk_avatar_behavior primary key (id))
+;
+
+create table avatar_behavior_bundle (
+  id                        integer not null,
+  is_valid                  boolean,
+  description               varchar(255),
+  constraint pk_avatar_behavior_bundle primary key (id))
 ;
 
 create table avatar_gesture (
@@ -127,6 +135,8 @@ create table user_my_pal (
 
 create sequence avatar_behavior_seq;
 
+create sequence avatar_behavior_bundle_seq;
+
 create sequence avatar_gesture_seq;
 
 create sequence avatar_line_seq;
@@ -147,28 +157,30 @@ create sequence picture_seq;
 
 create sequence user_my_pal_seq;
 
-alter table avatar_line add constraint fk_avatar_line_behavior_1 foreign key (behavior_id) references avatar_behavior (id) on delete restrict on update restrict;
-create index ix_avatar_line_behavior_1 on avatar_line (behavior_id);
-alter table diary_activity add constraint fk_diary_activity_user_2 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_diary_activity_user_2 on diary_activity (user_email);
-alter table diary_activity add constraint fk_diary_activity_type_3 foreign key (type_id) references diary_activity_type (id) on delete restrict on update restrict;
-create index ix_diary_activity_type_3 on diary_activity (type_id);
-alter table diary_activity add constraint fk_diary_activity_picture_4 foreign key (picture_id) references picture (id) on delete restrict on update restrict;
-create index ix_diary_activity_picture_4 on diary_activity (picture_id);
-alter table diary_activity_type add constraint fk_diary_activity_type_user_5 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_diary_activity_type_user_5 on diary_activity_type (user_email);
-alter table diary_measurement add constraint fk_diary_measurement_user_6 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_diary_measurement_user_6 on diary_measurement (user_email);
-alter table glucose add constraint fk_glucose_user_7 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_glucose_user_7 on glucose (user_email);
-alter table insulin add constraint fk_insulin_user_8 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_insulin_user_8 on insulin (user_email);
-alter table log_action add constraint fk_log_action_user_9 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_log_action_user_9 on log_action (user_email);
-alter table picture add constraint fk_picture_diaryActivity_10 foreign key (diary_activity_id) references diary_activity (id) on delete restrict on update restrict;
-create index ix_picture_diaryActivity_10 on picture (diary_activity_id);
-alter table picture add constraint fk_picture_user_11 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
-create index ix_picture_user_11 on picture (user_email);
+alter table avatar_behavior add constraint fk_avatar_behavior_behaviorBun_1 foreign key (behavior_bundle_id) references avatar_behavior_bundle (id) on delete restrict on update restrict;
+create index ix_avatar_behavior_behaviorBun_1 on avatar_behavior (behavior_bundle_id);
+alter table avatar_line add constraint fk_avatar_line_behavior_2 foreign key (behavior_id) references avatar_behavior (id) on delete restrict on update restrict;
+create index ix_avatar_line_behavior_2 on avatar_line (behavior_id);
+alter table diary_activity add constraint fk_diary_activity_user_3 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_diary_activity_user_3 on diary_activity (user_email);
+alter table diary_activity add constraint fk_diary_activity_type_4 foreign key (type_id) references diary_activity_type (id) on delete restrict on update restrict;
+create index ix_diary_activity_type_4 on diary_activity (type_id);
+alter table diary_activity add constraint fk_diary_activity_picture_5 foreign key (picture_id) references picture (id) on delete restrict on update restrict;
+create index ix_diary_activity_picture_5 on diary_activity (picture_id);
+alter table diary_activity_type add constraint fk_diary_activity_type_user_6 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_diary_activity_type_user_6 on diary_activity_type (user_email);
+alter table diary_measurement add constraint fk_diary_measurement_user_7 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_diary_measurement_user_7 on diary_measurement (user_email);
+alter table glucose add constraint fk_glucose_user_8 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_glucose_user_8 on glucose (user_email);
+alter table insulin add constraint fk_insulin_user_9 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_insulin_user_9 on insulin (user_email);
+alter table log_action add constraint fk_log_action_user_10 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_log_action_user_10 on log_action (user_email);
+alter table picture add constraint fk_picture_diaryActivity_11 foreign key (diary_activity_id) references diary_activity (id) on delete restrict on update restrict;
+create index ix_picture_diaryActivity_11 on picture (diary_activity_id);
+alter table picture add constraint fk_picture_user_12 foreign key (user_email) references user_my_pal (email) on delete restrict on update restrict;
+create index ix_picture_user_12 on picture (user_email);
 
 
 
@@ -177,6 +189,8 @@ create index ix_picture_user_11 on picture (user_email);
 SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists avatar_behavior;
+
+drop table if exists avatar_behavior_bundle;
 
 drop table if exists avatar_gesture;
 
@@ -201,6 +215,8 @@ drop table if exists user_my_pal;
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists avatar_behavior_seq;
+
+drop sequence if exists avatar_behavior_bundle_seq;
 
 drop sequence if exists avatar_gesture_seq;
 

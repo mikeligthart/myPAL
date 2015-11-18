@@ -1,5 +1,6 @@
 package models.avatar.behaviorDefinition;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import controllers.routes;
 import play.Logger;
@@ -49,6 +50,10 @@ public class AvatarBehavior extends Model {
     private List<AvatarLine> avatarLines;
     private long lastModified;
 
+    @ManyToOne
+    @JsonBackReference
+    private AvatarBehaviorBundle behaviorBundle;
+
     //Not for database
     private int version;
     private AvatarLineVariables variables;
@@ -58,6 +63,7 @@ public class AvatarBehavior extends Model {
 
 
     public AvatarBehavior() {
+        behaviorBundle = null;
     }
 
     public void load(AvatarLineVariables variables) {
@@ -256,6 +262,14 @@ public class AvatarBehavior extends Model {
     public static int getHighestId(){
         List<AvatarBehavior> behaviors = find.where().orderBy("id desc").findList();
         return behaviors.get(0).getId();
+    }
+
+    public AvatarBehaviorBundle getBehaviorBundle() {
+        return behaviorBundle;
+    }
+
+    public void setBehaviorBundle(AvatarBehaviorBundle behaviorBundle) {
+        this.behaviorBundle = behaviorBundle;
     }
 }
 

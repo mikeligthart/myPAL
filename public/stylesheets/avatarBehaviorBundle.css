@@ -1,0 +1,19 @@
+.timeLineElement{
+    border-radius: 10px;
+    border: 2px solid #73AD21;
+    padding: 20px;
+    width: 100px;
+    height: 75px;
+    font-size: 200%;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.bitOfMargin{
+margin-top:20px;
+}
+
+.bitOfPadding{
+margin-right:5px;
+}

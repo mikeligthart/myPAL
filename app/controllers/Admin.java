@@ -3,15 +3,13 @@ package controllers;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.typesafe.config.ConfigFactory;
+import controllers.avatar.AvatarBehaviorBundleFactory;
 import controllers.avatar.AvatarGestureFactory;
 import models.UserMyPAL;
 import models.UserType;
 import controllers.avatar.AvatarBehaviorFactory;
 import controllers.avatar.AvatarReasoner;
-import models.avatar.behaviorDefinition.AvatarBehavior;
-import models.avatar.behaviorDefinition.AvatarGesture;
-import models.avatar.behaviorDefinition.AvatarHtmlType;
-import models.avatar.behaviorDefinition.AvatarLine;
+import models.avatar.behaviorDefinition.*;
 import models.diary.activity.DiaryActivity;
 import models.logging.LogAction;
 import play.Logger;
@@ -23,15 +21,13 @@ import play.mvc.Http;
 import play.mvc.Result;
 import views.html.admin.*;
 import views.html.controlFlow.no_access;
-import views.interfaces.AvatarBehaviorToHTML;
-import views.interfaces.DiaryActivityToHTML;
-import views.interfaces.LogActionToHTML;
-import views.interfaces.UserToHTML;
+import views.interfaces.*;
 
 import java.io.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
 import static play.data.Form.form;
@@ -181,6 +177,33 @@ public class Admin extends Controller {
 
         List<AvatarGesture> gestures = AvatarGesture.find.all();
         return ok(admin_gesture.render(gestures, error));
+    }
+
+    public static Result behaviorBundle(){
+        return behaviorBundle("");
+    }
+
+    private static Result behaviorBundle(String error){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        List<AvatarBehaviorToHTML> behaviorToHTMLs = AvatarBehaviorToHTML.fromListToList(AvatarBehavior.find.all());
+        return ok(admin_behavior_bundle.render(behaviorToHTMLs, AvatarBehaviorBundle.getCount(), error));
+    }
+
+    public static Result addBehaviorBundlePage(){
+        return addBehaviorBundlePage("");
+    }
+
+    private static Result addBehaviorBundlePage(String error){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        return ok(admin_behavior_bundle_add.render(error));
     }
 
      /* FUNCTIONS */
@@ -439,6 +462,56 @@ public class Admin extends Controller {
             return gesture();
         } else {
             return gesture(gestureFactory.getLatestError());
+        }
+    }
+
+    public static Result getBehaviorBundles(){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        List<AvatarBehaviorBundleToHTML> behaviors = AvatarBehaviorBundleToHTML.fromListToList(AvatarBehaviorBundle.find.all());
+        ObjectNode data = JsonNodeFactory.instance.objectNode();
+        data.set("data", toJson(behaviors));
+        return ok(data);
+    }
+
+    public static Result addBehaviorBundle(){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        DynamicForm requestData = form().bindFromRequest();
+        String behaviorBundle = requestData.get("behaviorBundle");
+        String bundleDescription = requestData.get("bundleDescription");
+        List<Integer> behaviorIds = new LinkedList<>();
+        for(String id: Arrays.asList(behaviorBundle.trim().split(","))){
+            behaviorIds.add(Integer.valueOf(id));
+        }
+
+        AvatarBehaviorBundleFactory behaviorBundleFactory = new AvatarBehaviorBundleFactory();
+        if(behaviorBundleFactory.addBehaviorBundle(behaviorIds, bundleDescription)){
+            return redirect(routes.Admin.behaviorBundle());
+        } else {
+            return addBehaviorBundlePage(behaviorBundleFactory.latestError);
+        }
+
+
+    }
+
+    public static Result deleteBehaviorBundle(int id){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        AvatarBehaviorBundleFactory bundleFactory = new AvatarBehaviorBundleFactory();
+        if(bundleFactory.deleteBehaviorBundle(id)){
+            return redirect(routes.Admin.behaviorBundle());
+        } else {
+            return forbidden();
         }
     }
 

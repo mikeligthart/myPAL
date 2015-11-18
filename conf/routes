@@ -79,6 +79,11 @@ DELETE  /admin/behavior/delete/:id              controllers.Admin.deleteBehavior
 GET     /admin/behavior/gesture                 controllers.Admin.gesture()
 POST    /admin/behavior/gesture                 controllers.Admin.addGesture()
 GET     /admin/behavior/gesture/delete/:id      controllers.Admin.deleteGesture(id: Int)
+GET     /admin/behavior/bundle                  controllers.Admin.behaviorBundle()
+DELETE  /admin/behavior/bundle/delete/:id       controllers.Admin.deleteBehaviorBundle(id: Int)
+GET     /admin/behavior/bundle/add              controllers.Admin.addBehaviorBundlePage()
+POST    /admin/behavior/bundle/add              controllers.Admin.addBehaviorBundle()
+GET     /admin/behavior/bundle/list             controllers.Admin.getBehaviorBundles()
 
 ## REGISTRATION ##
 GET     /register                               controllers.Registration.registrationPage()

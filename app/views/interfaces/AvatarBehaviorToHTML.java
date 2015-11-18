@@ -4,10 +4,7 @@ import controllers.routes;
 import models.avatar.behaviorDefinition.*;
 import play.Logger;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -106,7 +103,7 @@ public class AvatarBehaviorToHTML {
     }
 
     public static List<AvatarBehaviorToHTML> fromListToList(List<AvatarBehavior> behaviors){
-        List<AvatarBehaviorToHTML> htmlReadyBehaviors = new ArrayList<>();
+        List<AvatarBehaviorToHTML> htmlReadyBehaviors = new LinkedList<>();
         for(Iterator<AvatarBehavior> it = behaviors.iterator(); it.hasNext();){
             htmlReadyBehaviors.add(new AvatarBehaviorToHTML(it.next()));
         }

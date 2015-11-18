@@ -200,6 +200,22 @@ page.admin.behavior.gesture.file=Selecteer bestand
 page.admin.behavior.gesture.duration=Speeltijd (0 bij plaatjes)
 page.admin.behavior.gesture.add=Gebaar toevoegen
 page.admin.behavior.gesture.add.add=Toevoegen
+page.admin.behavior.bundle.overview=Overzicht van gedragsbundels
+page.admin.behavior.bundle.add=Bundel toevoegen
+page.admin.behavior.bundle.id=Id
+page.admin.behavior.bundle.behaviors=Gebundeld gedrag
+page.admin.behavior.bundle.isValid=Is valide
+page.admin.behavior.bundle.description=Beschrijving
+page.admin.behavior.bundle.nobundles=Er zijn op dit moment geen gedragsbundles.
+page.admin.behavior.bundle.add.select=Selecteer het volgende gedrag
+page.admin.behavior.bundle.add = Bundel toevoegen
+page.admin.behavior.bundle.add.timeline = Tijdlijn
+page.admin.behavior.bundle.add.submit=Bundel toevoegen
+page.admin.behavior.bundle.removebehavior=Laatste gedrag verwijderen
+page.admin.behavior.bundle.reset=Reset
+page.admin.behavior.bundle.add.description.label=(Korte) beschrijving
+page.admin.behavior.bundle.add.description.placeholder=Wat is het doel van deze bundel?
+
 
 ## Registration ##
 page.registration.title=Registratie
@@ -271,3 +287,6 @@ error.gestureCannotBeStored=Er is iets misgegaan waardoor het nieuwe gebaar niet
 error.gestureCannotBeSavedToDatabase=Er is iets misgegaan waardoor het nieuwe gebaar niet opgeslagen kon worden in de database.
 error.gestureDoesNotExistsInDatabase=Het gebaar met id: {0} is niet aanwezig in de database en kan derhalve niet verwijderd worden.
 error.noGestureFileSelected=Er is geen bestand geslecteerd. Druk op 'Bladeren' om een bestand te selecteren.
+error.behaviorBundleDoesNotExistsInDatabase=De bundel met id: {0} is niet aanwezig in de database en kan derhalve niet verwijderd worden.
+error.behaviorBundleWentWrong=Er is iets misgegaan waardoor de bundel niet opgeslagen kon worden in de database.
+error.behaviorBundleDescriptionEmpty=Er dient iets ingevuld te worden bij de schrijving.

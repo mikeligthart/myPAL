@@ -1,7 +1,7 @@
-function deleteBehavior(id){
+function deleteBehaviorBundle(id){
     $.ajax({
         type: "DELETE",
-        url: "/admin/behavior/delete/" + id,
+        url: "/admin/behavior/bundle/delete/" + id,
         data: {id:id},
     });
 }
@@ -12,13 +12,13 @@ if(userLang = "nl"){
     lang = "/assets/javascripts/tables/nl.json"
 }
 
-var table = $('#admin_behavior').DataTable( {
-    "ajax": "/admin/behavior/list",
+var table = $('#admin_behavior_bundle').DataTable( {
+    "ajax": "/admin/behavior/bundle/list",
     "columns": [
         { "data": "id" },
-        { "data": "gesture" },
-        { "data": "lines"},
-        { "data": "avatarHtmlType"},
+        { "data": "behaviors" },
+        { "data": "isValid"},
+        { "data": "description"},
         {
             "data": null,
             "orderable":      false,
@@ -31,7 +31,15 @@ var table = $('#admin_behavior').DataTable( {
     }
 } );
 
-$('#admin_behavior tbody').on( 'click', '.removeButton', function () {
-    deleteBehavior(table.row($(this).closest('tr')).data().id);
+$('#admin_behavior_bundle tbody').on( 'click', '.removeButton', function () {
+    deleteBehaviorBundle(table.row($(this).closest('tr')).data().id);
     table.row($(this).closest('tr')).remove().draw( false );
 } );
+
+$('#admin_behavior_bundle tbody').on( 'click', '.behaviorButton', function (e) {
+    e.preventDefault();
+    var avatarBehavior = "#avatarBehavior" + $(this).attr("value");
+    $(".avatarBehaviors").hide();
+    $(avatarBehavior).show();
+});
+

@@ -10917,3 +10917,108 @@ Copy resource mappings:
 Total time: 0 s, completed 18-nov-2015 17:40:02
 > server-post-command-cleanup
 > server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@51e5ab6c, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\controllers\avatar\AvatarBehaviorBundleFactory.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\controllers\avatar\AvatarBehaviorBundleFactory.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\controllers\avatar\AvatarBehaviorBundleFactory.java)
+
+Read from stdout: Compiling 1 Java source to C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes...
+Compiling 1 Java source to C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes...
+Read from stdout: Note: C:\Users\Mike\Documents\GitHub\myPAL\app\controllers\avatar\AvatarBehaviorBundleFactory.java uses unchecked or unsafe operations.
+Note: C:\Users\Mike\Documents\GitHub\myPAL\app\controllers\avatar\AvatarBehaviorBundleFactory.java uses unchecked or unsafe operations.
+Read from stdout: Note: Recompile with -Xlint:unchecked for details.
+Note: Recompile with -Xlint:unchecked for details.
+Java compilation took 0.797816841 s
+Java analysis took 0.071670043 s
+Java compile + analysis took 0.912408527 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 2 s, completed 18-nov-2015 17:42:21
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@1e90f0d5, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\controllers\avatar\AvatarBehaviorBundleFactory.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\controllers\avatar\AvatarBehaviorBundleFactory.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\Mike\Documents\GitHub\myPAL\app\controllers\avatar\AvatarBehaviorBundleFactory.java)
+
+Read from stdout: Compiling 1 Java source to C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes...
+Compiling 1 Java source to C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes...
+Read from stdout: Note: C:\Users\Mike\Documents\GitHub\myPAL\app\controllers\avatar\AvatarBehaviorBundleFactory.java uses unchecked or unsafe operations.
+Note: C:\Users\Mike\Documents\GitHub\myPAL\app\controllers\avatar\AvatarBehaviorBundleFactory.java uses unchecked or unsafe operations.
+Read from stdout: Note: Recompile with -Xlint:unchecked for details.
+Note: Recompile with -Xlint:unchecked for details.
+Java compilation took 0.655793726 s
+Java analysis took 0.051768114 s
+Java compile + analysis took 0.749346278 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Total time: 1 s, completed 18-nov-2015 17:43:24
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/Mike/Documents/GitHub/myPAL/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@1660f7d9, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\application.conf,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\application.conf)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\application.conf.bak,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\application.conf.bak)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\messages.en,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\messages.en)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\messages.nl,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\messages.nl)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\routes,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\routes)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions\default,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions\default)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions\default\1.sql,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions\default\1.sql)
+Total time: 0 s, completed 18-nov-2015 17:43:41
+> server-post-command-cleanup
+> server-handle-next-server-request

@@ -9,8 +9,10 @@ import org.json.simple.JSONObject;
 import play.Logger;
 import play.i18n.Messages;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,6 +48,12 @@ public class AvatarBehaviorBundleFactory {
             behavior.setBehaviorBundle(null);
         }
         behaviorBundle.delete();
+
+        try {
+            Files.deleteIfExists(new File(BEHAVIORBUNDLEROOT + BEHAVIORBUNDLEFILENAME + id + BEHAVIORBUNDLEFILETYPE).toPath());
+        } catch (IOException e) {
+            Logger.error("[AvatarBehaviorBundleFactory > deleteBehavior] IOException while deleting file " + e.getLocalizedMessage());
+        }
         return true;
     }
 

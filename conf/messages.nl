@@ -140,6 +140,9 @@ page.admin.base.home=Home
 page.admin.base.users=Gebruikers
 page.admin.base.admin=Admin
 page.admin.base.behavior=Gedrag
+page.admin.base.behaviorManagement=Beheer gedrag
+page.admin.base.behaviorBundle=Gedragsbundels
+page.admin.base.gesture=Gebaren
 page.admin.base.practiseDiary=Oefendagboek
 
 # Home #
@@ -192,6 +195,11 @@ page.admin.behavior.noaudiofile=Geen audiobestand gevonden
 page.admin.behavior.validatedvariable=Bestaande variable
 page.admin.behavior.unvalidatedvariable=Niet bestaande variable
 page.admin.behavior.downloadaudiotemplace=Download template om audiobestanden te genereren
+page.admin.behavior.gesture.overview=Overzicht gebaren
+page.admin.behavior.gesture.file=Selecteer bestand
+page.admin.behavior.gesture.duration=Speeltijd (0 bij plaatjes)
+page.admin.behavior.gesture.add=Gebaar toevoegen
+page.admin.behavior.gesture.add.add=Toevoegen
 
 ## Registration ##
 page.registration.title=Registratie
@@ -257,3 +265,9 @@ error.notypeselected=Er is geen type geselecteerd voor deze activiteit
 error.nonameorcolor=Er is iets misgegaan. Heb je het nieuwe type een naam gegeven?
 error.notypeselected=Er was geen type geselecteerd
 error.cannotBeRemoved=Dit type mag niet verwijderd worden
+error.gestureFileIsNotSupported=Het toegevoegde bestand dient een .png of .mp4 te zijn.
+error.gestureDurationIsNotValid=Een gebaar moet tussen de 0 en 60 seconden duren.
+error.gestureCannotBeStored=Er is iets misgegaan waardoor het nieuwe gebaar niet opgeslagen kon worden.
+error.gestureCannotBeSavedToDatabase=Er is iets misgegaan waardoor het nieuwe gebaar niet opgeslagen kon worden in de database.
+error.gestureDoesNotExistsInDatabase=Het gebaar met id: {0} is niet aanwezig in de database en kan derhalve niet verwijderd worden.
+error.noGestureFileSelected=Er is geen bestand geslecteerd. Druk op 'Bladeren' om een bestand te selecteren.

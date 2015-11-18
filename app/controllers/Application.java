@@ -6,7 +6,7 @@ import dialogue.Dialogue;
 import models.UserMyPAL;
 import models.UserMyPAL.Login;
 import models.UserType;
-import models.avatar.AvatarReasoner;
+import controllers.avatar.AvatarReasoner;
 import models.diary.DiarySettingsManager;
 import models.diary.activity.Picture;
 import models.logging.LogAction;

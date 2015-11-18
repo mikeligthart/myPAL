@@ -3,10 +3,11 @@ package controllers;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.typesafe.config.ConfigFactory;
+import controllers.avatar.AvatarGestureFactory;
 import models.UserMyPAL;
 import models.UserType;
-import models.avatar.AvatarBehaviorFactory;
-import models.avatar.AvatarReasoner;
+import controllers.avatar.AvatarBehaviorFactory;
+import controllers.avatar.AvatarReasoner;
 import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorDefinition.AvatarGesture;
 import models.avatar.behaviorDefinition.AvatarHtmlType;
@@ -18,6 +19,7 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import views.html.admin.*;
 import views.html.controlFlow.no_access;
@@ -27,7 +29,6 @@ import views.interfaces.LogActionToHTML;
 import views.interfaces.UserToHTML;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.*;
@@ -166,6 +167,20 @@ public class Admin extends Controller {
         List<AvatarGesture> gestures = AvatarGesture.find.all();
         List<AvatarHtmlType> htmlTypes = Arrays.asList(AvatarHtmlType.values());
         return ok(admin_behavior_add.render(gestures, htmlTypes));
+    }
+
+    public static Result gesture(){
+        return gesture("");
+    }
+
+    private static Result gesture(String error){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        List<AvatarGesture> gestures = AvatarGesture.find.all();
+        return ok(admin_gesture.render(gestures, error));
     }
 
      /* FUNCTIONS */
@@ -394,6 +409,42 @@ public class Admin extends Controller {
 
     }
 
+    public static Result addGesture(){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart filePart = body.getFile("gestureFile");
+        DynamicForm requestData = form().bindFromRequest();
+        int duration = Integer.valueOf(requestData.get("gestureDuration"));
+
+        AvatarGestureFactory gestureFactory = new AvatarGestureFactory();
+        if(gestureFactory.addGesture(filePart, duration)){
+            return redirect(routes.Admin.gesture());
+        } else {
+            return gesture(gestureFactory.getLatestError());
+        }
+    }
+
+    public static Result deleteGesture(int id){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        AvatarGestureFactory gestureFactory = new AvatarGestureFactory();
+        if(gestureFactory.deleteGesture(id)){
+            return gesture();
+        } else {
+            return gesture(gestureFactory.getLatestError());
+        }
+    }
+
+    /*
+    Helper functions
+     */
     private static List<String> processLines(String stringOfLines){
         List<String> processedLines = new ArrayList<>();
         Pattern delimiter = Pattern.compile(";\\s*");

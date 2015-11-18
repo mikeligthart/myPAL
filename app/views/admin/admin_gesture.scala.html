@@ -1,0 +1,76 @@
+@(gestures: List[models.avatar.behaviorDefinition.AvatarGesture], error: String = "")
+
+@admin(title = Messages("page.admin.behavior.title"), page = "behavior") {
+
+
+<div class="text-left row">
+    @if(error != "") {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">@Messages("page.general.error")</span>
+            @error
+        </div>
+    }
+    <h1>@Messages("page.admin.behavior.gesture.overview")</h1>
+</div>
+
+    <div class="text-center">
+        @for((gesture, index) <- gestures.zipWithIndex){
+            @if(index % 4 == 0){
+                <div class="row">
+            }
+
+            <div class="col-md-3 portfolio-item">
+                <div class="text-right"><a class='btn btn-default' aria-label='Left Align' data-toggle="confirmation" data-title='@Messages("page.general.areyousure")' data-href='@routes.Admin.deleteGesture(gesture.getId)' data-btnOkLabel='@Messages("page.general.yes")' data-btnCancelLabel='@Messages("page.general.no")' data-btnOkClass="btn btn-sm btn-primary" data-placement="top"><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a></div>
+                @if(gesture.isVideo){
+                    <video width="250px" height="250px" autoplay="autoplay" controls>
+                        <source src='@gesture.getGesture' type="video/mp4">
+                    </video>
+                }else{
+                    <img width="250px" height="250px" class="text-left img-responsive" src='@gesture.getGesture'>
+                }
+            </div>
+
+            @if((index+1) % 4 == 0){
+                </div>
+            }
+        }
+        @if(gestures.size == 1 || gestures.size-1 % 4 != 0){
+            </div>
+        }
+    </div>
+
+    <div class="row text-left">
+        <h3>@Messages("page.admin.behavior.gesture.add")</h3>
+    </div>
+    <div class="text-center">
+        <form action="@routes.Admin.addGesture()" method="post" enctype="multipart/form-data">
+            <div class="row form-group">
+                <label class="col-sm-2 control-label" for="gestureFile">@Messages("page.admin.behavior.gesture.file")</label>
+                <div class="col-sm-4">
+                    <input type="file"
+                           class="form-control"
+                           id="gestureFile"
+                           name="gestureFile"/>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label class="col-sm-2 control-label" for="gestureDuration">@Messages("page.admin.behavior.gesture.duration")</label>
+                <div class="col-sm-4">
+                    <input type="text"
+                           class="form-control"
+                           id="gestureDuration"
+                           name="gestureDuration"
+                           value="0" />
+                </div>
+            </div>
+
+            <input type="submit" value='@Messages("page.admin.behavior.gesture.add.add")' class="btn btn-primary"/>
+        </form>
+    </div>
+
+<script>
+    $('[data-toggle="confirmation"]').confirmation();
+</script>
+}

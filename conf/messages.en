@@ -139,7 +139,10 @@ page.diary.goals.tobeimplemented=The goal section is not yet implemented.
 page.admin.base.home=Home
 page.admin.base.users=Users
 page.admin.base.admin=Admin
-page.admin.base.behavior=Behavior
+page.admin.base.behavior=Behaviors
+page.admin.base.behaviorManagement=Manage behavior
+page.admin.base.behaviorBundle=Behavior bundles
+page.admin.base.gesture=Gestures
 page.admin.base.practiseDiary=Practice Diary
 
 # Home #
@@ -193,6 +196,11 @@ page.admin.behavior.noaudiofile=No audio file detected
 page.admin.behavior.validatedvariable=Valid variable
 page.admin.behavior.unvalidatedvariable=Not a valid variable
 page.admin.behavior.downloadaudiotemplace=Download template to generate audio files
+page.admin.behavior.gesture.overview=Gesture overview
+page.admin.behavior.gesture.file=Select file
+page.admin.behavior.gesture.duration=Duration (0 for images)
+page.admin.behavior.gesture.add=Add gesture
+page.admin.behavior.gesture.add.add=Add
 
 ## Registration ##
 page.registration.title=Registration
@@ -258,3 +266,9 @@ error.notypeselected=No type was selected for this activity
 error.nonameorcolor=Something went wrong. Did you gave the new type a name?
 error.notypeselected=No type was selected
 error.cannotBeRemoved=This type cannot be removed
+error.gestureFileIsNotSupported=The file needs to be either a .png or a .mp4
+error.gestureDurationIsNotValid=A gesture needs to have a duration between the 0 and 60 seconds.
+error.gestureCannotBeStored=Something went wrong and the gesture could not be stored.
+error.gestureCannotBeSavedToDatabase=Something went wrong and the gesture could not be stored in the database.
+error.gestureDoesNotExistsInDatabase=Gesture with id: {0} is not found in the database and could not be removed.
+error.noGestureFileSelected=No file was selected.

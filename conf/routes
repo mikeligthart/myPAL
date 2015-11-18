@@ -76,6 +76,9 @@ GET     /admin/behavior/add                     controllers.Admin.addBehaviorPag
 POST    /admin/behavior/add                     controllers.Admin.addBehavior()
 GET     /admin/behavior/audiotemplate           controllers.Admin.generateAudioTemplate()
 DELETE  /admin/behavior/delete/:id              controllers.Admin.deleteBehavior(id: Int)
+GET     /admin/behavior/gesture                 controllers.Admin.gesture()
+POST    /admin/behavior/gesture                 controllers.Admin.addGesture()
+GET     /admin/behavior/gesture/delete/:id      controllers.Admin.deleteGesture(id: Int)
 
 ## REGISTRATION ##
 GET     /register                               controllers.Registration.registrationPage()

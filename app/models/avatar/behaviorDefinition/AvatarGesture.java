@@ -10,6 +10,7 @@ import util.AppException;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.File;
+import java.util.List;
 
 /**
  * myPAL
@@ -119,5 +120,10 @@ public class AvatarGesture extends Model {
 
     public static int getCount() {
         return find.all().size();
+    }
+
+    public static int getHighestId(){
+        List<AvatarGesture> gestures = find.where().orderBy("id desc").findList();
+        return gestures.get(0).getId();
     }
 }

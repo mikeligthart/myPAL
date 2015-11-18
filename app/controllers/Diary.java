@@ -2,7 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import models.UserMyPAL;
-import models.avatar.AvatarReasoner;
+import controllers.avatar.AvatarReasoner;
 import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorSelection.decisionInformation.AvatarTrigger;
 import models.diary.DiarySettings;

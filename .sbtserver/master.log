@@ -279,3 +279,10 @@ Copy resource mappings:
 Total time: 1 s, completed Nov 19, 2015 10:13:34 AM
 > server-post-command-cleanup
 > server-handle-next-server-request
+Done executing sbt server engine, result Right(Exit(0))
+Closing listening server socket
+Waiting for socket thread
+Waiting for request processor thread
+Waiting for command engine result
+Returning control to sbt launcher with result Exit(0)
+Closing the 4680@SMYPAL logs at Thu Nov 19 15:52:25 CET 2015, goodbye.

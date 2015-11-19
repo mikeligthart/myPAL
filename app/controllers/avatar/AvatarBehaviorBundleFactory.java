@@ -1,6 +1,7 @@
 package controllers.avatar;
 
-import com.sun.javafx.scene.control.behavior.BehaviorBase;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.ConfigFactory;
 import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorDefinition.AvatarBehaviorBundle;
@@ -8,8 +9,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import play.Logger;
 import play.i18n.Messages;
+import play.libs.Json;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,8 +36,14 @@ public class AvatarBehaviorBundleFactory {
     public static final String BEHAVIORBUNDLEROOT = ConfigFactory.load().getString("private.avatarbehaviorbundles.location");
     public static final String BEHAVIORBUNDLEFILENAME = "bundle.";
     public static final String BEHAVIORBUNDLEFILETYPE = ".json";
+    private static ObjectMapper MAPPER = new ObjectMapper();
 
     public String latestError;
+
+    public static void refresh(){
+        manageBehaviorBundles();
+    }
+
 
     public boolean deleteBehaviorBundle(int id){
         if(!AvatarBehaviorBundle.exists(id)){
@@ -43,11 +52,7 @@ public class AvatarBehaviorBundleFactory {
             return false;
         }
 
-        AvatarBehaviorBundle behaviorBundle = AvatarBehaviorBundle.byID(id);
-        for(AvatarBehavior behavior : behaviorBundle.getBehaviors()){
-            behavior.setBehaviorBundle(null);
-        }
-        behaviorBundle.delete();
+        deleteBundleFromDB(id);
 
         try {
             Files.deleteIfExists(new File(BEHAVIORBUNDLEROOT + BEHAVIORBUNDLEFILENAME + id + BEHAVIORBUNDLEFILETYPE).toPath());
@@ -74,7 +79,9 @@ public class AvatarBehaviorBundleFactory {
             return false;
         }
 
+        int bundleId = AvatarBehaviorBundle.getHighestId() + 1;
         AvatarBehaviorBundle newBundle = new AvatarBehaviorBundle();
+        newBundle.setId(bundleId);
         List<AvatarBehavior> behaviors = new LinkedList<>();
         for(int id : behaviorIds){
             AvatarBehavior behavior = AvatarBehavior.byID(id);
@@ -95,10 +102,9 @@ public class AvatarBehaviorBundleFactory {
             behavior.update();
         }
 
-        int id = newBundle.getId();
         //Create new JsonFile
         JSONObject obj = new JSONObject();
-        obj.put("id", id);
+        obj.put("id", bundleId);
         obj.put("isValid", newBundle.isValid());
 
         JSONArray lineArray = new JSONArray();
@@ -108,13 +114,15 @@ public class AvatarBehaviorBundleFactory {
         obj.put("lines", lineArray);
         obj.put("description", newBundle.getDescription());
 
-        String fileName = BEHAVIORBUNDLEROOT + BEHAVIORBUNDLEFILENAME + id + BEHAVIORBUNDLEFILETYPE;
+        String fileName = BEHAVIORBUNDLEROOT + BEHAVIORBUNDLEFILENAME + bundleId + BEHAVIORBUNDLEFILETYPE;
         try{
             FileWriter file = new FileWriter(fileName);
             file.write(obj.toJSONString());
             file.close();
+            newBundle.setLastModified(new File(fileName).lastModified());
+            newBundle.update();
         } catch (IOException e) {
-            Logger.error("[AvatarBehaviorFactory > addBehavior] IOException: behavior with id " + id + " not writen to file - " + e.getMessage());
+            Logger.error("[AvatarBehaviorFactory > addBehavior] IOException: behavior with id " + bundleId + " not writen to file - " + e.getMessage());
         }
         return true;
     }
@@ -123,7 +131,115 @@ public class AvatarBehaviorBundleFactory {
         return latestError;
     }
 
-    public void setLatestError(String latestError) {
-        this.latestError = latestError;
+    private static void manageBehaviorBundles(){
+        int bundleFileCount = new File(BEHAVIORBUNDLEROOT).list().length;
+        int bundleDBCount = AvatarBehaviorBundle.getCount();
+
+        //Remove behaviors from database if they have been removed from file
+        if (bundleDBCount > bundleFileCount){
+            List<AvatarBehaviorBundle> bundles = AvatarBehaviorBundle.find.all();
+            for(AvatarBehaviorBundle bundle : bundles){
+                if(!new File(BEHAVIORBUNDLEROOT + BEHAVIORBUNDLEFILENAME + bundle.getId() + BEHAVIORBUNDLEFILETYPE).exists()){
+                    deleteBundleFromDB(bundle.getId());
+                }
+            }
+        }
+
+        //Add new behaviors or update changed behaviors
+
+        for(File file : new File(BEHAVIORBUNDLEROOT).listFiles()){
+            int bundleId = Integer.valueOf(file.getName().replace(BEHAVIORBUNDLEFILENAME, "").replace(BEHAVIORBUNDLEFILETYPE, ""));
+
+            if(bundleDBCount < bundleFileCount) {
+                //If behavior does not exists create a new one and store it in de the database;
+                if (!AvatarBehaviorBundle.exists(bundleId)) {
+                    try {
+                        JsonNode bundleNode = Json.parse(new FileInputStream(file));
+
+                        AvatarBehaviorBundle newBundle = new AvatarBehaviorBundle();
+                        newBundle.setId(bundleId);
+                        newBundle.setLastModified(file.lastModified());
+
+                        List<AvatarBehavior> behaviors = new LinkedList<>();
+                        JsonNode linesNode = bundleNode.get("lines");
+                        for (int i = 0; i < linesNode.size(); i++) {
+                            int behaviorIdInLine = linesNode.get(i).asInt();
+                            AvatarBehavior behavior = AvatarBehavior.byID(behaviorIdInLine);
+                            if (behavior == null) {
+                                Logger.error(Messages.get("error.behaviorBundleDoesNotExistsInDatabase", behaviorIdInLine));
+                            }
+                            newBundle.addAvatarBehavior(behavior);
+                            behaviors.add(behavior);
+                        }
+                        newBundle.setDescription(bundleNode.get("description").asText());
+                        newBundle.setValid(bundleNode.get("isValid").asBoolean());
+                        newBundle.save();
+
+                        for (AvatarBehavior behavior : behaviors) {
+                            behavior.setBehaviorBundle(newBundle);
+                            behavior.update();
+                        }
+                    } catch (IOException e) {
+                        Logger.error("[AvatarBehaviorBundleFactory > manageBehaviorBundles] IOException Could not read behaviorFile during creation: " + file.getAbsolutePath());
+                    }
+                }
+            } else {
+                //check if bundles need to be updated
+                updateBundle(file, bundleId);
+            }
+        }
     }
+
+    private static void updateBundle(File file, int bundleId){
+        AvatarBehaviorBundle bundle = AvatarBehaviorBundle.byID(bundleId);
+        if(bundle.getLastModified() != file.lastModified()){
+            try {
+                JsonNode bundleNode = Json.parse(new FileInputStream(file));
+                if(bundleNode != null) {
+                    bundle.setLastModified(file.lastModified());
+
+                    for(AvatarBehavior nullefyBehavior : bundle.getBehaviors()){
+                        nullefyBehavior.setBehaviorBundle(null);
+                        nullefyBehavior.update();
+                    }
+
+                    bundle.setBehavior(new LinkedList<>());
+
+                    List<AvatarBehavior> behaviors = new LinkedList<>();
+                    JsonNode linesNode = bundleNode.get("lines");
+                    for(int i = 0; i <  linesNode.size(); i++){
+                        int behaviorIdInLine = linesNode.get(i).asInt();
+                        AvatarBehavior behavior = AvatarBehavior.byID(behaviorIdInLine);
+                        if(behavior == null) {
+                            Logger.error(Messages.get("error.behaviorBundleDoesNotExistsInDatabase", behaviorIdInLine));
+                        }
+                        bundle.addAvatarBehavior(behavior);
+                        behaviors.add(behavior);
+                    }
+                    bundle.setDescription(bundleNode.get("description").asText());
+                    bundle.setValid(bundleNode.get("isValid").asBoolean());
+                    bundle.update();
+
+                    for(AvatarBehavior behavior : behaviors){
+                        behavior.setBehaviorBundle(bundle);
+                        behavior.update();
+                    }
+                }
+            } catch (IOException e) {
+                Logger.error("[AvatarBehaviorBundleFactory > manageBehaviorBundles] IOException could not read behaviorFile during updating: " + file.getAbsolutePath());
+            }
+
+        }
+
+    }
+    private static void deleteBundleFromDB(int id){
+        if(AvatarBehaviorBundle.exists(id)) {
+            AvatarBehaviorBundle behaviorBundle = AvatarBehaviorBundle.byID(id);
+            for (AvatarBehavior behavior : behaviorBundle.getBehaviors()) {
+                behavior.setBehaviorBundle(null);
+            }
+            behaviorBundle.delete();
+        }
+    }
+
 }

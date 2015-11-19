@@ -23,7 +23,6 @@ import java.util.List;
 public class AvatarBehaviorBundle extends Model {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "behaviorBundle")
@@ -32,6 +31,7 @@ public class AvatarBehaviorBundle extends Model {
 
     private boolean isValid;
     private String description;
+    private long lastModified;
 
     public AvatarBehaviorBundle(){
         behaviors = new LinkedList<>();
@@ -71,6 +71,14 @@ public class AvatarBehaviorBundle extends Model {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public long getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(long lastModified) {
+        this.lastModified = lastModified;
     }
 
     public static Finder<Integer, AvatarBehaviorBundle> find = new Finder<Integer, AvatarBehaviorBundle>(Integer.class, AvatarBehaviorBundle.class);

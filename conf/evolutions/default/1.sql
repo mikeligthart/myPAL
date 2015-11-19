@@ -17,6 +17,7 @@ create table avatar_behavior_bundle (
   id                        integer not null,
   is_valid                  boolean,
   description               varchar(255),
+  last_modified             bigint,
   constraint pk_avatar_behavior_bundle primary key (id))
 ;
 

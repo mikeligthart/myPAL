@@ -25,10 +25,11 @@ var table = $('#admin_behavior').DataTable( {
             "defaultContent":  '<button type="button" class="btn btn-default removeButton" aria-label="Left Align" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>'
         }
     ],
-    "order": [[ 0, "asc" ]],
+    "order": [[ 0, "desc" ]],
     "language": {
         "url": lang
-    }
+    },
+    'iDisplayLength': 50
 } );
 
 $('#admin_behavior tbody').on( 'click', '.removeButton', function () {

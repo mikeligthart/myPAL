@@ -1,7 +1,9 @@
 speech.15.0.wav#Hallo
-speech.18.0.wav#En ik dan?
-speech.16.1.wav#Ik maak hier rare dingen van!
 speech.16.0.wav#Haha ik ben slechte typer.
+speech.16.1.wav#Ik maak hier rare dingen van!
 speech.16.2.wav#En dat vind ik echt heeel leuk, of niet?
-speech.17.0.wav#Dit is een #leuketest#.
-speech.17.1.wav#Haha of niet dan #firstname#.
+speech.17.0.wav#Hja haha.
+speech.18.0.wav#En ik dan?
+speech.19.0.wav#Kasjdk hadkajdlk.
+speech.19.1.wav#Akjsdkad.
+speech.19.2.wav#Jkajsd.

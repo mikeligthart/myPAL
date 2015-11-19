@@ -74,6 +74,7 @@ public class AvatarReasoner {
 
     public static void refresh(){
         AvatarBehaviorFactory.refresh();
+        AvatarBehaviorBundleFactory.refresh();
     }
 
 }

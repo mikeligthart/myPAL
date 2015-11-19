@@ -189,6 +189,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
+        AvatarReasoner.refresh();
         List<AvatarBehaviorToHTML> behaviorToHTMLs = AvatarBehaviorToHTML.fromListToList(AvatarBehavior.find.all());
         return ok(admin_behavior_bundle.render(behaviorToHTMLs, AvatarBehaviorBundle.getCount(), error));
     }
@@ -203,6 +204,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
+        AvatarReasoner.refresh();
         return ok(admin_behavior_bundle_add.render(error));
     }
 
@@ -471,6 +473,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
+        AvatarReasoner.refresh();
         List<AvatarBehaviorBundleToHTML> behaviors = AvatarBehaviorBundleToHTML.fromListToList(AvatarBehaviorBundle.find.all());
         ObjectNode data = JsonNodeFactory.instance.objectNode();
         data.set("data", toJson(behaviors));
@@ -483,6 +486,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
+        AvatarReasoner.refresh();
         DynamicForm requestData = form().bindFromRequest();
         String behaviorBundle = requestData.get("behaviorBundle");
         String bundleDescription = requestData.get("bundleDescription");
@@ -507,6 +511,7 @@ public class Admin extends Controller {
             return result.denyAction;
         }
 
+        AvatarReasoner.refresh();
         AvatarBehaviorBundleFactory bundleFactory = new AvatarBehaviorBundleFactory();
         if(bundleFactory.deleteBehaviorBundle(id)){
             return redirect(routes.Admin.behaviorBundle());

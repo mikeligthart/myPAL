@@ -84,8 +84,8 @@ page.diary.calendar.noactivities=Voeg een activiteit toe.
 page.diary.calendar.notaddactivity=Terug
 page.diary.calendar.addfromgallery=voeg toe uit gallerij
 page.diary.calendar.or=Of
-page.diary.calendar.addnewtype=Nieuw
-page.diary.calendar.removetype=Verwijder
+page.diary.calendar.addnewtype=Nieuwe soort activiteit
+page.diary.calendar.removetype=Verwijder soort activiteit
 page.diary.calendar.downloadfromapp=Download van app
 
 # diaryActivityType #

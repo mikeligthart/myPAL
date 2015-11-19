@@ -6576,3 +6576,65 @@ Copy resource mappings:
 Total time: 0 s, completed 19-nov-2015 15:40:51
 > server-post-command-cleanup
 > server-handle-next-server-request
+> {file:/C:/Users/Mike/Documents/GitHub/myPAL/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@46a2e0b5, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\application.conf,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\application.conf)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\application.conf.bak,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\application.conf.bak)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\messages.en,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\messages.en)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\messages.nl,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\messages.nl)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\routes,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\routes)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions\default,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions\default)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions\default\1.sql,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions\default\1.sql)
+Total time: 0 s, completed 19-nov-2015 15:45:54
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/Mike/Documents/GitHub/myPAL/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@37ea7e47, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\application.conf,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\application.conf)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\application.conf.bak,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\application.conf.bak)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\messages.en,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\messages.en)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\messages.nl,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\messages.nl)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\routes,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\routes)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions\default,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions\default)
+	(C:\Users\Mike\Documents\GitHub\myPAL\conf\evolutions\default\1.sql,C:\Users\Mike\Documents\GitHub\myPAL\target\scala-2.11\classes\evolutions\default\1.sql)
+Total time: 0 s, completed 19-nov-2015 15:46:11
+> server-post-command-cleanup
+> server-handle-next-server-request

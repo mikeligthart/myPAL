@@ -173,6 +173,7 @@ public class AvatarBehaviorBundleFactory {
                         }
                         newBundle.setDescription(bundleNode.get("description").asText());
                         newBundle.setValid(bundleNode.get("isValid").asBoolean());
+                        Logger.debug("newBundle data: " + newBundle.getId() + ", " + newBundle.getDescription() + ", " + newBundle.isValid() + ", " + newBundle.getBehaviors());
                         newBundle.save();
 
                         for (AvatarBehavior behavior : behaviors) {

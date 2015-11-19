@@ -215,6 +215,7 @@ page.admin.behavior.bundle.removebehavior=Laatste gedrag verwijderen
 page.admin.behavior.bundle.reset=Reset
 page.admin.behavior.bundle.add.description.label=(Korte) beschrijving
 page.admin.behavior.bundle.add.description.placeholder=Wat is het doel van deze bundel?
+page.admin.behavior.bundleID=Bundel id
 
 
 ## Registration ##

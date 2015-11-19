@@ -2,6 +2,7 @@ package models.avatar.behaviorDefinition;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import controllers.avatar.AvatarBehaviorBundleFactory;
 import controllers.routes;
 import play.Logger;
 import play.db.ebean.Model;
@@ -242,6 +243,7 @@ public class AvatarBehavior extends Model {
         for(AvatarLine line : avatarLines){
             line.delete();
         }
+        new AvatarBehaviorBundleFactory().deleteBehaviorBundle(behaviorBundle.getId());
         this.delete();
     }
 

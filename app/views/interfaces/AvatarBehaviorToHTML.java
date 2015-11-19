@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 public class AvatarBehaviorToHTML {
 
     private int id;
-    private String gesture, lines, avatarHtmlType;
+    private String gesture, lines, avatarHtmlType, bundleId;
 
     public static Iterable<MatchResult> allMatches(
             final Pattern p, final CharSequence input) {
@@ -100,6 +100,12 @@ public class AvatarBehaviorToHTML {
 
         AvatarHtmlType type = behavior.getAvatarHtmlType();
         avatarHtmlType = "<a href='" + AvatarHtml.getAvatarHtmlImage(type) + "' data-toggle='lightbox' data-title='" + type.name() + "'>" + type.name() + "</a>";
+        AvatarBehaviorBundle bundle = behavior.getBehaviorBundle();
+        if(bundle == null){
+            bundleId = "Ongebonden";
+        } else {
+            bundleId = String.valueOf(bundle.getId());
+        }
     }
 
     public static List<AvatarBehaviorToHTML> fromListToList(List<AvatarBehavior> behaviors){
@@ -140,5 +146,13 @@ public class AvatarBehaviorToHTML {
 
     public void setAvatarHtmlType(String avatarHtmlType) {
         this.avatarHtmlType = avatarHtmlType;
+    }
+
+    public String getBundleId() {
+        return bundleId;
+    }
+
+    public void setBundleId(String bundleId) {
+        this.bundleId = bundleId;
     }
 }

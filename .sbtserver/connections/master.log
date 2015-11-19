@@ -1,13 +1,13 @@
-New log file opened at Thu Nov 19 16:06:35 CET 2015 by 1284@Obsidian
-Taking next connection to: 57385
-New client attempting to connect on port: 57386-57385
-  Address = /192.168.178.14:57385
-This client on port 57386 has uuid 6c628a04-90cc-4d90-9ecf-39309f893b36 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-6c628a04-90cc-4d90-9ecf-39309f893b36
-Taking next connection to: 57385
-New client attempting to connect on port: 57387-57385
-  Address = /192.168.178.14:57385
-Handshake exception on socket: 57387
+New log file opened at Thu Nov 19 16:33:11 CET 2015 by 6724@Obsidian
+Taking next connection to: 57688
+New client attempting to connect on port: 57689-57688
+  Address = /192.168.178.14:57688
+This client on port 57689 has uuid afa07164-6d8b-4355-9b1d-eed2b2384a4f configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-afa07164-6d8b-4355-9b1d-eed2b2384a4f
+Taking next connection to: 57688
+New client attempting to connect on port: 57690-57688
+  Address = /192.168.178.14:57688
+Handshake exception on socket: 57690
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -23,15 +23,15 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 57385
-New client attempting to connect on port: 57388-57385
-  Address = /192.168.178.14:57385
-This client on port 57388 has uuid a23795bd-3365-4a7a-be79-cc188f82bc02 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-6c628a04-90cc-4d90-9ecf-39309f893b36, activator-a23795bd-3365-4a7a-be79-cc188f82bc02
-Taking next connection to: 57385
-New client attempting to connect on port: 57389-57385
-  Address = /192.168.178.14:57385
-Handshake exception on socket: 57389
+Taking next connection to: 57688
+New client attempting to connect on port: 57691-57688
+  Address = /192.168.178.14:57688
+This client on port 57691 has uuid 9ab54e1b-5b3c-41d6-972b-0fcef71c208f configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-afa07164-6d8b-4355-9b1d-eed2b2384a4f, activator-9ab54e1b-5b3c-41d6-972b-0fcef71c208f
+Taking next connection to: 57688
+New client attempting to connect on port: 57692-57688
+  Address = /192.168.178.14:57688
+Handshake exception on socket: 57692
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -47,15 +47,18 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 57385
-New client attempting to connect on port: 57390-57385
-  Address = /192.168.178.14:57385
-This client on port 57390 has uuid 3a72bc1a-a6d2-42e7-8d0e-41d72109c256 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-6c628a04-90cc-4d90-9ecf-39309f893b36, activator-a23795bd-3365-4a7a-be79-cc188f82bc02, play-fork-run-3a72bc1a-a6d2-42e7-8d0e-41d72109c256
-Taking next connection to: 57385
+Taking next connection to: 57688
+New client attempting to connect on port: 57693-57688
+  Address = /192.168.178.14:57688
+This client on port 57693 has uuid 7e98b1ab-a056-4d81-a209-5bcf4833e3ad configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-9ab54e1b-5b3c-41d6-972b-0fcef71c208f, play-fork-run-7e98b1ab-a056-4d81-a209-5bcf4833e3ad
+Taking next connection to: 57688
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 57385
+Taking next connection to: 57688
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 57385
+Taking next connection to: 57688
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 57688

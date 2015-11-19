@@ -19,6 +19,7 @@ var table = $('#admin_behavior').DataTable( {
         { "data": "gesture" },
         { "data": "lines"},
         { "data": "avatarHtmlType"},
+        { "data": "bundleId"},
         {
             "data": null,
             "orderable":      false,

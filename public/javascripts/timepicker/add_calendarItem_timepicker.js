@@ -30,3 +30,4 @@ $('#endtime').on('selectTime', function(){
 });
 
 $('#date').datepicker();
+

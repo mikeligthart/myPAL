@@ -17,8 +17,9 @@ var table = $('#admin_behavior').DataTable( {
         { "data": "lines"},
         { "data": "avatarHtmlType"}
     ],
-    "order": [[ 1, "asc" ]],
+    "order": [[ 1, "desc" ]],
     "language": {
         "url": lang
-    }
+    },
+    'iDisplayLength': 50
 } );

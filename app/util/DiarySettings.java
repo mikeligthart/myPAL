@@ -1,4 +1,4 @@
-package models.diary;
+package util;
 
 import com.typesafe.config.ConfigFactory;
 import play.i18n.Messages;

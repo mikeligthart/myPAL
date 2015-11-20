@@ -13,6 +13,7 @@ import javax.persistence.*;
 import java.applet.AppletStub;
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -38,6 +39,8 @@ public abstract class DiaryItem extends Model {
     @Constraints.Required(message = " ")
     @Formats.DateTime(pattern="dd/MM/yyyy")
     private Date date;
+
+    private Timestamp added;
 
     @Constraints.Required(message = " ")
     @Formats.DateTime(pattern = "HH:mm")
@@ -130,7 +133,9 @@ public abstract class DiaryItem extends Model {
 
     public void setUser(UserMyPAL user) {
         this.user = user;
-        userName = user.getUserName();
+        if(user != null) {
+            userName = user.getUserName();
+        }
     }
 
     public String getUserName() {
@@ -139,5 +144,13 @@ public abstract class DiaryItem extends Model {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Timestamp getAdded() {
+        return added;
+    }
+
+    public void setAdded(Timestamp added) {
+        this.added = added;
     }
 }

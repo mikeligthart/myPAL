@@ -20,6 +20,18 @@ model.user.gluconlineID=GluconlineID
 ## AvatarLineVariables ##
 model.avatarLineVariables.firstName=Voornaam van gebruiker
 
+## Goal ##
+model.goal.failed=Niet gelukt
+model.goal.addXAcitivites=Aantal toegevoegde activiteiten
+model.goal.addXMeasurements=Aantal toegevoegde metingen
+model.goal.addXPictures=Aantal toegevoegde foto's
+model.goal.addXLogins=Aantal keer inloggen
+model.goal.addConActivities=Aantal keer achter elkaar inlogggen
+model.goal.addConMeasurements=Aantal keer achter elkaar inlogggen
+model.goal.addConPictures=Aantal keer achter elkaar inlogggen
+model.goal.addConLogins=Aantal keer achter elkaar inlogggen
+model.goal.noTargetFound=Dit type doel bestaat niet
+
 ### PAGES ###
 ## General ##
 page.general.error=Fout:

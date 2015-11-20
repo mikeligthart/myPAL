@@ -1,4 +1,4 @@
-package models.diary;
+package util;
 
 import java.util.HashMap;
 import java.util.Map;

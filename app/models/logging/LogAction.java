@@ -5,8 +5,12 @@ import models.UserMyPAL;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 
 /**
  * myPAL
@@ -59,10 +63,19 @@ public class LogAction extends Model {
         this.type = type;
     }
 
-    public static void log(String email, LogActionType type){
-        UserMyPAL user = UserMyPAL.byUserName(email);
+    public static void log(String userName, LogActionType type){
+        UserMyPAL user = UserMyPAL.byUserName(userName);
         user.addLogAction(type);
         user.update();
+    }
+
+    public static boolean logInByUserAndDate(UserMyPAL user, Date date){
+        LocalDateTime dateMidnight = date.toLocalDate().atStartOfDay();
+        Timestamp from = new Timestamp(java.util.Date.from(dateMidnight.atZone(ZoneId.systemDefault()).toInstant()).getTime());
+        LocalDateTime nextDay = dateMidnight.plusDays(1);
+        Timestamp till = new Timestamp(java.util.Date.from(nextDay.atZone(ZoneId.systemDefault()).toInstant()).getTime());
+
+        return (find.where().eq("user", user).eq("type", LogActionType.LOGIN).between("timestamp", from, till).findRowCount() > 0);
     }
 
 }

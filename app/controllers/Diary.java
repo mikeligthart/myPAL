@@ -5,8 +5,9 @@ import models.UserMyPAL;
 import controllers.avatar.AvatarReasoner;
 import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorSelection.decisionInformation.AvatarTrigger;
-import models.diary.DiarySettings;
-import models.diary.DiarySettingsManager;
+import org.joda.time.DateTime;
+import util.DiarySettings;
+import util.DiarySettingsManager;
 import models.diary.activity.*;
 import models.diary.measurement.*;
 import models.logging.LogAction;
@@ -31,7 +32,10 @@ import views.interfaces.DiaryActivityToHTML;
 import views.interfaces.MeasurementToHTML;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static play.data.Form.form;
@@ -511,6 +515,8 @@ public class Diary extends Controller {
             DiaryActivity newDiaryActivity = diaryActivityForm.get();
             //Link the activity to a user
             newDiaryActivity.setUser(UserMyPAL.byUserName(userName));
+            //Add timestamp
+            newDiaryActivity.setAdded(Timestamp.valueOf(LocalDateTime.now()));
             //Link the activity to a type
             newDiaryActivity.setType(diaryActivityType);
             DiarySettingsManager.getInstance().retrieve(userName).dateUpdate(newDiaryActivity.getDate());
@@ -941,6 +947,8 @@ public class Diary extends Controller {
             //Retrieve glucose object and save it
             Glucose glucose = glucoseForm.get();
             glucose.setUser(user);
+            //Add timestamp
+            glucose.setAdded(Timestamp.valueOf(LocalDateTime.now()));
             glucose.save();
 
             //Change the date to match the glucose object's date
@@ -971,6 +979,8 @@ public class Diary extends Controller {
             //Retrieve glucose object and save it
             Insulin insulin = insulinForm.get();
             insulin.setUser(user);
+            //Add timestamp
+            insulin.setAdded(Timestamp.valueOf(LocalDateTime.now()));
             insulin.save();
 
             //Change the date to match the glucose object's date

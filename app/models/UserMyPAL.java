@@ -6,6 +6,7 @@ import models.diary.activity.DiaryActivity;
 import models.diary.activity.DiaryActivityType;
 import models.diary.activity.Picture;
 import models.diary.measurement.DiaryMeasurement;
+import models.goals.Goal;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -82,6 +83,10 @@ public class UserMyPAL extends Model {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonManagedReference
     private List<Picture> pictures;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
+    private List<Goal> goals;
 
     private String gluconlineID = "";
 
@@ -258,6 +263,14 @@ public class UserMyPAL extends Model {
 
     public void setCreatedDiaryActivityTypes(List<DiaryActivityType> createdDiaryActivityTypes) {
         this.createdDiaryActivityTypes = createdDiaryActivityTypes;
+    }
+
+    public List<Goal> getGoals() {
+        return goals;
+    }
+
+    public void setGoals(List<Goal> goals) {
+        this.goals = goals;
     }
 
     public String getGluconlineID() {

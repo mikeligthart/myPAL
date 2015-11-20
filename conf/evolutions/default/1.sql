@@ -43,6 +43,7 @@ create table avatar_line (
 create table diary_activity (
   id                        integer not null,
   date                      date,
+  added                     timestamp,
   starttime                 time,
   endtime                   time,
   user_user_name            varchar(255),
@@ -69,6 +70,7 @@ create table diary_activity_type (
 create table diary_measurement (
   id                        integer not null,
   date                      date,
+  added                     timestamp,
   starttime                 time,
   endtime                   time,
   user_user_name            varchar(255),
@@ -82,6 +84,7 @@ create table diary_measurement (
 create table glucose (
   id                        integer not null,
   date                      date,
+  added                     timestamp,
   starttime                 time,
   endtime                   time,
   user_user_name            varchar(255),
@@ -93,9 +96,24 @@ create table glucose (
   constraint pk_glucose primary key (id))
 ;
 
+create table goal (
+  id                        integer not null,
+  target                    varchar(16),
+  target_value              integer,
+  start_date                timestamp,
+  deadline                  timestamp,
+  met                       boolean,
+  goal_type                 varchar(5),
+  user_user_name            varchar(255),
+  constraint ck_goal_target check (target in ('ADDxACTIVITIES','ADDxMEASUREMENTS','ADDxPICTURES','ADDxYESTERDAY','LOGINS','CONACTIVITIES','CONMEASUREMENTS','CONPICTURES','CONLOGINS')),
+  constraint ck_goal_goal_type check (goal_type in ('DAILY','TOTAL')),
+  constraint pk_goal primary key (id))
+;
+
 create table insulin (
   id                        integer not null,
   date                      date,
+  added                     timestamp,
   starttime                 time,
   endtime                   time,
   user_user_name            varchar(255),
@@ -121,6 +139,7 @@ create table picture (
   name                      varchar(255),
   thumbnail                 varchar(255),
   diary_activity_id         integer,
+  added                     timestamp,
   user_user_name            varchar(255),
   date                      date,
   constraint pk_picture primary key (id))
@@ -155,6 +174,8 @@ create sequence diary_measurement_seq;
 
 create sequence glucose_seq;
 
+create sequence goal_seq;
+
 create sequence insulin_seq;
 
 create sequence log_action_seq;
@@ -179,14 +200,16 @@ alter table diary_measurement add constraint fk_diary_measurement_user_7 foreign
 create index ix_diary_measurement_user_7 on diary_measurement (user_user_name);
 alter table glucose add constraint fk_glucose_user_8 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
 create index ix_glucose_user_8 on glucose (user_user_name);
-alter table insulin add constraint fk_insulin_user_9 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
-create index ix_insulin_user_9 on insulin (user_user_name);
-alter table log_action add constraint fk_log_action_user_10 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
-create index ix_log_action_user_10 on log_action (user_user_name);
-alter table picture add constraint fk_picture_diaryActivity_11 foreign key (diary_activity_id) references diary_activity (id) on delete restrict on update restrict;
-create index ix_picture_diaryActivity_11 on picture (diary_activity_id);
-alter table picture add constraint fk_picture_user_12 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
-create index ix_picture_user_12 on picture (user_user_name);
+alter table goal add constraint fk_goal_user_9 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_goal_user_9 on goal (user_user_name);
+alter table insulin add constraint fk_insulin_user_10 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_insulin_user_10 on insulin (user_user_name);
+alter table log_action add constraint fk_log_action_user_11 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_log_action_user_11 on log_action (user_user_name);
+alter table picture add constraint fk_picture_diaryActivity_12 foreign key (diary_activity_id) references diary_activity (id) on delete restrict on update restrict;
+create index ix_picture_diaryActivity_12 on picture (diary_activity_id);
+alter table picture add constraint fk_picture_user_13 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_picture_user_13 on picture (user_user_name);
 
 
 
@@ -209,6 +232,8 @@ drop table if exists diary_activity_type;
 drop table if exists diary_measurement;
 
 drop table if exists glucose;
+
+drop table if exists goal;
 
 drop table if exists insulin;
 
@@ -235,6 +260,8 @@ drop sequence if exists diary_activity_type_seq;
 drop sequence if exists diary_measurement_seq;
 
 drop sequence if exists glucose_seq;
+
+drop sequence if exists goal_seq;
 
 drop sequence if exists insulin_seq;
 

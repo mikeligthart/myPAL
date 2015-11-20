@@ -8,6 +8,9 @@ import play.data.validation.Constraints;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 /**
@@ -121,6 +124,24 @@ public class DiaryActivity extends DiaryItem {
 
     public static DiaryActivity byID(int id){
         return find.byId(id);
+    }
+
+    public static int countByUserAndDates(UserMyPAL user, Date start, Date end){
+        return find.where().eq("user", user).between("added", new Timestamp(start.getTime()), new Timestamp(end.getTime())).findRowCount();
+    }
+
+    public static int addedFromYesterday(UserMyPAL user, Date start, Date end){
+        Date yesterday = Date.valueOf(end.toLocalDate().minusDays(1));
+        return find.where().eq("user", user).between("added", new Timestamp(start.getTime()), new Timestamp(end.getTime())).eq("date", yesterday).findRowCount();
+    }
+
+    public static boolean addedAnythingOnDate(UserMyPAL user, Date date){
+        LocalDateTime dateMidnight = date.toLocalDate().atStartOfDay();
+        Timestamp from = new Timestamp(java.util.Date.from(dateMidnight.atZone(ZoneId.systemDefault()).toInstant()).getTime());
+        LocalDateTime nextDay = dateMidnight.plusDays(1);
+        Timestamp till = new Timestamp(java.util.Date.from(nextDay.atZone(ZoneId.systemDefault()).toInstant()).getTime());
+
+        return (find.where().eq("user", user).between("added", from, till).findRowCount() > 0);
     }
 
 }

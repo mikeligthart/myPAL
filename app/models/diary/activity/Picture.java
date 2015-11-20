@@ -6,6 +6,9 @@ import play.db.ebean.Model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 /**
  * myPAL
@@ -32,6 +35,8 @@ public class Picture extends Model {
     @JsonBackReference
     private DiaryActivity diaryActivity;
 
+    private Timestamp added;
+
     @ManyToOne
     @JsonBackReference
     private UserMyPAL user;
@@ -48,6 +53,7 @@ public class Picture extends Model {
         this.diaryActivity = diaryActivity;
         this.user = diaryActivity.getUser();
         this.date = diaryActivity.getDate();
+        added = Timestamp.valueOf(LocalDateTime.now());
     }
 
     public Picture(String name, String thumbnail, UserMyPAL user, Date date){
@@ -56,6 +62,7 @@ public class Picture extends Model {
         this.user = user;
         this.date = date;
         this.diaryActivity = null;
+        added = Timestamp.valueOf(LocalDateTime.now());
     }
 
     public int getId() {
@@ -116,6 +123,14 @@ public class Picture extends Model {
         return find.where().eq("thumbnail", name).findUnique();
     }
 
+    public Timestamp getAdded() {
+        return added;
+    }
+
+    public void setAdded(Timestamp added) {
+        this.added = added;
+    }
+
     public static Picture byDiaryActivity(DiaryActivity diaryActivity){
         return find.where().eq("diaryActivity", diaryActivity).findUnique();
     }
@@ -157,5 +172,23 @@ public class Picture extends Model {
 
     public static Picture byID(int id){
         return find.byId(id);
+    }
+
+    public static int countByUserAndDates(UserMyPAL user, Date start, Date end){
+        return find.where().eq("user", user).between("added", new Timestamp(start.getTime()), new Timestamp(end.getTime())).findRowCount();
+    }
+
+    public static int addedFromYesterday(UserMyPAL user, Date start, Date end){
+        Date yesterday = Date.valueOf(end.toLocalDate().minusDays(1));
+        return find.where().eq("user", user).between("added", new Timestamp(start.getTime()), new Timestamp(end.getTime())).eq("date", yesterday).findRowCount();
+    }
+
+    public static boolean addedAnythingOnDate(UserMyPAL user, Date date){
+        LocalDateTime dateMidnight = date.toLocalDate().atStartOfDay();
+        Timestamp from = new Timestamp(java.util.Date.from(dateMidnight.atZone(ZoneId.systemDefault()).toInstant()).getTime());
+        LocalDateTime nextDay = dateMidnight.plusDays(1);
+        Timestamp till = new Timestamp(java.util.Date.from(nextDay.atZone(ZoneId.systemDefault()).toInstant()).getTime());
+
+        return (find.where().eq("user", user).between("added", from, till).findRowCount() > 0);
     }
 }

@@ -7,7 +7,7 @@ import models.UserMyPAL;
 import models.UserMyPAL.Login;
 import models.UserType;
 import controllers.avatar.AvatarReasoner;
-import models.diary.DiarySettingsManager;
+import util.DiarySettingsManager;
 import models.diary.activity.Picture;
 import models.logging.LogAction;
 import models.logging.LogActionType;

@@ -1,5 +1,7 @@
 package models.diary.activity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import models.UserMyPAL;
 import models.diary.DiaryItem;
 import play.data.validation.Constraints;
@@ -23,10 +25,12 @@ import java.util.List;
 @Entity
 public class DiaryActivity extends DiaryItem {
 
-
-
     @ManyToOne
+    @JsonBackReference
     private DiaryActivityType type;
+
+    @Constraints.Required(message = " ")
+    private String name;
 
     @Constraints.MaxLength(1200)
     @Column(length = 1200)
@@ -34,6 +38,7 @@ public class DiaryActivity extends DiaryItem {
     private String description;
 
     @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @JsonManagedReference
     private Picture picture;
 
     @OneToOne
@@ -90,6 +95,14 @@ public class DiaryActivity extends DiaryItem {
 
     public void setCarbohydrateValue(double carbohydrateValue) {
         this.carbohydrateValue = carbohydrateValue;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public static Finder<Integer, DiaryActivity> find = new Finder<Integer, DiaryActivity>(Integer.class, DiaryActivity.class);

@@ -11,7 +11,7 @@
 </div>
 <div class="row">
     <div class="col-sm-12 text-left">
-        <i>@user.getEmail</i>
+        <i>@user.getUserName</i>
         <br />
         <br />
         @Messages("model.user.birthdate"): @user.getBirthdate (@user.getAge)
@@ -19,6 +19,7 @@
         @Messages("model.user.gluconlineID"): @user.getGluconlineID
         <br />
         @Messages("model.user.lastActivity"): @user.getLastActivity
+        <br />
     </div>
 </div>
 
@@ -32,7 +33,8 @@
         <th>@Messages("page.diary.calendar.date")</th>
         <th>@Messages("page.diary.calendar.starttime")</th>
         <th>@Messages("page.diary.calendar.endtime")</th>
-        <th>@Messages("page.diary.calendar.activity")</th>
+        <th>@Messages("page.diary.calendar.activitytype")</th>
+        <th>@Messages("page.diary.calendar.name")</th>
         <th>@Messages("page.diary.calendar.emotion")</th>
         <th>@Messages("page.admin.users.viewUser.hasPicture")</th>
         <th>@Messages("page.diary.calendar.description")</th>
@@ -40,13 +42,41 @@
     </thead>
     <tbody>
     <tr>
-        <td>Date</td>
-        <td>Start time</td>
-        <td>End time</td>
-        <td>Type</td>
-        <td>Emotion</td>
-        <td>Has photo</td>
+        <td>@Messages("page.diary.calendar.date")</td>
+        <td>@Messages("page.diary.calendar.starttime")</td>
+        <td>@Messages("page.diary.calendar.endtime")</td>
+        <td>@Messages("page.diary.calendar.activitytype")</td>
+        <td>@Messages("page.diary.calendar.name")</td>
+        <td>@Messages("page.diary.calendar.emotion")</td>
+        <td>@Messages("page.admin.users.viewUser.hasPicture")</td>
         <td>@Messages("page.diary.calendar.description")</td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <h3>@Messages("page.admin.users.viewUser.measurementOverview")</h3>
+</div>
+
+<table id="admin_user_measurement_overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>@Messages("page.diary.calendar.date")</th>
+        <th>@Messages("page.diary.calendar.measurement.time")</th>
+        <th>@Messages("page.diary.calendar.measurement.type")</th>
+        <th>@Messages("page.diary.calendar.measurement.value")</th>
+        <th>@Messages("page.diary.calendar.measurement.unit")</th>
+        <th>@Messages("page.diary.calendar.measurement.comment")</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>@Messages("page.diary.calendar.date")</td>
+        <td>@Messages("page.diary.calendar.measurement.time")</td>
+        <td>@Messages("page.diary.calendar.measurement.type")</td>
+        <td>@Messages("page.diary.calendar.measurement.value")</td>
+        <td>@Messages("page.diary.calendar.measurement.unit")</td>
+        <td>@Messages("page.diary.calendar.measurement.comment")</td>
     </tr>
     </tbody>
 </table>

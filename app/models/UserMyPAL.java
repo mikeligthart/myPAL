@@ -41,8 +41,7 @@ public class UserMyPAL extends Model {
 
     @Id
     @Constraints.Required
-    @Constraints.Email
-    private String email;
+    private String userName;
 
     @Constraints.Required
     private String firstName;
@@ -88,13 +87,13 @@ public class UserMyPAL extends Model {
 
     //The attributes needed to login with a user
     public static class Login {
-        public String email;
+        public String userName;
         public String password;
 
         public Login(){};
 
         public String validate() {
-            if (!UserMyPAL.authenticate(email, password)) {
+            if (!UserMyPAL.authenticate(userName, password)) {
                 return Messages.get("model.user.invalid");
             }
             return null;
@@ -104,8 +103,8 @@ public class UserMyPAL extends Model {
     public UserMyPAL(){
     }
 
-    public UserMyPAL(String email, String firstName, String lastName, Date birthdate, String password, UserType userType, String gluconlineID){
-        this.email = email;
+    public UserMyPAL(String userName, String firstName, String lastName, Date birthdate, String password, UserType userType, String gluconlineID){
+        this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
@@ -120,12 +119,12 @@ public class UserMyPAL extends Model {
 
     public static Finder<String, UserMyPAL> find = new Finder<String, UserMyPAL>(String.class, UserMyPAL.class);
 
-    public static UserMyPAL byEmail(String email){
-        return find.byId(email);
+    public static UserMyPAL byUserName(String userName){
+        return find.byId(userName);
     }
 
-    public static boolean authenticate(String email, String password) {
-        UserMyPAL user = byEmail(email);
+    public static boolean authenticate(String userName, String password) {
+        UserMyPAL user = byUserName(userName);
         if(user != null){
             if(HashHelper.checkPassword(password, user.getPassword())){
                 return true;
@@ -141,12 +140,12 @@ public class UserMyPAL extends Model {
         logAction.save();
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -278,7 +277,7 @@ public class UserMyPAL extends Model {
 
         UserMyPAL rhs = (UserMyPAL) obj;
         return new EqualsBuilder().
-                append(email, rhs.email).
+                append(userName, rhs.userName).
                 append(lastActivity, rhs.lastActivity).
                 isEquals();
     }

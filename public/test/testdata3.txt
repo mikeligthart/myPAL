@@ -1,1 +1,1 @@
-{"data":[{"email":"mike.ligthart@gmail.com","firstName":"Mike","lastName":"Ligthart","password":"mike","userType":"ADMIN","mutables":{"firstName":"Mike","lastName":"Ligthart","userType":"ADMIN"}}]}
+{"data":[{"userName":"mike.ligthart@gmail.com","firstName":"Mike","lastName":"Ligthart","password":"mike","userType":"ADMIN","mutables":{"firstName":"Mike","lastName":"Ligthart","userType":"ADMIN"}}]}

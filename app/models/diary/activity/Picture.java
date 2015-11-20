@@ -29,6 +29,7 @@ public class Picture extends Model {
     private String name, thumbnail;
 
     @OneToOne(optional = true)
+    @JsonBackReference
     private DiaryActivity diaryActivity;
 
     @ManyToOne

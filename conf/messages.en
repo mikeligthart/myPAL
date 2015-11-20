@@ -1,6 +1,6 @@
 ### MODELS ###
 ## User ##
-model.user.email=Email address
+model.user.userName=Email address
 model.user.firstName=First name
 model.user.lastName=Last name
 model.user.birthdate=Birthday
@@ -276,7 +276,7 @@ error.pictureCannotBeStored=Whoops! Unfortunately your image could not be stored
 error.pleaseAddFile=Please add a file
 error.activityNotFound=The activity was not stored properly. Please try to add that again first.
 error.hasAlreadyPicture=The activity already has a picture. You can change that by updating the original activity.
-error.emailregisteredalready=This email address is already registered
+error.emailregisteredalready=This userName address is already registered
 error.notypeselected=No type was selected for this activity
 error.nonameorcolor=Something went wrong. Did you gave the new type a name?
 error.notypeselected=No type was selected

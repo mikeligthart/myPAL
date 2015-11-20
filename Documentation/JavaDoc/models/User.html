@@ -235,12 +235,12 @@ extends play.db.ebean.Model</pre>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../models/User.html#authenticate-java.lang.String-java.lang.String-">authenticate</a></span>(java.lang.String&nbsp;email,
+<td class="colLast"><code><span class="memberNameLink"><a href="../models/User.html#authenticate-java.lang.String-java.lang.String-">authenticate</a></span>(java.lang.String&nbsp;userName,
             java.lang.String&nbsp;password)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../models/User.html" title="class in models">User</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../models/User.html#byEmail-java.lang.String-">byEmail</a></span>(java.lang.String&nbsp;email)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../models/User.html#byEmail-java.lang.String-">byEmail</a></span>(java.lang.String&nbsp;userName)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
@@ -316,7 +316,7 @@ extends play.db.ebean.Model</pre>
 </tr>
 <tr id="i21" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../models/User.html#setEmail-java.lang.String-">setEmail</a></span>(java.lang.String&nbsp;email)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../models/User.html#setEmail-java.lang.String-">setEmail</a></span>(java.lang.String&nbsp;userName)</code>&nbsp;</td>
 </tr>
 <tr id="i22" class="altColor">
 <td class="colFirst"><code>void</code></td>
@@ -441,7 +441,7 @@ extends play.db.ebean.Model</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>byEmail</h4>
-<pre>public static&nbsp;<a href="../models/User.html" title="class in models">User</a>&nbsp;byEmail(java.lang.String&nbsp;email)</pre>
+<pre>public static&nbsp;<a href="../models/User.html" title="class in models">User</a>&nbsp;byEmail(java.lang.String&nbsp;userName)</pre>
 </li>
 </ul>
 <a name="getMutables--">
@@ -468,7 +468,7 @@ extends play.db.ebean.Model</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>authenticate</h4>
-<pre>public static&nbsp;boolean&nbsp;authenticate(java.lang.String&nbsp;email,
+<pre>public static&nbsp;boolean&nbsp;authenticate(java.lang.String&nbsp;userName,
                                    java.lang.String&nbsp;password)</pre>
 </li>
 </ul>
@@ -496,7 +496,7 @@ extends play.db.ebean.Model</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>setEmail</h4>
-<pre>public&nbsp;void&nbsp;setEmail(java.lang.String&nbsp;email)</pre>
+<pre>public&nbsp;void&nbsp;setEmail(java.lang.String&nbsp;userName)</pre>
 </li>
 </ul>
 <a name="getFirstName--">

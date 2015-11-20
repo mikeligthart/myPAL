@@ -3,7 +3,7 @@
 @import play.api.i18n._
 
 <fieldset>
-    @email(userForm("email"), label = Messages("model.user.email") + "*", placeholder = Messages("model.user.email"), isReadonly=true)
+    @userName(userForm("userName"), label = Messages("model.user.userName") + "*", placeholder = Messages("model.user.userName"), isReadonly=true)
     @text(userForm("firstName"), label = Messages("model.user.firstName") + "*", placeholder = Messages("model.user.firstName"))
     @text(userForm("lastName"), label = Messages("model.user.lastName") + "*", placeholder = Messages("model.user.lastName"))
     @date(userForm("birthdate"), label = Messages("model.user.birthdate") + "*", placeholder = Messages("model.user.birthdate"))

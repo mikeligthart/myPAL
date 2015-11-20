@@ -7,7 +7,7 @@ if(userLang = "nl"){
 var table = $('#admin_users').DataTable( {
     "ajax": "/admin/users/list",
     "columns": [
-        { "data": "email" },
+        { "data": "userName" },
         { "data": "firstName" },
         { "data": "lastName" },
         { "data": "age"},
@@ -27,15 +27,15 @@ var table = $('#admin_users').DataTable( {
 } );
 
 $('#admin_users tbody').on( 'click', '.removeButton', function () {
-    deleteUser(table.row($(this).closest('tr')).data().email);
+    deleteUser(table.row($(this).closest('tr')).data().userName);
     table.row($(this).closest('tr')).remove().draw( false );
 } );
 
 $('#admin_users tbody').on( 'click', '.editButton', function () {
-    window.location.href = "users/update/" + table.row($(this).closest('tr')).data().email;
+    window.location.href = "users/update/" + table.row($(this).closest('tr')).data().userName;
 } );
 
 $('#admin_users tbody').on( 'click', '.viewButton', function () {
-    window.location.href = "users/view/" + table.row($(this).closest('tr')).data().email;
+    window.location.href = "users/view/" + table.row($(this).closest('tr')).data().userName;
 } );
 

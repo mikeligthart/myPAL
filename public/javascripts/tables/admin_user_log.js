@@ -4,10 +4,10 @@ if(userLang = "nl"){
     lang = "/assets/javascripts/tables/nl.json"
 }
 
-var email = $( "i" ).text();
+var userName = $( "i" ).text();
 
 var table = $('#admin_user_log').DataTable( {
-    "ajax": "/admin/users/view/log/" + email,
+    "ajax": "/admin/users/view/log/" + userName,
     "columns": [
         { "data": "timestamp" },
         { "data": "type" }
@@ -19,15 +19,32 @@ var table = $('#admin_user_log').DataTable( {
 } );
 
 var activityTable =  $('#admin_user_activity_overview').DataTable( {
-                        "ajax": "/admin/users/view/activities/" + email,
+                        "ajax": "/admin/users/view/activities/" + userName,
                         "columns": [
                             { "data": "date" },
                             { "data": "startTime" },
                             { "data": "endTime" },
                             { "data": "type" },
+                            { "data": "name" },
                             { "data": "emotion" },
                             { "data": "hasPictureString" },
                             { "data": "shortDescription" }
+                        ],
+                        "order": [[ 0, "desc" ]],
+                        "language": {
+                            "url": lang
+                        }
+} );
+
+var MeasurementTable =  $('#admin_user_measurement_overview').DataTable( {
+                        "ajax": "/admin/users/view/measurements/" + userName,
+                        "columns": [
+                            { "data": "date" },
+                            { "data": "startTime" },
+                            { "data": "displayName" },
+                            { "data": "value" },
+                            { "data": "unit" },
+                            { "data": "comment" }
                         ],
                         "order": [[ 0, "desc" ]],
                         "language": {

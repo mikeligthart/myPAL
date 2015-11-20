@@ -51,6 +51,8 @@ public abstract class DiaryItem extends Model {
     @JsonBackReference
     private UserMyPAL user;
 
+    private String userName;
+
     public int getId() {
         return id;
     }
@@ -128,5 +130,14 @@ public abstract class DiaryItem extends Model {
 
     public void setUser(UserMyPAL user) {
         this.user = user;
+        userName = user.getUserName();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

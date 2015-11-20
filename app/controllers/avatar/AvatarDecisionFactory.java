@@ -161,7 +161,7 @@ public class AvatarDecisionFactory {
     }
 
     private void refreshInformation(AvatarTrigger trigger){
-        List<LogAction> logActions = UserMyPAL.byEmail(user.getEmail()).getLogActions();
+        List<LogAction> logActions = UserMyPAL.byUserName(user.getUserName()).getLogActions();
         int logActionsSize = logActions.size();
         if(logActionsSize >= 2){
             currentUserHistory = new AvatarUserHistory(logActions.get(logActionsSize-1).getType(), logActions.get(logActionsSize-2).getType());

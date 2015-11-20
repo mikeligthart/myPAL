@@ -70,12 +70,12 @@ public class Application extends Controller {
         } else {
             //Set session
             session().clear();
-            String email = loginForm.get().email;
-            session("email", email);
-            UserMyPAL user =  UserMyPAL.byEmail(email);
+            String userName = loginForm.get().userName;
+            session("userName", userName);
+            UserMyPAL user =  UserMyPAL.byUserName(userName);
 
             //Set DiarySettings
-            DiarySettingsManager.getInstance().login(email);
+            DiarySettingsManager.getInstance().login(userName);
 
             //Load avatarReasoner
             AvatarReasoner.refresh();
@@ -96,7 +96,7 @@ public class Application extends Controller {
             }
 
             //Log user activity
-            LogAction.log(email, LogActionType.LOGIN);
+            LogAction.log(userName, LogActionType.LOGIN);
 
             //Redirect to right page
             UserType userType = user.getUserType();
@@ -117,16 +117,16 @@ public class Application extends Controller {
      */
     public static Result logout() {
         //Retrieve session details
-        String email = session().get("email");
+        String userName = session().get("userName");
 
         //Clear session
         session().clear();
 
         //Clear DiarySettings
-        DiarySettingsManager.getInstance().logoff(email);
+        DiarySettingsManager.getInstance().logoff(userName);
 
         //Log user activity
-        LogAction.log(email, LogActionType.LOGOFF);
+        LogAction.log(userName, LogActionType.LOGOFF);
 
         //Redirect to login page
         return redirect(routes.Application.login());
@@ -139,10 +139,10 @@ public class Application extends Controller {
      * @return rendering of the avatar greeting page
      */
     public static Result hello() {
-        if (session().isEmpty() || session().get("email") == null) {
+        if (session().isEmpty() || session().get("userName") == null) {
             return redirect(routes.Application.login());
         }
-        UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
+        UserMyPAL user = UserMyPAL.byUserName(session().get("userName"));
         return ok(diary_greeting.render(dialogue.getGreeting(user.getFirstName())));
     }
 
@@ -155,7 +155,7 @@ public class Application extends Controller {
      */
     public static Result getPicture(String fileName){
         //Check if someone is logged in and whether the request is not empty
-        if(session().isEmpty() || session().get("email") == null || fileName.isEmpty()){
+        if(session().isEmpty() || session().get("userName") == null || fileName.isEmpty()){
             return forbidden();
         }
 
@@ -175,7 +175,7 @@ public class Application extends Controller {
        }
 
         //Check if someone has access to the picture
-        UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
+        UserMyPAL user = UserMyPAL.byUserName(session().get("userName"));
         if(picture.getUser().equals(user) || user.getUserType() == UserType.ADMIN){
             //Serve the picture
             return ok(new File(ConfigFactory.load().getString("private.data.location") + fileName));
@@ -188,7 +188,7 @@ public class Application extends Controller {
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart filePart = body.getFile("picture");
 
-        UserMyPAL user = UserMyPAL.byEmail("mike.ligthart@gmail.com");
+        UserMyPAL user = UserMyPAL.byUserName("mike.ligthart@gmail.com");
         //If a file is added
         if (filePart != null) {
             //Retrieve, move and store image file to disk and save picture object
@@ -196,7 +196,7 @@ public class Application extends Controller {
             Picture picture = pictureFactory.processUploadedFile(filePart, user, Date.valueOf(LocalDate.now()));
             if (picture != null) {
                 picture.save();
-                LogAction.log(user.getEmail(), LogActionType.UPLOADEDPICTURE);
+                LogAction.log(user.getUserName(), LogActionType.UPLOADEDPICTURE);
                 return ok("Received");
             } else {
                 return badRequest(pictureFactory.getLatestError());
@@ -207,7 +207,7 @@ public class Application extends Controller {
     }
 
     public static Result contentBox(String content){
-        if(session().isEmpty() || session().get("email") == null || content.isEmpty()){
+        if(session().isEmpty() || session().get("userName") == null || content.isEmpty()){
             return forbidden();
         }
 
@@ -215,7 +215,7 @@ public class Application extends Controller {
     }
 
     public static Result showGesture(String source){
-        if(session().isEmpty() || session().get("email") == null || source.isEmpty()){
+        if(session().isEmpty() || session().get("userName") == null || source.isEmpty()){
             return forbidden();
         }
 

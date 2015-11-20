@@ -5,6 +5,7 @@
 <fieldset>
     <div class="row">
     @diary_formGroup_select_diaryActivityType(label = Messages("page.diary.calendar.activitytype") + "*", user, types, preselectedType, typeInputErrorMessage, Messages("page.diary.diaryActivityType.source.updateActivity"), activity.getId())
+    @diary_formGroup_text(activityForm("name"), Messages("page.diary.calendar.name") + "*", Messages("page.diary.calendar.name"))
     @diary_formGroup_date(activityForm("date"), Messages("page.diary.calendar.date") + "*", Messages("page.diary.calendar.date"))
     @diary_formGroup_doubleTime(activityForm("starttime"), activityForm("endtime"))
     @diary_formGroup_select_emotion(activityForm("emotion"), label = Messages("page.diary.calendar.emotion") + "*", placeholder = Messages("page.diary.calendar.emotion"))

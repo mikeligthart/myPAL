@@ -1,6 +1,7 @@
 package models.diary.activity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import controllers.routes;
 import models.UserMyPAL;
 import play.data.validation.Constraints;
@@ -38,6 +39,7 @@ public class DiaryActivityType extends Model {
     private String color;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "type")
+    @JsonManagedReference
     private List<DiaryActivity> activities;
 
     @ManyToOne

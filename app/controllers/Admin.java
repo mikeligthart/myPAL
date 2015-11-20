@@ -11,6 +11,9 @@ import controllers.avatar.AvatarBehaviorFactory;
 import controllers.avatar.AvatarReasoner;
 import models.avatar.behaviorDefinition.*;
 import models.diary.activity.DiaryActivity;
+import models.diary.measurement.DiaryMeasurement;
+import models.diary.measurement.Glucose;
+import models.diary.measurement.Insulin;
 import models.logging.LogAction;
 import play.Logger;
 import play.data.DynamicForm;
@@ -27,7 +30,6 @@ import java.io.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
 import static play.data.Form.form;
@@ -62,8 +64,12 @@ public class Admin extends Controller {
         List<UserMyPAL> users = UserMyPAL.find.all();
         List<DiaryActivity> activities = DiaryActivity.find.all();
         int nLogs = LogAction.find.all().size();
+        int nMeasurements = Glucose.find.findRowCount() + Insulin.find.findRowCount();
+        int nBehaviors = AvatarBehavior.getCount();
+        int nBundles = AvatarBehaviorBundle.getCount();
+        int nGestures = AvatarGesture.getCount();
 
-        return ok(admin_home.render(users.size(), countOnlineUsers(users), activities.size(), nLogs, recentActivities(activities)));
+        return ok(admin_home.render(users.size(), countOnlineUsers(users), activities.size(), nLogs, recentActivities(activities), nMeasurements, nBehaviors, nBundles, nGestures));
     }
 
     private static int countOnlineUsers(List<UserMyPAL> users) {
@@ -108,21 +114,21 @@ public class Admin extends Controller {
 
     /**
      * Page that provides a pre-filled form to update an existing user
-     * @param email id for an existing user that needs to be updated
+     * @param userName id for an existing user that needs to be updated
      * @return update page for a existing user
      */
-    public static Result updatePageUser(String email){
+    public static Result updatePageUser(String userName){
         AdminAuthenticationResult result = AdminAuthentication.authenticate();
         if(!result.hasAcces){
             return result.denyAction;
         }
 
-        UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
-        UserMyPAL updateThisUser = UserMyPAL.byEmail(email);
+        UserMyPAL user = UserMyPAL.byUserName(session().get("userName"));
+        UserMyPAL updateThisUser = UserMyPAL.byUserName(userName);
         Form<UserMyPAL> userForm = form(UserMyPAL.class);
         if (updateThisUser != null) {
             userForm = userForm.fill(updateThisUser);
-            return ok(admin_user_update.render(email, userForm, user.equals(updateThisUser)));
+            return ok(admin_user_update.render(userName, userForm, user.equals(updateThisUser)));
         } else {
             return forbidden();
         }
@@ -130,16 +136,16 @@ public class Admin extends Controller {
 
     /**
      *
-     * @param email id for existing user that needs to be viewed
+     * @param userName id for existing user that needs to be viewed
      * @return page with all info on selected existing user
      */
-    public static Result viewUser(String email){
+    public static Result viewUser(String userName){
         AdminAuthenticationResult result = AdminAuthentication.authenticate();
         if(!result.hasAcces){
             return result.denyAction;
         }
 
-        UserMyPAL viewUser = UserMyPAL.byEmail(email);
+        UserMyPAL viewUser = UserMyPAL.byUserName(userName);
         if (viewUser != null) {
             return ok(admin_user_view.render(new UserToHTML(viewUser)));
         } else {
@@ -240,8 +246,8 @@ public class Admin extends Controller {
         if (userForm.hasErrors()) {
             return badRequest(admin_user.render(userForm));
         } else {
-            if(UserMyPAL.byEmail(userForm.data().get("email")) != null){
-                userForm.reject("email", Messages.get("error.emailregisteredalready"));
+            if(UserMyPAL.byUserName(userForm.data().get("userName")) != null){
+                userForm.reject("userName", Messages.get("error.usernameregisteredalready"));
                 return badRequest(admin_user.render(userForm));
             }
             UserMyPAL newUser = userForm.get();
@@ -252,20 +258,20 @@ public class Admin extends Controller {
 
     /**
      * Listener for a POST request. Updates an existing user from a form.
-     * @param email - id of user that needs to be updated
+     * @param userName - id of user that needs to be updated
      * @return redirect to admin users page
      */
-    public static Result updateUser(String email){
+    public static Result updateUser(String userName){
         AdminAuthenticationResult result = AdminAuthentication.authenticate();
         if(!result.hasAcces){
             return result.denyAction;
         }
 
-        UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
+        UserMyPAL user = UserMyPAL.byUserName(session().get("userName"));
         Form<UserMyPAL> userForm = form(UserMyPAL.class).bindFromRequest();
-        UserMyPAL updateThisUser = UserMyPAL.byEmail(email);
+        UserMyPAL updateThisUser = UserMyPAL.byUserName(userName);
         if (userForm.hasErrors()) {
-            return badRequest(admin_user_update.render(email, userForm, user.equals(updateThisUser)));
+            return badRequest(admin_user_update.render(userName, userForm, user.equals(updateThisUser)));
         } else {
             UserMyPAL updatedUser = userForm.get();
             if(userForm.data().get("password").equalsIgnoreCase(Messages.get("page.general.dummypassword"))){
@@ -278,17 +284,17 @@ public class Admin extends Controller {
 
     /**
      * Deletes provided existing user
-     * @param email - id for an existing user
+     * @param userName - id for an existing user
      * @return ok 200
      */
-    public static Result deleteUser(String email) {
+    public static Result deleteUser(String userName) {
         AdminAuthenticationResult result = AdminAuthentication.authenticate();
         if(!result.hasAcces){
             return result.denyAction;
         }
 
-        UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
-        UserMyPAL deleteThisUser = UserMyPAL.byEmail(email);
+        UserMyPAL user = UserMyPAL.byUserName(session().get("userName"));
+        UserMyPAL deleteThisUser = UserMyPAL.byUserName(userName);
         if (user.equals(deleteThisUser)){
             return forbidden();
         }
@@ -303,16 +309,16 @@ public class Admin extends Controller {
 
     /**
      *
-     * @param email id for existing user
+     * @param userName id for existing user
      * @return JsonNode containing LogAction items for provided user
      */
-    public static Result getUserLog(String email){
+    public static Result getUserLog(String userName){
         AdminAuthenticationResult result = AdminAuthentication.authenticate();
         if(!result.hasAcces){
             return result.denyAction;
         }
 
-        UserMyPAL userForLogs = UserMyPAL.byEmail(email);
+        UserMyPAL userForLogs = UserMyPAL.byUserName(userName);
         if (userForLogs != null){
             List<LogActionToHTML> logs = LogActionToHTML.fromListToList(LogAction.find.where().eq("user", userForLogs).findList());
             ObjectNode data = JsonNodeFactory.instance.objectNode();
@@ -323,13 +329,13 @@ public class Admin extends Controller {
         }
     }
 
-    public static Result getUserActivities(String email){
+    public static Result getUserActivities(String userName){
         AdminAuthenticationResult result = AdminAuthentication.authenticate();
         if(!result.hasAcces){
             return result.denyAction;
         }
 
-        UserMyPAL user = UserMyPAL.byEmail(email);
+        UserMyPAL user = UserMyPAL.byUserName(userName);
         if (user != null){
             List<DiaryActivityToHTML> activities = DiaryActivityToHTML.fromListToList(DiaryActivity.byUser(user));
             ObjectNode data = JsonNodeFactory.instance.objectNode();
@@ -339,6 +345,62 @@ public class Admin extends Controller {
             return forbidden(no_access.render());
         }
 
+    }
+
+    public static Result getUserMeasurements(String userName){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        UserMyPAL user = UserMyPAL.byUserName(userName);
+        if (user != null){
+            List<DiaryMeasurement> measurements = new ArrayList<>();
+            measurements.addAll(Glucose.byUser(user));
+            measurements.addAll(Insulin.byUser(user));
+            List<MeasurementToHTML> measurementToHTMLs = MeasurementToHTML.fromListToList(measurements);
+            ObjectNode data = JsonNodeFactory.instance.objectNode();
+            data.set("data", toJson(measurementToHTMLs));
+            return ok(data);
+        } else {
+            return forbidden(no_access.render());
+        }
+    }
+
+    public static Result downloadUserData(){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        List<UserMyPAL> users = UserMyPAL.find.all();
+        String fileName = "privateData/temp/userdata.json";
+        try{
+            FileWriter file = new FileWriter(fileName);
+            file.write(toJson(users).toString());
+            file.close();
+            return ok(new File(fileName));
+        } catch (IOException e) {
+            Logger.error("[Admin > downloadUserLog] IOException writing userdata " + e.getMessage());
+            return noContent();
+        }
+    }
+
+    public static Result downloadMeasurementData(){
+        List<DiaryMeasurement> measurements = new LinkedList<>();
+        measurements.addAll(Glucose.find.all());
+        measurements.addAll(Insulin.find.all());
+
+        String fileName = "privateData/temp/measurementdata.json";
+        try{
+            FileWriter file = new FileWriter(fileName);
+            file.write(toJson(measurements).toString());
+            file.close();
+            return ok(new File(fileName));
+        } catch (IOException e) {
+            Logger.error("[Admin > downloadUserLog] IOException writing measurementdata " + e.getMessage());
+            return noContent();
+        }
     }
 
     public static Result getBehaviors(){
@@ -548,10 +610,10 @@ public class Admin extends Controller {
     private static class AdminAuthentication {
 
         public static AdminAuthenticationResult authenticate(){
-            if(session().isEmpty() || session().get("email") == null){
+            if(session().isEmpty() || session().get("userName") == null){
                 return new AdminAuthenticationResult(false, redirect(routes.Application.login()));
             }
-            UserMyPAL user = UserMyPAL.byEmail(session().get("email"));
+            UserMyPAL user = UserMyPAL.byUserName(session().get("userName"));
             if(user.getUserType() != UserType.ADMIN){
                 return new AdminAuthenticationResult(false, forbidden(no_access.render()));
             }

@@ -3,18 +3,18 @@
 @import play.api.i18n._
 <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/ekko-lightbox.min.css")'>
 
-<div id="diaryActivityTypeSelecter" class="row form-group @if(errorMessage != "") {has-error}">
+<div id="diaryActivityTypeSelecter" class="row text-left form-group @if(errorMessage != "") {has-error}">
     <label class="col-sm-2 control-label">@label</label>
     @for((uType, index) <- types.zipWithIndex){
         @if(index % 5 == 0){
             <div class="row text-left">
                 @if(index >= 5){
-                    <label  class="col-sm-offset-4 col-sm-1 text-center">
+                    <label  class="col-sm-offset-4 col-sm-1 text-left">
                 }else{
-                    <label  class="col-sm-offset-2 col-sm-1 text-center">
+                    <label  class="col-sm-offset-2 col-sm-1 text-left">
                 }
         }else{
-            <label  class="col-sm-1 text-center">
+            <label  class="col-sm-1 text-left">
         }
             @if(uType.getName == Messages("page.diary.calendar.activitytype.MEAL")){
                 <input type="radio" name='diaryActivityType' class="ismeal" value="@uType.getId" @if(preselected == uType.getName){checked="checked"} @if(preselected == "" && index == 0){checked="checked"} />

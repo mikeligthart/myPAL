@@ -32,7 +32,7 @@ public class DiaryActivityToHTML {
     private int startHour, startMin, endHour, endMin;
     private String type, description, emotion, date, emotionPicture, picture, color, viewURL,
             startTime, endTime, hasPictureString, shortDescription, firstName, lastName, fullPicture, email,
-            longDescription;
+            longDescription, name;
     private double value;
     private boolean hasPicture, isMeal;
 
@@ -77,13 +77,13 @@ public class DiaryActivityToHTML {
         }
         firstName = diaryActivity.getUser().getFirstName();
         lastName = diaryActivity.getUser().getLastName();
-        email = diaryActivity.getUser().getEmail();
+        email = diaryActivity.getUser().getUserName();
         if(description.length() <= longDescriptionMaxLength){
             longDescription = description;
         } else {
             longDescription = description.substring(0, longDescriptionMaxLength) + "...";
         }
-
+        name = diaryActivity.getName();
     }
 
     public static List<DiaryActivityToHTML> fromListToList(List<DiaryActivity> activities){
@@ -313,5 +313,13 @@ public class DiaryActivityToHTML {
 
     public void setIsMeal(boolean isMeal) {
         this.isMeal = isMeal;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,35 +1,35 @@
 {
     "data": [
         {
-            "email":"test1@email.com",
+            "userName":"test1@userName.com",
             "firstName":"Bob",
             "lastName":"Test1",
             "password":"secret",
             "userType":0
         },
         {
-            "email":"mike.ligthart@gmail.com",
+            "userName":"mike.ligthart@gmail.com",
             "firstName":"Mike",
             "lastName":"Ligthart",
             "password":"mike",
             "userType":4
         },
         {
-            "email":"test2@email.com",
+            "userName":"test2@userName.com",
             "firstName":"Henk",
             "lastName":"Test2",
             "password":"secret",
             "userType":1
         },
         {
-            "email":"test3@email.com",
+            "userName":"test3@userName.com",
             "firstName":"Jan",
             "lastName":"Test3",
             "password":"secret",
             "userType":2
         },
         {
-            "email":"test4@email.com",
+            "userName":"test4@userName.com",
             "firstName":"Piet",
             "lastName":"Test4",
             "password":"secret",

@@ -57,7 +57,7 @@ public class MeasurementToHTML {
         value = Double.toString(measurement.getValue());
         daypart = measurement.getDaypart().toString();
         date = dateFormatter.format(measurement.getDate());
-        user=measurement.getUser().getEmail();
+        user=measurement.getUser().getUserName();
 
         if (measurement instanceof Glucose){
             diaryMeasurementType = DiaryMeasurementType.GLUCOSE;

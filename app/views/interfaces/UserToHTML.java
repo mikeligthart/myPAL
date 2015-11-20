@@ -29,13 +29,13 @@ import java.util.List;
 public class UserToHTML {
 
 
-    private String email,firstName,lastName, birthdate, userType, lastActivity, gluconlineID;
+    private String userName,firstName,lastName, birthdate, userType, lastActivity, gluconlineID;
     int age;
     private List<LogAction> logActions;
     private boolean validGluconlineID;
 
     public UserToHTML(UserMyPAL user){
-        email = user.getEmail();
+        userName = user.getUserName();
         firstName = user.getFirstName();
         lastName = user.getLastName();
         birthdate = new SimpleDateFormat(ConfigFactory.load().getString("date.format")).format(user.getBirthdate());
@@ -60,12 +60,12 @@ public class UserToHTML {
         return htmlReadyUsers;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFirstName() {

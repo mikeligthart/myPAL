@@ -60,7 +60,7 @@ public class LogAction extends Model {
     }
 
     public static void log(String email, LogActionType type){
-        UserMyPAL user = UserMyPAL.byEmail(email);
+        UserMyPAL user = UserMyPAL.byUserName(email);
         user.addLogAction(type);
         user.update();
     }

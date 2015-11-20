@@ -31,13 +31,13 @@ public class AvatarReasoner {
         if(avatarReasoners == null){
             avatarReasoners = new HashMap<>();
             reasoner = new AvatarReasoner(user);
-            avatarReasoners.put(user.getEmail(), reasoner);
+            avatarReasoners.put(user.getUserName(), reasoner);
         } else {
-            if(avatarReasoners.containsKey(user.getEmail())){
-                reasoner = avatarReasoners.get(user.getEmail());
+            if(avatarReasoners.containsKey(user.getUserName())){
+                reasoner = avatarReasoners.get(user.getUserName());
             } else {
                 reasoner = new AvatarReasoner(user);
-                avatarReasoners.put(user.getEmail(), reasoner);
+                avatarReasoners.put(user.getUserName(), reasoner);
             }
         }
         return reasoner;

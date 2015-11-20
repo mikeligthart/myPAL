@@ -8,7 +8,6 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import util.AppException;
 import util.RegistrationToDisk;
-import views.html.registration.*;
 
 import static play.data.Form.form;
 
@@ -46,7 +45,7 @@ public class Registration extends Controller {
 
         //Create new user with this data
         UserMyPAL user = new UserMyPAL();
-        user.setEmail(emailName + "@pal4u.eu");
+        user.setUserName(emailName + "@pal4u.eu");
         user.setFirstName(firstName);
         user.setLastName("Kamp");
         user.setBirthdate("20/10/" + (2015 - age));
@@ -60,7 +59,7 @@ public class Registration extends Controller {
 
         //Add user to session
         session().clear();
-        session("email", user.getEmail());
+        session("userName", user.getUserName());
 
         return redirect(routes.Diary.diary());
     }

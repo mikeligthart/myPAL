@@ -228,13 +228,13 @@ extends play.mvc.Controller</pre>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static play.mvc.Result</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../controllers/Admin.html#deleteUser-java.lang.String-">deleteUser</a></span>(java.lang.String&nbsp;email)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../controllers/Admin.html#deleteUser-java.lang.String-">deleteUser</a></span>(java.lang.String&nbsp;userName)</code>
 <div class="block">Deletes provided existing user</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static play.mvc.Result</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../controllers/Admin.html#getUserLog-java.lang.String-">getUserLog</a></span>(java.lang.String&nbsp;email)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../controllers/Admin.html#getUserLog-java.lang.String-">getUserLog</a></span>(java.lang.String&nbsp;userName)</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static play.mvc.Result</code></td>
@@ -242,13 +242,13 @@ extends play.mvc.Controller</pre>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static play.mvc.Result</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../controllers/Admin.html#updatePageUser-java.lang.String-">updatePageUser</a></span>(java.lang.String&nbsp;email)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../controllers/Admin.html#updatePageUser-java.lang.String-">updatePageUser</a></span>(java.lang.String&nbsp;userName)</code>
 <div class="block">Page that provides a pre-filled form to update an existing user</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>static play.mvc.Result</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../controllers/Admin.html#updateUser-java.lang.String-">updateUser</a></span>(java.lang.String&nbsp;email)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../controllers/Admin.html#updateUser-java.lang.String-">updateUser</a></span>(java.lang.String&nbsp;userName)</code>
 <div class="block">Listener for a POST request.</div>
 </td>
 </tr>
@@ -260,7 +260,7 @@ extends play.mvc.Controller</pre>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>static play.mvc.Result</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../controllers/Admin.html#viewUser-java.lang.String-">viewUser</a></span>(java.lang.String&nbsp;email)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../controllers/Admin.html#viewUser-java.lang.String-">viewUser</a></span>(java.lang.String&nbsp;userName)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -348,11 +348,11 @@ extends play.mvc.Controller</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>updatePageUser</h4>
-<pre>public static&nbsp;play.mvc.Result&nbsp;updatePageUser(java.lang.String&nbsp;email)</pre>
+<pre>public static&nbsp;play.mvc.Result&nbsp;updatePageUser(java.lang.String&nbsp;userName)</pre>
 <div class="block">Page that provides a pre-filled form to update an existing user</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>email</code> - id for an existing user that needs to be updated</dd>
+<dd><code>userName</code> - id for an existing user that needs to be updated</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>update page for a existing user</dd>
 </dl>
@@ -364,10 +364,10 @@ extends play.mvc.Controller</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>viewUser</h4>
-<pre>public static&nbsp;play.mvc.Result&nbsp;viewUser(java.lang.String&nbsp;email)</pre>
+<pre>public static&nbsp;play.mvc.Result&nbsp;viewUser(java.lang.String&nbsp;userName)</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>email</code> - id for existing user that needs to be viewed</dd>
+<dd><code>userName</code> - id for existing user that needs to be viewed</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>page with all info on selected existing user</dd>
 </dl>
@@ -406,11 +406,11 @@ extends play.mvc.Controller</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>updateUser</h4>
-<pre>public static&nbsp;play.mvc.Result&nbsp;updateUser(java.lang.String&nbsp;email)</pre>
+<pre>public static&nbsp;play.mvc.Result&nbsp;updateUser(java.lang.String&nbsp;userName)</pre>
 <div class="block">Listener for a POST request. Updates an existing user from a form.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>email</code> - - id of user that needs to be updated</dd>
+<dd><code>userName</code> - - id of user that needs to be updated</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>redirect to admin users page</dd>
 </dl>
@@ -422,11 +422,11 @@ extends play.mvc.Controller</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>deleteUser</h4>
-<pre>public static&nbsp;play.mvc.Result&nbsp;deleteUser(java.lang.String&nbsp;email)</pre>
+<pre>public static&nbsp;play.mvc.Result&nbsp;deleteUser(java.lang.String&nbsp;userName)</pre>
 <div class="block">Deletes provided existing user</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>email</code> - - id for an existing user</dd>
+<dd><code>userName</code> - - id for an existing user</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>ok 200</dd>
 </dl>
@@ -438,10 +438,10 @@ extends play.mvc.Controller</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getUserLog</h4>
-<pre>public static&nbsp;play.mvc.Result&nbsp;getUserLog(java.lang.String&nbsp;email)</pre>
+<pre>public static&nbsp;play.mvc.Result&nbsp;getUserLog(java.lang.String&nbsp;userName)</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>email</code> - id for existing user</dd>
+<dd><code>userName</code> - id for existing user</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>JsonNode containing LogAction items for provided user</dd>
 </dl>

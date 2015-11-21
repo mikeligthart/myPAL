@@ -1,11 +1,14 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import controllers.goals.GoalFactory;
 import models.UserMyPAL;
 import controllers.avatar.AvatarReasoner;
 import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorSelection.decisionInformation.AvatarTrigger;
-import org.joda.time.DateTime;
+import models.goals.Goal;
+import models.goals.GoalTarget;
+import models.goals.GoalType;
 import util.DiarySettings;
 import util.DiarySettingsManager;
 import models.diary.activity.*;
@@ -27,7 +30,7 @@ import views.html.diary.calendar.activity.*;
 import views.html.diary.calendar.diary_calendar;
 import views.html.diary.calendar.measurement.*;
 import views.html.diary.gallery.*;
-import views.html.diary.goals.diary_goals;
+import views.html.diary.goals.*;
 import views.interfaces.DiaryActivityToHTML;
 import views.interfaces.MeasurementToHTML;
 
@@ -106,11 +109,16 @@ public class Diary extends Controller {
         LogAction.log(userName, LogActionType.ACCESSGOALS);
 
         //Generate AvatarBehavior
-        //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
         List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.PAGE));
 
-        return ok(diary_goals.render(user.getUserType(), avatarBehavior));
+        //Load goals
+        List<Goal> pendingDaily = GoalFactory.getGoals(user, false, GoalType.DAILY);
+        List<Goal> metDaily = GoalFactory.getGoals(user, true, GoalType.DAILY);
+        List<Goal> pendingTotal = GoalFactory.getGoals(user, false, GoalType.TOTAL);
+        List<Goal> metTotal = GoalFactory.getGoals(user, true, GoalType.TOTAL);
+
+        return ok(diary_goals.render(user, pendingDaily, metDaily, pendingTotal, metTotal, avatarBehavior));
     }
 
     public static Result gallery(){
@@ -423,6 +431,32 @@ public class Diary extends Controller {
         LogAction.log(userName, LogActionType.UPDATEINSULIN);
 
         return ok(diary_calendar_insulin_update.render(user, insulinForm, id));
+    }
+
+    public static Result addGoalDailyPage(){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("userName") == null) {
+            return redirect(routes.Application.login());
+        }
+        String userName = session().get("userName");
+        UserMyPAL user = UserMyPAL.byUserName(userName);
+
+        LogAction.log(userName, LogActionType.ACCESSGOALADDDAILYPAGE);
+
+        return ok(diary_goals_add_dailyGoal.render(user));
+    }
+
+    public static Result addGoalTotalPage(){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("userName") == null) {
+            return redirect(routes.Application.login());
+        }
+        String userName = session().get("userName");
+        UserMyPAL user = UserMyPAL.byUserName(userName);
+
+        LogAction.log(userName, LogActionType.ACCESSGOALADDTOTALPAGE);
+
+        return ok(diary_goals_add_totalGoal.render(user));
     }
 
 
@@ -1143,5 +1177,89 @@ public class Diary extends Controller {
         }
 
         return redirect(routes.Diary.calendar());
+    }
+
+    public static Result addGoalDaily(){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("userName") == null) {
+            return redirect(routes.Application.login());
+        }
+        String userName = session().get("userName");
+        UserMyPAL user = UserMyPAL.byUserName(userName);
+
+        //Retrieve information from html form
+        DynamicForm requestData = form().bindFromRequest();
+        GoalTarget target = GoalTarget.valueOf(requestData.get("target"));
+        int targetValue = Integer.valueOf(requestData.get("targetValue"));
+
+
+        //Create new goal
+        Goal goal = new Goal();
+        goal.setUser(user);
+        goal.setGoalType(GoalType.DAILY);
+        goal.setTarget(target);
+        goal.setTargetValue(targetValue);
+        goal.save();
+
+        //Log action
+        LogAction.log(userName, LogActionType.ADDEDGOALDAILY);
+
+        //Return to goal overview page
+        return redirect(routes.Diary.goals());
+    }
+
+    public static Result addGoalTotal(){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("userName") == null) {
+            return redirect(routes.Application.login());
+        }
+        String userName = session().get("userName");
+        UserMyPAL user = UserMyPAL.byUserName(userName);
+
+        //Retrieve information from html form
+        DynamicForm requestData = form().bindFromRequest();
+        GoalTarget target = GoalTarget.valueOf(requestData.get("target"));
+        int targetValue = Integer.valueOf(requestData.get("targetValue"));
+
+        //Create new goal
+        Goal goal = new Goal();
+        goal.setUser(user);
+        goal.setGoalType(GoalType.TOTAL);
+        goal.setTarget(target);
+        goal.setTargetValue(targetValue);
+        goal.save();
+
+        //Log action
+        LogAction.log(userName, LogActionType.ADDEDGOALTOTAL);
+
+        //Return to goal overview page
+        return redirect(routes.Diary.goals());
+    }
+
+    public static Result deleteGoal(int id){
+        //Check whether a user is logged in
+        if (session().isEmpty() || session().get("userName") == null) {
+            return redirect(routes.Application.login());
+        }
+        String userName = session().get("userName");
+        UserMyPAL user = UserMyPAL.byUserName(userName);
+
+        //Check if user has access to view this activity
+        Goal goal = Goal.byID(id);
+        if(goal == null){
+            return forbidden();
+        }
+        if(!goal.getUser().equals(user)) {
+            return forbidden();
+        }
+
+        //Remove goal
+        goal.setUser(null);
+        goal.delete();
+
+        //Log user behavior
+        LogAction.log(userName, LogActionType.DELETEGOAL);
+
+        return redirect(routes.Diary.goals());
     }
 }

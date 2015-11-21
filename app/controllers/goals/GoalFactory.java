@@ -1,16 +1,21 @@
 package controllers.goals;
 
+import controllers.routes;
 import models.UserMyPAL;
 import models.diary.activity.DiaryActivity;
 import models.diary.activity.Picture;
 import models.diary.measurement.DiaryMeasurement;
+import models.goals.Goal;
 import models.goals.GoalTarget;
+import models.goals.GoalType;
 import models.logging.LogAction;
 import play.i18n.Messages;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * myPAL
@@ -25,6 +30,8 @@ import java.util.Date;
  * @version 1.0 20-11-2015
  */
 public class GoalFactory {
+
+    private  static final String GOALICONROOT = routes.Assets.at("images/goalIcons/").url();
 
     public static int getCurrentValue(GoalTarget target, UserMyPAL user, Date startDate, Date deadline){
         java.sql.Date start = new java.sql.Date(startDate.getTime());
@@ -42,15 +49,6 @@ public class GoalFactory {
                 return DiaryActivity.addedFromYesterday(user, start, end) +
                         DiaryMeasurement.addedFromYesterday(user, start, end) +
                         Picture.addedFromYesterday(user, start, end);
-            case LOGINS:
-                LocalDate localStart = start.toLocalDate();
-                int nLogins = 0;
-                for(int day = 0; day < Duration.between(localStart, end.toLocalDate()).toDays(); day++){
-                    if(LogAction.logInByUserAndDate(user, java.sql.Date.valueOf(localStart.plusDays(day)))){
-                        nLogins++;
-                    }
-                }
-                return nLogins;
             case CONACTIVITIES:
                 int nConActivities = 0;
                 int nConActivitiesHighest = 0;
@@ -123,8 +121,6 @@ public class GoalFactory {
                 return Messages.get("model.goal.addXPictures");
             case ADDxYESTERDAY:
                 return Messages.get("model.goal.addXYesterday");
-            case LOGINS:
-                return Messages.get("model.goal.addXLogins");
             case CONACTIVITIES:
                 return Messages.get("model.goal.addConActivities");
             case CONMEASUREMENTS:
@@ -136,5 +132,115 @@ public class GoalFactory {
             default:
                 return Messages.get("model.goal.noTargetFound");
         }
+    }
+
+    public static String getName(GoalTarget target){
+        switch(target){
+
+            case ADDxACTIVITIES:
+                return Messages.get("model.goal.activities");
+            case ADDxMEASUREMENTS:
+                return Messages.get("model.goal.measurements");
+            case ADDxPICTURES:
+                return Messages.get("model.goal.pictures");
+            case ADDxYESTERDAY:
+                return Messages.get("model.goal.yesterday");
+            case CONACTIVITIES:
+                return Messages.get("model.goal.conActivities");
+            case CONMEASUREMENTS:
+                return Messages.get("model.goal.conMeasurements");
+            case CONPICTURES:
+                return Messages.get("model.goal.conPictures");
+            case CONLOGINS:
+                return Messages.get("model.goal.conLogins");
+            default:
+                return Messages.get("model.goal.noTargetFound");
+        }
+    }
+
+    public static String getIcon(GoalTarget target){
+        switch(target){
+            case ADDxACTIVITIES:
+                return GOALICONROOT + "activitiesX.png";
+            case ADDxMEASUREMENTS:
+                return GOALICONROOT + "measurementsX.png";
+            case ADDxPICTURES:
+                return GOALICONROOT + "picturesX.png";
+            case ADDxYESTERDAY:
+                return GOALICONROOT + "yesterdayX.png";
+            case CONACTIVITIES:
+                return GOALICONROOT + "activitiesCon.png";
+            case CONMEASUREMENTS:
+                return GOALICONROOT + "measurementsCon.png";
+            case CONPICTURES:
+                return GOALICONROOT + "picturesCon.png";
+            case CONLOGINS:
+                return GOALICONROOT + "loginCon.png";
+            default:
+                return GOALICONROOT + "noGoal.png";
+        }
+    }
+
+    public static String getIconWhenMet(GoalTarget target){
+        switch(target){
+            case ADDxACTIVITIES:
+                return GOALICONROOT + "activitiesX-met.png";
+            case ADDxMEASUREMENTS:
+                return GOALICONROOT + "measurementsX-met.png";
+            case ADDxPICTURES:
+                return GOALICONROOT + "picturesX-met.png";
+            case ADDxYESTERDAY:
+                return GOALICONROOT + "yesterdayX-met.png";
+            case CONACTIVITIES:
+                return GOALICONROOT + "activitiesCon-met.png";
+            case CONMEASUREMENTS:
+                return GOALICONROOT + "measurementsCon-met.png";
+            case CONPICTURES:
+                return GOALICONROOT + "picturesCon-met.png";
+            case CONLOGINS:
+                return GOALICONROOT + "loginCon-met.png";
+            default:
+                return GOALICONROOT + "noGoal-met.png";
+        }
+    }
+
+    public static List<GoalTarget> getDailyTargets(){
+        List<GoalTarget> dailyTargets = new LinkedList<>();
+        dailyTargets.add(GoalTarget.ADDxACTIVITIES);
+        dailyTargets.add(GoalTarget.ADDxMEASUREMENTS);
+        dailyTargets.add(GoalTarget.ADDxPICTURES);
+        dailyTargets.add(GoalTarget.ADDxYESTERDAY);
+        return dailyTargets;
+    }
+
+    public static List<GoalTarget> getTotalTargets(){
+        List<GoalTarget> totalTargets = new LinkedList<>();
+        totalTargets.add(GoalTarget.CONLOGINS);
+        totalTargets.add(GoalTarget.CONACTIVITIES);
+        totalTargets.add(GoalTarget.CONMEASUREMENTS);
+        totalTargets.add(GoalTarget.CONPICTURES);
+        return totalTargets;
+    }
+
+    public static int dailyTargetsSize(){
+        return getDailyTargets().size();
+    }
+
+    public static int totalTargetsSize(){
+        return getTotalTargets().size();
+    }
+
+    public static List<Goal> getGoals(UserMyPAL user, boolean met, GoalType type){
+        List<Goal> goals = Goal.getGoalsPerType(user, type);
+        List<Goal> filteredGoals = new LinkedList<>();
+
+        for(Goal goal : goals){
+            if(goal.isMet() == met){
+                filteredGoals.add(goal);
+            }
+            goal.update();
+        }
+
+        return filteredGoals;
     }
 }

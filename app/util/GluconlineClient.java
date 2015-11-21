@@ -13,10 +13,13 @@ import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import javax.crypto.Mac;
@@ -189,6 +192,7 @@ public class GluconlineClient {
                 insulin.setValue(Double.parseDouble(insulinValueNode.get("unit").asText()));
                 insulin.setDaypart(dayPartEnum);
                 insulin.setComment(insulinValueNode.get("comment").asText());
+                insulin.setAdded(Timestamp.valueOf(LocalDateTime.now()));
                 if(!Insulin.exists(insulin)){
                     insulin.save();
                 }
@@ -219,6 +223,7 @@ public class GluconlineClient {
                 glucose.setValue(Double.parseDouble(glucoseNode.get("value").asText()));
                 glucose.setDaypart(stringToDayPart(dayPartString));
                 glucose.setComment(glucoseNode.get("comment").asText());
+                glucose.setAdded(Timestamp.valueOf(LocalDateTime.now()));
                 if(!Glucose.exists(glucose)) {
                     glucose.save();
                 }

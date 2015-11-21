@@ -9,7 +9,7 @@
     text-align: center;
 }
 
-.registrationMain{
+.registrationMainregistrationMain{
     margin-top:50px;
 }
 
@@ -106,6 +106,10 @@
     margin-top: 25px;
 }
 
+.green{
+    color: #90d23d;
+}
+
 #timeline{
   margin-top: 5%;
 }
@@ -121,6 +125,18 @@
 
 .addactivitybutton{
   margin-top: 10px;
+}
+
+.setGoal{
+    padding-top: 25px;
+}
+
+.goalViewButton{
+    color: transparent; background-color: transparent; border-color: transparent;
+}
+
+.goalViewButton:hover {
+    background-color: yellow;
 }
 
 .buttonWithNavBar {

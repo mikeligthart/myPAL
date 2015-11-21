@@ -3,6 +3,7 @@ package models.goals;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import controllers.goals.GoalFactory;
 import models.UserMyPAL;
+import play.Logger;
 import play.db.ebean.Model;
 import play.i18n.Messages;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.time.Instant;
+import java.util.List;
 
 /**
  * myPAL
@@ -43,6 +45,9 @@ public class Goal extends Model {
     @Temporal(TemporalType.DATE)
     private Date deadline;
 
+    @Temporal(TemporalType.DATE)
+    private Date metAt;
+
     private boolean met;
 
     @OneToMany
@@ -56,6 +61,7 @@ public class Goal extends Model {
     public Goal(){
         startDate = Date.from(Instant.now());
         met = false;
+        metAt = null;
     }
 
     public String getProgress(){
@@ -142,6 +148,14 @@ public class Goal extends Model {
         this.user = user;
     }
 
+    public Date getMetAt() {
+        return metAt;
+    }
+
+    public void setMetAt(Date metAt) {
+        this.metAt = metAt;
+    }
+
     private boolean isDeadlinePassed(){
         return (Instant.now().compareTo(deadline.toInstant()) > 0);
     }
@@ -149,7 +163,21 @@ public class Goal extends Model {
 
     private void checkIfGoalIsMet(){
         if(!met) {
-            met = (GoalFactory.getCurrentValue(target, user, startDate, deadline) == targetValue);
+            Logger.debug("[Goal > checkIfGoalIsMet()] checking for " + target.name() + ": currentValue: " + GoalFactory.getCurrentValue(target, user, startDate, deadline) + ", targetValue " + targetValue);
+            met = (GoalFactory.getCurrentValue(target, user, startDate, deadline) >= targetValue);
+            if(met){
+                metAt = new Date();
+            }
         }
+    }
+
+    public static Finder<Integer, Goal> find = new Finder<Integer, Goal>(Integer.class, Goal.class);
+
+    public static Goal byID(int id) {
+        return find.byId(id);
+    }
+
+    public static List<Goal> getGoalsPerType(UserMyPAL user, GoalType type){
+        return find.where().eq("user", user).eq("goalType", type).findList();
     }
 }

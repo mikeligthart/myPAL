@@ -1,12 +1,155 @@
-@(userType: UserType, avatarBehaviors: List[models.avatar.behaviorDefinition.AvatarBehavior])
+@(user: UserMyPAL, pendingDaily: List[models.goals.Goal], metDaily: List[models.goals.Goal], pendingTotal: List[models.goals.Goal], metTotal: List[models.goals.Goal], avatarBehaviors: List[models.avatar.behaviorDefinition.AvatarBehavior])
 
 @import play.api.i18n._
 
-@views.html.diary.diary(Messages("page.diary.base.goals"), "goals", userType, avatarBehaviors) {
+@views.html.diary.diary(Messages("page.diary.base.goals"), "goals", user.getUserType, avatarBehaviors) {
 
+    <div class="text-center"><h1>@Messages("page.diary.base.goals")</h1></div>
 
-<div class="starter-template">
-    <h1>@Messages("page.diary.base.goals")</h1>
-    <p class="lead">@Messages("page.diary.goals.tobeimplemented")</p>
+    <div class="row">
+        <div class="col-md-4 text-left">
+            <br />
+            <a href="@routes.Diary.addGoalDailyPage()" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.goals.add.daily.page")</a>
+        </div>
+        <div class="col-md-4 text-center">
+            <h2>Dagdoelen</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 text-left">
+            <h3>Actief</h3>
+        </div>
+    </div>
+
+    @if(pendingDaily.size > 0){
+        @for(goal <- pendingDaily){
+            <div class="row text-left">
+                <div class="col-md-2"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIcon(goal.getTarget)"></div>
+                <div class="col-md-4">@goal.getProgress</div>
+                <div class="col-md-2"><a href="@routes.Diary.deleteGoal(goal.getId)" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></div>
+            </div>
+        }
+    } else {
+        <div class="row">
+            <div class="col-md-8 text-left">
+                <h4>Er zijn geen actieve dagdoelen</h4>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-8 text-left">
+            <h3>Behaald</h3>
+        </div>
+    </div>
+    @if(metDaily.size > 0){
+        @for((goal, index) <- metDaily.zipWithIndex){
+            @if(index % 6 == 0){
+                <div class="row ">
+            }
+                <div class="col-md-1 text-left portfolio-item">
+                    <button class="goalViewButton" value="@goal.getId"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIconWhenMet(goal.getTarget)"></button>
+                </div>
+            @if((index+1) % 6 == 0){
+                </div>
+            }
+        }
+
+        @if(metDaily.size == 1 || metDaily.size % 6 != 0){
+            </div>
+        }
+
+        @for(goal <- metDaily){
+            <div class="row goalView" id="goalView@goal.getId" style="display:none;">
+                <div class="col-md-8 text-left">
+                    <h4>Doelinformatie</h4>
+                    Ik heb op @goal.getMetAt @goal.getTargetValue @controllers.goals.GoalFactory.getName(goal.getTarget) toegevoegd.
+                </div>
+            </div>
+        }
+
+    } else {
+        <div class="row">
+            <div class="col-md-8 text-left">
+                <h4>Je hebt nog geen dagdoelen behaald.</h4>
+            </div>
+        </div>
+    }
+
+    <div class="buttonWithNavBar">
+        <hr />
+    </div>
+
+<div class="row buttonWithNavBar">
+    <div class="col-md-4 text-left">
+        <br />
+        <a href="@routes.Diary.addGoalTotalPage()" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.goals.add.total.page")</a>
+    </div>
+    <div class="col-md-4 text-center">
+        <h2>Herhaaldoelen</h2>
+    </div>
 </div>
+<div class="row">
+    <div class="col-md-8 text-left">
+        <h3>Actief</h3>
+    </div>
+</div>
+
+    @if(pendingTotal.size > 0){
+        @for(goal <- pendingTotal){
+            <div class="row text-left">
+                <div class="col-md-2"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIcon(goal.getTarget)"></div>
+                <div class="col-md-4">@goal.getProgress</div>
+                <div class="col-md-2"><a href="@routes.Diary.deleteGoal(goal.getId)" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></div>
+            </div>
+        }
+    } else {
+        <div class="row">
+            <div class="col-md-8 text-left">
+                <h4>Er zijn geen actieve herhaaldoelen</h4>
+            </div>
+        </div>
+     }
+
+    <div class="row">
+        <div class="col-md-8 text-left">
+            <h3>Behaald</h3>
+        </div>
+    </div>
+
+    @if(metTotal.size > 0){
+        @for((goal, index) <- metTotal.zipWithIndex){
+            @if(index % 6 == 0){
+                <div class="row ">
+            }
+            <div class="col-md-1 text-left portfolio-item">
+                <img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIconWhenMet(goal.getTarget)">
+            </div>
+            @if((index+1) % 6 == 0){
+                </div>
+            }
+        }
+
+        @if(metTotal.size == 1 || metTotal.size-1 % 6 != 0){
+            </div>
+        }
+    } else {
+        <div class="row">
+            <div class="col-md-8 text-left">
+                <h4>Je hebt nog geen herhaaldoelen behaald.</h4>
+            </div>
+        </div>
+    }
+
+    <script>
+        $(".goalViewButton").click(function(e) {
+            e.preventDefault();
+            goalId = $(this).attr("value");
+            $(".goalView").hide();
+            $("#goalView" + goalId).show();
+        });
+
+    </script>
+
+
 }

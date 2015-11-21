@@ -43,6 +43,11 @@ POST    /mypal/adddiaryactivitytype/:source/:id     controllers.Diary.addDiaryAc
 GET     /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiaryActivityTypePage(source:String, id:Int)
 POST    /mypal/removediaryactivitytype/:source/:id  controllers.Diary.removeDiaryActivityType(source:String, id:Int)
 GET     /mypal/gluconline                           controllers.Diary.gluconline()
+GET     /mypal/goals/add/daily                      controllers.Diary.addGoalDailyPage()
+POST    /mypal/goals/add/daily                      controllers.Diary.addGoalDaily()
+GET     /mypal/goals/add/total                      controllers.Diary.addGoalTotalPage()
+POST    /mypal/goals/add/total                      controllers.Diary.addGoalTotal()
+GET     /mypal/goals/delete/:id                     controllers.Diary.deleteGoal(id: Int)
 
 # Measurement #
 GET     /mypal/measurement/select                   controllers.Diary.selectMeasurement()

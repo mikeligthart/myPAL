@@ -22,15 +22,23 @@ model.avatarLineVariables.firstName=Voornaam van gebruiker
 
 ## Goal ##
 model.goal.failed=Niet gelukt
-model.goal.addXAcitivites=Aantal toegevoegde activiteiten
-model.goal.addXMeasurements=Aantal toegevoegde metingen
-model.goal.addXPictures=Aantal toegevoegde foto's
-model.goal.addXLogins=Aantal keer inloggen
-model.goal.addConActivities=Aantal keer achter elkaar inlogggen
-model.goal.addConMeasurements=Aantal keer achter elkaar inlogggen
-model.goal.addConPictures=Aantal keer achter elkaar inlogggen
-model.goal.addConLogins=Aantal keer achter elkaar inlogggen
-model.goal.noTargetFound=Dit type doel bestaat niet
+model.goal.addXActivities=activiteit(en) toevoegen
+model.goal.addXMeasurements=meting(en) toevoegen
+model.goal.addXPictures=foto('s) toevoegen
+model.goal.addXYesterday=activiteit(en) van gister toevoegen
+model.goal.addConActivities=activiteit toevoegen.
+model.goal.addConMeasurements=meting toevoegen.
+model.goal.addConPictures=foto toevoegen.
+model.goal.addConLogins=keer inloggen.
+model.goal.noTargetFound=[Error: dit type doel bestaat niet]
+model.goal.activities=Activiteiten
+model.goal.measurements=Metingen
+model.goal.pictures=Foto's
+model.goal.yesterday=Activiteiten van gister
+model.goal.conActivities=Activiteit
+model.goal.conMeasurements=Meting
+model.goal.conPictures=Foto
+model.goal.conLogins=Inloggen
 
 ### PAGES ###
 ## General ##
@@ -148,6 +156,16 @@ page.diary.gallery.addthispicture=Koppel deze foto aan de activiteit
 
 # Goals #
 page.diary.goals.tobeimplemented=De doelensectie is nog niet geïmplementeerd.
+page.diary.goals.view=Bekijk
+page.diary.goals.set.igo=Ik ga
+page.diary.goals.daily.set=binnen één dag.
+page.diary.goals.total.set=dagen achter elkaar tenminste één
+page.diary.goals.daily.add=Dagdoel toevoegen
+page.diary.goals.total.add=Herhaaldoel toevoegen
+page.diary.goals.add.daily.page=Dagdoel toevoegen
+page.diary.goals.add.total.page=Herhaaldoel toevoegen
+page.diary.goals.select=Bekijk een doel, vul hem aan en voeg hem toe.
+page.diary.goals.donotadd=Niks toevoegen
 
 ## Admin ##
 # Base #

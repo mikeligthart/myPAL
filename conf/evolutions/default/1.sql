@@ -102,10 +102,11 @@ create table goal (
   target_value              integer,
   start_date                timestamp,
   deadline                  timestamp,
+  met_at                    timestamp,
   met                       boolean,
   goal_type                 varchar(5),
   user_user_name            varchar(255),
-  constraint ck_goal_target check (target in ('ADDxACTIVITIES','ADDxMEASUREMENTS','ADDxPICTURES','ADDxYESTERDAY','LOGINS','CONACTIVITIES','CONMEASUREMENTS','CONPICTURES','CONLOGINS')),
+  constraint ck_goal_target check (target in ('ADDxACTIVITIES','ADDxMEASUREMENTS','ADDxPICTURES','ADDxYESTERDAY','CONACTIVITIES','CONMEASUREMENTS','CONPICTURES','CONLOGINS')),
   constraint ck_goal_goal_type check (goal_type in ('DAILY','TOTAL')),
   constraint pk_goal primary key (id))
 ;
@@ -130,7 +131,7 @@ create table log_action (
   timestamp                 timestamp,
   type                      integer,
   user_user_name            varchar(255),
-  constraint ck_log_action_type check (type in (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36)),
+  constraint ck_log_action_type check (type in (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41)),
   constraint pk_log_action primary key (id))
 ;
 

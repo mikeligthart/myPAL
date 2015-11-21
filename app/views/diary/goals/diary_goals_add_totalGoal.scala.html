@@ -1,0 +1,77 @@
+@(user: UserMyPAL)
+
+@import play.api.i18n._
+
+@views.html.diary.diary_no_avatar(Messages("page.diary.base.goals"), "goals", user.getUserType) {
+
+<div class="text-center">
+    <h1>@Messages("page.diary.goals.add.total.page")</h1>
+    <h3>@Messages("page.diary.goals.select")</h3>
+</div>
+
+<div class="text-left calendarinfo">
+    @for((target, index) <- controllers.goals.GoalFactory.getTotalTargets().zipWithIndex){
+    @if(index % 4 == 0){
+    <div class="row">
+        }
+        <div class="col-md-3 portfolio-item">
+            <p class="targetName @if(index == 0){green}" id="targetName@target.name"><b><i>@controllers.goals.GoalFactory.getName(target)</i></b></p>
+            <img class="img-responsive" src="@controllers.goals.GoalFactory.getIcon(target)" alt="@target.name">
+            <br />
+            <button class="btn @if(index == 0){btn-primary}else{btn-default} selectGoalTarget" value="@target.name">@Messages("page.diary.goals.view")</button>
+        </div>
+        @if((index+1) % 4 == 0){
+    </div>
+    }
+    }
+
+    @if(controllers.goals.GoalFactory.totalTargetsSize() == 1 || controllers.goals.GoalFactory.totalTargetsSize()-1 % 4 != 0){
+</div>
+}
+</div>
+
+<form action="@routes.Diary.addGoalTotal()" method="post">
+    <div class="row buttonWithNavBar">
+        <div class="col-md-12 text-center"><h3>
+            @Messages("page.diary.goals.set.igo")
+            <select id="targetValue" name="targetValue">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+            @Messages("page.diary.goals.total.set")
+            @for((target, index) <- controllers.goals.GoalFactory.getTotalTargets().zipWithIndex){
+                    <span class="setGoal" id="setGoal@target.name"  @if(index != 0){style="display:none;"}>
+                        @controllers.goals.GoalFactory.getDescription(target)
+                    </span>
+            }
+        </h3></div>
+    </div>
+
+    <div class="text-center buttonWithNavBar">
+        <input id="target" name="target" type="hidden" value="@controllers.goals.GoalFactory.getTotalTargets().get(0).name" />
+        <input type="submit" value='@Messages("page.diary.goals.total.add")' class="btn btn-primary btn-lg" />
+        <a href="@routes.Diary.goals()" class="btn btn-default">@Messages("page.diary.goals.donotadd")</a>
+    </div>
+</form>
+
+<script>
+        $(".selectGoalTarget").click(function(e) {
+            e.preventDefault();
+            targetName = $(this).attr("value");
+            $(".setGoal").hide();
+            $("#setGoal" + targetName).show();
+            $(".selectGoalTarget").removeClass("btn-primary");
+            $(".selectGoalTarget").addClass("btn-default");
+            $(this).removeClass("btn-default");
+            $(this).addClass("btn-primary");
+            $(".targetName").removeClass("green");
+            $("#targetName" + targetName).addClass("green");
+            $("#target").val(targetName);
+        });
+    </script>
+
+}

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import models.UserMyPAL;
 import models.diary.DiaryItem;
+import play.Logger;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
@@ -131,7 +132,8 @@ public class DiaryActivity extends DiaryItem {
     }
 
     public static int addedFromYesterday(UserMyPAL user, Date start, Date end){
-        Date yesterday = Date.valueOf(end.toLocalDate().minusDays(1));
+        Date yesterday = Date.valueOf(start.toLocalDate().minusDays(1));
+        Logger.debug("addedFromYesterday: yesterday " + yesterday);
         return find.where().eq("user", user).between("added", new Timestamp(start.getTime()), new Timestamp(end.getTime())).eq("date", yesterday).findRowCount();
     }
 

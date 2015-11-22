@@ -1,22 +1,187 @@
 {
   "root": {
     "class": "AvatarTrigger",
-    "behaviorBundles": null,
+    "behaviors": null,
     "children": [
       {
         "0": {
           "trigger": "PAGE",
           "child": {
             "class": "AvatarUserHistory",
-            "behaviorBundles": null,
+            "behaviors": null,
             "children": [
               {
                 "0": {
                   "last": "ACCESSCALENDAR",
                   "beforeLast": "ADDEDACTIVITY",
                   "child": {
+                    "class": "AvatarEmotion",
+                    "behaviors": null,
+                    "children": [
+                      {
+                        "0": {
+                          "emotion": "HAPPY",
+                          "child": {
+                            "class": "AvatarActivityType",
+                            "behaviors": null,
+                            "children": [
+                              {
+                                "0": {
+                                  "type": "SCHOOL",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [41],
+                                    "children": null
+                                  }
+                                }
+                              },
+                              {
+                                "1": {
+                                  "type": "SPORT",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [42],
+                                    "children": null
+                                  }
+                                }
+                              },
+                              {
+                                "2": {
+                                  "type": "MAALTIJD",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [1],
+                                    "children": null
+                                  }
+                                }
+                              },
+                              {
+                                "3": {
+                                  "type": "OVERIG",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [1],
+                                    "children": null
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "1": {
+                          "emotion": "NEUTRAL",
+                          "child": {
+                            "class": "AvatarActivityType",
+                            "behaviors": null,
+                            "children": [
+                              {
+                                "0": {
+                                  "type": "SCHOOL",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [1],
+                                    "children": null
+                                  }
+                                }
+                              },
+                              {
+                                "1": {
+                                  "type": "SPORT",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [1],
+                                    "children": null
+                                  }
+                                }
+                              },
+                              {
+                                "2": {
+                                  "type": "MAALTIJD",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [43],
+                                    "children": null
+                                  }
+                                }
+                              },
+                              {
+                                "3": {
+                                  "type": "OVERIG",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [1],
+                                    "children": null
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "2": {
+                          "emotion": "SAD",
+                          "child": {
+                            "class": "AvatarActivityType",
+                            "behaviors": null,
+                            "children": [
+                              {
+                                "0": {
+                                  "type": "SCHOOL",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [1],
+                                    "children": null
+                                  }
+                                }
+                              },
+                              {
+                                "1": {
+                                  "type": "SPORT",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [1],
+                                    "children": null
+                                  }
+                                }
+                              },
+                              {
+                                "2": {
+                                  "type": "MAALTIJD",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [1],
+                                    "children": null
+                                  }
+                                }
+                              },
+                              {
+                                "3": {
+                                  "type": "OVERIG",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [44],
+                                    "children": null
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "1": {
+                  "last": "ACCESSCALENDAR",
+                  "beforeLast": "LOGIN",
+                  "child": {
                     "class": "AvatarLeafNode",
-                    "behaviorBundles": [["1.0", "1"]],
+                    "behaviors": [67],
                     "children": null
                   }
                 }

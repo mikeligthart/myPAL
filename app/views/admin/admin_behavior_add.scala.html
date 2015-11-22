@@ -35,7 +35,7 @@
                     </div>
                 }
             }
-            @if(gestures.size == 1 || gestures.size-1 % 4 != 0){
+            @if(gestures.size == 1 || gestures.size % 4 != 0){
                 </div>
             }
             <input id="gestureId" name="gestureId" type="hidden" value="1" />
@@ -62,14 +62,14 @@
                     <div class="row">
                 }
                 <div class="col-md-3 portfolio-item">
-                    <img width="250px" height="250px" class="text-left img-responsive" src='@models.avatar.behaviorDefinition.AvatarHtml.getAvatarHtmlImage(avatarHtmlType)'>
+                    <img width="100px" height="100px" class="text-left img-responsive" src='@models.avatar.behaviorDefinition.AvatarHtml.getAvatarHtmlImage(avatarHtmlType)'>
                     <button class="htmlSelectButton btn @if(index == 0){btn-primary} else{btn-default}" value="@avatarHtmlType.name">@Messages("page.admin.behavior.add.selectAvatarHtml")</button>
                 </div>
                 @if((index+1) % 4 == 0){
             </div>
             }
             }
-            @if(gestures.size == 1 || gestures.size-1 % 4 != 0){
+            @if(gestures.size == 1 || gestures.size % 4 != 0){
         </div>
         }
         <input id="avatarHtmlType" name="avatarHtmlType" type="hidden" value="NULL" />

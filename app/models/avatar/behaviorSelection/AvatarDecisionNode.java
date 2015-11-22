@@ -25,27 +25,19 @@ import java.util.*;
 public class AvatarDecisionNode {
 
     //BehaviorBundle ids with their cumulative changes of getting selected
-    private Map<Double, Integer> behaviorsBundles;
+    private List<Integer> behaviorIds;
     private AvatarDecisionFunction currentInformation;
     private Map<AvatarDecisionFunction, AvatarDecisionNode> children;
 
-    public AvatarDecisionNode(Map<Double, Integer> behaviorsBundles, AvatarDecisionFunction currentInformation, Map<AvatarDecisionFunction, AvatarDecisionNode> children){
-        this.behaviorsBundles = behaviorsBundles;
+    public AvatarDecisionNode(List<Integer> behaviorIds, AvatarDecisionFunction currentInformation, Map<AvatarDecisionFunction, AvatarDecisionNode> children){
+        this.behaviorIds = behaviorIds;
         this.currentInformation = currentInformation;
         this.children = children;
     }
 
-    public List<AvatarBehavior> getAvatarBehaviors(){
-        if(behaviorsBundles != null && !behaviorsBundles.isEmpty()){
-            double select = new Random().nextDouble();
-            SortedSet<Double> cumulativeChances = new TreeSet<>(behaviorsBundles.keySet());
-            for(Iterator<Double> chance = cumulativeChances.iterator(); chance.hasNext();){
-                double thisChance = chance.next();
-                if(select <= thisChance){
-                     return getAvatarBehaviorsFromBundle(behaviorsBundles.get(thisChance));
-                }
-            }
-            return getAvatarBehaviorsFromBundle(behaviorsBundles.get(cumulativeChances.last()));
+    public List<Integer> getAvatarBehaviors(){
+        if(behaviorIds != null){
+            return behaviorIds;
         } else if (children != null) {
             for(AvatarDecisionFunction df : children.keySet()){
                 if(df.equals(currentInformation)){
@@ -57,11 +49,4 @@ public class AvatarDecisionNode {
             return null;
         }
     }
-
-    private List<AvatarBehavior> getAvatarBehaviorsFromBundle(int bundleId){
-        AvatarReasoner.refresh();
-        AvatarBehaviorBundle bundle = AvatarBehaviorBundle.byID(bundleId);
-        return bundle.getBehaviors();
-    }
-
 }

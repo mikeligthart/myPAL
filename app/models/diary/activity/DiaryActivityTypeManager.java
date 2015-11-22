@@ -88,4 +88,8 @@ public class DiaryActivityTypeManager {
     private static String capitalise(String name) {
         return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     }
+
+    public static DiaryActivityType getType(UserMyPAL user, String name){
+        return DiaryActivityType.byNameAndUser(capitalise(name), user);
+    }
 }

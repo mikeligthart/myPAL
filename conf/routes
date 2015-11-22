@@ -12,9 +12,6 @@ GET     /contentbox/:content        controllers.Application.contentBox(content: 
 POST    /dropphoto                  controllers.Application.dropForMyPALPhoto()
 GET     /show/gesture/:source       controllers.Application.showGesture(source: String)
 
-# Hello goodbye
-GET     /greeting                   controllers.Application.hello()
-
 ## DIARY ##
 GET     /mypal                                      controllers.Diary.diary()
 GET     /mypal/calendar                             controllers.Diary.calendar()
@@ -92,16 +89,7 @@ DELETE  /admin/behavior/bundle/delete/:id       controllers.Admin.deleteBehavior
 GET     /admin/behavior/bundle/add              controllers.Admin.addBehaviorBundlePage()
 POST    /admin/behavior/bundle/add              controllers.Admin.addBehaviorBundle()
 GET     /admin/behavior/bundle/list             controllers.Admin.getBehaviorBundles()
-
-## REGISTRATION ##
-GET     /register                               controllers.Registration.registrationPage()
-POST    /register                               controllers.Registration.register()
-
-## TEST ##
-GET     /test/datatest              controllers.Test.dataTest()
-GET     /test/bootstrap             controllers.Test.showBootstrap()
-GET     /test/google                controllers.Test.googleTest()
-GET     /test/affectbutton          controllers.Test.affectButton()
+GET     /admin/secret/clearbehaviors            controllers.Admin.clearDatabaseOfBehaviors()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -2,7 +2,6 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.typesafe.config.ConfigFactory;
-import dialogue.Dialogue;
 import models.UserMyPAL;
 import models.UserMyPAL.Login;
 import models.UserType;
@@ -23,7 +22,6 @@ import util.NoValidGluconlineIDException;
 import util.PictureFactory;
 import views.html.controlFlow.login;
 import views.html.controlFlow.no_content;
-import views.html.diary.diary_greeting;
 import views.html.interfaces.interfaces_description_box;
 import views.html.interfaces.interfaces_show_gesture_video;
 
@@ -47,7 +45,6 @@ import static play.data.Form.form;
  */
 public class Application extends Controller {
 
-    private static final Dialogue dialogue = Dialogue.getInstance();
 
     /* CONTROL FLOW */
 
@@ -101,7 +98,7 @@ public class Application extends Controller {
             //Redirect to right page
             UserType userType = user.getUserType();
             if(userType == UserType.CHILD){
-                return redirect(routes.Application.hello());
+                return redirect(routes.Diary.calendar());
             }
             else if (userType == UserType.ADMIN){
                 return redirect(routes.Admin.admin());
@@ -130,20 +127,6 @@ public class Application extends Controller {
 
         //Redirect to login page
         return redirect(routes.Application.login());
-    }
-
-    /* HELLO AND GOODBYE */
-
-    /**
-     *
-     * @return rendering of the avatar greeting page
-     */
-    public static Result hello() {
-        if (session().isEmpty() || session().get("userName") == null) {
-            return redirect(routes.Application.login());
-        }
-        UserMyPAL user = UserMyPAL.byUserName(session().get("userName"));
-        return ok(diary_greeting.render(dialogue.getGreeting(user.getFirstName())));
     }
 
     /* PRIVATE FILE MANAGEMENT */

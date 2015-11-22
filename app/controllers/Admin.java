@@ -582,6 +582,19 @@ public class Admin extends Controller {
         }
     }
 
+
+    public static Result clearDatabaseOfBehaviors(){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        AvatarBehaviorFactory.clearDatabase();
+        AvatarBehaviorBundleFactory.deleteBundlesFromDB();
+        return ok("database cleared of behaviors and bundles");
+    }
+
+
     /*
     Helper functions
      */

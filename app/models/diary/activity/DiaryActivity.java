@@ -146,4 +146,14 @@ public class DiaryActivity extends DiaryItem {
         return (find.where().eq("user", user).between("added", from, till).findRowCount() > 0);
     }
 
+    public static DiaryActivity lastByUser(UserMyPAL user){
+        List<DiaryActivity> activities = find.where().eq("user", user).setOrderBy("added desc").findList();
+        if(activities != null){
+            if(!activities.isEmpty()){
+                return activities.get(0);
+            }
+        }
+        return null;
+    }
+
 }

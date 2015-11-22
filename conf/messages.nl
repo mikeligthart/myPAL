@@ -1,3 +1,5 @@
+robotname=Robin
+
 ### MODELS ###
 ## User ##
 model.user.userName=Gebruikersnaam
@@ -275,12 +277,6 @@ page.admin.behavior.bundle.add.description.label=(Korte) beschrijving
 page.admin.behavior.bundle.add.description.placeholder=Wat is het doel van deze bundel?
 page.admin.behavior.bundleID=Bundel id
 
-
-## Registration ##
-page.registration.title=Registratie
-page.registration.enter=Enter
-page.registration.start=Start
-
 ### Gluconline ###
 gluconline.daypart.sober=NU
 gluconline.daypart.afterbreakfast=NO
@@ -288,40 +284,6 @@ gluconline.daypart.beforelunch=VL
 gluconline.daypart.afterlunch=NL
 gluconline.daypart.beforedinner=VA
 gluconline.daypart.afterdinner=NA
-
-### ERROR MESSAGES ###
-
-### DIALOGUE ###
-
-## Greeting ##
-# Part 1 #
-dialogue.greeting.part1.count=3
-dialogue.greeting.part1.0=Hoi {0},
-dialogue.greeting.part1.1=Hallo {0},
-dialogue.greeting.part1.2=Hey {0},
-# Part 2 #
-dialogue.greeting.part2.count=3
-dialogue.greeting.part2.0=leuk om je weer te zien.
-dialogue.greeting.part2.1=goed dat je er bent.
-dialogue.greeting.part2.2=fijn dat je er bent.
-
-## Registration ##
-dialogue.registration.0=Hi, ik ben Xander het robotvriendje van Charlie.
-dialogue.registration.1=Hoe heet jij?
-dialogue.registration.2=En hoe oud ben jij?
-dialogue.registration.3=Wat gaaf dat je naar dit kamp bent gekomen!
-dialogue.registration.4=Je gaat zo aan de slag met een digitaal diabetesdagboek
-dialogue.registration.5=Heb je al eerder zo iets bijgehouden?
-dialogue.registration.6.0=Oke. En wat vond je ervan?
-dialogue.registration.6.1=Oke. Mag ik vragen waarom dan niet?
-dialogue.registration.7=Wat zou je ervan vinden als we samen een dagboek bijhouden?
-dialogue.registration.8=Bedankt voor je antwoord.
-dialogue.registration.9=Helaas is het dagboek nog niet af.
-dialogue.registration.10=Je kunt mij en Mike helpen het dagboek verder af te maken.
-dialogue.registration.11=Mike legt uit hoe je dat kunt doen.
-
-## Test ##
-dialogue.test.whatdidyoudotoday=Wat heb jij vandaag gedaan?
 
 ### JAVASCRIPT ###
 ## Timepicker ##

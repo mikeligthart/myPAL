@@ -54,11 +54,13 @@ public class AvatarBehaviorBundleFactory {
 
         deleteBundleFromDB(id);
 
+        /*
         try {
             Files.deleteIfExists(new File(BEHAVIORBUNDLEROOT + BEHAVIORBUNDLEFILENAME + id + BEHAVIORBUNDLEFILETYPE).toPath());
         } catch (IOException e) {
             Logger.error("[AvatarBehaviorBundleFactory > deleteBehavior] IOException while deleting file " + e.getLocalizedMessage());
         }
+        */
         return true;
     }
 
@@ -164,10 +166,12 @@ public class AvatarBehaviorBundleFactory {
                         JsonNode linesNode = bundleNode.get("lines");
                         for (int i = 0; i < linesNode.size(); i++) {
                             int behaviorIdInLine = linesNode.get(i).asInt();
+                            Logger.debug("manageBehaviorBundles loaded id:" + behaviorIdInLine);
                             AvatarBehavior behavior = AvatarBehavior.byID(behaviorIdInLine);
                             if (behavior == null) {
                                 Logger.error(Messages.get("error.behaviorBundleDoesNotExistsInDatabase", behaviorIdInLine));
                             }
+
                             newBundle.addAvatarBehavior(behavior);
                             behaviors.add(behavior);
                         }
@@ -237,8 +241,16 @@ public class AvatarBehaviorBundleFactory {
             AvatarBehaviorBundle behaviorBundle = AvatarBehaviorBundle.byID(id);
             for (AvatarBehavior behavior : behaviorBundle.getBehaviors()) {
                 behavior.setBehaviorBundle(null);
+                behavior.update();
             }
             behaviorBundle.delete();
+        }
+    }
+
+    public static void deleteBundlesFromDB(){
+        List<AvatarBehaviorBundle> bundles = AvatarBehaviorBundle.find.all();
+        for(AvatarBehaviorBundle bundle: bundles){
+            bundle.delete();
         }
     }
 

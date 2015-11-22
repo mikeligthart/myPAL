@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import controllers.routes;
 import models.UserMyPAL;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -73,6 +74,7 @@ public class DiaryActivityType extends Model {
         return find.where().eq("user", user).findList();
     }
 
+
     public int getId() {
         return id;
     }
@@ -128,5 +130,20 @@ public class DiaryActivityType extends Model {
 
     public void removeDiaryActivity(DiaryActivity activity) {
         activities.remove(activity);
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (!(obj instanceof DiaryActivityType))
+            return false;
+        if (obj == this)
+            return true;
+
+        DiaryActivityType rhs = (DiaryActivityType) obj;
+        return new EqualsBuilder().
+                append(id, rhs.getId()).
+                append(user, rhs.getUser()).
+                append(color, rhs.getColor()).
+                isEquals();
     }
 }

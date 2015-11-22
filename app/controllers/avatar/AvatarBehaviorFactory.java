@@ -57,7 +57,7 @@ public class AvatarBehaviorFactory {
         if(behaviors == null){
             return null;
         }
-
+        Logger.debug("[AvatarBehaviorFactory > loadAvatarBehaviors] behaviors: " + behaviors.get(0).getId());
         List<AvatarBehavior> loadedBehaviors = new LinkedList<>();
         for(AvatarBehavior behavior : behaviors)    {
             AvatarLineVariables variables = new AvatarLineVariables(user);
@@ -65,7 +65,18 @@ public class AvatarBehaviorFactory {
             loadedBehaviors.add(behavior);
         }
         return loadedBehaviors;
+    }
 
+    public AvatarBehavior getAvatarBehavior(int id) throws AppException {
+        refresh();
+        AvatarBehavior behavior = AvatarBehavior.byID(id);
+        if(behavior == null){
+            throw new AppException("Behavior with id " + id + " does not exists in database");
+        } else {
+            AvatarLineVariables variables = new AvatarLineVariables(user);
+            behavior.load(variables);
+        }
+        return behavior;
     }
 
     @SuppressWarnings("unchecked")
@@ -221,5 +232,11 @@ public class AvatarBehaviorFactory {
         }
     }
 
+    public static void clearDatabase(){
+        List<AvatarBehavior> behaviors = AvatarBehavior.find.all();
+        for(AvatarBehavior behavior : behaviors){
+            behavior.deleteBehavior();
+        }
+    }
 
 }

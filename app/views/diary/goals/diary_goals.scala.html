@@ -44,7 +44,7 @@
             <div class="row text-left pendingGoalView">
                 <div class="col-md-2"><button class="goalViewButton" value="@goal.getId"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIcon(goal.getTarget)"></button></div>
                 <div class="col-md-4"><div class="progressBar" id="progressBar@goal.getId"><div class="progress-label">@goal.getProgress %</div></div></div>
-                <div class="col-md-2"><a href="@routes.Diary.deleteGoal(goal.getId)" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></div>
+                <div class="col-md-2"><a aria-label='Left Align' data-toggle="confirmation" data-title='@Messages("page.general.areyousure")' data-href="@routes.Diary.deleteGoal(goal.getId)" data-btnOkLabel='@Messages("page.general.yes")' data-btnCancelLabel='@Messages("page.general.no")' data-btnOkClass="btn btn-sm btn-primary" data-placement="right" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></div>
             </div>
         }
     } else {
@@ -81,8 +81,8 @@
             <div class="row goalView" id="goalView@goal.getId" style="display:none;">
                 <div class="col-md-8 text-left">
                     <h4>Doelinformatie</h4>
-                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.getStartDateStringify @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue <i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")
-                    @if(goal.getMetAtStringify == goal.getStartDateStringify){@Messages("page.diary.goals.daily.viewprogress.part4a")}else{@Messages("page.diary.goals.daily.viewprogress.part4b") @goal.getMetAtStringify!}
+                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.stringifyStartDate @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue <i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")
+                    @if(goal.stringifyMetAt == goal.stringifyStartDate){@Messages("page.diary.goals.daily.viewprogress.part4a")}else{@Messages("page.diary.goals.daily.viewprogress.part4b") @goal.stringifyMetAt!}
                 </div>
             </div>
         }
@@ -100,7 +100,7 @@
             <div class="row goalView" id="goalView@goal.getId" style="display:none;">
                 <div class="col-md-8 text-left">
                     <h4>Doelinformatie</h4>
-                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.getStartDateStringify @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue <i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")
+                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.stringifyStartDate @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue <i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")
                 </div>
             </div>
         }
@@ -116,7 +116,7 @@
             <div class="row goalView" id="goalView@goal.getId" style="display:none;">
                 <div class="col-md-8 text-left">
                     <h4>@Messages("page.diary.goals.info")</h4>
-                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.getStartDateStringify @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue @Messages("page.diary.goals.total.viewprogress.part2") @if(goal.getTarget.name == "CONLOGINS"){@Messages("page.diary.goals.total.viewprogress.part3a")}else{<i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")}
+                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.stringifyStartDate @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue @Messages("page.diary.goals.total.viewprogress.part2") @if(goal.getTarget.name == "CONLOGINS"){@Messages("page.diary.goals.total.viewprogress.part3a")}else{<i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")}
                 </div>
             </div>
         }
@@ -127,8 +127,8 @@
             <div class="row goalView" id="goalView@goal.getId" style="display:none;">
                 <div class="col-md-8 text-left">
                     <h4>@Messages("page.diary.goals.info")</h4>
-                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.getStartDateStringify @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue @Messages("page.diary.goals.total.viewprogress.part2") @if(goal.getTarget.name == "CONLOGINS"){@Messages("page.diary.goals.total.viewprogress.part3a")}else{<i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")}
-                    @Messages("page.diary.goals.daily.viewprogress.part4b") @goal.getMetAtStringify!
+                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.stringifyStartDate @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue @Messages("page.diary.goals.total.viewprogress.part2") @if(goal.getTarget.name == "CONLOGINS"){@Messages("page.diary.goals.total.viewprogress.part3a")}else{<i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")}
+                    @Messages("page.diary.goals.daily.viewprogress.part4b") @goal.stringifyMetAt!
                 </div>
             </div>
         }
@@ -153,7 +153,7 @@
             <div class="row text-left">
                 <div class="col-md-2"><button class="goalViewButton" value="@goal.getId"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIcon(goal.getTarget)"></button></div>
                 <div class="col-md-4"><div class="progressBar" id="progressBar@goal.getId"><div class="progress-label">@goal.getProgress %</div></div></div>
-                <div class="col-md-2"><a href="@routes.Diary.deleteGoal(goal.getId)" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></div>
+                <div class="col-md-2"><a aria-label='Left Align' data-toggle="confirmation" data-title='@Messages("page.general.areyousure")' data-href="@routes.Diary.deleteGoal(goal.getId)" data-btnOkLabel='@Messages("page.general.yes")' data-btnCancelLabel='@Messages("page.general.no")' data-btnOkClass="btn btn-sm btn-primary" data-placement="right" class="btn btn-default"></span></a></div>
             </div>
         }
     } else {
@@ -196,6 +196,8 @@
 
     <script src='@routes.Assets.at("javascripts/jquery-ui.js")' type="text/javascript"></script>
     <script>
+    $('[data-toggle="confirmation"]').confirmation();
+
         $(".goalViewButton").click(function(e) {
             e.preventDefault();
             goalId = $(this).attr("value");

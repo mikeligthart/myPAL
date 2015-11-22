@@ -146,12 +146,12 @@ public class Goal extends Model {
         return metAt;
     }
 
-    public String getMetAtStringify(){
+    public String stringifyMetAt(){
         SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
         return sdf.format(metAt);
     }
 
-    public String getStartDateStringify(){
+    public String stringifyStartDate(){
         SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
         return sdf.format(startDate);
     }

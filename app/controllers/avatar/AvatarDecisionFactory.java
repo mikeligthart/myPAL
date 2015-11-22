@@ -6,9 +6,11 @@ import com.typesafe.config.ConfigFactory;
 import models.UserMyPAL;
 import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorSelection.AvatarDecisionNode;
-import models.avatar.behaviorSelection.decisionInformation.AvatarDecisionFunction;
-import models.avatar.behaviorSelection.decisionInformation.AvatarTrigger;
-import models.avatar.behaviorSelection.decisionInformation.AvatarUserHistory;
+import models.avatar.behaviorSelection.decisionInformation.*;
+import models.diary.activity.DiaryActivity;
+import models.diary.activity.DiaryActivityType;
+import models.diary.activity.DiaryActivityTypeManager;
+import models.diary.activity.Emotion;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import play.Logger;
@@ -41,6 +43,8 @@ public class AvatarDecisionFactory {
     private UserMyPAL user;
     private AvatarTrigger currentTrigger;
     private AvatarUserHistory currentUserHistory;
+    private AvatarEmotion currentEmotion;
+    private AvatarActivityType currentActivityType;
 
     //Model
     private String decisionModelLocation;
@@ -51,8 +55,10 @@ public class AvatarDecisionFactory {
     public AvatarDecisionFactory(UserMyPAL user) {
         //Load initial information
         this.user = user;
-        this.currentTrigger = null;
-        this.currentUserHistory = new AvatarUserHistory(null, null);
+        currentTrigger = null;
+        currentUserHistory = new AvatarUserHistory(null, null);
+        currentEmotion = null;
+        currentActivityType = null;
 
         //Load initial model
         model = null;
@@ -61,7 +67,7 @@ public class AvatarDecisionFactory {
         loadModelFromFile();
     }
 
-    public List<AvatarBehavior> getAvatarBehaviors(AvatarTrigger trigger){
+    public List<Integer> getAvatarBehaviors(AvatarTrigger trigger){
         refreshModel();
         refreshInformation(trigger);
 
@@ -93,26 +99,21 @@ public class AvatarDecisionFactory {
     }
 
     private AvatarDecisionNode parseNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
-        if(!node.has("class") || !node.has("behaviorBundles") || !node.has("children")){
+        Logger.debug("[AvatarDecisionFactory > parseNode] call for " + node);
+        if(!node.has("class") || !node.has("behaviors") || !node.has("children")){
             throw new ParseAvatarDecisionModelException("Node structure check for 'class', 'behaviorBundles' and 'children' failed");
         }
 
         //Check if node is a leaf node and if so retrieve the behaviors
-        Map<Double, Integer> behaviorBundles = new LinkedHashMap<>();
-        JsonNode behaviorBundlesNode = node.get("behaviorBundles");
-        if(behaviorBundlesNode.isArray() && !behaviorBundlesNode.isNull()) {
-            double cumulativeCounter = 0.0;
-            for(int i = 0; i < behaviorBundlesNode.size(); i++) {
-                List<String> bundleAsStringList = mapper.convertValue(behaviorBundlesNode.get(i), List.class);
-                double cumulativeChange = Double.valueOf(bundleAsStringList.get(0)) + cumulativeCounter;
-                cumulativeCounter = cumulativeChange;
-                behaviorBundles.put(cumulativeChange, Integer.valueOf(bundleAsStringList.get(1)));
-            }
+        JsonNode behaviorsNode = node.get("behaviors");
+        LinkedList<Integer> behaviorIds = null;
+        if(behaviorsNode.isArray() && !behaviorsNode.isNull()) {
+            behaviorIds = mapper.convertValue(behaviorsNode, LinkedList.class);
         }
 
         //If it is a leaf node return it
-        if(behaviorBundles != null && !behaviorBundles.isEmpty()){
-            return new AvatarDecisionNode(behaviorBundles, null, null);
+        if(behaviorIds != null && !behaviorIds.isEmpty()){
+            return new AvatarDecisionNode(behaviorIds, null, null);
         }
 
         //Else search for child nodes
@@ -126,8 +127,51 @@ public class AvatarDecisionFactory {
             return parseAvatarTriggerNode(childrenNode);
         } else if(nodeClass.equalsIgnoreCase(AvatarUserHistory.class.getSimpleName())){
             return parseAvatarUserHistoryNode(childrenNode);
+        } else if(nodeClass.equalsIgnoreCase(AvatarEmotion.class.getSimpleName())){
+            return parseAvatarEmotionNode(childrenNode);
+        } else if(nodeClass.equalsIgnoreCase(AvatarActivityType.class.getSimpleName())){
+            return parseAvatarActivityTypeNode(childrenNode);
         }
         return null;
+    }
+
+    private AvatarDecisionNode parseAvatarActivityTypeNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
+        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        for(int index = 0; index < node.size(); index++){
+            JsonNode avatarActivityTypeNode = node.get(index).get(Integer.toString(index));
+            if(!avatarActivityTypeNode.has("type") || !avatarActivityTypeNode.has("child")){
+                throw new ParseAvatarDecisionModelException("AvatarTriggerNode check for 'type' and 'child' failed");
+            } else {
+                String proposedActivityType = avatarActivityTypeNode.get("type").asText();
+                DiaryActivityType activityType = DiaryActivityTypeManager.getType(user, proposedActivityType);
+                if(activityType == null){
+                    throw new ParseAvatarDecisionModelException(proposedActivityType + " not recognized as an AvatarActivityType");
+                }
+                AvatarActivityType avatarActivityType = new AvatarActivityType(activityType);
+                AvatarDecisionNode child = parseNode(avatarActivityTypeNode.get("child"));
+                children.put(avatarActivityType, child);
+            }
+        }
+        return new AvatarDecisionNode(null, currentActivityType, children);
+    }
+
+    private AvatarDecisionNode parseAvatarEmotionNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
+        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        for(int index = 0; index < node.size(); index++){
+            JsonNode avatarEmotionNode = node.get(index).get(Integer.toString(index));
+            if(!avatarEmotionNode.has("emotion") || !avatarEmotionNode.has("child")){
+                throw new ParseAvatarDecisionModelException("AvatarTriggerNode check for 'emotion' and 'child' failed");
+            } else {
+                String proposedEmotion = avatarEmotionNode.get("emotion").asText().toUpperCase();
+                if(!AvatarEmotion.validEmotion(proposedEmotion)){
+                    throw new ParseAvatarDecisionModelException(proposedEmotion + " not recognized as an AvatarEmotion");
+                }
+                AvatarEmotion emotion = new AvatarEmotion(Emotion.valueOf(proposedEmotion));
+                AvatarDecisionNode child = parseNode(avatarEmotionNode.get("child"));
+                children.put(emotion, child);
+            }
+        }
+        return new AvatarDecisionNode(null, currentEmotion, children);
     }
 
     private AvatarDecisionNode parseAvatarTriggerNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException{
@@ -177,6 +221,12 @@ public class AvatarDecisionFactory {
             currentUserHistory = new AvatarUserHistory(null, null);
         }
         this.currentTrigger = trigger;
+
+        DiaryActivity activity = DiaryActivity.lastByUser(user);
+        if(activity != null){
+            currentEmotion = new AvatarEmotion(activity.getEmotion());
+            currentActivityType = new AvatarActivityType(activity.getType());
+        }
     }
 
     private void loadModelFromFile(){

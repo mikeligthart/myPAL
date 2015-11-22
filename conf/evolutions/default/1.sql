@@ -9,7 +9,7 @@ create table avatar_behavior (
   avatar_html_type          varchar(15),
   last_modified             bigint,
   behavior_bundle_id        integer,
-  constraint ck_avatar_behavior_avatar_html_type check (avatar_html_type in ('NULL','YES_NO','YES_NO_DONTKNOW','TEXT','TEXTFIELD')),
+  constraint ck_avatar_behavior_avatar_html_type check (avatar_html_type in ('NULL','YES_NO','YES_NO_DONTKNOW','TEXT','TEXTFIELD','PICTURE1','PICTURE2','PICTURE3','PICTURE4','PICTURE5','PICTURE6','PICTURE7','PICTURE8','PICTURE9','PICTURE10','PICTURE11','PICTURE12','PICTURE13','PICTURE14','PICTURE15','PICTURE16','PICTURE17','PICTURE18','PICTURE19','PICTURE20','PICTURE21','PICTURE22','PICTURE23','PICTURE24','PICTURE25','PICTURE26','PICTURE27','PICTURE28','PICTURE29','PICTURE30','PICTURE31','PICTURE32','PICTURE33','PICTURE34','PICTURE35','PICTURE36')),
   constraint pk_avatar_behavior primary key (id))
 ;
 
@@ -131,7 +131,7 @@ create table log_action (
   timestamp                 timestamp,
   type                      integer,
   user_user_name            varchar(255),
-  constraint ck_log_action_type check (type in (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41)),
+  constraint ck_log_action_type check (type in (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51)),
   constraint pk_log_action primary key (id))
 ;
 

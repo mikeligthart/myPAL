@@ -242,7 +242,10 @@ public class AvatarBehavior extends Model {
         for(AvatarLine line : avatarLines){
             line.delete();
         }
-        new AvatarBehaviorBundleFactory().deleteBehaviorBundle(behaviorBundle.getId());
+
+        if(behaviorBundle != null) {
+            new AvatarBehaviorBundleFactory().deleteBehaviorBundle(behaviorBundle.getId());
+        }
         this.delete();
     }
 

@@ -1,0 +1,17 @@
+@(index: Int, source: String)
+
+<div class="row">
+    <div class="col-md-offset-4 col-md-8 text-center">
+        <a href="@source" data-toggle="lightbox" data-title='Kijk mijn foto!'>
+            <img width="500" height="500" class="img-responsive" src="@source" alt="Mijn foto">
+        </a>
+        (Klik om te vergroten)
+    </div>
+</div>
+
+<script>
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>

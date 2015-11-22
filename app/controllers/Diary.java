@@ -230,7 +230,7 @@ public class Diary extends Controller {
         Form<DiaryActivity> activityForm = form(DiaryActivity.class);
         activityForm = activityForm.fill(activity);
         //Log user behavior
-        LogAction.log(userName, LogActionType.VIEWACTIVITY);
+        LogAction.log(userName, LogActionType.ACCESSUPDATEACTIVITYPAGE);
 
         return ok(diary_calendar_diaryActivity_update.render(user, activityForm, new DiaryActivityToHTML(activity), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), activity.getType().getName(), error));
     }
@@ -282,6 +282,10 @@ public class Diary extends Controller {
         if (session().isEmpty() || session().get("userName") == null) {
             return redirect(routes.Application.login());
         }
+        String userName = session().get("userName");
+
+        //Log user activity
+        LogAction.log(userName, LogActionType.ACCESSADDACTIVITYTYPEPAGE);
 
         return ok(diary_calendar_diaryActivityType_add.render(source, id));
     }
@@ -293,6 +297,9 @@ public class Diary extends Controller {
         }
         UserMyPAL user = UserMyPAL.byUserName(session().get("userName"));
         List<DiaryActivityType> diaryActivityTypes = DiaryActivityType.byUser(user);
+
+        //Log user activity
+        LogAction.log(user.getUserName(), LogActionType.ACCESSADDACTIVITYTYPEPAGE);
 
         return ok(diary_calendar_diaryActivityType_remove.render(source, id, diaryActivityTypes));
     }
@@ -337,7 +344,7 @@ public class Diary extends Controller {
         Form<Insulin> insulinForm = form(Insulin.class);
 
         //Log user activity
-        LogAction.log(userName, LogActionType.ACCESSADDGLUCOSEPAGE);
+        LogAction.log(userName, LogActionType.ACCESSADDINSULINPAGE);
 
         return ok(diary_calendar_insulin_add.render(user, insulinForm, DiarySettingsManager.getInstance().retrieve(userName).getDateString(false)));
     }
@@ -402,7 +409,7 @@ public class Diary extends Controller {
         glucoseForm = glucoseForm.fill(glucose);
 
         //Log user behavior
-        LogAction.log(userName, LogActionType.UPDATEGLUCOSE);
+        LogAction.log(userName, LogActionType.ACCESSUPDATEGLUCOSEPAGE);
 
         return ok(diary_calendar_glucose_update.render(user, glucoseForm, id));
     }
@@ -428,7 +435,7 @@ public class Diary extends Controller {
         insulinForm = insulinForm.fill(insulin);
 
         //Log user behavior
-        LogAction.log(userName, LogActionType.UPDATEINSULIN);
+        LogAction.log(userName, LogActionType.ACCESSUPDATEINSULINPAGE);
 
         return ok(diary_calendar_insulin_update.render(user, insulinForm, id));
     }
@@ -914,6 +921,9 @@ public class Diary extends Controller {
 
         DiaryActivityTypeManager.createDiaryActivityType(UserMyPAL.byUserName(userName), name, color);
 
+        //Log user activity
+        LogAction.log(userName, LogActionType.ADDEDACTIVITYTYPE);
+
         if(isUpdate){
             return redirect(routes.Diary.updateActivity(id));
         } else {
@@ -956,6 +966,9 @@ public class Diary extends Controller {
                 return addActivityPage(Messages.get("error.cannotBeRemoved"));
             }
         }
+
+        //Log user activity
+        LogAction.log(user.getUserName(), LogActionType.DELETEACTIVITYTYPE);
 
         if(isUpdate){
             return redirect(routes.Diary.updateActivity(id));
@@ -1097,8 +1110,14 @@ public class Diary extends Controller {
 
         DiaryMeasurementType type = DiaryMeasurementType.fromInteger(measurementType);
         switch (type) {
-            case GLUCOSE: return redirect(routes.Diary.updateGlucosePage(id));
-            case INSULIN: return redirect(routes.Diary.updateInsulinPage(id));
+            case GLUCOSE:
+                //Log user activity
+                LogAction.log(userName, LogActionType.DELETEGLUCOSE);
+                return redirect(routes.Diary.updateGlucosePage(id));
+            case INSULIN:
+                //Log user activity
+                LogAction.log(userName, LogActionType.DELETEINSULIN);
+                return redirect(routes.Diary.updateInsulinPage(id));
             case OTHER:
             default: return forbidden();
         }
@@ -1169,6 +1188,8 @@ public class Diary extends Controller {
             JsonNode result = gluconlineClient.retrieve();
             if(result != null) {
                 gluconlineClient.updateMeasurements(result);
+                //Log user activity
+                LogAction.log(userName, LogActionType.ADDEDWITHGLUCONLINE);
             }
         } catch (NoValidGluconlineIDException e) {
             Logger.error("[Diary > gluconline] NoValidGluconlineIDException: " + e.getLocalizedMessage());

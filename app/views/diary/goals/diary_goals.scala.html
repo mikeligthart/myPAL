@@ -4,7 +4,25 @@
 
 @views.html.diary.diary(Messages("page.diary.base.goals"), "goals", user.getUserType, avatarBehaviors) {
 
-    <div class="text-center"><h1>@Messages("page.diary.base.goals")</h1></div>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/jquery-ui.css")'>
+    <style>
+        .ui-progressbar {
+            position: relative;
+        }
+        .progress-label {
+            position: absolute;
+            left: 50%;
+            top: 4px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #fff;
+        }
+
+        .progressBar .ui-progressbar-value {
+            background-color: #90d23d;
+        }
+    </style>
+
+<div class="text-center"><h1>@Messages("page.diary.base.goals")</h1></div>
 
     <div class="row">
         <div class="col-md-4 text-left">
@@ -12,40 +30,40 @@
             <a href="@routes.Diary.addGoalDailyPage()" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.goals.add.daily.page")</a>
         </div>
         <div class="col-md-4 text-center">
-            <h2>Dagdoelen</h2>
+            <h2>@Messages("page.diary.goals.daily.title")</h2>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8 text-left">
-            <h3>Actief</h3>
+            <h3>@Messages("page.diary.goals.active")</h3>
         </div>
     </div>
 
     @if(pendingDaily.size > 0){
         @for(goal <- pendingDaily){
-            <div class="row text-left">
-                <div class="col-md-2"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIcon(goal.getTarget)"></div>
-                <div class="col-md-4">@goal.getProgress</div>
+            <div class="row text-left pendingGoalView">
+                <div class="col-md-2"><button class="goalViewButton" value="@goal.getId"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIcon(goal.getTarget)"></button></div>
+                <div class="col-md-4"><div class="progressBar" id="progressBar@goal.getId"><div class="progress-label">@goal.getProgress %</div></div></div>
                 <div class="col-md-2"><a href="@routes.Diary.deleteGoal(goal.getId)" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></div>
             </div>
         }
     } else {
         <div class="row">
             <div class="col-md-8 text-left">
-                <h4>Er zijn geen actieve dagdoelen</h4>
+                <h4>@Messages("page.diary.goals.daily.noactive")</h4>
             </div>
         </div>
     }
 
     <div class="row">
         <div class="col-md-8 text-left">
-            <h3>Behaald</h3>
+            <h3>@Messages("page.diary.goals.met")</h3>
         </div>
     </div>
     @if(metDaily.size > 0){
         @for((goal, index) <- metDaily.zipWithIndex){
             @if(index % 6 == 0){
-                <div class="row ">
+                <div class="row">
             }
                 <div class="col-md-1 text-left portfolio-item">
                     <button class="goalViewButton" value="@goal.getId"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIconWhenMet(goal.getTarget)"></button>
@@ -63,7 +81,8 @@
             <div class="row goalView" id="goalView@goal.getId" style="display:none;">
                 <div class="col-md-8 text-left">
                     <h4>Doelinformatie</h4>
-                    Ik heb op @goal.getMetAt @goal.getTargetValue @controllers.goals.GoalFactory.getName(goal.getTarget) toegevoegd.
+                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.getStartDateStringify @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue <i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")
+                    @if(goal.getMetAtStringify == goal.getStartDateStringify){@Messages("page.diary.goals.daily.viewprogress.part4a")}else{@Messages("page.diary.goals.daily.viewprogress.part4b") @goal.getMetAtStringify!}
                 </div>
             </div>
         }
@@ -71,9 +90,20 @@
     } else {
         <div class="row">
             <div class="col-md-8 text-left">
-                <h4>Je hebt nog geen dagdoelen behaald.</h4>
+                <h4>@Messages("page.diary.goals.daily.nomet")</h4>
             </div>
         </div>
+    }
+
+    @if(pendingDaily.size > 0){
+        @for(goal <- pendingDaily){
+            <div class="row goalView" id="goalView@goal.getId" style="display:none;">
+                <div class="col-md-8 text-left">
+                    <h4>Doelinformatie</h4>
+                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.getStartDateStringify @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue <i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")
+                </div>
+            </div>
+        }
     }
 
     <div class="buttonWithNavBar">
@@ -81,39 +111,62 @@
     </div>
 
 <div class="row buttonWithNavBar">
+    @if(pendingTotal.size > 0){
+        @for(goal <- pendingTotal){
+            <div class="row goalView" id="goalView@goal.getId" style="display:none;">
+                <div class="col-md-8 text-left">
+                    <h4>@Messages("page.diary.goals.info")</h4>
+                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.getStartDateStringify @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue @Messages("page.diary.goals.total.viewprogress.part2") @if(goal.getTarget.name == "CONLOGINS"){@Messages("page.diary.goals.total.viewprogress.part3a")}else{<i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")}
+                </div>
+            </div>
+        }
+    }
+
+    @if(metTotal.size > 0){
+        @for(goal <- metTotal){
+            <div class="row goalView" id="goalView@goal.getId" style="display:none;">
+                <div class="col-md-8 text-left">
+                    <h4>@Messages("page.diary.goals.info")</h4>
+                    @Messages("page.diary.goals.daily.viewprogress.part1") @goal.getStartDateStringify @Messages("page.diary.goals.daily.viewprogress.part2") @goal.getTargetValue @Messages("page.diary.goals.total.viewprogress.part2") @if(goal.getTarget.name == "CONLOGINS"){@Messages("page.diary.goals.total.viewprogress.part3a")}else{<i>@controllers.goals.GoalFactory.getName(goal.getTarget)</i> @Messages("page.diary.goals.daily.viewprogress.part3")}
+                    @Messages("page.diary.goals.daily.viewprogress.part4b") @goal.getMetAtStringify!
+                </div>
+            </div>
+        }
+    }
+
     <div class="col-md-4 text-left">
         <br />
         <a href="@routes.Diary.addGoalTotalPage()" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.goals.add.total.page")</a>
     </div>
     <div class="col-md-4 text-center">
-        <h2>Herhaaldoelen</h2>
+        <h2>@Messages("page.diary.goals.total.title")</h2>
     </div>
 </div>
 <div class="row">
     <div class="col-md-8 text-left">
-        <h3>Actief</h3>
+        <h3>@Messages("page.diary.goals.active")</h3>
     </div>
 </div>
 
     @if(pendingTotal.size > 0){
         @for(goal <- pendingTotal){
             <div class="row text-left">
-                <div class="col-md-2"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIcon(goal.getTarget)"></div>
-                <div class="col-md-4">@goal.getProgress</div>
+                <div class="col-md-2"><button class="goalViewButton" value="@goal.getId"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIcon(goal.getTarget)"></button></div>
+                <div class="col-md-4"><div class="progressBar" id="progressBar@goal.getId"><div class="progress-label">@goal.getProgress %</div></div></div>
                 <div class="col-md-2"><a href="@routes.Diary.deleteGoal(goal.getId)" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></div>
             </div>
         }
     } else {
         <div class="row">
             <div class="col-md-8 text-left">
-                <h4>Er zijn geen actieve herhaaldoelen</h4>
+                <h4>@Messages("page.diary.goals.total.noactive")</h4>
             </div>
         </div>
      }
 
     <div class="row">
         <div class="col-md-8 text-left">
-            <h3>Behaald</h3>
+            <h3>@Messages("page.diary.goals.met")</h3>
         </div>
     </div>
 
@@ -123,7 +176,7 @@
                 <div class="row ">
             }
             <div class="col-md-1 text-left portfolio-item">
-                <img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIconWhenMet(goal.getTarget)">
+                <button class="goalViewButton" value="@goal.getId"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIconWhenMet(goal.getTarget)"></button>
             </div>
             @if((index+1) % 6 == 0){
                 </div>
@@ -136,11 +189,12 @@
     } else {
         <div class="row">
             <div class="col-md-8 text-left">
-                <h4>Je hebt nog geen herhaaldoelen behaald.</h4>
+                <h4>@Messages("page.diary.goals.total.nomet")</h4>
             </div>
         </div>
     }
 
+    <script src='@routes.Assets.at("javascripts/jquery-ui.js")' type="text/javascript"></script>
     <script>
         $(".goalViewButton").click(function(e) {
             e.preventDefault();
@@ -149,7 +203,29 @@
             $("#goalView" + goalId).show();
         });
 
+
+        $(function() {
+            @if(pendingDaily.size > 0){
+                @for(goal <- pendingDaily){
+                    $( "#progressBar@goal.getId" ).progressbar({
+                        value: @goal.getProgress
+                    });
+                }
+            }
+        });
+
+        $(function() {
+            @if(pendingDaily.size > 0){
+                @for(goal <- pendingTotal){
+                    $( "#progressBar@goal.getId" ).progressbar({
+                        value: @goal.getProgress
+                    });
+                }
+            }
+        });
     </script>
+
+
 
 
 }

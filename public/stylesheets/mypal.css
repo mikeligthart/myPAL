@@ -131,6 +131,14 @@
     padding-top: 25px;
 }
 
+.pendingGoalView{
+    margin-bottom:5px;
+}
+
+.bottomGoalView{
+    margin-bottom:50px;
+}
+
 .goalViewButton{
     color: transparent; background-color: transparent; border-color: transparent;
 }

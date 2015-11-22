@@ -1,6 +1,7 @@
 package models.goals;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.typesafe.config.ConfigFactory;
 import controllers.goals.GoalFactory;
 import models.UserMyPAL;
 import play.Logger;
@@ -9,6 +10,7 @@ import play.i18n.Messages;
 
 import javax.persistence.*;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.time.Instant;
 import java.util.List;
@@ -64,16 +66,8 @@ public class Goal extends Model {
         metAt = null;
     }
 
-    public String getProgress(){
-        if(isMet()){
-            return "100%";
-        }
-        else if(isDeadlinePassed()){
-            return Messages.get("model.goal.failed");
-        } else {
-            DecimalFormat numberFormat = new DecimalFormat("#.0");
-            return numberFormat.format(((double) GoalFactory.getCurrentValue(target, user, startDate, deadline) / targetValue) * 100.0) + "%";
-        }
+    public int getProgress(){
+            return Math.round(((float) GoalFactory.getCurrentValue(target, user, startDate, deadline) / (float) targetValue) * 100);
     }
 
     public int getId() {
@@ -152,6 +146,16 @@ public class Goal extends Model {
         return metAt;
     }
 
+    public String getMetAtStringify(){
+        SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
+        return sdf.format(metAt);
+    }
+
+    public String getStartDateStringify(){
+        SimpleDateFormat sdf = new SimpleDateFormat(ConfigFactory.load().getString("date.format"));
+        return sdf.format(startDate);
+    }
+
     public void setMetAt(Date metAt) {
         this.metAt = metAt;
     }
@@ -163,7 +167,6 @@ public class Goal extends Model {
 
     private void checkIfGoalIsMet(){
         if(!met) {
-            Logger.debug("[Goal > checkIfGoalIsMet()] checking for " + target.name() + ": currentValue: " + GoalFactory.getCurrentValue(target, user, startDate, deadline) + ", targetValue " + targetValue);
             met = (GoalFactory.getCurrentValue(target, user, startDate, deadline) >= targetValue);
             if(met){
                 metAt = new Date();

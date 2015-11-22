@@ -1,14 +1,14 @@
 {
   "root": {
     "class": "AvatarTrigger",
-    "behaviors": null,
+    "behaviorBundles": null,
     "children": [
       {
         "0": {
           "trigger": "PAGE",
           "child": {
             "class": "AvatarUserHistory",
-            "behaviors": null,
+            "behaviorBundles": null,
             "children": [
               {
                 "0": {
@@ -16,38 +16,12 @@
                   "beforeLast": "ADDEDACTIVITY",
                   "child": {
                     "class": "AvatarLeafNode",
-                    "behaviors": [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      6,
-                      7,
-                      8,
-                      9,
-                      10,
-                      11,
-                      12,
-                      13
-                    ],
+                    "behaviorBundles": [["1.0", "1"]],
                     "children": null
                   }
                 }
               }
             ]
-          }
-        }
-      },
-      {
-        "1": {
-          "trigger": "OTHER",
-          "child": {
-            "class": "AvatarLeafNode",
-            "behaviors": [
-              0
-            ],
-            "children": null
           }
         }
       }

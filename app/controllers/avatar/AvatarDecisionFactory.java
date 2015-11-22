@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.ConfigFactory;
 import models.UserMyPAL;
+import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorSelection.AvatarDecisionNode;
 import models.avatar.behaviorSelection.decisionInformation.AvatarDecisionFunction;
 import models.avatar.behaviorSelection.decisionInformation.AvatarTrigger;
@@ -60,7 +61,7 @@ public class AvatarDecisionFactory {
         loadModelFromFile();
     }
 
-    public List<Integer> getAvatarBehaviorIds(AvatarTrigger trigger){
+    public List<AvatarBehavior> getAvatarBehaviors(AvatarTrigger trigger){
         refreshModel();
         refreshInformation(trigger);
 
@@ -68,12 +69,11 @@ public class AvatarDecisionFactory {
         try {
             rootNode = generateRootNode();
         } catch (ParseAvatarDecisionModelException e) {
-            Logger.error("[AvatarDecisionFactory > getAvatarBehaviorIds] ParseAvatarDecisionModelException: " + e.getMessage());
+            Logger.error("[AvatarDecisionFactory > getAvatarBehaviors] ParseAvatarDecisionModelException: " + e.getMessage());
         }
 
         if (rootNode != null) {
-            List<Integer> behaviors = rootNode.getAvatarBehaviors();
-            return behaviors;
+            return rootNode.getAvatarBehaviors();
         } else {
             return null;
         }
@@ -93,20 +93,26 @@ public class AvatarDecisionFactory {
     }
 
     private AvatarDecisionNode parseNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
-        if(!node.has("class") || !node.has("behaviors") || !node.has("children")){
-            throw new ParseAvatarDecisionModelException("Node structure check for 'class', 'behaviors' and 'children' failed");
+        if(!node.has("class") || !node.has("behaviorBundles") || !node.has("children")){
+            throw new ParseAvatarDecisionModelException("Node structure check for 'class', 'behaviorBundles' and 'children' failed");
         }
 
         //Check if node is a leaf node and if so retrieve the behaviors
-        List<Integer> behavior = null;
-        JsonNode behaviorNode = node.get("behaviors");
-        if(behaviorNode.isArray() && !behaviorNode.isNull()) {
-            behavior = mapper.convertValue(node.get("behaviors"), List.class);
+        Map<Double, Integer> behaviorBundles = new LinkedHashMap<>();
+        JsonNode behaviorBundlesNode = node.get("behaviorBundles");
+        if(behaviorBundlesNode.isArray() && !behaviorBundlesNode.isNull()) {
+            double cumulativeCounter = 0.0;
+            for(int i = 0; i < behaviorBundlesNode.size(); i++) {
+                List<String> bundleAsStringList = mapper.convertValue(behaviorBundlesNode.get(i), List.class);
+                double cumulativeChange = Double.valueOf(bundleAsStringList.get(0)) + cumulativeCounter;
+                cumulativeCounter = cumulativeChange;
+                behaviorBundles.put(cumulativeChange, Integer.valueOf(bundleAsStringList.get(1)));
+            }
         }
 
         //If it is a leaf node return it
-        if(behavior != null){
-            return new AvatarDecisionNode(behavior, null, null);
+        if(behaviorBundles != null && !behaviorBundles.isEmpty()){
+            return new AvatarDecisionNode(behaviorBundles, null, null);
         }
 
         //Else search for child nodes

@@ -62,7 +62,6 @@ public class AvatarBehavior extends Model {
     private AvatarGesture avatarGesture;
     private AvatarLine avatarLine;
 
-
     public AvatarBehavior() {
         behaviorBundle = null;
     }
@@ -273,6 +272,7 @@ public class AvatarBehavior extends Model {
     public void setBehaviorBundle(AvatarBehaviorBundle behaviorBundle) {
         this.behaviorBundle = behaviorBundle;
     }
+
 }
 
 

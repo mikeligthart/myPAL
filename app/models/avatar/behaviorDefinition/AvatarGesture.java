@@ -29,7 +29,7 @@ public class AvatarGesture extends Model {
 
     private static final String GESTUREROOT = routes.Assets.at("avatar/gestures/").url();
     public static final String GESTUREFILEROOT = "public/avatar/gestures/";
-    public static final String DEFAULTGESTURE = routes.Assets.at("gestures/gesture_1_length-0.png").url();
+    public static final String DEFAULTGESTURE = routes.Assets.at("avatar/gestures/gesture_1_length-0.png").url();
 
     @Id
     private int id;

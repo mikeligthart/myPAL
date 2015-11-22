@@ -52,23 +52,12 @@ public class AvatarReasoner {
     }
 
     public List<AvatarBehavior> selectAvatarBehaviors(AvatarTrigger trigger){
-        List<AvatarBehavior> behaviors = new LinkedList<>();
-        List<Integer> behaviorIds = decisionFactory.getAvatarBehaviorIds(trigger);
-        if(behaviorIds != null) {
-            for (Integer id : behaviorIds) {
-                if (id == null) {
-                    behaviors.add(null);
-                } else {
-                    try {
-                        behaviors.add(behaviorFactory.getAvatarBehavior(id));
-                    } catch (AppException e) {
-                        Logger.error("[AvatarReasoner > selectAvatarBehaviors] AvatarBehavior id=" + id + " could not be retrieved. AppException: " + e.getMessage());
-                    }
-                }
-            }
-        } else {
+        List<AvatarBehavior> behaviors = behaviorFactory.loadAvatarBehaviors(decisionFactory.getAvatarBehaviors(trigger));
+        if(behaviors == null){
+            behaviors = new LinkedList<>();
             behaviors.add(null);
         }
+        Logger.debug("[AvatarReasoner > selectAvatarBehaviors] triggered by " + trigger.getTrigger() + ", number of selected behaviors" + behaviors.size());
         return behaviors;
     }
 

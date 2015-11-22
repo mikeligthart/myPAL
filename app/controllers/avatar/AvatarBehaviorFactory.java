@@ -53,16 +53,18 @@ public class AvatarBehaviorFactory {
         behaviorManagement();
     }
 
-    public AvatarBehavior getAvatarBehavior(int id) throws AppException {
-        refresh();
-        AvatarBehavior behavior = AvatarBehavior.byID(id);
-        if(behavior == null){
-            throw new AppException("Behavior with id " + id + " does not exists in database");
-        } else {
+    public List<AvatarBehavior> loadAvatarBehaviors(List<AvatarBehavior> behaviors) {
+        if(behaviors == null){
+            return null;
+        }
+
+        List<AvatarBehavior> loadedBehaviors = new LinkedList<>();
+        for(AvatarBehavior behavior : behaviors)    {
             AvatarLineVariables variables = new AvatarLineVariables(user);
             behavior.load(variables);
+            loadedBehaviors.add(behavior);
         }
-        return behavior;
+        return loadedBehaviors;
 
     }
 
@@ -133,63 +135,55 @@ public class AvatarBehaviorFactory {
         }
 
         //Add new behaviors or update changed behaviors
-        if(behaviorDBCount < behaviorFileCount){
-            for(File file : new File(BEHAVIORROOT).listFiles()){
-                int behaviorId = Integer.valueOf(file.getName().replace(BEHAVIORFILENAME, "").replace(BEHAVIORFILETYPE, ""));
+        for(File file : new File(BEHAVIORROOT).listFiles()){
+            int behaviorId = Integer.valueOf(file.getName().replace(BEHAVIORFILENAME, "").replace(BEHAVIORFILETYPE, ""));
+
+            if(behaviorDBCount < behaviorFileCount) {
                 //If behavior does not exists create a new one and store it in de the database;
-                if(!AvatarBehavior.exists(behaviorId)){
-                   try {
-                       //AvatarBehavior newBehavior = MAPPER.readValue(file, AvatarBehavior.class);
-                       JsonNode behaviorNode = Json.parse(new FileInputStream(file));
-                       AvatarBehavior newBehavior = new AvatarBehavior();
-                       newBehavior.setId(behaviorId);
-                       newBehavior.setGestureId(behaviorNode.get("gestureId").asInt());
-                       newBehavior.setAvatarHtmlType(AvatarHtmlType.valueOf(behaviorNode.get("avatarHtmlType").asText()));
+                if (!AvatarBehavior.exists(behaviorId)) {
+                    try {
+                        //AvatarBehavior newBehavior = MAPPER.readValue(file, AvatarBehavior.class);
+                        JsonNode behaviorNode = Json.parse(new FileInputStream(file));
+                        AvatarBehavior newBehavior = new AvatarBehavior();
+                        newBehavior.setId(behaviorId);
+                        newBehavior.setGestureId(behaviorNode.get("gestureId").asInt());
+                        newBehavior.setAvatarHtmlType(AvatarHtmlType.valueOf(behaviorNode.get("avatarHtmlType").asText()));
 
-                       JsonNode linesNode = behaviorNode.get("lines");
-                       List<String> lines = new LinkedList<>();
-                       for(int i = 0; i < linesNode.size(); i++){
-                           lines.add(linesNode.get(i).asText());
-                       }
-                       newBehavior.setLines(lines);
-                       newBehavior.setLastModified(file.lastModified());
-                       newBehavior.saveBehavior();
-                   }
-                   catch (IOException e) {
-                       Logger.error("[AvatarBehaviorFactory > behaviorManagement] IOException Could not read behaviorFile " + file.getAbsolutePath());
-                   }
-                }
-                //if behavior exists, check whether the file is updated and if so update the database entry.
-                else {
-                    AvatarBehavior behavior = AvatarBehavior.byID(behaviorId);
-                    if(behavior.getLastModified() != file.lastModified()){
-                        AvatarBehavior updatedBehavior = null;
-                        try {
-                            //updatedBehavior = MAPPER.readValue(file, AvatarBehavior.class);
-                            JsonNode behaviorNode = Json.parse(new FileInputStream(file));
-                            updatedBehavior = new AvatarBehavior();
-                            updatedBehavior.setId(behaviorId);
-                            updatedBehavior.setGestureId(behaviorNode.get("gestureId").asInt());
-                            updatedBehavior.setAvatarHtmlType(AvatarHtmlType.valueOf(behaviorNode.get("avatarHtmlType").asText()));
-
-                            JsonNode linesNode = behaviorNode.get("lines");
-                            List<String> lines = new LinkedList<>();
-                            for(int i = 0; i < linesNode.size(); i++){
-                                lines.add(linesNode.get(i).asText());
-                            }
-                            updatedBehavior.setLines(lines);
-
-                        } catch (IOException e) {
-                            Logger.error("[AvatarBehaviorFactory > behaviorManagement] Could not read behaviorFile " + file.getAbsolutePath());
+                        JsonNode linesNode = behaviorNode.get("lines");
+                        List<String> lines = new LinkedList<>();
+                        for (int i = 0; i < linesNode.size(); i++) {
+                            lines.add(linesNode.get(i).asText());
                         }
-                        if(updatedBehavior != null){
-                            behavior.deleteBehavior();
-                            updatedBehavior.setLastModified(file.lastModified());
-                            updatedBehavior.saveBehavior();
-                        }
-
+                        newBehavior.setLines(lines);
+                        newBehavior.setLastModified(file.lastModified());
+                        newBehavior.saveBehavior();
+                    } catch (IOException e) {
+                        Logger.error("[AvatarBehaviorFactory > behaviorManagement] IOException Could not read behaviorFile " + file.getAbsolutePath());
                     }
                 }
+            }
+            //if behavior exists, check whether the file is updated and if so update the database entry.
+            AvatarBehavior behavior = AvatarBehavior.byID(behaviorId);
+            if(behavior.getLastModified() != file.lastModified()){
+                try {
+                    //updatedBehavior = MAPPER.readValue(file, AvatarBehavior.class);
+                    JsonNode behaviorNode = Json.parse(new FileInputStream(file));
+                    behavior.setId(behaviorId);
+                    behavior.setGestureId(behaviorNode.get("gestureId").asInt());
+                    behavior.setAvatarHtmlType(AvatarHtmlType.valueOf(behaviorNode.get("avatarHtmlType").asText()));
+
+                    JsonNode linesNode = behaviorNode.get("lines");
+                    List<String> lines = new LinkedList<>();
+                    for(int i = 0; i < linesNode.size(); i++){
+                        lines.add(linesNode.get(i).asText());
+                    }
+                    behavior.setLines(lines);
+                    behavior.setLastModified(file.lastModified());
+                    behavior.update();
+                } catch (IOException e) {
+                    Logger.error("[AvatarBehaviorFactory > behaviorManagement] Could not read behaviorFile " + file.getAbsolutePath());
+                }
+
             }
         }
     }

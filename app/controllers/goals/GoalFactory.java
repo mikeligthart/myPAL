@@ -9,10 +9,12 @@ import models.goals.Goal;
 import models.goals.GoalTarget;
 import models.goals.GoalType;
 import models.logging.LogAction;
+import play.Logger;
 import play.i18n.Messages;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +38,8 @@ public class GoalFactory {
     public static int getCurrentValue(GoalTarget target, UserMyPAL user, Date startDate, Date deadline){
         java.sql.Date start = new java.sql.Date(startDate.getTime());
         java.sql.Date end = new java.sql.Date(deadline.getTime());
-        LocalDate localConStart = start.toLocalDate();
+        LocalDateTime localConStart = start.toLocalDate().atStartOfDay();
+        LocalDateTime localConEnd = end.toLocalDate().atStartOfDay();
 
         switch(target){
             case ADDxACTIVITIES:
@@ -52,8 +55,8 @@ public class GoalFactory {
             case CONACTIVITIES:
                 int nConActivities = 0;
                 int nConActivitiesHighest = 0;
-                for(int day = 0; day < Duration.between(localConStart, end.toLocalDate()).toDays(); day++){
-                    if(DiaryActivity.addedAnythingOnDate(user, java.sql.Date.valueOf(localConStart.plusDays(day)))){
+                for(int day = 0; day < Duration.between(localConStart, localConEnd).toDays(); day++){
+                    if(DiaryActivity.addedAnythingOnDate(user, java.sql.Date.valueOf(localConStart.plusDays(day).toLocalDate()))){
                         nConActivities++;
                         if(nConActivities > nConActivitiesHighest){
                             nConActivitiesHighest = nConActivities;
@@ -66,8 +69,8 @@ public class GoalFactory {
             case CONMEASUREMENTS:
                 int nConMeasurements = 0;
                 int nConMeasurementsHighest = 0;
-                for(int day = 0; day < Duration.between(localConStart, end.toLocalDate()).toDays(); day++){
-                    if(DiaryMeasurement.addedAnythingOnDate(user, java.sql.Date.valueOf(localConStart.plusDays(day)))){
+                for(int day = 0; day < Duration.between(localConStart, localConEnd).toDays(); day++){
+                    if(DiaryMeasurement.addedAnythingOnDate(user, java.sql.Date.valueOf(localConStart.plusDays(day).toLocalDate()))){
                         nConMeasurements++;
                         if(nConMeasurements > nConMeasurementsHighest){
                             nConMeasurementsHighest = nConMeasurements;
@@ -80,8 +83,8 @@ public class GoalFactory {
             case CONPICTURES:
                 int nConPictures = 0;
                 int nConPicturesHighest = 0;
-                for(int day = 0; day < Duration.between(localConStart, end.toLocalDate()).toDays(); day++){
-                    if(Picture.addedAnythingOnDate(user, java.sql.Date.valueOf(localConStart.plusDays(day)))){
+                for(int day = 0; day < Duration.between(localConStart, localConEnd).toDays(); day++){
+                    if(Picture.addedAnythingOnDate(user, java.sql.Date.valueOf(localConStart.plusDays(day).toLocalDate()))){
                         nConPictures++;
                         if(nConPictures > nConPicturesHighest){
                             nConPicturesHighest = nConPictures;
@@ -94,8 +97,10 @@ public class GoalFactory {
             case CONLOGINS:
                 int nConLogins = 0;
                 int nConLoginsHighest = 0;
-                for(int day = 0; day < Duration.between(localConStart, end.toLocalDate()).toDays(); day++){
-                    if(LogAction.logInByUserAndDate(user, java.sql.Date.valueOf(localConStart.plusDays(day)))){
+
+
+                for(int day = 0; day < Duration.between(localConStart, localConEnd).toDays(); day++){
+                    if(LogAction.logInByUserAndDate(user, java.sql.Date.valueOf(localConStart.plusDays(day).toLocalDate()))){
                         nConLogins++;
                         if(nConLogins > nConLoginsHighest){
                             nConLoginsHighest = nConLogins;

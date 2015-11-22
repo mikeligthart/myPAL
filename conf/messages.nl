@@ -31,10 +31,10 @@ model.goal.addConMeasurements=meting toevoegen.
 model.goal.addConPictures=foto toevoegen.
 model.goal.addConLogins=keer inloggen.
 model.goal.noTargetFound=[Error: dit type doel bestaat niet]
-model.goal.activities=Activiteiten
-model.goal.measurements=Metingen
-model.goal.pictures=Foto's
-model.goal.yesterday=Activiteiten van gister
+model.goal.activities=Activiteit(en)
+model.goal.measurements=Meting(en)
+model.goal.pictures=Foto('s)
+model.goal.yesterday=Activiteit(en) van gister
 model.goal.conActivities=Activiteit
 model.goal.conMeasurements=Meting
 model.goal.conPictures=Foto
@@ -166,6 +166,23 @@ page.diary.goals.add.daily.page=Dagdoel toevoegen
 page.diary.goals.add.total.page=Herhaaldoel toevoegen
 page.diary.goals.select=Bekijk een doel, vul hem aan en voeg hem toe.
 page.diary.goals.donotadd=Niks toevoegen
+page.diary.goals.daily.title=Dagdoelen
+page.diary.goals.total.title=Herhaaldoelen
+page.diary.goals.active=Actief
+page.diary.goals.met=Behaald
+page.diary.goals.info=Doelinformatie
+page.diary.goals.daily.noactive=Je hebt op dit moment geen actieve dagdoelen.
+page.diary.goals.daily.nomet=Er zijn nog geen dagdoelen behaald.
+page.diary.goals.total.noactive=Je hebt op dit moment geen actieve herhaaldoelen.
+page.diary.goals.total.nomet=Er zijn nog geen herhaaldoelen behaald.
+page.diary.goals.daily.viewprogress.part1=Ik heb op
+page.diary.goals.daily.viewprogress.part2=afgesproken om
+page.diary.goals.daily.viewprogress.part3=toe te voegen.
+page.diary.goals.daily.viewprogress.part4a=Dat is dezelfde dag nog gelukt!
+page.diary.goals.daily.viewprogress.part4b=Dit is gelukt op
+page.diary.goals.total.viewprogress.part2=dagen achter elkaar tenminste één
+page.diary.goals.total.viewprogress.part3a=keer in te loggen.
+
 
 ## Admin ##
 # Base #

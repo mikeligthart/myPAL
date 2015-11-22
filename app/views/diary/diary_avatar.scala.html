@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-12 text-center" id="avatarGesture@index" @if(index != 0){style="display:none;"}>
             @if(avatarBehavior == null){
-                <img class="text-left" src='@routes.Assets.at("robot_animations/avatar_standing.png")'>
+                <img class="text-left" src='@models.avatar.behaviorDefinition.AvatarGesture.DEFAULTGESTURE'>
             }else{
                 @if(avatarBehavior.isGestureAVideo){
                     <video width="500px" height="500px" id='avatarGestureVideo@index' @if(index == 0){autoplay="autoplay"}>

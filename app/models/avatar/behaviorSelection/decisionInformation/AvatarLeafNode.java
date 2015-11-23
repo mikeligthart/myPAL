@@ -1,5 +1,9 @@
 package models.avatar.behaviorSelection.decisionInformation;
 
+import models.logging.LogAvatarType;
+
+import java.util.LinkedList;
+
 /**
  * myPAL
  * Purpose: [ENTER PURPOSE]
@@ -13,6 +17,7 @@ package models.avatar.behaviorSelection.decisionInformation;
  * @version 1.0 3-11-2015
  */
 public class AvatarLeafNode implements AvatarDecisionFunction {
+
 
     //Dummy class
 }

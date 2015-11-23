@@ -9,6 +9,7 @@ import models.diary.measurement.DiaryMeasurement;
 import models.goals.Goal;
 import models.logging.LogAction;
 import models.logging.LogActionType;
+import models.logging.LogAvatar;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import play.Logger;
 import play.data.format.Formats;
@@ -65,6 +66,10 @@ public class UserMyPAL extends Model {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonManagedReference
     private List<LogAction> logActions;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
+    private List<LogAvatar> logAvatars;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonManagedReference
@@ -271,6 +276,14 @@ public class UserMyPAL extends Model {
 
     public void setGoals(List<Goal> goals) {
         this.goals = goals;
+    }
+
+    public List<LogAvatar> getLogAvatars() {
+        return logAvatars;
+    }
+
+    public void setLogAvatars(List<LogAvatar> logAvatars) {
+        this.logAvatars = logAvatars;
     }
 
     public String getGluconlineID() {

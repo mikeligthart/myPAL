@@ -8,17 +8,8 @@ create table avatar_behavior (
   gesture_id                integer,
   avatar_html_type          varchar(15),
   last_modified             bigint,
-  behavior_bundle_id        integer,
   constraint ck_avatar_behavior_avatar_html_type check (avatar_html_type in ('NULL','YES_NO','YES_NO_DONTKNOW','TEXT','TEXTFIELD','PICTURE1','PICTURE2','PICTURE3','PICTURE4','PICTURE5','PICTURE6','PICTURE7','PICTURE8','PICTURE9','PICTURE10','PICTURE11','PICTURE12','PICTURE13','PICTURE14','PICTURE15','PICTURE16','PICTURE17','PICTURE18','PICTURE19','PICTURE20','PICTURE21','PICTURE22','PICTURE23','PICTURE24','PICTURE25','PICTURE26','PICTURE27','PICTURE28','PICTURE29','PICTURE30','PICTURE31','PICTURE32','PICTURE33','PICTURE34','PICTURE35','PICTURE36')),
   constraint pk_avatar_behavior primary key (id))
-;
-
-create table avatar_behavior_bundle (
-  id                        integer not null,
-  is_valid                  boolean,
-  description               varchar(255),
-  last_modified             bigint,
-  constraint pk_avatar_behavior_bundle primary key (id))
 ;
 
 create table avatar_gesture (
@@ -100,6 +91,8 @@ create table goal (
   id                        integer not null,
   target                    varchar(16),
   target_value              integer,
+  added                     timestamp,
+  met_at_timestamp          timestamp,
   start_date                timestamp,
   deadline                  timestamp,
   met_at                    timestamp,
@@ -135,6 +128,15 @@ create table log_action (
   constraint pk_log_action primary key (id))
 ;
 
+create table log_avatar (
+  id                        integer not null,
+  timestamp                 timestamp,
+  type                      integer,
+  user_user_name            varchar(255),
+  constraint ck_log_avatar_type check (type in (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)),
+  constraint pk_log_avatar primary key (id))
+;
+
 create table picture (
   id                        integer not null,
   name                      varchar(255),
@@ -161,8 +163,6 @@ create table user_my_pal (
 
 create sequence avatar_behavior_seq;
 
-create sequence avatar_behavior_bundle_seq;
-
 create sequence avatar_gesture_seq;
 
 create sequence avatar_line_seq;
@@ -181,32 +181,34 @@ create sequence insulin_seq;
 
 create sequence log_action_seq;
 
+create sequence log_avatar_seq;
+
 create sequence picture_seq;
 
 create sequence user_my_pal_seq;
 
-alter table avatar_behavior add constraint fk_avatar_behavior_behaviorBun_1 foreign key (behavior_bundle_id) references avatar_behavior_bundle (id) on delete restrict on update restrict;
-create index ix_avatar_behavior_behaviorBun_1 on avatar_behavior (behavior_bundle_id);
-alter table avatar_line add constraint fk_avatar_line_behavior_2 foreign key (behavior_id) references avatar_behavior (id) on delete restrict on update restrict;
-create index ix_avatar_line_behavior_2 on avatar_line (behavior_id);
-alter table diary_activity add constraint fk_diary_activity_user_3 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
-create index ix_diary_activity_user_3 on diary_activity (user_user_name);
-alter table diary_activity add constraint fk_diary_activity_type_4 foreign key (type_id) references diary_activity_type (id) on delete restrict on update restrict;
-create index ix_diary_activity_type_4 on diary_activity (type_id);
-alter table diary_activity add constraint fk_diary_activity_picture_5 foreign key (picture_id) references picture (id) on delete restrict on update restrict;
-create index ix_diary_activity_picture_5 on diary_activity (picture_id);
-alter table diary_activity_type add constraint fk_diary_activity_type_user_6 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
-create index ix_diary_activity_type_user_6 on diary_activity_type (user_user_name);
-alter table diary_measurement add constraint fk_diary_measurement_user_7 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
-create index ix_diary_measurement_user_7 on diary_measurement (user_user_name);
-alter table glucose add constraint fk_glucose_user_8 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
-create index ix_glucose_user_8 on glucose (user_user_name);
-alter table goal add constraint fk_goal_user_9 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
-create index ix_goal_user_9 on goal (user_user_name);
-alter table insulin add constraint fk_insulin_user_10 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
-create index ix_insulin_user_10 on insulin (user_user_name);
-alter table log_action add constraint fk_log_action_user_11 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
-create index ix_log_action_user_11 on log_action (user_user_name);
+alter table avatar_line add constraint fk_avatar_line_behavior_1 foreign key (behavior_id) references avatar_behavior (id) on delete restrict on update restrict;
+create index ix_avatar_line_behavior_1 on avatar_line (behavior_id);
+alter table diary_activity add constraint fk_diary_activity_user_2 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_diary_activity_user_2 on diary_activity (user_user_name);
+alter table diary_activity add constraint fk_diary_activity_type_3 foreign key (type_id) references diary_activity_type (id) on delete restrict on update restrict;
+create index ix_diary_activity_type_3 on diary_activity (type_id);
+alter table diary_activity add constraint fk_diary_activity_picture_4 foreign key (picture_id) references picture (id) on delete restrict on update restrict;
+create index ix_diary_activity_picture_4 on diary_activity (picture_id);
+alter table diary_activity_type add constraint fk_diary_activity_type_user_5 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_diary_activity_type_user_5 on diary_activity_type (user_user_name);
+alter table diary_measurement add constraint fk_diary_measurement_user_6 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_diary_measurement_user_6 on diary_measurement (user_user_name);
+alter table glucose add constraint fk_glucose_user_7 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_glucose_user_7 on glucose (user_user_name);
+alter table goal add constraint fk_goal_user_8 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_goal_user_8 on goal (user_user_name);
+alter table insulin add constraint fk_insulin_user_9 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_insulin_user_9 on insulin (user_user_name);
+alter table log_action add constraint fk_log_action_user_10 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_log_action_user_10 on log_action (user_user_name);
+alter table log_avatar add constraint fk_log_avatar_user_11 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
+create index ix_log_avatar_user_11 on log_avatar (user_user_name);
 alter table picture add constraint fk_picture_diaryActivity_12 foreign key (diary_activity_id) references diary_activity (id) on delete restrict on update restrict;
 create index ix_picture_diaryActivity_12 on picture (diary_activity_id);
 alter table picture add constraint fk_picture_user_13 foreign key (user_user_name) references user_my_pal (user_name) on delete restrict on update restrict;
@@ -219,8 +221,6 @@ create index ix_picture_user_13 on picture (user_user_name);
 SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists avatar_behavior;
-
-drop table if exists avatar_behavior_bundle;
 
 drop table if exists avatar_gesture;
 
@@ -240,6 +240,8 @@ drop table if exists insulin;
 
 drop table if exists log_action;
 
+drop table if exists log_avatar;
+
 drop table if exists picture;
 
 drop table if exists user_my_pal;
@@ -247,8 +249,6 @@ drop table if exists user_my_pal;
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists avatar_behavior_seq;
-
-drop sequence if exists avatar_behavior_bundle_seq;
 
 drop sequence if exists avatar_gesture_seq;
 
@@ -267,6 +267,8 @@ drop sequence if exists goal_seq;
 drop sequence if exists insulin_seq;
 
 drop sequence if exists log_action_seq;
+
+drop sequence if exists log_avatar_seq;
 
 drop sequence if exists picture_seq;
 

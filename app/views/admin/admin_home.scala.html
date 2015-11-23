@@ -1,4 +1,4 @@
-@(nUsers: Int, nLoggedInUsers: Int, nActivities: Int, nLogs: Int, recentActivities: List[views.interfaces.DiaryActivityToHTML], nMeasurements: Int, nBehaviors: Int, nBundles: Int, nGestures: Int)
+@(nUsers: Int, nLoggedInUsers: Int, nActivities: Int, nLogs: Int, recentActivities: List[views.interfaces.DiaryActivityToHTML], nMeasurements: Int, nBehaviors: Int, nGestures: Int)
 @import play.api.i18n._
 
 @admin(Messages("page.admin.home.title"), page = "home") {
@@ -11,7 +11,6 @@
         <p>@nActivities @Messages("page.admin.home.added.activities")</p>
         <p>@nMeasurements @Messages("page.admin.home.added.measurements")</p>
         <p>@nBehaviors <a href='@routes.Admin.behavior()'>@Messages("page.admin.home.added.behaviors")</a></p>
-        <p>@nBundles <a href="@routes.Admin.behaviorBundle()">@Messages("page.admin.home.added.bundles")</a></p>
         <p>@nGestures <a href="@routes.Admin.gesture()">@Messages("page.admin.home.added.gestures")</a></p>
         <p>@nLogs @Messages("page.admin.home.logs")</p>
     </div>

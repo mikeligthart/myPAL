@@ -9,11 +9,16 @@ import play.db.ebean.Model;
 import play.i18n.Messages;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.time.Instant;
 import java.util.List;
+import java.util.Random;
 
 /**
  * myPAL
@@ -41,6 +46,8 @@ public class Goal extends Model {
 
     private int targetValue;
 
+    private Timestamp added, metAtTimestamp;
+
     @Temporal(TemporalType.DATE)
     private Date startDate;
 
@@ -62,6 +69,7 @@ public class Goal extends Model {
 
     public Goal(){
         startDate = Date.from(Instant.now());
+        added = Timestamp.from(Instant.now());
         met = false;
         metAt = null;
     }
@@ -160,16 +168,34 @@ public class Goal extends Model {
         this.metAt = metAt;
     }
 
+
     private boolean isDeadlinePassed(){
         return (Instant.now().compareTo(deadline.toInstant()) > 0);
     }
 
+
+    public Timestamp getAdded() {
+        return added;
+    }
+
+    public void setAdded(Timestamp added) {
+        this.added = added;
+    }
+
+    public Timestamp getMetAtTimestamp() {
+        return metAtTimestamp;
+    }
+
+    public void setMetAtTimestamp(Timestamp metAtTimestamp) {
+        this.metAtTimestamp = metAtTimestamp;
+    }
 
     private void checkIfGoalIsMet(){
         if(!met) {
             met = (GoalFactory.getCurrentValue(target, user, startDate, deadline) >= targetValue);
             if(met){
                 metAt = new Date();
+                metAtTimestamp = Timestamp.from(Instant.now());
             }
         }
     }
@@ -182,5 +208,43 @@ public class Goal extends Model {
 
     public static List<Goal> getGoalsPerType(UserMyPAL user, GoalType type){
         return find.where().eq("user", user).eq("goalType", type).findList();
+    }
+
+    public static Goal lastByUser(UserMyPAL user){
+        List<Goal> goals = find.where().eq("user", user).setOrderBy("added desc").findList();
+        if(goals != null){
+            if(!goals.isEmpty()){
+                return goals.get(0);
+            }
+        }
+        return null;
+    }
+
+    public static Goal randomActiveGoal(UserMyPAL user){
+        Date yesterday = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        List<Goal> goals = find.where().eq("user", user).eq("met", false).le("deadline", yesterday).findList();
+        if(goals != null){
+            if(!goals.isEmpty()){
+                Random rand = new Random();
+                return goals.get(rand.nextInt(goals.size()));
+            }
+        }
+        return null;
+    }
+
+    public static Goal metGoalAfter(UserMyPAL user, Timestamp after){
+        List<Goal> goals = null;
+        if(after != null) {
+            goals = find.where().eq("user", user).eq("met", true).ge("metAtTimestamp", after).findList();
+        } else {
+            goals = find.where().eq("user", user).eq("met", true).findList();
+        }
+        if(goals != null){
+            if(!goals.isEmpty()){
+                Random rand = new Random();
+                return goals.get(rand.nextInt(goals.size()));
+            }
+        }
+        return null;
     }
 }

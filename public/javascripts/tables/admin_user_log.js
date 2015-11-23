@@ -52,3 +52,15 @@ var MeasurementTable =  $('#admin_user_measurement_overview').DataTable( {
                         }
 } );
 
+var table = $('#admin_avatar_log').DataTable( {
+    "ajax": "/admin/users/view/avatarlog/" + userName,
+    "columns": [
+        { "data": "timestamp" },
+        { "data": "type" }
+    ],
+    "order": [[ 0, "desc" ]],
+    "language": {
+        "url": lang
+    }
+} );
+

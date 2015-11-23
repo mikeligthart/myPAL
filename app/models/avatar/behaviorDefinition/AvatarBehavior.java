@@ -2,20 +2,12 @@ package models.avatar.behaviorDefinition;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import controllers.avatar.AvatarBehaviorBundleFactory;
-import controllers.routes;
 import play.Logger;
 import play.db.ebean.Model;
 import play.twirl.api.Html;
 import util.AppException;
 
 import javax.persistence.*;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.File;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -51,20 +43,12 @@ public class AvatarBehavior extends Model {
     private List<AvatarLine> avatarLines;
     private long lastModified;
 
-    @ManyToOne
-    @JsonBackReference
-    private AvatarBehaviorBundle behaviorBundle;
-
     //Not for database
     private int version;
     private AvatarLineVariables variables;
     private AvatarHtml avatarHtml;
     private AvatarGesture avatarGesture;
     private AvatarLine avatarLine;
-
-    public AvatarBehavior() {
-        behaviorBundle = null;
-    }
 
     public void load(AvatarLineVariables variables) {
         Random rand = new Random();
@@ -242,10 +226,6 @@ public class AvatarBehavior extends Model {
         for(AvatarLine line : avatarLines){
             line.delete();
         }
-
-        if(behaviorBundle != null) {
-            new AvatarBehaviorBundleFactory().deleteBehaviorBundle(behaviorBundle.getId());
-        }
         this.delete();
     }
 
@@ -267,15 +247,6 @@ public class AvatarBehavior extends Model {
         List<AvatarBehavior> behaviors = find.where().orderBy("id desc").findList();
         return behaviors.get(0).getId();
     }
-
-    public AvatarBehaviorBundle getBehaviorBundle() {
-        return behaviorBundle;
-    }
-
-    public void setBehaviorBundle(AvatarBehaviorBundle behaviorBundle) {
-        this.behaviorBundle = behaviorBundle;
-    }
-
 }
 
 

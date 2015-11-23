@@ -30,7 +30,7 @@
                                   "type": "SCHOOL",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [41],
+                                    "behaviors": [[0.5, "REACT_HAPPY_SCHOOL", [41]], [0.5, "REACT_HAPPY_SPORT", [42]]],
                                     "children": null
                                   }
                                 }
@@ -40,7 +40,7 @@
                                   "type": "SPORT",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [42],
+                                    "behaviors": [[1.0, "REACT_HAPPY_SPORT", [42]]],
                                     "children": null
                                   }
                                 }
@@ -50,7 +50,7 @@
                                   "type": "MAALTIJD",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [1],
+                                    "behaviors": [[1.0, "REACT_HAPPY_MEAL", [1]]],
                                     "children": null
                                   }
                                 }
@@ -60,7 +60,7 @@
                                   "type": "OVERIG",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [1],
+                                    "behaviors": [[1.0, "REACT_HAPPY_OTHER", [1]]],
                                     "children": null
                                   }
                                 }
@@ -81,7 +81,7 @@
                                   "type": "SCHOOL",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [1],
+                                    "behaviors": [[1.0, "REACT_NEUTRAL_SCHOOL", [1]]],
                                     "children": null
                                   }
                                 }
@@ -91,7 +91,7 @@
                                   "type": "SPORT",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [1],
+                                    "behaviors": [[1.0, "REACT_NEUTRAL_SPORT", [1]]],
                                     "children": null
                                   }
                                 }
@@ -101,7 +101,7 @@
                                   "type": "MAALTIJD",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [43],
+                                    "behaviors": [[1.0, "REACT_NEUTRAL_MEAL", [43]]],
                                     "children": null
                                   }
                                 }
@@ -111,7 +111,7 @@
                                   "type": "OVERIG",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [1],
+                                    "behaviors": [[1.0, "REACT_NEUTRAL_OTHER", [41]]],
                                     "children": null
                                   }
                                 }
@@ -132,7 +132,7 @@
                                   "type": "SCHOOL",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [1],
+                                    "behaviors": [[1.0, "REACT_SAD_SCHOOL", [1]]],
                                     "children": null
                                   }
                                 }
@@ -142,7 +142,7 @@
                                   "type": "SPORT",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [1],
+                                    "behaviors": [[1.0, "REACT_SAD_SPORT", [1]]],
                                     "children": null
                                   }
                                 }
@@ -152,7 +152,7 @@
                                   "type": "MAALTIJD",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [1],
+                                    "behaviors": [[1.0, "REACT_SAD_MEAL", [1]]],
                                     "children": null
                                   }
                                 }
@@ -162,7 +162,7 @@
                                   "type": "OVERIG",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [44],
+                                    "behaviors": [[1.0, "REACT_SAD_OTHER", [1]]],
                                     "children": null
                                   }
                                 }
@@ -181,7 +181,7 @@
                   "beforeLast": "LOGIN",
                   "child": {
                     "class": "AvatarLeafNode",
-                    "behaviors": [67],
+                    "behaviors": [[1.0, "GREETING", [67]]],
                     "children": null
                   }
                 }

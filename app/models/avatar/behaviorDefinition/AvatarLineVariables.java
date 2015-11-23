@@ -1,6 +1,8 @@
 package models.avatar.behaviorDefinition;
 
 import models.UserMyPAL;
+import models.diary.activity.DiaryActivity;
+import models.goals.Goal;
 import play.i18n.Messages;
 
 import java.util.ArrayList;
@@ -21,9 +23,11 @@ import java.util.List;
 public class AvatarLineVariables {
 
     private UserMyPAL user;
+    private DiaryActivity latestActivity;
 
     public AvatarLineVariables(UserMyPAL user){
         this.user = user;
+        latestActivity = DiaryActivity.lastByUser(user);
     }
 
     public UserMyPAL getUser() {
@@ -35,18 +39,24 @@ public class AvatarLineVariables {
     }
 
     public String processLine(String line){
-        return line.replace("#firstName#", user.getFirstName());
+        line = line.replace("#firstName#", user.getFirstName());
+        line = line.replace("#activityName#", latestActivity.getName().toLowerCase());
+        return line;
     }
 
     public static String lineVariablesToString(){
         StringBuilder builder = new StringBuilder();
         builder.append("* #firstName#: ").append(Messages.get("model.avatarLineVariables.firstName"));
+        builder.append("* #activityName#: ").append(Messages.get("model.avatarLineVariables.activityName"));
         return builder.toString();
     }
 
     public static boolean isLineVariable(String potentialLineVariable){
         if(potentialLineVariable.equalsIgnoreCase("#firstName#"))
             return true;
-        return false;
+        else if(potentialLineVariable.equalsIgnoreCase("#activityName#"))
+            return true;
+        else
+            return false;
     }
 }

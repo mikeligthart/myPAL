@@ -72,6 +72,7 @@ GET     /admin/users/view/:userName                 controllers.Admin.viewUser(u
 GET     /admin/users/view/log/:userName             controllers.Admin.getUserLog(userName: String)
 GET     /admin/users/view/activities/:userName      controllers.Admin.getUserActivities(userName: String)
 GET     /admin/users/view/measurements/:userName    controllers.Admin.getUserMeasurements(userName: String)
+GET     /admin/users/view/avatarlog/:userName       controllers.Admin.getAvatarLog(userName: String)
 GET     /admin/users/update/:userName               controllers.Admin.updatePageUser(userName: String)
 POST    /admin/users/update/:userName               controllers.Admin.updateUser(userName: String)
 DELETE  /admin/users/delete/:userName               controllers.Admin.deleteUser(userName: String)
@@ -84,11 +85,6 @@ DELETE  /admin/behavior/delete/:id              controllers.Admin.deleteBehavior
 GET     /admin/behavior/gesture                 controllers.Admin.gesture()
 POST    /admin/behavior/gesture                 controllers.Admin.addGesture()
 GET     /admin/behavior/gesture/delete/:id      controllers.Admin.deleteGesture(id: Int)
-GET     /admin/behavior/bundle                  controllers.Admin.behaviorBundle()
-DELETE  /admin/behavior/bundle/delete/:id       controllers.Admin.deleteBehaviorBundle(id: Int)
-GET     /admin/behavior/bundle/add              controllers.Admin.addBehaviorBundlePage()
-POST    /admin/behavior/bundle/add              controllers.Admin.addBehaviorBundle()
-GET     /admin/behavior/bundle/list             controllers.Admin.getBehaviorBundles()
 GET     /admin/secret/clearbehaviors            controllers.Admin.clearDatabaseOfBehaviors()
 
 # Map static resources from the /public folder to the /assets URL path

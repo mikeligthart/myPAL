@@ -6,6 +6,7 @@ import com.typesafe.config.ConfigFactory;
 import models.UserMyPAL;
 import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorSelection.AvatarDecisionNode;
+import models.avatar.behaviorSelection.AvatarLeafTip;
 import models.avatar.behaviorSelection.decisionInformation.*;
 import models.diary.activity.DiaryActivity;
 import models.diary.activity.DiaryActivityType;
@@ -13,6 +14,8 @@ import models.diary.activity.DiaryActivityTypeManager;
 import models.diary.activity.Emotion;
 import models.logging.LogAction;
 import models.logging.LogActionType;
+import models.logging.LogAvatar;
+import models.logging.LogAvatarType;
 import play.Logger;
 import play.libs.Json;
 
@@ -79,7 +82,13 @@ public class AvatarDecisionFactory {
         }
 
         if (rootNode != null) {
-            return rootNode.getAvatarBehaviors();
+            AvatarLeafTip leafTip = rootNode.getAvatarBehaviors();
+            if(leafTip == null){
+                Logger.error("[AvatarDecisionFactory > getAvatarBehaviors] leafTip cannot be null");
+                return null;
+            }
+            LogAvatar.log(user, leafTip.getLogAvatarType());
+            return leafTip.getBehaviorIds();
         } else {
             return null;
         }
@@ -99,21 +108,47 @@ public class AvatarDecisionFactory {
     }
 
     private AvatarDecisionNode parseNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
-        Logger.debug("[AvatarDecisionFactory > parseNode] call for " + node);
         if(!node.has("class") || !node.has("behaviors") || !node.has("children")){
             throw new ParseAvatarDecisionModelException("Node structure check for 'class', 'behaviorBundles' and 'children' failed");
         }
 
         //Check if node is a leaf node and if so retrieve the behaviors
         JsonNode behaviorsNode = node.get("behaviors");
-        LinkedList<Integer> behaviorIds = null;
+        Map<Double, AvatarLeafTip> leafNodes = new LinkedHashMap<>();
+        double cumProb = 0.0;
         if(behaviorsNode.isArray() && !behaviorsNode.isNull()) {
-            behaviorIds = mapper.convertValue(behaviorsNode, LinkedList.class);
+            for(int i = 0; i < behaviorsNode.size(); i++){
+                JsonNode probNode = behaviorsNode.get(i).get(0);
+                JsonNode logNode = behaviorsNode.get(i).get(1);
+                JsonNode idsNode = behaviorsNode.get(i).get(2);
+
+                if(!probNode.isDouble()){
+                    throw new ParseAvatarDecisionModelException("First element of inner list in a leafNode should be a double indicating the probablity");
+                }
+                cumProb += probNode.asDouble();
+
+                LogAvatarType avatarLog = LogAvatarType.forName(logNode.asText());
+                if(avatarLog == null){
+                    throw new ParseAvatarDecisionModelException("Second element of inner list in a leafNode should be a valid LogAvatarType. " + logNode.asText() + " isn't");
+                }
+
+                LinkedList<Integer> ids = null;
+                if(idsNode.isArray() && !idsNode.isNull()) {
+                    ids = mapper.convertValue(idsNode, LinkedList.class);
+                } else {
+                    throw new ParseAvatarDecisionModelException("Third element of inner list in a leafNode should be list of behavior ids (ints)");
+                }
+                if(ids == null){
+                    throw new ParseAvatarDecisionModelException("Behavior ids could not be retrieved");
+                }
+
+                leafNodes.put(cumProb, new AvatarLeafTip(avatarLog, ids));
+            }
         }
 
         //If it is a leaf node return it
-        if(behaviorIds != null && !behaviorIds.isEmpty()){
-            return new AvatarDecisionNode(behaviorIds, null, null);
+        if(leafNodes != null && !leafNodes.isEmpty()){
+            return new AvatarDecisionNode(leafNodes, null, null);
         }
 
         //Else search for child nodes

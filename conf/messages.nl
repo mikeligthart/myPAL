@@ -21,6 +21,8 @@ model.user.gluconlineID=GluconlineID
 
 ## AvatarLineVariables ##
 model.avatarLineVariables.firstName=Voornaam van gebruiker
+model.avatarLineVariables.activityName=Zelf gegeven naam van de meest recentste activiteit
+
 
 ## Goal ##
 model.goal.failed=Niet gelukt
@@ -229,6 +231,9 @@ page.admin.users.viewUser.activityOverview=Overzicht activiteiten
 page.admin.users.viewUser.measurementOverview=Overzicht metingen
 page.admin.users.log.timestamp=Tijd
 page.admin.users.log.activity=Log
+page.admin.users.avatarlog=Avatargedrag
+page.admin.users.avatarlog.timestamp=Tijd
+page.admin.users.avatarlog.behavior=Gedrag
 page.admin.users.viewUser.hasPicture=Bevat foto
 
 # Behavior #

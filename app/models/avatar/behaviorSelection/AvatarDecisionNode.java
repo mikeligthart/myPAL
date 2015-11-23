@@ -1,12 +1,8 @@
 package models.avatar.behaviorSelection;
 
-import controllers.avatar.AvatarBehaviorBundleFactory;
-import controllers.avatar.AvatarBehaviorFactory;
-import controllers.avatar.AvatarReasoner;
-import models.avatar.behaviorDefinition.AvatarBehavior;
-import models.avatar.behaviorDefinition.AvatarBehaviorBundle;
 import models.avatar.behaviorSelection.decisionInformation.AvatarDecisionFunction;
 import play.Logger;
+import sun.rmi.runtime.Log;
 
 import java.util.*;
 
@@ -25,19 +21,27 @@ import java.util.*;
 public class AvatarDecisionNode {
 
     //BehaviorBundle ids with their cumulative changes of getting selected
-    private List<Integer> behaviorIds;
+    private Map<Double, AvatarLeafTip> leafTips;
     private AvatarDecisionFunction currentInformation;
     private Map<AvatarDecisionFunction, AvatarDecisionNode> children;
 
-    public AvatarDecisionNode(List<Integer> behaviorIds, AvatarDecisionFunction currentInformation, Map<AvatarDecisionFunction, AvatarDecisionNode> children){
-        this.behaviorIds = behaviorIds;
+    public AvatarDecisionNode(Map<Double, AvatarLeafTip> leafTips, AvatarDecisionFunction currentInformation, Map<AvatarDecisionFunction, AvatarDecisionNode> children){
+        this.leafTips = leafTips;
         this.currentInformation = currentInformation;
         this.children = children;
     }
 
-    public List<Integer> getAvatarBehaviors(){
-        if(behaviorIds != null){
-            return behaviorIds;
+    public AvatarLeafTip getAvatarBehaviors(){
+        if(leafTips != null){
+            Random rand = new Random();
+            double select = rand.nextDouble();
+            for(Iterator<Double> it = leafTips.keySet().iterator(); it.hasNext();){
+                double prob = it.next();
+                if(select <= prob){
+                    return leafTips.get(prob);
+                }
+            }
+            return null;
         } else if (children != null) {
             for(AvatarDecisionFunction df : children.keySet()){
                 if(df.equals(currentInformation)){

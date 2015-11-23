@@ -3,7 +3,6 @@ package controllers;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.typesafe.config.ConfigFactory;
-import controllers.avatar.AvatarBehaviorBundleFactory;
 import controllers.avatar.AvatarGestureFactory;
 import models.UserMyPAL;
 import models.UserType;
@@ -15,6 +14,7 @@ import models.diary.measurement.DiaryMeasurement;
 import models.diary.measurement.Glucose;
 import models.diary.measurement.Insulin;
 import models.logging.LogAction;
+import models.logging.LogAvatar;
 import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -66,10 +66,9 @@ public class Admin extends Controller {
         int nLogs = LogAction.find.all().size();
         int nMeasurements = Glucose.find.findRowCount() + Insulin.find.findRowCount();
         int nBehaviors = AvatarBehavior.getCount();
-        int nBundles = AvatarBehaviorBundle.getCount();
         int nGestures = AvatarGesture.getCount();
 
-        return ok(admin_home.render(users.size(), countOnlineUsers(users), activities.size(), nLogs, recentActivities(activities), nMeasurements, nBehaviors, nBundles, nGestures));
+        return ok(admin_home.render(users.size(), countOnlineUsers(users), activities.size(), nLogs, recentActivities(activities), nMeasurements, nBehaviors, nGestures));
     }
 
     private static int countOnlineUsers(List<UserMyPAL> users) {
@@ -185,35 +184,6 @@ public class Admin extends Controller {
         return ok(admin_gesture.render(gestures, error));
     }
 
-    public static Result behaviorBundle(){
-        return behaviorBundle("");
-    }
-
-    private static Result behaviorBundle(String error){
-        AdminAuthenticationResult result = AdminAuthentication.authenticate();
-        if(!result.hasAcces){
-            return result.denyAction;
-        }
-
-        AvatarReasoner.refresh();
-        List<AvatarBehaviorToHTML> behaviorToHTMLs = AvatarBehaviorToHTML.fromListToList(AvatarBehavior.find.all());
-        return ok(admin_behavior_bundle.render(behaviorToHTMLs, AvatarBehaviorBundle.getCount(), error));
-    }
-
-    public static Result addBehaviorBundlePage(){
-        return addBehaviorBundlePage("");
-    }
-
-    private static Result addBehaviorBundlePage(String error){
-        AdminAuthenticationResult result = AdminAuthentication.authenticate();
-        if(!result.hasAcces){
-            return result.denyAction;
-        }
-
-        AvatarReasoner.refresh();
-        return ok(admin_behavior_bundle_add.render(error));
-    }
-
      /* FUNCTIONS */
 
     /**
@@ -321,6 +291,23 @@ public class Admin extends Controller {
         UserMyPAL userForLogs = UserMyPAL.byUserName(userName);
         if (userForLogs != null){
             List<LogActionToHTML> logs = LogActionToHTML.fromListToList(LogAction.find.where().eq("user", userForLogs).findList());
+            ObjectNode data = JsonNodeFactory.instance.objectNode();
+            data.set("data", toJson(logs));
+            return ok(data);
+        } else {
+            return forbidden(no_access.render());
+        }
+    }
+
+    public static Result getAvatarLog(String userName){
+        AdminAuthenticationResult result = AdminAuthentication.authenticate();
+        if(!result.hasAcces){
+            return result.denyAction;
+        }
+
+        UserMyPAL userForLogs = UserMyPAL.byUserName(userName);
+        if (userForLogs != null){
+            List<LogAvatarToHTML> logs = LogAvatarToHTML.fromListToList(LogAvatar.byUser(userForLogs));
             ObjectNode data = JsonNodeFactory.instance.objectNode();
             data.set("data", toJson(logs));
             return ok(data);
@@ -529,60 +516,6 @@ public class Admin extends Controller {
         }
     }
 
-    public static Result getBehaviorBundles(){
-        AdminAuthenticationResult result = AdminAuthentication.authenticate();
-        if(!result.hasAcces){
-            return result.denyAction;
-        }
-
-        AvatarReasoner.refresh();
-        List<AvatarBehaviorBundleToHTML> behaviors = AvatarBehaviorBundleToHTML.fromListToList(AvatarBehaviorBundle.find.all());
-        ObjectNode data = JsonNodeFactory.instance.objectNode();
-        data.set("data", toJson(behaviors));
-        return ok(data);
-    }
-
-    public static Result addBehaviorBundle(){
-        AdminAuthenticationResult result = AdminAuthentication.authenticate();
-        if(!result.hasAcces){
-            return result.denyAction;
-        }
-
-        AvatarReasoner.refresh();
-        DynamicForm requestData = form().bindFromRequest();
-        String behaviorBundle = requestData.get("behaviorBundle");
-        String bundleDescription = requestData.get("bundleDescription");
-        List<Integer> behaviorIds = new LinkedList<>();
-        for(String id: Arrays.asList(behaviorBundle.trim().split(","))){
-            behaviorIds.add(Integer.valueOf(id));
-        }
-
-        AvatarBehaviorBundleFactory behaviorBundleFactory = new AvatarBehaviorBundleFactory();
-        if(behaviorBundleFactory.addBehaviorBundle(behaviorIds, bundleDescription)){
-            return redirect(routes.Admin.behaviorBundle());
-        } else {
-            return addBehaviorBundlePage(behaviorBundleFactory.latestError);
-        }
-
-
-    }
-
-    public static Result deleteBehaviorBundle(int id){
-        AdminAuthenticationResult result = AdminAuthentication.authenticate();
-        if(!result.hasAcces){
-            return result.denyAction;
-        }
-
-        AvatarReasoner.refresh();
-        AvatarBehaviorBundleFactory bundleFactory = new AvatarBehaviorBundleFactory();
-        if(bundleFactory.deleteBehaviorBundle(id)){
-            return redirect(routes.Admin.behaviorBundle());
-        } else {
-            return forbidden();
-        }
-    }
-
-
     public static Result clearDatabaseOfBehaviors(){
         AdminAuthenticationResult result = AdminAuthentication.authenticate();
         if(!result.hasAcces){
@@ -590,8 +523,7 @@ public class Admin extends Controller {
         }
 
         AvatarBehaviorFactory.clearDatabase();
-        AvatarBehaviorBundleFactory.deleteBundlesFromDB();
-        return ok("database cleared of behaviors and bundles");
+        return ok("database cleared of behaviors");
     }
 
 

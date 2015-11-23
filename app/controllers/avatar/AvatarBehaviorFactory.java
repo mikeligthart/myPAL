@@ -53,20 +53,6 @@ public class AvatarBehaviorFactory {
         behaviorManagement();
     }
 
-    public List<AvatarBehavior> loadAvatarBehaviors(List<AvatarBehavior> behaviors) {
-        if(behaviors == null){
-            return null;
-        }
-        Logger.debug("[AvatarBehaviorFactory > loadAvatarBehaviors] behaviors: " + behaviors.get(0).getId());
-        List<AvatarBehavior> loadedBehaviors = new LinkedList<>();
-        for(AvatarBehavior behavior : behaviors)    {
-            AvatarLineVariables variables = new AvatarLineVariables(user);
-            behavior.load(variables);
-            loadedBehaviors.add(behavior);
-        }
-        return loadedBehaviors;
-    }
-
     public AvatarBehavior getAvatarBehavior(int id) throws AppException {
         refresh();
         AvatarBehavior behavior = AvatarBehavior.byID(id);
@@ -130,7 +116,6 @@ public class AvatarBehaviorFactory {
             return false;
         }
     }
-
 
     private static void behaviorManagement(){
         int behaviorFileCount = new File(BEHAVIORROOT).list().length;

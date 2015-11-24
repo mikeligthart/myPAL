@@ -75,6 +75,7 @@ public class Goal extends Model {
     }
 
     public int getProgress(){
+
             return Math.round(((float) GoalFactory.getCurrentValue(target, user, startDate, deadline) / (float) targetValue) * 100);
     }
 

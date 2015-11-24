@@ -30,7 +30,7 @@
                                   "type": "SCHOOL",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[0.5, "REACT_HAPPY_SCHOOL", [41]], [0.5, "REACT_HAPPY_SPORT", [42]]],
+                                    "behaviors": [[0.5, "REACT_HAPPY_SCHOOL", [1]]],
                                     "children": null
                                   }
                                 }
@@ -40,7 +40,7 @@
                                   "type": "SPORT",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_HAPPY_SPORT", [42]]],
+                                    "behaviors": [[1.0, "REACT_HAPPY_SPORT", [1]]],
                                     "children": null
                                   }
                                 }
@@ -101,7 +101,7 @@
                                   "type": "MAALTIJD",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_NEUTRAL_MEAL", [43]]],
+                                    "behaviors": [[1.0, "REACT_NEUTRAL_MEAL", [1]]],
                                     "children": null
                                   }
                                 }
@@ -111,7 +111,7 @@
                                   "type": "OVERIG",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_NEUTRAL_OTHER", [41]]],
+                                    "behaviors": [[1.0, "REACT_NEUTRAL_OTHER", [1]]],
                                     "children": null
                                   }
                                 }
@@ -181,7 +181,7 @@
                   "beforeLast": "LOGIN",
                   "child": {
                     "class": "AvatarLeafNode",
-                    "behaviors": [[1.0, "GREETING", [67]]],
+                    "behaviors": [[1.0, "GREETING", [2, 2]]],
                     "children": null
                   }
                 }

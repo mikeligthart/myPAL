@@ -24,6 +24,7 @@ public class AvatarReasoner {
 
     //Factory management attributes
     private static Map<String, AvatarReasoner> avatarReasoners;
+    private static final int DEFAULT_BEHAVIOR_ID = 1;
 
     //Factory management
     public static AvatarReasoner getReasoner(UserMyPAL user){
@@ -66,6 +67,13 @@ public class AvatarReasoner {
                     }
                 }
             }
+            if(behaviorIds.size() > 1){
+                try {
+                    behaviors.add(defaultBehavior());
+                } catch (AppException e) {
+                    Logger.error("[AvatarReasoner > selectAvatarBehaviors] (default) AvatarBehavior id=" + DEFAULT_BEHAVIOR_ID + " could not be retrieved. AppException: " + e.getMessage());
+                }
+            }
         } else {
             behaviors.add(null);
         }
@@ -74,6 +82,12 @@ public class AvatarReasoner {
 
     public static void refresh(){
         AvatarBehaviorFactory.refresh();
+    }
+
+    private AvatarBehavior defaultBehavior() throws AppException {
+        AvatarBehavior defaultBehavior = behaviorFactory.getAvatarBehavior(DEFAULT_BEHAVIOR_ID);
+        defaultBehavior.setKeep(true);
+        return defaultBehavior;
     }
 
 }

@@ -150,7 +150,7 @@
 
     @if(pendingTotal.size > 0){
         @for(goal <- pendingTotal){
-            <div class="row text-left">
+            <div class="row text-left pendingGoalView">
                 <div class="col-md-2"><button class="goalViewButton" value="@goal.getId"><img width="50" height="50" class="img-responsive" src="@controllers.goals.GoalFactory.getIcon(goal.getTarget)"></button></div>
                 <div class="col-md-4"><div class="progressBar" id="progressBar@goal.getId"><div class="progress-label">@goal.getProgress %</div></div></div>
                 <div class="col-md-2"><a aria-label='Left Align' data-toggle="confirmation" data-title='@Messages("page.general.areyousure")' data-href="@routes.Diary.deleteGoal(goal.getId)" data-btnOkLabel='@Messages("page.general.yes")' data-btnCancelLabel='@Messages("page.general.no")' data-btnOkClass="btn btn-sm btn-primary" data-placement="right" class="btn btn-default"></span></a></div>

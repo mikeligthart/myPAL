@@ -62,7 +62,7 @@ public class GoalFactory {
                             nConActivitiesHighest = nConActivities;
                         }
                     } else {
-                        nConActivitiesHighest = 0;
+                        nConActivities = 0;
                     }
                 }
                 return nConActivitiesHighest;
@@ -76,7 +76,7 @@ public class GoalFactory {
                             nConMeasurementsHighest = nConMeasurements;
                         }
                     } else {
-                        nConMeasurementsHighest = 0;
+                        nConMeasurements = 0;
                     }
                 }
                 return nConMeasurementsHighest;
@@ -90,14 +90,13 @@ public class GoalFactory {
                             nConPicturesHighest = nConPictures;
                         }
                     } else {
-                        nConPicturesHighest = 0;
+                        nConPictures = 0;
                     }
                 }
                 return nConPicturesHighest;
             case CONLOGINS:
                 int nConLogins = 0;
                 int nConLoginsHighest = 0;
-
 
                 for(int day = 0; day < Duration.between(localConStart, localConEnd).toDays(); day++){
                     if(LogAction.logInByUserAndDate(user, java.sql.Date.valueOf(localConStart.plusDays(day).toLocalDate()))){

@@ -1,6 +1,1 @@
-{
-  "id": 2,
-  "gestureId": 1,
-  "lines": ["Hoe heet jij?"],
-  "avatarHtmlType": "TEXT"
-}
+{"gestureId":2,"avatarHtmlType":"NULL","id":2,"lines":["Hoi #firstName#, fijn dat je er bent.","Hoi #firstName#, goed dat je er bent.","Hoi #firstName#, leuk om je weer te zien.","Hey #firstName#, fijn dat je er bent.","Hey #firstName#, goed dat je er bent.","Hey #firstName#, leuk om je weer te zien.","Hallo #firstName#, fijn dat je er bent.","Hallo #firstName#, goed dat je er bent.","Hallo #firstName#, leuk om je weer te zien."]}

@@ -1,6 +1,5 @@
 package models.avatar.behaviorDefinition;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import play.Logger;
 import play.db.ebean.Model;
@@ -49,8 +48,10 @@ public class AvatarBehavior extends Model {
     private AvatarHtml avatarHtml;
     private AvatarGesture avatarGesture;
     private AvatarLine avatarLine;
+    private boolean keep;
 
     public void load(AvatarLineVariables variables) {
+        keep = false;
         Random rand = new Random();
         lines = this.getLines();
         if (lines.size() > 0) {
@@ -76,7 +77,10 @@ public class AvatarBehavior extends Model {
 
     @Transient
     public int getTimer() {
-        if (!avatarHtml.isActiveHtml()) {
+        if(keep){
+            return 0;
+        }
+        else if (!avatarHtml.isActiveHtml()) {
             int lineDuration = avatarLines.get(version).getTimer(variables.getUser().getBirthdate());
             int gestureDuration = avatarGesture.getDuration();
             return Math.max(lineDuration, gestureDuration);
@@ -205,6 +209,16 @@ public class AvatarBehavior extends Model {
     @Transient
     public void setAvatarLine(AvatarLine avatarLine) {
         this.avatarLine = avatarLine;
+    }
+
+    @Transient
+    public boolean isKeep() {
+        return keep;
+    }
+
+    @Transient
+    public void setKeep(boolean keep) {
+        this.keep = keep;
     }
 
     public long getLastModified() {

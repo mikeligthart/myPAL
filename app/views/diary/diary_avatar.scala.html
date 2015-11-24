@@ -48,6 +48,18 @@
     </script>
     }
 }
+
+<script>
+        $(".avatarTogetherOrSelf.avatarValueTogether").click(function(e) {
+            e.preventDefault();
+            window.location.href="@routes.Diary.together().url";
+        });
+
+        $(".avatarTogetherOrSelf.avatarValueSelf").click(function(e) {
+            e.preventDefault();
+            window.location.href = "@routes.Diary.addActivityPage().url";
+        });
+</script>
 @if(avatarBehaviors.size > 1){
     <script>
         avatarBehaviorManager.start();
@@ -68,16 +80,6 @@
             e.preventDefault();
             avatarBehaviorManager.setChoice(2,2);
             avatarBehaviorManager.nextBehavior();
-        });
-
-        $(".avatarTogetherOrSelf.avatarValueTogether").click(function(e) {
-            e.preventDefault();
-            window.location=@routes.Diary.together().url
-        });
-
-        $(".avatarTogetherOrSelf.avatarValueSelf").click(function(e) {
-            e.preventDefault();
-            window.location=@routes.Diary.addActivityPage().url
         });
 
         $(".avatarHtmlYesNoDontknow.avatarValueYes").click(function(e) {

@@ -1,7 +1,11 @@
-@(user: UserMyPAL)
+@(user: UserMyPAL, avatarBehaviors: List[models.avatar.behaviorDefinition.AvatarBehavior])
 
 @views.html.diary.diary_no_avatar(Messages("page.diary.base.calendar"), "calendar", user.getUserType) {
 
 <h1>We gaan het samen invullen!</h1>
+
+    @for(behavior <- avatarBehaviors){
+        <p>@behavior.getLine</p>
+    }
 
 }

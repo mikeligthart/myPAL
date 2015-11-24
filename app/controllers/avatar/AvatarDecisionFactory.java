@@ -117,7 +117,6 @@ public class AvatarDecisionFactory {
         Map<Double, AvatarLeafTip> leafNodes = new LinkedHashMap<>();
         double cumProb = 0.0;
         if(behaviorsNode.isArray() && !behaviorsNode.isNull()) {
-            Logger.debug("Adding leaf node");
             for(int i = 0; i < behaviorsNode.size(); i++){
                 JsonNode probNode = behaviorsNode.get(i).get(0);
                 JsonNode logNode = behaviorsNode.get(i).get(1);
@@ -149,7 +148,6 @@ public class AvatarDecisionFactory {
 
         //If it is a leaf node return it
         if(leafNodes != null && !leafNodes.isEmpty()){
-            Logger.debug("Leaf node added");
             return new AvatarDecisionNode(leafNodes, null, null);
         }
 
@@ -159,19 +157,14 @@ public class AvatarDecisionFactory {
             throw new ParseAvatarDecisionModelException("The attribute 'children' of AvatarTrigger is either empty or not in the right format");
         }
 
-        Logger.debug("processing children");
         String nodeClass = node.get("class").asText();
         if(nodeClass.equalsIgnoreCase(AvatarTrigger.class.getSimpleName())){
-            Logger.debug("TriggerNode");
             return parseAvatarTriggerNode(childrenNode);
         } else if(nodeClass.equalsIgnoreCase(AvatarUserHistory.class.getSimpleName())){
-            Logger.debug("History");
             return parseAvatarUserHistoryNode(childrenNode);
         } else if(nodeClass.equalsIgnoreCase(AvatarEmotion.class.getSimpleName())){
-            Logger.debug("Emotion");
             return parseAvatarEmotionNode(childrenNode);
         } else if(nodeClass.equalsIgnoreCase(AvatarActivityType.class.getSimpleName())){
-            Logger.debug("ActivityType");
             return parseAvatarActivityTypeNode(childrenNode);
         }
         return null;

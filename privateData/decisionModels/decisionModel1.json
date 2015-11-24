@@ -185,6 +185,16 @@
                     "children": null
                   }
                 }
+              },{
+                "2": {
+                  "last": "TOGETHER",
+                  "beforeLast": "TOGETHERORSELF",
+                  "child": {
+                    "class": "AvatarLeafNode",
+                    "behaviors": [[1.0, "ADDACTIVITYTOGETHER", [2, 2]]],
+                    "children": null
+                  }
+                }
               }
             ]
           }

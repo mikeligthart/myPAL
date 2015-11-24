@@ -3,6 +3,7 @@ package models.avatar.behaviorDefinition;
 import controllers.Assets;
 import controllers.routes;
 import models.avatar.behaviorDefinition.viewHolders.*;
+import play.Logger;
 import play.twirl.api.Html;
 
 /**

@@ -1,5 +1,6 @@
 package models.avatar.behaviorDefinition.viewHolders;
 
+import play.Logger;
 import play.twirl.api.Html;
 
 /**
@@ -20,6 +21,6 @@ public class AvatarHtmlTogetherOrSelf implements  AvatarHtmlView {
 
     @Override
     public Html renderHtml(int index) {
-        return null;
+        return view.render(index);
     }
 }

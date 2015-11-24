@@ -164,8 +164,9 @@ public class AvatarBehaviorFactory {
                 try {
                     //updatedBehavior = MAPPER.readValue(file, AvatarBehavior.class);
                     JsonNode behaviorNode = Json.parse(new FileInputStream(file));
-                    behavior.setId(behaviorId);
-                    behavior.setGestureId(behaviorNode.get("gestureId").asInt());
+                    AvatarBehavior updateBehavior = new AvatarBehavior();
+                    updateBehavior.setId(behaviorId);
+                    updateBehavior.setGestureId(behaviorNode.get("gestureId").asInt());
                     behavior.setAvatarHtmlType(AvatarHtmlType.valueOf(behaviorNode.get("avatarHtmlType").asText()));
 
                     JsonNode linesNode = behaviorNode.get("lines");
@@ -173,9 +174,10 @@ public class AvatarBehaviorFactory {
                     for(int i = 0; i < linesNode.size(); i++){
                         lines.add(linesNode.get(i).asText());
                     }
-                    behavior.setLines(lines);
-                    behavior.setLastModified(file.lastModified());
-                    behavior.update();
+                    updateBehavior.setLines(lines);
+                    updateBehavior.setLastModified(file.lastModified());
+                    behavior.deleteBehavior();
+                    updateBehavior.saveBehavior();
                 } catch (IOException e) {
                     Logger.error("[AvatarBehaviorFactory > behaviorManagement] Could not read behaviorFile " + file.getAbsolutePath());
                 }

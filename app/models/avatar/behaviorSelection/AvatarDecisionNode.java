@@ -47,6 +47,7 @@ public class AvatarDecisionNode {
             return null;
         } else if (children != null) {
             for(AvatarDecisionFunction df : children.keySet()){
+                Logger.debug("Currentinformation: " + currentInformation.getClass().getCanonicalName() + ", df class: " + df.getClass().getCanonicalName());
                 if(df.equals(currentInformation)){
                     Logger.debug("Return children");
                     return children.get(df).getAvatarBehaviors();

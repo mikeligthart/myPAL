@@ -201,7 +201,13 @@ public class Diary extends Controller {
         String userName = session().get("userName");
         UserMyPAL user = UserMyPAL.byUserName(userName);
 
-        return ok(diary_calendar_diaryActivity_add_together.render(user));
+        LogAction.log(userName, LogActionType.TOGETHER);
+
+        //Generate AvatarBehavior
+        AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.PAGE));
+
+        return ok(diary_calendar_diaryActivity_add_together.render(user, avatarBehavior));
     }
 
     public static Result addPicturePage(){

@@ -32,24 +32,30 @@ public class AvatarDecisionNode {
     }
 
     public AvatarLeafTip getAvatarBehaviors(){
+        Logger.debug("leafTips == null: " + (leafTips == null) + ", children == null: " + (children == null));
         if(leafTips != null){
             Random rand = new Random();
             double select = rand.nextDouble();
             for(Iterator<Double> it = leafTips.keySet().iterator(); it.hasNext();){
                 double prob = it.next();
                 if(select <= prob){
+                    Logger.debug("Return leaftips");
                     return leafTips.get(prob);
                 }
             }
+            Logger.debug("Return leaftips null");
             return null;
         } else if (children != null) {
             for(AvatarDecisionFunction df : children.keySet()){
                 if(df.equals(currentInformation)){
+                    Logger.debug("Return children");
                     return children.get(df).getAvatarBehaviors();
                 }
             }
+            Logger.debug("Return children null");
             return null;
         } else {
+            Logger.debug("Return null null");
             return null;
         }
     }

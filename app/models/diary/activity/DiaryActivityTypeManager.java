@@ -2,6 +2,7 @@ package models.diary.activity;
 
 import controllers.routes;
 import models.UserMyPAL;
+import play.Logger;
 import play.i18n.Messages;
 
 import java.util.Iterator;
@@ -31,14 +32,30 @@ public class DiaryActivityTypeManager {
     }
 
     public static void loadStandardTypes(UserMyPAL user){
-        DiaryActivityType school = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.SCHOOL"), routes.Assets.at("images/school_icon.png").url(), "#308dd4", user);
-        school.save();
-        DiaryActivityType sport = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.SPORT"), routes.Assets.at("images/sport_icon.png").url(), "#8dd430", user);
-        sport.save();
-        DiaryActivityType meal = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.MEAL"), routes.Assets.at("images/meal_icon.png").url(), "#d4308d", user);
-        meal.save();
-        DiaryActivityType other = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.OTHER"), routes.Assets.at("images/other_icon.png").url(), "#d47730", user);
-        other.save();
+        DiaryActivityType school = DiaryActivityType.byNameAndUser(Messages.get("page.diary.calendar.activitytype.SCHOOL"), user);
+        if(school == null) {
+            school = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.SCHOOL"), routes.Assets.at("images/school_icon.png").url(), "#308dd4", user);
+            school.save();
+        }
+
+        DiaryActivityType sport = DiaryActivityType.byNameAndUser(Messages.get("page.diary.calendar.activitytype.SPORT"), user);
+        if(sport == null){
+            sport = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.SPORT"), routes.Assets.at("images/sport_icon.png").url(), "#8dd430", user);
+            sport.save();
+        }
+
+        DiaryActivityType meal = DiaryActivityType.byNameAndUser(Messages.get("page.diary.calendar.activitytype.MEAL"), user);
+        if(meal == null) {
+            meal = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.MEAL"), routes.Assets.at("images/meal_icon.png").url(), "#d4308d", user);
+            meal.save();
+        }
+
+        DiaryActivityType other = DiaryActivityType.byNameAndUser(Messages.get("page.diary.calendar.activitytype.OTHER"), user);
+        if(other == null){
+            other = new DiaryActivityType(Messages.get("page.diary.calendar.activitytype.OTHER"), routes.Assets.at("images/other_icon.png").url(), "#d47730", user);
+            other.save();
+        }
+
     }
 
     public static void createDiaryActivityType(UserMyPAL user, String name, String color){

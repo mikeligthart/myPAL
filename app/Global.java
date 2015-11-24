@@ -1,6 +1,7 @@
 import com.avaje.ebean.Ebean;
 import models.UserMyPAL;
 import models.UserType;
+import models.diary.activity.DiaryActivityTypeManager;
 import play.Application;
 import play.GlobalSettings;
 
@@ -19,6 +20,7 @@ public class Global extends GlobalSettings {
             if(Ebean.find(UserMyPAL.class).findRowCount() == 0) {
                 UserMyPAL originalUser = new UserMyPAL("mike.ligthart", "Mike", "Ligthart", Date.valueOf(LocalDate.now()), "mike", UserType.ADMIN, "067835880");
                 Ebean.save(originalUser);
+                DiaryActivityTypeManager.loadStandardTypes(originalUser);
             }
         }
 

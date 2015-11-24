@@ -111,6 +111,7 @@ public class UserMyPAL extends Model {
     }
 
     public UserMyPAL(){
+
     }
 
     public UserMyPAL(String userName, String firstName, String lastName, Date birthdate, String password, UserType userType, String gluconlineID){

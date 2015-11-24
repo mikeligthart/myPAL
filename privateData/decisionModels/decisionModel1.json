@@ -30,7 +30,7 @@
                                   "type": "SCHOOL",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[0.5, "REACT_HAPPY_SCHOOL", [1]]],
+                                    "behaviors": [[1.0, "REACT_HAPPY_SCHOOL", [1]]],
                                     "children": null
                                   }
                                 }
@@ -187,6 +187,16 @@
                 }
               }
             ]
+          }
+        }
+      },
+      {
+        "1": {
+          "trigger": "TOGETHERORSELF",
+          "child": {
+            "class": "AvatarLeafNode",
+            "behaviors": [[1.0, "AKS_TOGETHER_OR_SELF", [3]]],
+            "children": null
           }
         }
       }

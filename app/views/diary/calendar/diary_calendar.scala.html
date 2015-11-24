@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="text-left col-md-4 addactivity">
-            <a href='@routes.Diary.addActivityPage()' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.calendar.addactivity")</a>
+            <a href='@routes.Diary.togetherOrSelf()' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.calendar.addactivity")</a>
             <br />
             <a href='@routes.Diary.selectMeasurement()' data-toggle="lightbox"  data-title='@Messages("page.diary.calendar.measurement.select")' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.calendar.addmeasurement") </a>
             @if(user.getGluconlineID != ""){

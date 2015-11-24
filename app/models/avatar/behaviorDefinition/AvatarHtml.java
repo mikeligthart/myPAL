@@ -207,6 +207,8 @@ public class AvatarHtml {
                 view = new AvatarHtmlViewSharePicture();
                 view.setPictureSource(AVATARPICTURESOURCE + "36.jpg");
                 return new AvatarHtml(view);
+            case TOGETHER_OR_SELF:
+                return new AvatarHtml(new AvatarHtmlTogetherOrSelf());
             case NULL:
             default:
                 return new AvatarHtml(null);

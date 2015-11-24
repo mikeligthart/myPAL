@@ -167,6 +167,43 @@ public class Diary extends Controller {
         return ok(diary_calendar_diaryActivity_add.render(user, activityForm, DiarySettingsManager.getInstance().retrieve(userName).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user), "", error));
     }
 
+    public static Result togetherOrSelf(){
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("userName") == null){
+            return redirect(routes.Application.login());
+        }
+        String userName = session().get("userName");
+        UserMyPAL user = UserMyPAL.byUserName(userName);
+
+        //Manage the right settings such as date for the calendar
+        DiarySettings diarySettings = DiarySettingsManager.getInstance().retrieve(userName);
+        Date date = Date.valueOf(diarySettings.getCalendarDate());
+
+        //Retrieve the number of activities
+        int DiaryItemSize = DiaryActivity.byUserAndDate(user, date).size() +
+                Glucose.byUserAndDate(user, date).size() + Insulin.byUserAndDate(user, date).size();
+
+        //Log user activity
+        LogAction.log(userName, LogActionType.TOGETHERORSELF);
+
+        //Generate AvatarBehavior
+        AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.TOGETHERORSELF));
+
+        return ok(diary_calendar.render(user, diarySettings.getDateString(true), diarySettings.getDateString(false), DiaryItemSize, avatarBehavior));
+    }
+
+    public static Result together(){
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("userName") == null){
+            return redirect(routes.Application.login());
+        }
+        String userName = session().get("userName");
+        UserMyPAL user = UserMyPAL.byUserName(userName);
+
+        return ok(diary_calendar_diaryActivity_add_together.render(user));
+    }
+
     public static Result addPicturePage(){
         //Check whether a user is logged in
         if(session().isEmpty() || session().get("userName") == null){

@@ -20,6 +20,7 @@ public class AvatarTrigger implements AvatarDecisionFunction {
 
     public static final String PAGE = "PAGE";
     public static final String OTHER = "OTHER";
+    public static final String TOGETHERORSELF = "TOGETHERORSELF";
 
     private String trigger;
 
@@ -52,6 +53,8 @@ public class AvatarTrigger implements AvatarDecisionFunction {
         if(proposedTrigger.equalsIgnoreCase(PAGE))
             return true;
         else if(proposedTrigger.equalsIgnoreCase(OTHER))
+            return true;
+        else if(proposedTrigger.equalsIgnoreCase(TOGETHERORSELF))
             return true;
         return false;
 

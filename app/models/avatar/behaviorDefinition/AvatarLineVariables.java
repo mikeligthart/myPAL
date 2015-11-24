@@ -40,7 +40,11 @@ public class AvatarLineVariables {
 
     public String processLine(String line){
         line = line.replace("#firstName#", user.getFirstName());
-        line = line.replace("#activityName#", latestActivity.getName().toLowerCase());
+        if(latestActivity != null) {
+            line = line.replace("#activityName#", latestActivity.getName().toLowerCase());
+        } else {
+            line = line.replace("#activityName#", "");
+        }
         return line;
     }
 

@@ -10,6 +10,7 @@ import controllers.avatar.AvatarBehaviorFactory;
 import controllers.avatar.AvatarReasoner;
 import models.avatar.behaviorDefinition.*;
 import models.diary.activity.DiaryActivity;
+import models.diary.activity.DiaryActivityTypeManager;
 import models.diary.measurement.DiaryMeasurement;
 import models.diary.measurement.Glucose;
 import models.diary.measurement.Insulin;
@@ -222,6 +223,7 @@ public class Admin extends Controller {
             }
             UserMyPAL newUser = userForm.get();
             newUser.save();
+            DiaryActivityTypeManager.loadStandardTypes(newUser);
             return redirect(routes.Admin.users());
         }
     }

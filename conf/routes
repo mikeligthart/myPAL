@@ -20,6 +20,8 @@ GET     /mypal/calendar/:day/:month/:year           controllers.Diary.calendarSe
 GET     /mypal/goals                                controllers.Diary.goals()
 GET     /mypal/addactivity                          controllers.Diary.addActivityPage()
 POST    /mypal/addactivity                          controllers.Diary.addActivity()
+GET     /mypal/addactivity/together                 controllers.Diary.together()
+GET     /mypal/addactivity/question                 controllers.Diary.togetherOrSelf()
 GET     /mypal/addactivity/selectfromgallery/:id    controllers.Diary.selectFromGalleryPage(id: Int)
 GET     /mypal/gallery                              controllers.Diary.gallery()
 GET     /mypal/addpicture                           controllers.Diary.addPicturePage()

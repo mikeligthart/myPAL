@@ -203,11 +203,14 @@ public class Diary extends Controller {
 
         LogAction.log(userName, LogActionType.TOGETHER);
 
+        //Generate addActivity page
+        Form<DiaryActivity> activityForm = form(DiaryActivity.class);
+
         //Generate AvatarBehavior
         AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
         List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.PAGE));
 
-        return ok(diary_calendar_diaryActivity_add_together.render(user, avatarBehavior));
+        return ok(diary_calendar_diaryActivity_add_together.render(user, avatarBehavior, activityForm, DiarySettingsManager.getInstance().retrieve(userName).getDateString(false), DiaryActivityTypeManager.retrieveDiaryActivityTypes(user)));
     }
 
     public static Result addPicturePage(){

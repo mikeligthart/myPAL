@@ -84,7 +84,6 @@ public class AvatarDecisionFactory {
         if (rootNode != null) {
             AvatarLeafTip leafTip = rootNode.getAvatarBehaviors();
             if(leafTip == null){
-                Logger.error("[AvatarDecisionFactory > getAvatarBehaviors] leafTip cannot be null");
                 return null;
             }
             LogAvatar.log(user, leafTip.getLogAvatarType());
@@ -246,9 +245,11 @@ public class AvatarDecisionFactory {
     }
 
     private void refreshInformation(AvatarTrigger trigger){
+        Logger.debug("Refresh Information in AvatarDF:");
         List<LogAction> logActions = UserMyPAL.byUserName(user.getUserName()).getLogActions();
         int logActionsSize = logActions.size();
         if(logActionsSize >= 2){
+            Logger.debug("Refresh Information in AvatarDF: " + logActions.get(logActionsSize-1).getType() + ", " + logActions.get(logActionsSize-2).getType());
             currentUserHistory = new AvatarUserHistory(logActions.get(logActionsSize-1).getType(), logActions.get(logActionsSize-2).getType());
         } else if(logActionsSize == 1){
             currentUserHistory = new AvatarUserHistory(logActions.get(0).getType(), null);

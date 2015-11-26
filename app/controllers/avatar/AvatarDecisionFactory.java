@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.ConfigFactory;
 import models.UserMyPAL;
-import models.avatar.behaviorDefinition.AvatarBehavior;
 import models.avatar.behaviorSelection.AvatarDecisionNode;
 import models.avatar.behaviorSelection.AvatarLeafTip;
 import models.avatar.behaviorSelection.decisionInformation.*;
@@ -12,6 +11,9 @@ import models.diary.activity.DiaryActivity;
 import models.diary.activity.DiaryActivityType;
 import models.diary.activity.DiaryActivityTypeManager;
 import models.diary.activity.Emotion;
+import models.goals.Goal;
+import models.goals.GoalStatus;
+import models.goals.GoalType;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import models.logging.LogAvatar;
@@ -24,6 +26,7 @@ import util.ParseAvatarDecisionModelException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -48,6 +51,8 @@ public class AvatarDecisionFactory {
     private AvatarUserHistory currentUserHistory;
     private AvatarEmotion currentEmotion;
     private AvatarActivityType currentActivityType;
+    private AvatarGoalStatus currentGoalStatus;
+    private AvatarGoalType currentGoalType;
 
     //Model
     private String decisionModelLocation;
@@ -62,6 +67,8 @@ public class AvatarDecisionFactory {
         currentUserHistory = new AvatarUserHistory(null, null);
         currentEmotion = null;
         currentActivityType = null;
+        currentGoalStatus = null;
+        currentGoalType = null;
 
         //Load initial model
         model = null;
@@ -108,7 +115,7 @@ public class AvatarDecisionFactory {
 
     private AvatarDecisionNode parseNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
         if(!node.has("class") || !node.has("behaviors") || !node.has("children")){
-            throw new ParseAvatarDecisionModelException("Node structure check for 'class', 'behaviorBundles' and 'children' failed");
+            throw new ParseAvatarDecisionModelException("Node structure check for 'class', 'behaviors' and 'children' failed");
         }
 
         //Check if node is a leaf node and if so retrieve the behaviors
@@ -165,8 +172,50 @@ public class AvatarDecisionFactory {
             return parseAvatarEmotionNode(childrenNode);
         } else if(nodeClass.equalsIgnoreCase(AvatarActivityType.class.getSimpleName())){
             return parseAvatarActivityTypeNode(childrenNode);
+        } else if(nodeClass.equalsIgnoreCase(AvatarGoalStatus.class.getSimpleName())){
+            return parseAvatarGoalStatusNode(childrenNode);
+        } else if(nodeClass.equalsIgnoreCase(AvatarGoalType.class.getSimpleName())){
+            return parseAvatarGoalTypeNode(childrenNode);
         }
         return null;
+    }
+
+    private AvatarDecisionNode parseAvatarGoalTypeNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
+        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        for(int index = 0; index < node.size(); index++){
+            JsonNode avatarNode = node.get(index).get(Integer.toString(index));
+            if(!avatarNode.has("type") || !avatarNode.has("child")){
+                throw new ParseAvatarDecisionModelException("AvatarTriggerNode check for 'status' and 'child' failed");
+            } else {
+                GoalType type = GoalType.forName(avatarNode.get("type").asText());
+                if(type == null){
+                    throw new ParseAvatarDecisionModelException(avatarNode.get("type").asText() + " not recognized as an GoalType");
+                }
+                AvatarDecisionNode child = parseNode(avatarNode.get("child"));
+                AvatarGoalType avatarGoaltype = new AvatarGoalType(type);
+                children.put(avatarGoaltype, child);
+            }
+        }
+        return new AvatarDecisionNode(null, currentGoalType, children);
+    }
+
+    private AvatarDecisionNode parseAvatarGoalStatusNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
+        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        for(int index = 0; index < node.size(); index++){
+            JsonNode avatarNode = node.get(index).get(Integer.toString(index));
+            if(!avatarNode.has("status") || !avatarNode.has("child")){
+                throw new ParseAvatarDecisionModelException("AvatarTriggerNode check for 'status' and 'child' failed");
+            } else {
+                GoalStatus status = GoalStatus.forName(avatarNode.get("status").asText());
+                if(status == null){
+                    throw new ParseAvatarDecisionModelException(avatarNode.get("status").asText() + " not recognized as an GoalStatus");
+                }
+                AvatarDecisionNode child = parseNode(avatarNode.get("child"));
+                AvatarGoalStatus avatarGoalStatus = new AvatarGoalStatus(status);
+                children.put(avatarGoalStatus, child);
+            }
+        }
+        return new AvatarDecisionNode(null, currentGoalStatus, children);
     }
 
     private AvatarDecisionNode parseAvatarActivityTypeNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
@@ -234,8 +283,8 @@ public class AvatarDecisionFactory {
             if(!userHistoryNode.has("last") || !userHistoryNode.has("beforeLast") || !userHistoryNode.has("child")){
                 throw new ParseAvatarDecisionModelException("AvatarTriggerNode check for 'last', 'beforeLast' and 'child' failed");
             } else {
-                LogActionType last = LogActionType.valueOf(userHistoryNode.get("last").asText().toUpperCase());
-                LogActionType beforeLast = LogActionType.valueOf(userHistoryNode.get("beforeLast").asText().toUpperCase());
+                LogActionType last = LogActionType.forName(userHistoryNode.get("last").asText().toUpperCase());
+                LogActionType beforeLast = LogActionType.forName(userHistoryNode.get("beforeLast").asText().toUpperCase());
                 AvatarUserHistory userHistory = new AvatarUserHistory(last, beforeLast);
                 AvatarDecisionNode child = parseNode(userHistoryNode.get("child"));
                 children.put(userHistory, child);
@@ -245,11 +294,9 @@ public class AvatarDecisionFactory {
     }
 
     private void refreshInformation(AvatarTrigger trigger){
-        Logger.debug("Refresh Information in AvatarDF:");
         List<LogAction> logActions = UserMyPAL.byUserName(user.getUserName()).getLogActions();
         int logActionsSize = logActions.size();
         if(logActionsSize >= 2){
-            Logger.debug("Refresh Information in AvatarDF: " + logActions.get(logActionsSize-1).getType() + ", " + logActions.get(logActionsSize-2).getType());
             currentUserHistory = new AvatarUserHistory(logActions.get(logActionsSize-1).getType(), logActions.get(logActionsSize-2).getType());
         } else if(logActionsSize == 1){
             currentUserHistory = new AvatarUserHistory(logActions.get(0).getType(), null);
@@ -262,6 +309,30 @@ public class AvatarDecisionFactory {
         if(activity != null){
             currentEmotion = new AvatarEmotion(activity.getEmotion());
             currentActivityType = new AvatarActivityType(activity.getType());
+        }
+
+
+        Goal goal = Goal.randomActiveGoal(user);
+        if(goal == null) {
+            currentGoalStatus = new AvatarGoalStatus(GoalStatus.NO_GOAL_ACTIVE);
+            currentGoalType = null;
+        } else {
+            currentGoalStatus = new AvatarGoalStatus(GoalStatus.GOAL_ACTIVE);
+            currentGoalType = new AvatarGoalType(goal.getGoalType());
+        }
+
+        Timestamp lastVisited = LogAvatar.lastGoalVisit(user);
+        if(lastVisited != null){
+            goal = Goal.randomGoalAddedAfter(user, lastVisited);
+            if(goal != null){
+                currentGoalStatus = new AvatarGoalStatus(GoalStatus.GOAL_ADDED);
+                currentGoalType = new AvatarGoalType(goal.getGoalType());
+            }
+            goal = Goal.randomGoalMetAfter(user, lastVisited);
+            if(goal != null){
+                currentGoalStatus = new AvatarGoalStatus(GoalStatus.GOAL_MET_AFTER_LAST_VISIT);
+                currentGoalType = new AvatarGoalType(goal.getGoalType());
+            }
         }
     }
 
@@ -285,6 +356,7 @@ public class AvatarDecisionFactory {
         }
 
         if(modelLastModified != new File(decisionModelLocation + activeDecisionModel).lastModified()){
+            Logger.debug("AvatarDecisionFactory refreshModel: file changed load from file");
             loadModelFromFile();
         }
     }

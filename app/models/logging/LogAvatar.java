@@ -1,13 +1,16 @@
 package models.logging;
 
+import com.avaje.ebean.Expr;
+import com.avaje.ebean.Expression;
+import com.avaje.ebean.ExpressionList;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import models.UserMyPAL;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -83,5 +86,21 @@ public class LogAvatar extends Model {
 
     public static List<LogAvatar> byUser(UserMyPAL user) {
         return find.where().eq("user", user).findList();
+    }
+
+    public static Timestamp lastGoalVisit(UserMyPAL user){
+        List<LogAvatar> goalVisits = find.where().eq("user", user)
+                .disjunction()
+                .eq("type",LogAvatarType.REACT_GOAL_MET_AFTER)
+                .eq("type",LogAvatarType.REACT_GOAL_ADDED)
+                .eq("type", LogAvatarType.REACT_GOAL_ACTIVE)
+                .eq("type", LogAvatarType.REACT_GOAL_NOT_ACTIVE)
+                .endJunction()
+                .where().setOrderBy("timestamp desc").findList();
+        if(goalVisits != null && !goalVisits.isEmpty()){
+            return goalVisits.get(0).getTimestamp();
+        } else {
+            return null;
+        }
     }
 }

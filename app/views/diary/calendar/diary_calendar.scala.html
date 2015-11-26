@@ -14,10 +14,14 @@
             <a href='@routes.Diary.togetherOrSelf()' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.calendar.addactivity")</a>
             <br />
             <a href='@routes.Diary.selectMeasurement()' data-toggle="lightbox"  data-title='@Messages("page.diary.calendar.measurement.select")' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.calendar.addmeasurement") </a>
+
+            <!--
             @if(user.getGluconlineID != ""){
-            <br />
+             <br />
             <a href='@routes.Diary.gluconline' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-download" aria-hidden="true"></span> @Messages("page.diary.calendar.downloadfromapp")</a>
             }
+            -->
+
         </div>
         <div id="calendar_head" class="text-center col-md-4">
             <h1>@Messages("page.diary.base.calendar")</h1>
@@ -32,7 +36,7 @@
     @if(diaryItemSize == 0){
         <div class="text-center">
             <br />
-            <h3><a href="@routes.Diary.addActivityPage()">@Messages("page.diary.calendar.noactivities")</a></h3>
+            <h3><a href="@routes.Diary.togetherOrSelf()">@Messages("page.diary.calendar.noactivities")</a></h3>
         </div>
     }
 

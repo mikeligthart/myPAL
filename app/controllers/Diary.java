@@ -107,16 +107,17 @@ public class Diary extends Controller {
 
         //Log user activity
         LogAction.log(userName, LogActionType.ACCESSGOALS);
-
-        //Generate AvatarBehavior
-        AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
-        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.PAGE));
+        LogAction.log(userName, LogActionType.ACCESSGOALS);
 
         //Load goals
         List<Goal> pendingDaily = GoalFactory.getGoals(user, false, GoalType.DAILY);
         List<Goal> metDaily = GoalFactory.getGoals(user, true, GoalType.DAILY);
         List<Goal> pendingTotal = GoalFactory.getGoals(user, false, GoalType.TOTAL);
         List<Goal> metTotal = GoalFactory.getGoals(user, true, GoalType.TOTAL);
+
+        //Generate AvatarBehavior
+        AvatarReasoner reasoner = AvatarReasoner.getReasoner(user);
+        List<AvatarBehavior> avatarBehavior = reasoner.selectAvatarBehaviors(new AvatarTrigger(AvatarTrigger.PAGE));
 
         return ok(diary_goals.render(user, pendingDaily, metDaily, pendingTotal, metTotal, avatarBehavior));
     }
@@ -1221,6 +1222,7 @@ public class Diary extends Controller {
         return redirect(routes.Diary.viewMeasurement(id, DiaryMeasurementType.INSULIN.ordinal()));
     }
 
+    @Deprecated
     public static Result gluconline(){
         //Check whether a user is logged in
         if (session().isEmpty() || session().get("userName") == null) {
@@ -1229,6 +1231,7 @@ public class Diary extends Controller {
         String userName = session().get("userName");
         UserMyPAL user = UserMyPAL.byUserName(userName);
 
+        /*
         try {
             GluconlineClient gluconlineClient = new GluconlineClient(user);
             JsonNode result = gluconlineClient.retrieve();
@@ -1244,6 +1247,8 @@ public class Diary extends Controller {
         }
 
         return redirect(routes.Diary.calendar());
+        */
+        return ok();
     }
 
     public static Result addGoalDaily(){

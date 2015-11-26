@@ -3,6 +3,7 @@ package models.avatar.behaviorSelection.decisionInformation;
 import models.logging.LogAction;
 import models.logging.LogActionType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.logging.Log;
 import play.Logger;
 
 /**
@@ -49,10 +50,11 @@ public class AvatarUserHistory implements AvatarDecisionFunction {
         if (obj == this)
             return true;
 
-        AvatarUserHistory rhs = (AvatarUserHistory) obj;
+
+        AvatarUserHistory auh = (AvatarUserHistory) obj;
         return new EqualsBuilder().
-                append(last, rhs.last).
-                append(beforeLast, rhs.beforeLast).
+                append(last, auh.last).
+                append(beforeLast, auh.beforeLast).
                 isEquals();
     }
 }

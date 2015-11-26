@@ -30,7 +30,7 @@
                                   "type": "SCHOOL",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_HAPPY_SCHOOL", [1]]],
+                                    "behaviors": [[0.5, "REACT_HAPPY_SCHOOL", [49]], [0.25, "REACT_HAPPY_SCHOOL", [49, 52, 53]], [0.25, "REACT_HAPPY_SCHOOL", [49, 54, 55, 56]]],
                                     "children": null
                                   }
                                 }
@@ -40,7 +40,7 @@
                                   "type": "SPORT",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_HAPPY_SPORT", [1]]],
+                                    "behaviors": [[0.25, "REACT_HAPPY_SPORT", [35, 36, 37]], [0.25, "REACT_HAPPY_SPORT", [38, 39]], [0.5, "REACT_HAPPY_SPORT", [40, 41, 42]]],
                                     "children": null
                                   }
                                 }
@@ -50,7 +50,7 @@
                                   "type": "MAALTIJD",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_HAPPY_MEAL", [1]]],
+                                    "behaviors": [[0.3, "REACT_HAPPY_MEAL", [29, 30, 31, 32]], [0.7, "REACT_HAPPY_MEAL", [33, 34]]],
                                     "children": null
                                   }
                                 }
@@ -60,7 +60,7 @@
                                   "type": "OVERIG",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_HAPPY_OTHER", [1]]],
+                                    "behaviors": [[0.7, "REACT_HAPPY_OTHER", [45]], [0.3, "REACT_HAPPY_OTHER", [45, 46]]],
                                     "children": null
                                   }
                                 }
@@ -81,7 +81,7 @@
                                   "type": "SCHOOL",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_NEUTRAL_SCHOOL", [1]]],
+                                    "behaviors": [[0.5, "REACT_NEUTRAL_SCHOOL", [50]], [0.25, "REACT_NEUTRAL_SCHOOL", [50, 52, 53]], [0.25, "REACT_HAPPY_SCHOOL", [50, 54, 55, 56]]],
                                     "children": null
                                   }
                                 }
@@ -91,7 +91,7 @@
                                   "type": "SPORT",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_NEUTRAL_SPORT", [1]]],
+                                    "behaviors": [[0.5, "REACT_NEUTRAL_SPORT", [35, 36, 37]], [0.5, "REACT_NEUTRAL_SPORT", [38, 39]]],
                                     "children": null
                                   }
                                 }
@@ -101,7 +101,7 @@
                                   "type": "MAALTIJD",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_NEUTRAL_MEAL", [1]]],
+                                    "behaviors": [[0.7, "REACT_NEUTRAL_MEAL", [29, 30, 31, 32]], [0.3, "REACT_NEUTRAL_MEAL", [33, 34]]],
                                     "children": null
                                   }
                                 }
@@ -111,7 +111,7 @@
                                   "type": "OVERIG",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_NEUTRAL_OTHER", [1]]],
+                                    "behaviors": [[0.25, "REACT_NEUTRAL_OTHER", [47]], [0.5, "REACT_NEUTRAL_OTHER", [47, 48]], [0.25, "REACT_NEUTRAL_OTHER", [47, 46]]],
                                     "children": null
                                   }
                                 }
@@ -132,7 +132,7 @@
                                   "type": "SCHOOL",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_SAD_SCHOOL", [1]]],
+                                    "behaviors": [[1.0, "REACT_SAD_SCHOOL", [51]]],
                                     "children": null
                                   }
                                 }
@@ -142,7 +142,7 @@
                                   "type": "SPORT",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_SAD_SPORT", [1]]],
+                                    "behaviors": [[1.0, "REACT_SAD_SPORT", [43, 44]]],
                                     "children": null
                                   }
                                 }
@@ -152,7 +152,7 @@
                                   "type": "MAALTIJD",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_SAD_MEAL", [1]]],
+                                    "behaviors": [[1.0, "REACT_SAD_MEAL", [25, 26, 27, 28]]],
                                     "children": null
                                   }
                                 }
@@ -162,7 +162,7 @@
                                   "type": "OVERIG",
                                   "child": {
                                     "class": "AvatarLeafNode",
-                                    "behaviors": [[1.0, "REACT_SAD_OTHER", [1]]],
+                                    "behaviors": [[0.25, "REACT_SAD_OTHER", [47]], [0.5, "REACT_SAD_OTHER", [47, 48]], [0.25, "REACT_SAD_OTHER", [47, 46]]],
                                     "children": null
                                   }
                                 }
@@ -191,8 +191,118 @@
                   "beforeLast": "TOGETHERORSELF",
                   "child": {
                     "class": "AvatarLeafNode",
-                    "behaviors": [[1.0, "ADDACTIVITYTOGETHER", [4, 5, 6, 13, 7 ,8, 9, 10, 11, 12]]],
+                    "behaviors": [[1.0, "ADDACTIVITYTOGETHER", [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]]],
                     "children": null
+                  }
+                }
+              },{
+                "3": {
+                  "last": "ACCESSGOALS",
+                  "beforeLast": "ACCESSGOALS",
+                  "child": {
+                    "class": "AvatarGoalStatus",
+                    "behaviors": null,
+                    "children": [
+                      {
+                        "0": {
+                          "status": "GOAL_MET_AFTER_LAST_VISIT",
+                          "child": {
+                            "class": "AvatarGoalType",
+                            "behaviors": null,
+                            "children": [
+                              {
+                                "0": {
+                                  "type": "DAILY",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [[0.5, "REACT_GOAL_MET_AFTER", [14]], [0.5, "REACT_GOAL_MET_AFTER", [15]]],
+                                    "children": null
+                                  }
+                                }
+                              }, {
+                                "1": {
+                                  "type": "TOTAL",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [[0.5, "REACT_GOAL_MET_AFTER", [16]], [0.5, "REACT_GOAL_MET_AFTER", [17]]],
+                                    "children": null
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }, {
+                        "1": {
+                          "status": "GOAL_ADDED",
+                          "child": {
+                            "class": "AvatarGoalType",
+                            "behaviors": null,
+                            "children": [
+                              {
+                                "0": {
+                                  "type": "DAILY",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [[1.0, "REACT_GOAL_ADDED", [18]]],
+                                    "children": null
+                                  }
+                                }
+                              }, {
+                                "1": {
+                                  "type": "TOTAL",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [[1.0, "REACT_GOAL_ADDED", [19]]],
+                                    "children": null
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "2": {
+                          "status": "GOAL_ACTIVE",
+                          "child": {
+                            "class": "AvatarGoalType",
+                            "behaviors": null,
+                            "children": [
+                              {
+                                "0": {
+                                  "type": "DAILY",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [[0.5, "REACT_GOAL_ACTIVE", [20]], [0.5, "REACT_GOAL_ACTIVE", [21]]],
+                                    "children": null
+                                  }
+                                }
+                              },
+                              {
+                                "1": {
+                                  "type": "TOTAL",
+                                  "child": {
+                                    "class": "AvatarLeafNode",
+                                    "behaviors": [[0.5, "REACT_GOAL_ACTIVE", [22]], [0.5, "REACT_GOAL_ACTIVE", [23]]],
+                                    "children": null
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }, {
+                        "3": {
+                          "status": "NO_GOAL_ACTIVE",
+                          "child": {
+                            "class": "AvatarLeafNode",
+                            "behaviors": [[1.0, "REACT_GOAL_NOT_ACTIVE", [24]]],
+                            "children": null
+                          }
+                        }
+                      }
+                    ]
                   }
                 }
               }
@@ -205,7 +315,7 @@
           "trigger": "TOGETHERORSELF",
           "child": {
             "class": "AvatarLeafNode",
-            "behaviors": [[1.0, "AKS_TOGETHER_OR_SELF", [3]]],
+            "behaviors": [[1.0, "ASK_TOGETHER_OR_SELF", [3]]],
             "children": null
           }
         }

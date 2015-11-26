@@ -544,7 +544,6 @@ public class Admin extends Controller {
 
     private static String processLine(String line){
         line = line.trim();
-        line = line.substring(0, 1).toUpperCase() + line.substring(1).toLowerCase();
         if(!Character.toString(line.charAt(line.length()-1)).matches("\\.|\\?|\\!")){
             line = line + ".";
         }

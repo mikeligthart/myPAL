@@ -222,28 +222,36 @@ public class Goal extends Model {
     }
 
     public static Goal randomActiveGoal(UserMyPAL user){
-        Date yesterday = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        List<Goal> goals = find.where().eq("user", user).eq("met", false).le("deadline", yesterday).findList();
+        List<Goal> goals = find.where().eq("user", user).eq("met", false).gt("deadline", new Date()).findList();
         if(goals != null){
             if(!goals.isEmpty()){
                 Random rand = new Random();
-                return goals.get(rand.nextInt(goals.size()));
+                Goal goal = goals.get(rand.nextInt(goals.size()));
+                return goal;
             }
         }
         return null;
     }
 
-    public static Goal metGoalAfter(UserMyPAL user, Timestamp after){
-        List<Goal> goals = null;
-        if(after != null) {
-            goals = find.where().eq("user", user).eq("met", true).ge("metAtTimestamp", after).findList();
-        } else {
-            goals = find.where().eq("user", user).eq("met", true).findList();
-        }
+    public static Goal randomGoalMetAfter(UserMyPAL user, Timestamp after){
+        List<Goal> goals = find.where().eq("user", user).eq("met", true).ge("metAtTimestamp", after).findList();
         if(goals != null){
             if(!goals.isEmpty()){
                 Random rand = new Random();
-                return goals.get(rand.nextInt(goals.size()));
+                Goal goal = goals.get(rand.nextInt(goals.size()));
+                return goal;
+            }
+        }
+        return null;
+    }
+
+    public static Goal randomGoalAddedAfter(UserMyPAL user, Timestamp after){
+        List<Goal> goals = find.where().eq("user", user).eq("met", false).ge("added", after).findList();
+        if(goals != null){
+            if(!goals.isEmpty()){
+                Random rand = new Random();
+                Goal goal = goals.get(rand.nextInt(goals.size()));
+                return goal;
             }
         }
         return null;

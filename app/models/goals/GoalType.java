@@ -1,5 +1,9 @@
 package models.goals;
 
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * myPAL
  * Purpose: [ENTER PURPOSE]
@@ -14,4 +18,17 @@ package models.goals;
  */
 public enum GoalType {
     DAILY, TOTAL;
+
+    private static final Map<String, GoalType> nameToValueMap =
+            new HashMap<String, GoalType>();
+
+    static {
+        for (GoalType value : EnumSet.allOf(GoalType.class)) {
+            nameToValueMap.put(value.name(), value);
+        }
+    }
+
+    public static GoalType forName(String name) {
+        return nameToValueMap.get(name);
+    }
 }

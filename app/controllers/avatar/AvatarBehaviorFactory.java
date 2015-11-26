@@ -3,6 +3,7 @@ package controllers.avatar;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.ConfigFactory;
+import controllers.Admin;
 import models.UserMyPAL;
 import models.avatar.behaviorDefinition.*;
 import play.Logger;
@@ -161,6 +162,7 @@ public class AvatarBehaviorFactory {
             //if behavior exists, check whether the file is updated and if so update the database entry.
             AvatarBehavior behavior = AvatarBehavior.byID(behaviorId);
             if(behavior.getLastModified() != file.lastModified()){
+                Admin.clearDatabaseOfBehaviors();
                 try {
                     //updatedBehavior = MAPPER.readValue(file, AvatarBehavior.class);
                     JsonNode behaviorNode = Json.parse(new FileInputStream(file));

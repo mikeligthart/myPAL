@@ -78,6 +78,7 @@ public class Application extends Controller {
             //Load avatarReasoner
             AvatarReasoner.refresh();
 
+            /*
             //Load new instances from app if gluconlineID is present
             if(!user.getGluconlineID().isEmpty()){
                 try {
@@ -92,6 +93,7 @@ public class Application extends Controller {
                     Logger.error("[Application > authenticate] AppException: " + e.getMessage());
                 }
             }
+            */
 
             //Log user activity
             LogAction.log(userName, LogActionType.LOGIN);

@@ -8,12 +8,18 @@
     <form action="@routes.Diary.addActivity()" method="post" enctype="multipart/form-data">
         <div class="addTogetherMain text-center">
 
+            @if(avatarBehaviors == null){
+                <script>
+                    window.location.href = "@routes.Diary.addActivityPage().url";
+                </script>
+            }
             @for((avatarBehavior, index) <- avatarBehaviors.zipWithIndex){
                 <div class="row avatarGesture" id="avatarGesture@index" @if(index != 0){style="display:none;"}>
                     <div class="col-md-12 text-center">
                         @if(avatarBehavior == null){
-                            <img class="text-left" src='@models.avatar.behaviorDefinition.AvatarGesture.DEFAULTGESTURE'>
-                            Er is iets mis gegaan!
+                            <script>
+                                window.location.href = "@routes.Diary.addActivityPage().url";
+                            </script>
                         }else{
                             @if(avatarBehavior.isGestureAVideo){
                                 <video width="500px" height="500px" id='avatarGestureVideo@index' @if(index == 0){autoplay="autoplay"}>
@@ -253,7 +259,9 @@
         @if(avatarBehaviors != null){
             @if(avatarBehaviors.size > 0){
                 //just for the first behavior
-                setTimeout(function(){next();}, @avatarBehaviors.get(0).getTimer);
+                @if(avatarBehaviors.get(0) != null){
+                    setTimeout(function(){next();}, @avatarBehaviors.get(0).getTimer);
+                }
             }
         }
     </script>

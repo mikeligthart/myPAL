@@ -1,4 +1,4 @@
-@(user: UserMyPAL, date: String, realDate: String, diaryItemSize: Integer, avatarBehaviors: List[models.avatar.behaviorDefinition.AvatarBehavior])
+@(user: UserMyPAL, date: String, realDate: String, diaryItemSize: Integer, avatarBehaviors: List[models.avatar.behaviorDefinition.AvatarBehavior], askQuestions: Boolean)
 
 @import play.api.i18n._
 @import play.api.libs.json.Json
@@ -21,6 +21,10 @@
             <a href='@routes.Diary.gluconline' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-download" aria-hidden="true"></span> @Messages("page.diary.calendar.downloadfromapp")</a>
             }
             -->
+            @if(askQuestions){
+                <br />
+                <a href='@routes.Application.askQuestions()' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Vul vragenlijst in</a>
+            }
 
         </div>
         <div id="calendar_head" class="text-center col-md-4">

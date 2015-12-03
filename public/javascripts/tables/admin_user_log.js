@@ -21,6 +21,7 @@ var table = $('#admin_user_log').DataTable( {
 var activityTable =  $('#admin_user_activity_overview').DataTable( {
                         "ajax": "/admin/users/view/activities/" + userName,
                         "columns": [
+                            { "data": "id" },
                             { "data": "date" },
                             { "data": "startTime" },
                             { "data": "endTime" },
@@ -39,6 +40,7 @@ var activityTable =  $('#admin_user_activity_overview').DataTable( {
 var MeasurementTable =  $('#admin_user_measurement_overview').DataTable( {
                         "ajax": "/admin/users/view/measurements/" + userName,
                         "columns": [
+                            { "data": "id" },
                             { "data": "date" },
                             { "data": "startTime" },
                             { "data": "displayName" },

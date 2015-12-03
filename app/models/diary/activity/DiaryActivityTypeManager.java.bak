@@ -52,7 +52,7 @@ public class DiaryActivityTypeManager {
 
         DiaryActivityType other = DiaryActivityType.byNameAndUser("Overig", user);
         if(other == null){
-            other = new DiaryActivityType("Overig", routes.Assets.at("images/other_icon.png").url(), "#d47730", user);
+            other = new DiaryActivityType("Overig"), routes.Assets.at("images/other_icon.png").url(), "#d47730", user);
             other.save();
         }
 

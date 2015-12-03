@@ -4,6 +4,8 @@
 
 @views.html.diary.diary_no_avatar(Messages("page.diary.base.calendar"), "calendar", user.getUserType) {
 
+<link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/jquery.time.slider.css")'>
+
 <div class="text-left">
     <h3>@Messages("page.diary.calendar.measurement.add")</h3>
 
@@ -20,7 +22,12 @@
     }
 </div>
 
-<script src='@routes.Assets.at("javascripts/timepicker/jquery.timepicker.min.js")' type="text/javascript"></script>
+<!--<script src='@routes.Assets.at("javascripts/timepicker/jquery.timepicker.min.js")' type="text/javascript"></script>
+<script src='@routes.Assets.at("javascripts/timepicker/add_glucose_timepicker.js")' type="text/javascript"></script>-->
+
+<script src='@routes.Assets.at("javascripts/jquery.time.slider.js")' type="text/javascript"></script>
 <script src='@routes.Assets.at("javascripts/date.js")' type="text/javascript"></script>
-<script src='@routes.Assets.at("javascripts/timepicker/add_glucose_timepicker.js")' type="text/javascript"></script>
+<script src='@routes.Assets.at("javascripts/add_measurementItem_timeslider.js")' type="text/javascript"></script>
+
+
 }

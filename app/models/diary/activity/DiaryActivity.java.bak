@@ -133,6 +133,7 @@ public class DiaryActivity extends DiaryItem {
 
     public static int addedFromYesterday(UserMyPAL user, Date start, Date end){
         Date yesterday = Date.valueOf(start.toLocalDate().minusDays(1));
+        Logger.debug("addedFromYesterday: yesterday " + yesterday);
         return find.where().eq("user", user).between("added", new Timestamp(start.getTime()), new Timestamp(end.getTime())).eq("date", yesterday).findRowCount();
     }
 

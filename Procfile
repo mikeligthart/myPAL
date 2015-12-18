@@ -1,1 +1,0 @@
-web: target/universal/stage/bin/mypal -Dhttp.port=${PORT} -DapplyEvolutions.default=true

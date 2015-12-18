@@ -1,5 +1,5 @@
-New log file opened at Fri Dec 18 17:37:17 CET 2015 by 6540@PC-14874
-jvm 6540@PC-14874
+New log file opened at Fri Dec 18 17:58:34 CET 2015 by 2688@PC-14874
+jvm 2688@PC-14874
 jvm vmName=Java HotSpot(TM) Client VM vmVendor=Oracle Corporation vmVersion=25.66-b18
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in C:\Users\ligthartmeu\apps\myPAL\project, returning: (mypal-build)
 Loading project definition from C:\Users\ligthartmeu\apps\myPAL\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@1ae2939, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@2821d4, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -71,4 +71,4 @@ Waiting for socket thread
 Waiting for request processor thread
 Waiting for command engine result
 Returning control to sbt launcher with result Exit(0)
-Closing the 6540@PC-14874 logs at Fri Dec 18 17:37:22 CET 2015, goodbye.
+Closing the 2688@PC-14874 logs at Fri Dec 18 17:58:38 CET 2015, goodbye.

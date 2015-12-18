@@ -67,6 +67,7 @@ crashlytics.properties
 crashlytics-build.properties
 
 #during development
-myPAL/databases/myPAL.lock.db
-
-
+myPAL/databases/*
+RUNNING_PID
+.sbtserver/connections/activator-*
+.sbtserver/connections/play-fork-*

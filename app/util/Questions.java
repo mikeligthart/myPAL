@@ -13,10 +13,11 @@ import java.util.List;
  */
 public class Questions {
 
-    public static final String ANSWERPATH = "privateData/antwoorden/";
+    public static final String ANSWERPATH = "privateData/answers/";
 
     public static boolean aksQuestion(UserMyPAL user){
-        return !(new File(ANSWERPATH + user.getUserName() + ".txt").exists());
+        //return !(new File(ANSWERPATH + user.getUserName() + ".txt").exists());
+        return false;
     }
 	
     public static void saveAnswers(UserMyPAL user, List<String> answers){

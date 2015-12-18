@@ -18,10 +18,6 @@
         <a href='@routes.Diary.togetherOrSelf()' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.calendar.addactivity")</a>
         <br />
         <a href='@routes.Diary.selectMeasurement()' data-toggle="lightbox"  data-title='@Messages("page.diary.calendar.measurement.select")' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> @Messages("page.diary.calendar.addmeasurement")</a>
-        @if(askQuestions){
-            <br />
-            <a href='@routes.Application.askQuestions()' class="btn btn-default addactivitybutton"> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Vul vragenlijst in</a>
-        }
     </div>
     <div id="calendar_head" class="text-center col-md-4">
         <h1>@Messages("page.diary.base.calendar")</h1>

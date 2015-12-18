@@ -1,144 +1,73 @@
 speech.1.0.wav# 
-speech.2.0.wav#Hoi #firstName#, fijn dat je er bent.
-speech.2.1.wav#Hoi #firstName#, goed dat je er bent.
-speech.2.2.wav#Hoi #firstName#, leuk om je weer te zien.
-speech.2.3.wav#Hey #firstName#, fijn dat je er bent.
-speech.2.4.wav#Hey #firstName#, goed dat je er bent.
-speech.2.5.wav#Hey #firstName#, leuk om je weer te zien.
-speech.2.6.wav#Hallo #firstName#, fijn dat je er bent.
-speech.2.7.wav#Hallo #firstName#, goed dat je er bent.
-speech.2.8.wav#Hallo #firstName#, leuk om je weer te zien.
-speech.3.0.wav#Wil je samen of alleen een activiteit toevoegen?
-speech.4.0.wav#Ik ben benieuwd wat je gedaan hebt.
-speech.4.1.wav#Leuk dat we samen een activiteit gaan invullen.
-speech.4.2.wav#Goed dat je een activiteit gaat toevoegen.
-speech.4.3.wav#Laten we beginnen!
-speech.5.0.wav#Wat voor soort activiteit heb je gedaan?
-speech.5.1.wav#Kun je aanklikken wat je gedaan hebt?
-speech.5.2.wav#Welk type past het beste bij wat je gedaan hebt?
-speech.6.0.wav#Tjakka, en wat is de naam van de activiteit?
-speech.6.1.wav#Hoppa, en hoe zou je de activiteit willen noemen?
-speech.6.2.wav#Hupsakee, en hoe heet de activiteit?
-speech.7.0.wav#Wanneer was dat?
-speech.7.1.wav#Wanneer heb je dat gedaan?
-speech.7.2.wav#Oke, wanneer vond dit plaats?
-speech.8.0.wav#Hoe laat was dat?
-speech.8.1.wav#Hoe laat heb je dat gedaan?
-speech.8.2.wav#Van hoelaat tot hoelaat was het?
-speech.9.0.wav#Kun je aangeven wat je gevoel daarbij was?
-speech.9.1.wav#Wat was je gevoel daarbij?
-speech.9.2.wav#Hoe voelde je je toen?
-speech.9.3.wav#Wat was je gevoel?
-speech.9.4.wav#Wat zei je gevoel daarover?
-speech.10.0.wav#Kun je er wat meer over vertellen?
-speech.10.1.wav#Vertel eens!
-speech.10.2.wav#Zou je er wat meer over kunnen vertellen?
-speech.10.3.wav#Wat kun je daar over opschrijven?
-speech.10.4.wav#Vertel eens wat meer.
-speech.10.5.wav#Wat wil je er over kwijt?
-speech.11.0.wav#Wil je ook een foto toevoegen?
-speech.11.1.wav#Je mag ook een foto toevoegen als je wilt. Doen?
-speech.11.2.wav#Voeg je ook een foto toe?
-speech.12.0.wav#Ben benieuwd! je kunt de foto hier uploaden.
-speech.12.1.wav#Laat maar komen. Voeg hem hieronder toe.
-speech.12.2.wav#Fijn dat je dat wil doen. Je kunt de foto hieronder uploaden.
-speech.13.0.wav#Prima. je kunt de activiteit nu toevoegen.
-speech.13.1.wav#Oke, je kunt de activiteit toevoegen.
-speech.13.2.wav#Volgende keer misschien. Je mag de activiteit nu toevoegen.
-speech.14.0.wav#Wat goed! Je hebt een dagdoel behaald.
-speech.14.1.wav#Een dagdoel behaald. Ik ben trots op je!
-speech.14.2.wav#Goed bezig met je dagdoelen, je hebt er eentje behaald.
-speech.15.0.wav#Woehoe, een dagdoel behaald.
-speech.15.1.wav#Vinkje bij een dagdoel.
-speech.15.2.wav#Weer een dagdoel klaar!
-speech.15.3.wav#Goed zo! Een dagdoel behaald.
-speech.16.0.wav#Ja! Een herhaaldoel gehaald.
-speech.16.1.wav#Wow, goed zo! Een herhaaldoel behaald.
-speech.16.2.wav#Ik ben zo trots! Je hebt een herhaaldoel afgevinkt.
-speech.17.0.wav#Herhaaldoelen zijn het moeilijkst om te halen. En dat is jou gelukt!
-speech.17.1.wav#Super, een herhaaldoel af!
-speech.17.2.wav#Dit maakt mij blij! Een herhaaldoel is klaar.
-speech.18.0.wav#Top. Goed dat je een dagdoel hebt toegevoegd.
-speech.18.1.wav#Succes met je dagdoel.
-speech.18.2.wav#Wat een mooi dagdoel.
-speech.18.3.wav#Fijn een dagdoel. Je kunt het.
-speech.19.0.wav#Leuk, een herhaaldoel.
-speech.19.1.wav#Succes met je herhaaldoel.
-speech.19.2.wav#Een herhaaldoel is een goede uitdaging voor je.
-speech.20.0.wav#Ik zie dat er nog een dagdoel actief is, hou vol om deze te halen.
-speech.20.1.wav#Probeer het actieve dagdoel af te ronden.
-speech.20.2.wav#Er is nog een dagdoel actief. Ik weet je het het kunt halen!
-speech.21.0.wav#Goed bezig met je dagdoelen, ga zo door.
-speech.21.1.wav#Fijn dat je zo goed bezig bent met je dagdoelen, probeer er nog eentje te halen.
-speech.21.2.wav#Ik zie dat je nog een dagdoel kan afronden, probeer het eens.
-speech.22.0.wav#Als je morgen weer terugkomt kun je het herhaaldoel nog verder afmaken.
-speech.22.1.wav#Kom je morgen weer terug? Dat is goed voor je herhaaldoelen.
-speech.22.2.wav#Weet je nog, bij herhaaldoelen moet je een aantal dagen achter elkaar terugkomen.
-speech.23.0.wav#Herhaaldoelen halen is een kwestie van volhouden.
-speech.23.1.wav#Ik weet dat je het openstaande herhaaldoel kunt halen.
-speech.23.2.wav#Hou vol en je gaat dit herhaaldoel ook halen.
-speech.24.0.wav#Laten we een doel aanmaken.
-speech.24.1.wav#Er zijn geen actieve doelen, tijd om eentje te maken.
-speech.24.2.wav#Zullen we een doel aanmaken?
-speech.24.3.wav#Doelen stellen is een goede manier om iets gedaan te krijgen. Maak je er weer eentje?
-speech.25.0.wav#Was het eten vies?
-speech.25.1.wav#Vond je het moeilijk om te eten?
-speech.25.2.wav#Vond je het eten vies?
-speech.26.0.wav#Oh dat is jammer.
-speech.26.1.wav#Wat vervelend om te horen.
-speech.27.0.wav#Gelukkig maar. Wat was er dan?
-speech.28.0.wav#Hopelijk gaat het morgen beter!
-speech.29.0.wav#Was het lekker?
-speech.30.0.wav#Gelukkig, ik houd van lekker eten.
-speech.31.0.wav#Dat is jammer om te horen!
-speech.32.0.wav#Dat kan.
-speech.33.0.wav#Hee, een maaltijd. Wat is eigenlijk je lievelingseten?
-speech.33.1.wav#Hee, een maaltijd. Wat eet je het liefst?
-speech.33.2.wav#Hee, een maaltijd. Wat vind je het lekkerste toetje?
-speech.34.0.wav#Dat is ook de mijne!
-speech.34.1.wav#Ik vind chocolade ijs lekker, maar ik eet vaak toch een appel.
-speech.34.2.wav#Oh dat klinkt erg lekker!
-speech.35.0.wav#Heb je een wedstrijd gespeeld?
-speech.36.0.wav#Ja? Hopelijk heb je gewonnen!
-speech.37.0.wav#Nee? Dan heb je vast getraind of iets anders.
-speech.38.0.wav#Sport je het liefst alleen of samen met anderen?
-speech.39.0.wav#Leuk, Ik voetbal het liefst met mijn robot vriendjes
-speech.39.1.wav#Ik speel het liefste in een team
-speech.40.0.wav#Van sporten word ik blij, jij ook?
-speech.41.0.wav#Fijn!
-speech.42.0.wav#Oke!
-speech.43.0.wav#Niet leuk om te horen dat het sporten wat minder goed ging deze keer.
-speech.43.1.wav#Oh, wat jammer om te zien dat sport minder leuk was.
-speech.43.2.wav#Vervelend dat het sporten niet zo fijn was.
-speech.44.0.wav#Hopelijk gaat het volgende keer beter.
-speech.44.1.wav#Hopelijk is het wat fijner volgende keer.
-speech.44.2.wav#Ik hoop dat het leuker is de volgende keer.
-speech.45.0.wav#Gaaf om te horen dat  #activityName# goed ging.
-speech.45.1.wav#Leuk om te horen dat  #activityName# je deze keer beviel.
-speech.45.2.wav#Tof dat  #activityName# zo leuk was.
-speech.46.0.wav#Kun je me uitleggen wat #activityName# ook alweer is? Ik ben vergen wat #activityName# ook alweer betekent. Wil je dat uitleggen? Kun je iets meer vertellen over #activityName#?
-speech.46.1.wav#Ik zou graag wat meer willen weten van #activityName#.
-speech.47.0.wav#Bedankt dat je iets over #activityName# wil toevoegen.
-speech.47.1.wav#Hee, je een #activityName# activiteit toegevoegd.
-speech.48.0.wav#Is er iets dat het prettiger zou kunnen maken?
-speech.48.1.wav#Is er iets wat het leuker zou kunnen maken?
-speech.48.2.wav#Is er iets dat het fijner zou kunnen maken?
-speech.49.0.wav#Tof!
-speech.49.1.wav#Cool!
-speech.49.2.wav#Leuk!
-speech.49.3.wav#Wat fijn dat je school leuk vond!
-speech.49.4.wav#Het was dus leuk op school?
-speech.49.5.wav#Een leuke school op dag gehad, mooi!
-speech.50.0.wav#Dank voor het invullen.
-speech.50.1.wav#Goed dat je naar school bent geweest.
-speech.50.2.wav#School, check!
-speech.50.3.wav#Ik moet soms ook naar school.
-speech.51.0.wav#Dank voor het invullen!
-speech.51.1.wav#Goed dat je weer naar school was.
-speech.51.2.wav#Je vond het dus niet zo leuk op school vandaag? wat jammer!
-speech.51.3.wav#Morgen gaat het hopelijk beter op school.
-speech.52.0.wav#Wat is jouw lievelingsvak op school?
-speech.53.0.wav#Ohja, dat vind ik ook een leuk vak!
-speech.54.0.wav#Ik ben goed in rekenen, jij ook?
-speech.55.0.wav#Ja?! Hopelijk gaat je volgende toets goed!
-speech.56.0.wav#Nee? Dat is jammer! Vaak oefenen helpt!
+speech.57.0.wav#Ik heb een foto die ik graag met je wil delen. Wil je die zien?
+speech.57.1.wav#Wil je een foto van mij zien?
+speech.57.2.wav#Wil je mijn foto zien?
+speech.57.3.wav#Vind je het leuk om mijn foto te zien?
+speech.58.0.wav#Jammer!
+speech.58.1.wav#Jammer, misschien een andere keer.
+speech.58.2.wav#Helaas, hopelijk de volgende keer wel.
+speech.58.3.wav#Ander keertje dan.
+speech.59.0.wav#Hier was ik aardappeltjes en een worstje aan het eten.
+speech.59.1.wav#Het eten van gisteravond was erg lekker. Ik had wel een beetje geknoeid.
+speech.60.0.wav#Hier was ik op weg naar de biebliotheek om een boek over hamsters te zoeken.
+speech.60.1.wav#Ik had al mijn boeken al uit dus ik ging naar de bieb om nog eentje te lenen.
+speech.61.0.wav#Gisteren was ik heel moe. Toen heb ik de hele avond om te bank gelegen.
+speech.61.1.wav#Soms doe ik een dutje op de bank.
+speech.62.0.wav#Vanmiddag mocht ik op het hobbelpaard! Dat vind ik zo leuk.
+speech.62.1.wav#Er is een hobbelpaard in het winkelcentrum. Ik heb daar even opgezeten.
+speech.63.0.wav#Kijk, mooie hoed he?
+speech.63.1.wav#Ik had laatst een grappige hoed opgezet.
+speech.64.0.wav#Poeh, ik was moe van het sporten.
+speech.64.1.wav#Sporten is leuk, maar vermoeiend!
+speech.65.0.wav#Kijk ik heb een leuke tekening gemaakt!
+speech.65.1.wav#Ik ben heel trots op de tekening die ik heb gemaakt.
+speech.66.0.wav#Ik had geen zin meer om te lopen dus ik ging er maar bij zitten.
+speech.66.1.wav#Ik moest even uitrusten tijdens de wandeling buiten.
+speech.67.0.wav#Ik mag per dag een uurtje achter de computer om een spelletje te spelen.
+speech.67.1.wav#Kijk, zo zit er er dan bij als ik ga inloggen in jouw dagboek.
+speech.68.0.wav#Ik lijk erg klein, maar ik vind het leuk om te fietsen.
+speech.68.1.wav#Soms pak ik de fiets om ergens heen te gaan.
+speech.69.0.wav#Hier ben ik huiswerk aan het maken.
+speech.69.1.wav#Heb jij ook huiswerk? Hier ben ik bezig om een opdracht te maken.
+speech.70.0.wav#Druk bezig met mijn huiswerk.
+speech.70.1.wav#Huiswerk moet ook gebeuren.
+speech.71.0.wav#Ik teken graag.
+speech.71.1.wav#Kijk, hier ben ik aan het tekenen.
+speech.72.0.wav#Ik lees graag over robots.
+speech.72.1.wav#Ik ben zo blij met dit boek over robots.
+speech.73.0.wav#Dit is echt een spannend verhaal.
+speech.73.1.wav#Ik kan soms wel uren achter elkaar lezen.
+speech.74.0.wav#Kinderverhalen zijn de beste verhalen.
+speech.74.1.wav#Lees jij ook boeken? Ik vind ze echt geweldig.
+speech.75.0.wav#Ik vind boodschappen doen altijd leuk, want dan mag ik in het wagentje zitten.
+speech.75.1.wav#Ga jij wel eens boodschappen doen? Ik mag altijd in het wagentje zitten.
+speech.76.0.wav#Lekker mijn boterham met kaas eten.
+speech.76.1.wav#Dit was mijn ontbijt vanochtend.
+speech.77.0.wav#Zo lig ik er bij als ik ga slapen.
+speech.77.1.wav#Lekker naar bedje toe straks met mijn knuffel.
+speech.78.0.wav#Soms heb ik geen zin om op te staan.
+speech.78.1.wav#Het bed ligt wel erg lekker soms.
+speech.79.0.wav#Ik mocht wat uitzoeken uit de automaat!
+speech.79.1.wav#Ik ben benieuwd wat ik ga krijgen uit de automaat.
+speech.80.0.wav#Wiej, glijden van de glijbaan is leuk.
+speech.80.1.wav#Ik vind de speeltuin altijd leuk. Vooral de glijbaan.
+speech.81.0.wav#Naast het sorteerspel ben ik ook goed in vier op een rij.
+speech.81.1.wav#Heb jij wel eens vier op een rij gespeeld. Ik vind dat een erg leuk spel.
+speech.82.0.wav#Mooie autootjes heb ik hè?
+speech.82.1.wav#Op woensdagmiddag speel ik altijd met mijn autootjes.
+speech.83.0.wav#Mijn dino's hebben hoedjes.
+speech.83.1.wav#Ik vind het ook leuk om met mijn dino's te spelen.
+speech.84.0.wav#Ik ben Mike aan het verslaan met een potje kaarten.
+speech.84.1.wav#Naast werken kaart ik ook wel eens met Mike.
+speech.85.0.wav#Soms lig ik er zo bij als ik inlog in jouw dagboek.
+speech.85.1.wav#Kijk, ik heb ook een tablet waar ik wel eens op mag.
+speech.86.0.wav#Ik vind Tai Chi erg ontspannend.
+speech.86.1.wav#Door Tai Chi oefeningen te doen kom ik heerlijk tot rust.
+speech.87.0.wav#Voor het slapen gaan altijd de tandjes poetsen.
+speech.87.1.wav#Poets jij je tanden wel goed voordat je gaat slapen? Ik wel.
+speech.88.0.wav#Ik vind voetbal kijken ook erg leuk om te doen.
+speech.88.1.wav#Naast zelf te voetballen vind ik het ook leuk om het te kijken op het veldje.
+speech.89.0.wav#Goal!
+speech.89.1.wav#Ik doe aan voetballen.
+speech.89.2.wav#Mijn hobby is voetbal.
+speech.89.3.wav#De sport die ik doe is voetbal.

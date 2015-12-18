@@ -11,6 +11,8 @@ GET     /private/*fileName          controllers.Application.getPicture(fileName)
 GET     /contentbox/:content        controllers.Application.contentBox(content: String)
 POST    /dropphoto                  controllers.Application.dropForMyPALPhoto()
 GET     /show/gesture/:source       controllers.Application.showGesture(source: String)
+GET     /mypal/questions            controllers.Application.askQuestions()
+POST    /mypal/questions            controllers.Application.processAnswers()
 
 ## DIARY ##
 GET     /mypal                                      controllers.Diary.diary()

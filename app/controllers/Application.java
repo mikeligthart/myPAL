@@ -7,7 +7,8 @@ import models.UserMyPAL.Login;
 import models.UserType;
 import controllers.avatar.AvatarReasoner;
 import models.diary.activity.DiaryActivityTypeManager;
-import util.DiarySettingsManager;
+import play.data.DynamicForm;
+import util.*;
 import models.diary.activity.Picture;
 import models.logging.LogAction;
 import models.logging.LogActionType;
@@ -17,18 +18,17 @@ import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import util.AppException;
-import util.GluconlineClient;
-import util.NoValidGluconlineIDException;
-import util.PictureFactory;
 import views.html.controlFlow.login;
 import views.html.controlFlow.no_content;
 import views.html.interfaces.interfaces_description_box;
 import views.html.interfaces.interfaces_show_gesture_video;
+import views.html.questions.questions;
 
 import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.List;
 
 import static play.data.Form.form;
 
@@ -130,6 +130,35 @@ public class Application extends Controller {
 
         //Redirect to login page
         return redirect(routes.Application.login());
+    }
+
+    public static Result askQuestions(){
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("userName") == null){
+            return redirect(routes.Application.login());
+        }
+
+        return ok(questions.render());
+    }
+
+    public static Result processAnswers(){
+        //Check whether a user is logged in
+        if(session().isEmpty() || session().get("userName") == null){
+            return redirect(routes.Application.login());
+        }
+        String userName = session().get("userName");
+        UserMyPAL user = UserMyPAL.byUserName(userName);
+
+        DynamicForm requestData = form().bindFromRequest();
+
+        List<String> answers = new LinkedList<>();
+        int numberOfAnswers = 11;
+        for(int answer = 1; answer <= numberOfAnswers; answer++){
+            answers.add(requestData.get("answer" + answer));
+        }
+        Questions.saveAnswers(user, answers);
+
+        return redirect(routes.Diary.calendar());
     }
 
     /* PRIVATE FILE MANAGEMENT */

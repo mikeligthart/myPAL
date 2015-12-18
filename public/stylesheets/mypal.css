@@ -155,6 +155,32 @@
   padding-top: 50px;
 }
 
+.question{
+  padding-top: 100px;
+}
+
+.questionItem{
+    width: 55px;
+    height: 55px;
+    margin-left: 20px;
+}
+
+.questionItem.last{
+    margin-right: 20px;
+}
+
+.questionItem.selectedAnswer{
+    background-color:#90d23d;
+}
+
+.nextQuestion{
+    margin-top: 50px;
+}
+
+.nextQuestion.disabled {
+    opacity:.2;
+}
+
 div.avatarfield{
     border-left: thick solid #46575f;
     height: 95vh;

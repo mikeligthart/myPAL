@@ -36,7 +36,7 @@ import static play.data.Form.form;
  * myPAL
  * Purpose: handles all the controller functions for the general or misc control flow and pages
  *
- * Developped for TNO.
+ * Developed for TNO.
  * Kampweg 5
  * 3769 DE Soesterberg
  * General telephone number: +31(0)88 866 15 00

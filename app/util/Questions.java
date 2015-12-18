@@ -18,7 +18,7 @@ public class Questions {
     public static boolean aksQuestion(UserMyPAL user){
         return !(new File(ANSWERPATH + user.getUserName() + ".txt").exists());
     }
-
+	
     public static void saveAnswers(UserMyPAL user, List<String> answers){
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(ANSWERPATH + user.getUserName() + ".txt"), "utf-8"))) {

@@ -4,7 +4,7 @@ package util;
  * myPAL
  * Purpose: base exception that the app can throw
  *
- * Developped for TNO.
+ * Developed for TNO.
  * Kampweg 5
  * 3769 DE Soesterberg
  * General telephone number: +31(0)88 866 15 00

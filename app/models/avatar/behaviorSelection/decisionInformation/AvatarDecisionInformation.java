@@ -4,7 +4,7 @@ import play.Logger;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: represents a source of information on which a decisionNode can be expended for further exploration
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -14,6 +14,6 @@ import play.Logger;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 3-11-2015
  */
-public interface AvatarDecisionFunction {
+public interface AvatarDecisionInformation {
 
 }

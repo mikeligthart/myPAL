@@ -100,7 +100,7 @@ public class UserMyPAL extends Model {
         public String userName;
         public String password;
 
-        public Login(){};
+        public Login(){}
 
         public String validate() {
             if (!UserMyPAL.authenticate(userName, password)) {
@@ -199,7 +199,7 @@ public class UserMyPAL extends Model {
     }
 
     public void setPassword(String password) throws AppException {
-        this.password = HashHelper.createPassword(password); ;
+        this.password = HashHelper.createPassword(password);
     }
 
     public void setHashedPassword(String hashedPassword)

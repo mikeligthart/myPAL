@@ -1,12 +1,8 @@
 package models.avatar.behaviorSelection.decisionInformation;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import play.Logger;
-import sun.rmi.runtime.Log;
-
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: represents decision information on what triggered the call to find the most fitting behavior
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -16,7 +12,7 @@ import sun.rmi.runtime.Log;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 3-11-2015
  */
-public class AvatarTrigger implements AvatarDecisionFunction {
+public class AvatarTrigger implements AvatarDecisionInformation {
 
     public static final String PAGE = "PAGE";
     public static final String OTHER = "OTHER";
@@ -44,9 +40,7 @@ public class AvatarTrigger implements AvatarDecisionFunction {
             return true;
 
         AvatarTrigger rhs = (AvatarTrigger) obj;
-        if(rhs.getTrigger().equals(this.trigger))
-            return true;
-        return false;
+        return rhs.getTrigger().equals(this.trigger);
     }
 
     public static boolean isLegalTrigger(String proposedTrigger) {

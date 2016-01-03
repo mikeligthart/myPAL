@@ -13,7 +13,7 @@ import java.nio.file.Files;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: maintain and control all the AvatarGesture (related) objects
  * <p>
  * Developed for TNO.
  * Kampweg 5

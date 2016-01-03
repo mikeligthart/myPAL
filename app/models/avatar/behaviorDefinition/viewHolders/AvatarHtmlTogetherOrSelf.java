@@ -2,10 +2,11 @@ package models.avatar.behaviorDefinition.viewHolders;
 
 import play.Logger;
 import play.twirl.api.Html;
+import views.html.avatar.avatar_together_or_self;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: placeholder to render avatar_together_or_self view
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -17,10 +18,8 @@ import play.twirl.api.Html;
  */
 public class AvatarHtmlTogetherOrSelf implements  AvatarHtmlView {
 
-    private views.html.avatar.avatar_together_or_self view;
-
     @Override
     public Html renderHtml(int index) {
-        return view.render(index);
+        return avatar_together_or_self.render(index);
     }
 }

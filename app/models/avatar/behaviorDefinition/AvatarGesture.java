@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: models the gestures of the avatar
  * <p>
  * Developed for TNO.
  * Kampweg 5

@@ -36,6 +36,18 @@ import play.Logger;
 import play.i18n.Messages;
 import play.libs.Json;
 
+/**
+ * myPAL
+ * Purpose: connector to the gluconline API
+ *
+ * Developed for TNO.
+ * Kampweg 5
+ * 3769 DE Soesterberg
+ * General telephone number: +31(0)88 866 15 00
+ *
+ * @author Mike Ligthart - mike.ligthart@gmail.com
+ * @version 1.0 21-8-2015
+ */
 public class GluconlineClient {
     private static final String UTF8_CHARSET = "UTF-8";
     private static final String HMAC_SHA256_ALGORITHM = "HmacSHA256";

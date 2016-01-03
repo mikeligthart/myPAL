@@ -9,11 +9,8 @@ import models.goals.Goal;
 import models.goals.GoalTarget;
 import models.goals.GoalType;
 import models.logging.LogAction;
-import play.Logger;
 import play.i18n.Messages;
-
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.LinkedList;
@@ -21,7 +18,7 @@ import java.util.List;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: Controller that can access all the relevant information about goals
  * <p>
  * Developed for TNO.
  * Kampweg 5

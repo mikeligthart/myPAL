@@ -60,11 +60,7 @@ public class DiaryActivityToHTML {
         endTime = timeFormatter.format(diaryActivity.getEndtime());
         hasPicture = diaryActivity.hasPicture();
         value = diaryActivity.getCarbohydrateValue();
-        if(value > -1.0){
-            isMeal = true;
-        } else {
-            isMeal = false;
-        }
+        isMeal = value > -1.0;
         if(hasPicture) {
             hasPictureString = "<a href='" + fullPicture + "' data-toggle='lightbox' data-title='" + type +" - " + date + "'>" + Messages.get("page.general.yes") + "</a>";
         } else {
@@ -241,7 +237,7 @@ public class DiaryActivityToHTML {
     }
 
     private String retrievePictureURL(Picture picture, boolean full){
-        String url = routes.Assets.at("images/no_picture.png").url();;
+        String url = routes.Assets.at("images/no_picture.png").url();
         if (picture != null)
             if(full){
                 url = routes.Application.getPicture(picture.getName()).url();

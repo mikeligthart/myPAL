@@ -4,7 +4,7 @@ import play.twirl.api.Html;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: placeholder to render right view
  * <p>
  * Developed for TNO.
  * Kampweg 5

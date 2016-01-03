@@ -8,7 +8,7 @@ import play.twirl.api.Html;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: models the optional and additional HTML code that can be added with a reply by the avatar
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -26,11 +26,7 @@ public class AvatarHtml {
 
     public AvatarHtml(AvatarHtmlView view){
         this.view = view;
-        if(view != null){
-            isActiveHtml = true;
-        } else {
-            isActiveHtml = false;
-        }
+        isActiveHtml = view != null;
     }
 
     public Html render(int index) {

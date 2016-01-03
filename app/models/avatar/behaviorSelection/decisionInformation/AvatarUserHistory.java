@@ -1,14 +1,11 @@
 package models.avatar.behaviorSelection.decisionInformation;
 
-import models.logging.LogAction;
 import models.logging.LogActionType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.logging.Log;
-import play.Logger;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: represents decision information on the activity of the user in the diary
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -18,7 +15,7 @@ import play.Logger;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 3-11-2015
  */
-public class AvatarUserHistory implements AvatarDecisionFunction {
+public class AvatarUserHistory implements AvatarDecisionInformation {
 
     private LogActionType last, beforeLast;
 

@@ -1,15 +1,12 @@
 package models.avatar.behaviorSelection;
 
-import models.avatar.behaviorSelection.decisionInformation.AvatarDecisionFunction;
-import models.avatar.behaviorSelection.decisionInformation.AvatarUserHistory;
-import play.Logger;
-import sun.rmi.runtime.Log;
+import models.avatar.behaviorSelection.decisionInformation.AvatarDecisionInformation;
 
 import java.util.*;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: models a node in the decision tree
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -21,12 +18,11 @@ import java.util.*;
  */
 public class AvatarDecisionNode {
 
-    //BehaviorBundle ids with their cumulative changes of getting selected
     private Map<Double, AvatarLeafTip> leafTips;
-    private AvatarDecisionFunction currentInformation;
-    private Map<AvatarDecisionFunction, AvatarDecisionNode> children;
+    private AvatarDecisionInformation currentInformation;
+    private Map<AvatarDecisionInformation, AvatarDecisionNode> children;
 
-    public AvatarDecisionNode(Map<Double, AvatarLeafTip> leafTips, AvatarDecisionFunction currentInformation, Map<AvatarDecisionFunction, AvatarDecisionNode> children){
+    public AvatarDecisionNode(Map<Double, AvatarLeafTip> leafTips, AvatarDecisionInformation currentInformation, Map<AvatarDecisionInformation, AvatarDecisionNode> children){
         this.leafTips = leafTips;
         this.currentInformation = currentInformation;
         this.children = children;
@@ -44,7 +40,7 @@ public class AvatarDecisionNode {
             }
             return null;
         } else if (children != null) {
-            for(AvatarDecisionFunction df : children.keySet()){
+            for(AvatarDecisionInformation df : children.keySet()){
                 if(df.equals(currentInformation)){
                     return children.get(df).getAvatarBehaviors();
                 }

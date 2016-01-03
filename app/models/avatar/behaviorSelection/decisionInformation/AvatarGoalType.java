@@ -4,7 +4,7 @@ import models.goals.GoalType;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: represents decision information on AvatarGoalType
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -14,7 +14,7 @@ import models.goals.GoalType;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 26-11-2015
  */
-public class AvatarGoalType implements AvatarDecisionFunction {
+public class AvatarGoalType implements AvatarDecisionInformation {
 
     private GoalType goalType;
 

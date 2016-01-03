@@ -21,6 +21,10 @@ public class Global extends GlobalSettings {
                 UserMyPAL originalUser = new UserMyPAL("mike.ligthart", "Mike", "Ligthart", Date.valueOf(LocalDate.now()), "mike", UserType.ADMIN, "067835880");
                 Ebean.save(originalUser);
                 DiaryActivityTypeManager.loadStandardTypes(originalUser);
+
+                UserMyPAL testUser = new UserMyPAL("admin", "Admin", "PAL", Date.valueOf(LocalDate.now()), "PAL_admin", UserType.ADMIN, "");
+                Ebean.save(testUser);
+                DiaryActivityTypeManager.loadStandardTypes(testUser);
             }
         }
 

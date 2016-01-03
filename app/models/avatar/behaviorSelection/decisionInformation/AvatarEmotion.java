@@ -4,7 +4,7 @@ import models.diary.activity.Emotion;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: represents decision information on Emotion
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -14,7 +14,7 @@ import models.diary.activity.Emotion;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 22-11-2015
  */
-public class AvatarEmotion implements AvatarDecisionFunction {
+public class AvatarEmotion implements AvatarDecisionInformation {
 
     private Emotion emotion;
 

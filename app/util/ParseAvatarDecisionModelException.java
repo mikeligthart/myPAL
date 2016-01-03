@@ -2,7 +2,7 @@ package util;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: exception thrown when the decision model cannot be correctly parsed
  * <p>
  * Developed for TNO.
  * Kampweg 5

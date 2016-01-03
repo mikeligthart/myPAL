@@ -13,7 +13,7 @@ import java.util.Random;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: models the behavior of the avatar
  * <p>
  * Developed for TNO.
  * Kampweg 5

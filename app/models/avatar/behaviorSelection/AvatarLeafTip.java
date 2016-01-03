@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: models a sequence of behaviors (ids) that is present in the leaf node
  * <p>
  * Developed for TNO.
  * Kampweg 5

@@ -1,18 +1,15 @@
 package controllers;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.typesafe.config.ConfigFactory;
 import models.UserMyPAL;
 import models.UserMyPAL.Login;
 import models.UserType;
 import controllers.avatar.AvatarReasoner;
-import models.diary.activity.DiaryActivityTypeManager;
 import play.data.DynamicForm;
 import util.*;
 import models.diary.activity.Picture;
 import models.logging.LogAction;
 import models.logging.LogActionType;
-import play.Logger;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Controller;

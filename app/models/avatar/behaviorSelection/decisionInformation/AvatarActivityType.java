@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: represents decision information on DiaryActivityType
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -15,7 +15,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 22-11-2015
  */
-public class AvatarActivityType implements AvatarDecisionFunction {
+public class AvatarActivityType implements AvatarDecisionInformation {
 
     private DiaryActivityType activityType;
 

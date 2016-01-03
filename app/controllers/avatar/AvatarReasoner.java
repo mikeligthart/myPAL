@@ -10,7 +10,7 @@ import java.util.*;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: Main controller that traverses the AvatarDecisionNodes to find the most fitting behavior and retrieves the actual AvatarBehavior
  * <p>
  * Developed for TNO.
  * Kampweg 5

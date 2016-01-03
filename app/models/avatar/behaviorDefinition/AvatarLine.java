@@ -24,7 +24,7 @@ import java.util.StringTokenizer;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: models
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -63,6 +63,7 @@ public class AvatarLine extends Model {
         isComplete = new File(speechFileSource).exists();
     }
 
+    //Modelled after 
     public static void fillWordsPerMinute(){
         WORDSPERMINUTE = new HashMap<>();
         WORDSPERMINUTE.put(7, 72);

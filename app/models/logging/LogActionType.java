@@ -8,7 +8,7 @@ import java.util.Map;
  * myPAL
  * Purpose: enum that contains the different types a LogAction can have
  *
- * Developped for TNO.
+ * Developed for TNO.
  * Kampweg 5
  * 3769 DE Soesterberg
  * General telephone number: +31(0)88 866 15 00

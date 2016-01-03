@@ -96,10 +96,8 @@ public class DiaryActivityTypeManager {
             return false;
         if(type.getName().equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.meal")))
             return false;
-        if(type.getName().equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.other")))
-            return false;
+        return !type.getName().equalsIgnoreCase(Messages.get("page.diary.calendar.activitytype.other"));
 
-        return true;
     }
 
     private static String capitalise(String name) {

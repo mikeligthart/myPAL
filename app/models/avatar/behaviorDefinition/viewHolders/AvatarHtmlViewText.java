@@ -1,10 +1,11 @@
 package models.avatar.behaviorDefinition.viewHolders;
 
 import play.twirl.api.Html;
+import views.html.avatar.avatar_text;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: placeholder to render avatar_text view
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -16,11 +17,9 @@ import play.twirl.api.Html;
  */
 public class AvatarHtmlViewText implements AvatarHtmlView {
 
-    private views.html.avatar.avatar_text view;
-
     @Override
     public Html renderHtml(int index) {
-        return view.render(index);
+        return avatar_text.render(index);
     }
 
 }

@@ -12,7 +12,7 @@ import java.time.temporal.ChronoUnit;
  * myPAL
  * Purpose: Settings that need to be kept per session for the diary.
  *
- * Developped for TNO.
+ * Developed for TNO.
  * Kampweg 5
  * 3769 DE Soesterberg
  * General telephone number: +31(0)88 866 15 00

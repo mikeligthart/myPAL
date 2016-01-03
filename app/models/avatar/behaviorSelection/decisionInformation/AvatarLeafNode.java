@@ -1,12 +1,8 @@
 package models.avatar.behaviorSelection.decisionInformation;
 
-import models.logging.LogAvatarType;
-
-import java.util.LinkedList;
-
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: represents a leaf node which contains the most fitting behavior sequence
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -16,8 +12,6 @@ import java.util.LinkedList;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 3-11-2015
  */
-public class AvatarLeafNode implements AvatarDecisionFunction {
-
-
+public class AvatarLeafNode implements AvatarDecisionInformation {
     //Dummy class
 }

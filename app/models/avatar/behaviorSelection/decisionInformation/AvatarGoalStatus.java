@@ -4,7 +4,7 @@ import models.goals.GoalStatus;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: represents decision information on GoalStatus
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -14,7 +14,7 @@ import models.goals.GoalStatus;
  * @author Mike Ligthart - mike.ligthart@gmail.com
  * @version 1.0 26-11-2015
  */
-public class AvatarGoalStatus implements AvatarDecisionFunction {
+public class AvatarGoalStatus implements AvatarDecisionInformation {
 
     private GoalStatus goalStatus;
 

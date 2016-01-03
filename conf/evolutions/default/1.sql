@@ -154,7 +154,7 @@ create table user_my_pal (
   last_name                 varchar(255),
   birthdate                 date,
   password                  varchar(255),
-  user_type                 varchar(32),
+  user_type                 varchar(20),
   last_activity             timestamp,
   gluconline_id             varchar(255),
   constraint ck_user_my_pal_user_type check (user_type in ('CHILD','PARENT','PROFESSIONAL','ADMIN')),

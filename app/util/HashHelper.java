@@ -6,7 +6,7 @@ import org.mindrot.jbcrypt.BCrypt;
  * myPAL
  * Purpose: util class that generates hashes for the password
  *
- * Developped for TNO.
+ * Developed for TNO.
  * Kampweg 5
  * 3769 DE Soesterberg
  * General telephone number: +31(0)88 866 15 00

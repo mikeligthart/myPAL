@@ -23,7 +23,7 @@ import org.json.simple.JSONObject;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: maintain and control all the AvatarBehavior (related) objects
  * <p>
  * Developed for TNO.
  * Kampweg 5

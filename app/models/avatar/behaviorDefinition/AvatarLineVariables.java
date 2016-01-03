@@ -58,9 +58,6 @@ public class AvatarLineVariables {
     public static boolean isLineVariable(String potentialLineVariable){
         if(potentialLineVariable.equalsIgnoreCase("#firstName#"))
             return true;
-        else if(potentialLineVariable.equalsIgnoreCase("#activityName#"))
-            return true;
-        else
-            return false;
+        else return potentialLineVariable.equalsIgnoreCase("#activityName#");
     }
 }

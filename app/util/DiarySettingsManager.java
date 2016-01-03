@@ -7,7 +7,7 @@ import java.util.Map;
  * myPAL
  * Purpose: manager that retrieves and manages the DiarySettings
  *
- * Developped for TNO.
+ * Developed for TNO.
  * Kampweg 5
  * 3769 DE Soesterberg
  * General telephone number: +31(0)88 866 15 00

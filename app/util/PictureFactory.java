@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
  * myPAL
  * Purpose: factory class saves pictures to the disk, links them to a Picture object and returns that object
  *
- * Developped for TNO.
+ * Developed for TNO.
  * Kampweg 5
  * 3769 DE Soesterberg
  * General telephone number: +31(0)88 866 15 00
@@ -146,9 +146,7 @@ public class PictureFactory {
             return true;
         if(extension.equalsIgnoreCase("bmp"))
             return true;
-        if(extension.equalsIgnoreCase("gif"))
-            return true;
-        return false;
+        return extension.equalsIgnoreCase("gif");
     }
 
     public int getWidth() {

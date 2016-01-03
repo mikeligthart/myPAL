@@ -1,10 +1,11 @@
 package models.avatar.behaviorDefinition.viewHolders;
 
 import play.twirl.api.Html;
+import views.html.avatar.avatar_share_picture;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: placeholder to render avatar_share_picture view
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -16,12 +17,11 @@ import play.twirl.api.Html;
  */
 public class AvatarHtmlViewSharePicture implements AvatarHtmlView {
 
-    private views.html.avatar.avatar_share_picture view;
     private String pictureSource;
 
     @Override
     public Html renderHtml(int index) {
-        return view.render(index, pictureSource);
+        return avatar_share_picture.render(index, pictureSource);
     }
 
     public String getPictureSource() {

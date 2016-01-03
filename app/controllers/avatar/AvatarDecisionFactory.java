@@ -32,7 +32,7 @@ import java.util.*;
 
 /**
  * myPAL
- * Purpose: [ENTER PURPOSE]
+ * Purpose: maintain and control all the AvatarDecisionNode (related) objects
  * <p>
  * Developed for TNO.
  * Kampweg 5
@@ -181,7 +181,7 @@ public class AvatarDecisionFactory {
     }
 
     private AvatarDecisionNode parseAvatarGoalTypeNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
-        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        Map<AvatarDecisionInformation, AvatarDecisionNode> children = new HashMap<>();
         for(int index = 0; index < node.size(); index++){
             JsonNode avatarNode = node.get(index).get(Integer.toString(index));
             if(!avatarNode.has("type") || !avatarNode.has("child")){
@@ -200,7 +200,7 @@ public class AvatarDecisionFactory {
     }
 
     private AvatarDecisionNode parseAvatarGoalStatusNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
-        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        Map<AvatarDecisionInformation, AvatarDecisionNode> children = new HashMap<>();
         for(int index = 0; index < node.size(); index++){
             JsonNode avatarNode = node.get(index).get(Integer.toString(index));
             if(!avatarNode.has("status") || !avatarNode.has("child")){
@@ -219,7 +219,7 @@ public class AvatarDecisionFactory {
     }
 
     private AvatarDecisionNode parseAvatarActivityTypeNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
-        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        Map<AvatarDecisionInformation, AvatarDecisionNode> children = new HashMap<>();
         for(int index = 0; index < node.size(); index++){
             JsonNode avatarActivityTypeNode = node.get(index).get(Integer.toString(index));
             if(!avatarActivityTypeNode.has("type") || !avatarActivityTypeNode.has("child")){
@@ -239,7 +239,7 @@ public class AvatarDecisionFactory {
     }
 
     private AvatarDecisionNode parseAvatarEmotionNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException {
-        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        Map<AvatarDecisionInformation, AvatarDecisionNode> children = new HashMap<>();
         for(int index = 0; index < node.size(); index++){
             JsonNode avatarEmotionNode = node.get(index).get(Integer.toString(index));
             if(!avatarEmotionNode.has("emotion") || !avatarEmotionNode.has("child")){
@@ -258,7 +258,7 @@ public class AvatarDecisionFactory {
     }
 
     private AvatarDecisionNode parseAvatarTriggerNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException{
-        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        Map<AvatarDecisionInformation, AvatarDecisionNode> children = new HashMap<>();
         for(int index = 0; index < node.size(); index++){
             JsonNode avatarTriggerNode = node.get(index).get(Integer.toString(index));
             if(!avatarTriggerNode.has("trigger") || !avatarTriggerNode.has("child")){
@@ -277,7 +277,7 @@ public class AvatarDecisionFactory {
     }
 
     private AvatarDecisionNode parseAvatarUserHistoryNode(JsonNode node) throws ParseAvatarDecisionModelException, IOException{
-        Map<AvatarDecisionFunction, AvatarDecisionNode> children = new HashMap<>();
+        Map<AvatarDecisionInformation, AvatarDecisionNode> children = new HashMap<>();
         for(int index = 0; index < node.size(); index++){
             JsonNode userHistoryNode = node.get(index).get(Integer.toString(index));
             if(!userHistoryNode.has("last") || !userHistoryNode.has("beforeLast") || !userHistoryNode.has("child")){

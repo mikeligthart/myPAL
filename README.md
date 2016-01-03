@@ -2,10 +2,10 @@
 The application is build in the PlayFramework (https://www.playframework.com/).
 
 To run the application you'll need to do the following (based on this installation guide: https://www.playframework.com/documentation/2.4.x/Installing):
-    * Have the latest stable Java 8 JDK
-    * Check that java and javac are properly installed (on Windows):
-        
-        run 'java -version' and 'javac -version' in your terminal
+
+    - Have the latest stable Java 8 JDK
+    - Check that java and javac are properly installed (on Windows):
+        + run 'java -version' and 'javac -version' in your terminal
         + If it does not recognize one or both it will not work. You can try in this order:
             > restarting your terminal
             > restarting your computer
